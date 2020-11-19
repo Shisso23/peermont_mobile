@@ -1,5 +1,4 @@
 import CreateAction from '../action-utilities/action-creator';
-// import { membershipCardModel } from '../../models';
 
 const reducerName = 'membershipCard';
 
