@@ -1,11 +1,11 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
-import { creditCardModel, apiCreditCardModel } from '../../../models';
 import creditCardUrls from './credit-card.urls';
+import { userCreditCardModel } from '../../../models';
 
 const getCreditCards = () => {
   const url = creditCardUrls.creditCardsUrl();
   const _createAndReturnCreditCardModel = (apiResponse) => {
-    return creditCardModel(apiResponse.data);
+    return userCreditCardModel(apiResponse.data);
   };
   return authNetworkService
     .get(url)

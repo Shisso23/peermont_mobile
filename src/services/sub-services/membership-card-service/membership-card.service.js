@@ -1,10 +1,11 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
 import membershipCardUrls from './membership-card.urls';
+import { userMembershipCardModel } from '../../../models';
 
 const getMembershipCards = () => {
   const url = membershipCardUrls.membershipCardsUrl();
   const _createAndReturnMembershipCardModel = (apiResponse) => {
-    return apiResponse.data;
+    return userMembershipCardModel(apiResponse.data);
   };
   return authNetworkService
     .get(url)

@@ -1,10 +1,11 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
 import bankAccountUrls from './bank-account.urls';
+import { userBankAccountModel } from '../../../models';
 
 const getBankAccounts = () => {
   const url = bankAccountUrls.bankAccountsUrl();
   const _createAndReturnBankAccountsModel = (apiResponse) => {
-    return apiResponse.data;
+    return userBankAccountModel(apiResponse.data);
   };
   return authNetworkService
     .get(url)
