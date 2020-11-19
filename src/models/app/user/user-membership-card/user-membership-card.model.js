@@ -5,32 +5,20 @@ export const userMembershipCardModel = ({
   card_valid,
   balance,
   balance_format,
-  points,
   status,
-  tier,
-  poins_balance,
+  tier_name,
+  points_balance,
 } = {}) => ({
   id: id || '',
   cardNumber: card_number || '',
-  cardValid: card_valid || '',
-  balance: balance || '',
+  cardValid: card_valid || false,
+  balance: balance || 0,
   balanceFormat: balance_format || '',
-  points: points || '',
   status: status || '',
-  tier: tier || '',
-  pointsBalance: poins_balance || '',
+  tierName: tier_name || '',
+  pointsBalance: points_balance || 0,
 });
 
-export const apiUserModel = ({ email, name } = {}) => ({
-  user: {
-    email: email || '',
-    name: name || '',
-  },
-});
-
-export const constructUserMembershipCardModel = (membershipCardsArray) => {
-  return (
-    (membershipCardsArray && membershipCardsArray.map((card) => userMembershipCardModel(card))) ||
-    []
-  );
+export const constructUserMembershipCardModels = (membershipCards) => {
+  return (membershipCards && membershipCards.map((card) => userMembershipCardModel(card))) || [];
 };

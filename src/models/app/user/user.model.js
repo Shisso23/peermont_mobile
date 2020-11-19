@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
-import { constructUserMembershipCardModel } from './user-membership-card/user-membership-card.model';
+import { constructUserMembershipCardModels } from './user-membership-card/user-membership-card.model';
+import { constructUserBankAccountModels } from './user-bank-account/user-bank-account.model';
+import { constructUserCreditCardModels } from './user-credit-card/user-credit-card.model';
 
 export const userModel = ({
   id,
@@ -10,7 +12,7 @@ export const userModel = ({
   id_number,
   credit_cards,
   bank_accounts,
-  tier,
+  tier_name,
   membership_cards,
 } = {}) => ({
   id: id || '',
@@ -19,15 +21,8 @@ export const userModel = ({
   mobileNumber: mobile_number || '',
   email: email || '',
   idNumber: id_number || '',
-  tier: tier || '',
-  membershipCards: constructUserMembershipCardModel(membership_cards),
-  bankAccounts: bank_accounts || [],
-  creditCards: credit_cards || [],
-});
-
-export const apiUserModel = ({ email, name } = {}) => ({
-  user: {
-    email: email || '',
-    name: name || '',
-  },
+  tierName: tier_name || '',
+  membershipCards: constructUserMembershipCardModels(membership_cards),
+  bankAccounts: constructUserBankAccountModels(bank_accounts),
+  creditCards: constructUserCreditCardModels(credit_cards),
 });

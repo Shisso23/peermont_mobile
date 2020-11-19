@@ -6,7 +6,6 @@ export const userBankAccountModel = ({
   account_holder,
   account_number,
   account_type,
-  default,
   status,
   proof_of_banking_status,
 } = {}) => ({
@@ -15,13 +14,9 @@ export const userBankAccountModel = ({
   bankId: bank_id || '',
   accountHolder: account_holder || '',
   accountNumber: account_number || '',
-});
-
-export const apiUserModel = ({ email, name } = {}) => ({
-  user: {
-    email: email || '',
-    name: name || '',
-  },
+  accountType: account_type || '',
+  status: status || '',
+  proofOfBankingStatus: proof_of_banking_status || '',
 });
 
 export const constructUserBankAccountModels = (bankAccounts) => {
