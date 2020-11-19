@@ -7,7 +7,7 @@ import AuthNavigator from './auth/auth.navigator';
 import AppNavigator from './app/app.navigator';
 
 // Global Screens
-import TermsAndConditionsScreen from '../screens/global/terms-and-conditions/terms-and-conditions.screen';
+// import TermsAndConditionsScreen from '../screens/global/terms-and-conditions/terms-and-conditions.screen';
 
 const RootStack = createStackNavigator();
 
@@ -21,13 +21,6 @@ const AppContainer = () => {
         ) : (
           <RootStack.Screen name="AUTH" component={AuthNavigator} />
         )}
-        <RootStack.Screen
-          name="TermsAndConditions"
-          component={TermsAndConditionsScreen}
-          options={{
-            title: 'Terms And Conditions',
-          }}
-        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
