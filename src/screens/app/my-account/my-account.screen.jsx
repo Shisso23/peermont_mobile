@@ -45,7 +45,10 @@ const MyAccountScreen = () => {
             <ListItem.Content>
               <ListItem.Title>{item.cardNumber}</ListItem.Title>
             </ListItem.Content>
-            <Button title="Delete" onPress={() => _handleDelete(item.id, deleteMembershipCardAction)} />
+            <Button
+              title="Delete"
+              onPress={() => _handleDelete(item.id, deleteMembershipCardAction)}
+            />
           </ListItem>
         );
       })}
@@ -69,7 +72,10 @@ const MyAccountScreen = () => {
             <ListItem.Content>
               <ListItem.Title>{item.accountNumber}</ListItem.Title>
             </ListItem.Content>
-            <Button title="Delete" onPress={() => _handleDelete(item.id, deleteBankAccountAction)} />
+            <Button
+              title="Delete"
+              onPress={() => _handleDelete(item.id, deleteBankAccountAction)}
+            />
           </ListItem>
         );
       })}
