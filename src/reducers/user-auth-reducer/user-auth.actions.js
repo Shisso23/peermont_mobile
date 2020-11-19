@@ -8,3 +8,9 @@ export const signOutAction = () => {
     });
   };
 };
+
+export const registerAction = ({ formData }) => {
+  return userAuthService.register({ formData }).then((res) => {
+    // store token here
+  });
+};

@@ -7,14 +7,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
-import { emailSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { flashService } from '../../../services';
 
 const ForgotPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
-  const validationSchema = Yup.object().shape({
-    email: emailSchema,
-  });
+  const validationSchema = Yup.object().shape({});
 
   const _handleSubmission = (formData, actions) => {
     submitForm({ formData })
@@ -61,11 +58,11 @@ const ForgotPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValu
           return (
             <>
               <Input
-                value={values.email}
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                label="Email"
-                errorMessage={error('email')}
+                value={values.mobileNumber}
+                onChangeText={handleChange('mobileNumber')}
+                onBlur={handleBlur('mobileNumber')}
+                label="Mobile Number"
+                errorMessage={error('mobileNumber')}
               />
               <Button title="Submit" onPress={handleSubmit} loading={isSubmitting} />
               {__DEV__ && <Text>{JSON.stringify(values, null, 2)}</Text>}

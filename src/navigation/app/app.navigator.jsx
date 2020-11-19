@@ -1,13 +1,14 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeNavigator from './home/home.navigator';
-import ProfileNavigator from './profile/profile.navigator';
+import { DrawerComponent } from '../../components/molecules';
+import MyAccountNavigator from './my-account/my-account.navigator';
 
 const Drawer = createDrawerNavigator();
 const AppNavigator = () => (
-  <Drawer.Navigator>
+  <Drawer.Navigator drawerContent={(props) => <DrawerComponent {...props} />}>
     <Drawer.Screen name="Home" component={HomeNavigator} />
-    <Drawer.Screen name="Profile" component={ProfileNavigator} />
+    <Drawer.Screen name="MyAccount" component={MyAccountNavigator} />
   </Drawer.Navigator>
 );
 

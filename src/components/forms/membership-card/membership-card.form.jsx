@@ -7,14 +7,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
-import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
-import { CountrySelect } from '../../atoms';
+import { cardSchema, pinSchema } from '../form-validaton-schemas';
 
-const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
   const validationSchema = Yup.object().shape({
-    mobileNumber: mobileNumberSchema,
-    password: passwordSchema,
+    cardNumber: cardSchema,
+    pin: pinSchema,
   });
 
   const _handleFormSubmitError = (error, actions, formData) => {
@@ -22,14 +21,13 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
     if (_.get(error, 'statusCode') === 422) {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
-    } else if (error.statusCode === 400) {
-      actions.setFieldError('mobileNumber', 'Incorrect login credetials provided');
     } else {
-      actions.setFieldError('mobileNumber', error.message);
+      actions.setFieldError('cardNumber', error.message);
     }
   };
+
   const _handleSubmission = (formData, actions) => {
-    submitForm({ formData })
+    submitForm(formData)
       .then(() => {
         actions.setSubmitting(false);
         onSuccess();
@@ -57,31 +55,27 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
           handleBlur,
           touched,
           status,
-          setFieldValue,
         }) => {
           const error = (name) => getFormError(name, { touched, status, errors });
           return (
             <>
               <Input
-                value={values.mobileNumber}
-                onChangeText={handleChange('mobileNumber')}
-                label="Mobile Number"
-                onBlur={handleBlur('mobileNumber')}
-                errorMessage={error('mobileNumber')}
-                leftIcon={() => (
-                  <CountrySelect onChange={(c) => setFieldValue('callingCode', c.callingCode[0])} />
-                )}
+                value={values.cardNumber}
+                onChangeText={handleChange('cardNumber')}
+                label="Card Number"
+                onBlur={handleBlur('cardNumber')}
+                errorMessage={error('cardNumber')}
               />
               <Input
-                value={values.password}
-                onChangeText={handleChange('password')}
-                label="Password"
-                onBlur={handleBlur('password')}
+                value={values.pin}
+                onChangeText={handleChange('pin')}
+                label="Pin"
+                onBlur={handleBlur('pin')}
                 secureTextEntry
-                errorMessage={error('password')}
+                errorMessage={error('pin')}
               />
-              <Button title="Login" onPress={handleSubmit} loading={isSubmitting} />
-              {__DEV__ && <Text>{JSON.stringify(values, null, 2)}</Text>}
+              <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+              <Text>{JSON.stringify(values)}</Text>
             </>
           );
         }}
@@ -90,16 +84,16 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
   );
 };
 
-SignInForm.propTypes = {
+MembershipCardForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
   containerStyle: ViewPropTypes.style,
 };
 
-SignInForm.defaultProps = {
+MembershipCardForm.defaultProps = {
   onSuccess: () => null,
   containerStyle: {},
 };
 
-export default SignInForm;
+export default MembershipCardForm;

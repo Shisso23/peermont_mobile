@@ -22,9 +22,9 @@ const createNetworkErrorHandlerInterceptor = (axiosInstance) => {
       if (_serverResponded(error)) {
         const statusCode = _.get(error, 'response.status');
         if (_serverSideError(statusCode)) {
-          exception = new ServerNetworkError(statusCode, error);
+          exception = new ServerNetworkError(statusCode, error.response.data);
         } else if (_clientSideError(statusCode)) {
-          exception = new ClientNetworkError(statusCode, error);
+          exception = new ClientNetworkError(statusCode, error.response.data);
         }
       } else if (_noResponseFromServer(error)) {
         exception = new ServerNotFoundError('Server is probably offline');

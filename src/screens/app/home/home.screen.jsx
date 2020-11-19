@@ -1,24 +1,18 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ScrollView } from 'react-native-gesture-handler';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
-import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 
 const { CancelToken } = axios;
 
 const HomeScreen = () => {
   const requestSource = CancelToken.source();
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-
   useFocusEffect(exitAppOnHardwarePressListener, []);
-
-  const _signOut = () => {
-    dispatch(signOutAction());
-  };
+  const { user } = useSelector((reducers) => reducers.userReducer);
 
   useEffect(() => {
     return () => {
@@ -27,10 +21,10 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View>
-      <Button title="Open Drawer" onPress={() => navigation.openDrawer()} />
-      <Button title="Sign Out" onPress={_signOut} />
-    </View>
+    <ScrollView>
+      <Text> Welcome {user.firstName}</Text>
+      <Text>{JSON.stringify(user, null, 2)}</Text>
+    </ScrollView>
   );
 };
 

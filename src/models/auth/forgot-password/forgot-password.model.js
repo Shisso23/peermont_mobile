@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-export const forgotPasswordModel = ({ email } = {}) => ({
-  email: email || '',
+export const forgotPasswordModel = ({ mobileNumber } = {}) => ({
+  mobileNumber: mobileNumber || '',
 });
 
 export const apiForgotPasswordModel = ({ email } = {}) => ({

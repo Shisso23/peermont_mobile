@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { RegisterLink, ForgotPasswordLink } from '../../../components/atoms';
 import { SignInForm } from '../../../components/forms';
@@ -7,24 +7,27 @@ import { SignInForm } from '../../../components/forms';
 import { userAuthService } from '../../../services';
 import { setIsAuthenticatedAction } from '../../../reducers/user-auth-reducer/user-auth.reducer';
 import { signInModel } from '../../../models';
+import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 
 const SignInScreen = () => {
   const dispatch = useDispatch();
 
   const _onSignInSuccess = () => {
-    dispatch(setIsAuthenticatedAction(true));
+    const userPromise = dispatch(getUserAction());
+    userPromise.then(() => {
+      dispatch(setIsAuthenticatedAction(true));
+    });
   };
   return (
-    <View style={styles.pageWrapper}>
-      <View style={styles.placeHolder} />
+    <>
       <SignInForm
         submitForm={userAuthService.signIn}
         onSuccess={_onSignInSuccess}
-        initialValues={signInModel()}
+        initialValues={signInModel({ mobileNumber: '0824776117', password: '0987' })}
       />
       <RegisterLink containerStyle={styles.registerLink} />
       <ForgotPasswordLink containerStyle={styles.forgotPasswordLink} />
-    </View>
+    </>
   );
 };
 

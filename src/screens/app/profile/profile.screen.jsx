@@ -4,7 +4,6 @@ import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { UserInfoForm } from '../../../components/forms';
-import { userModel } from '../../../models';
 import { userService } from '../../../services';
 
 const ProfileScreen = () => {
@@ -17,7 +16,7 @@ const ProfileScreen = () => {
         edit
         submitForm={userService.updateUser}
         onSuccess={_onFormSuccess}
-        initialValues={userModel(user)}
+        initialValues={user}
       />
       <Button title="Open Drawer" onPress={() => navigation.openDrawer()} />
     </View>

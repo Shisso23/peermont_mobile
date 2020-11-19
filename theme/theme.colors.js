@@ -7,6 +7,7 @@ export default {
   errorBackground: '#f8d7da',
   transparent: 'transparent',
   primary: '#36DB54',
+  background: '#36DB54',
   secondary: '#AF7650',
   success: 'green',
   danger: 'red',

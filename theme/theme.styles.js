@@ -14,3 +14,21 @@ export const custom = {
     marginBottom: 0,
   },
 };
+
+export const globalScreenOptions = {
+  headerBackTitleVisible: false,
+  headerStyle: {
+    backgroundColor: colors.primary,
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0,
+    },
+    shadowColor: 'transparent',
+    elevation: 0,
+  },
+  headerTitleStyle: {
+    fontFamily: variables.fontFamilySecondary,
+    color: colors.white,
+  },
+  cardStyle: { backgroundColor: colors.background },
+};

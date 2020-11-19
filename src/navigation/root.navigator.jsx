@@ -25,7 +25,6 @@ const AppContainer = () => {
           name="TermsAndConditions"
           component={TermsAndConditionsScreen}
           options={{
-            headerShown: true,
             title: 'Terms And Conditions',
           }}
         />

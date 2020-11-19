@@ -2,12 +2,13 @@ import _ from 'lodash';
 import authUrls from './user-auth.urls';
 import authUtils from './user-auth.utils';
 import networkService from '../network-service/network.service';
+import authNetworkService from '../auth-network-service/auth-network.service';
 import {
-  apiRegistrationUserModel,
-  registrationUserModel,
   apiForgotPasswordModel,
   forgotPasswordModel,
   apiSignInModel,
+  apiMembershipCardModel,
+  membershipCardModel,
 } from '../../../models';
 
 const signIn = ({ formData }) => {
@@ -19,14 +20,15 @@ const signIn = ({ formData }) => {
 
 const signOut = () => {
   // any other signOut logic
-  return authUtils.removeAccessAndRefreshTokens();
+  const signOutUrl = authUrls.signOutUrl();
+  return authNetworkService.delete(signOutUrl).then(authUtils.removeAccessAndRefreshTokens);
 };
 
 const register = ({ formData }) => {
   const registerUrl = authUrls.registerUrl();
-  const apiModel = apiRegistrationUserModel(formData);
+  const apiModel = apiMembershipCardModel(formData);
   return networkService.post(registerUrl, apiModel).catch((err) => {
-    err.errors = registrationUserModel(err.errors);
+    err.errors = membershipCardModel(err.errors);
     return Promise.reject(err);
   });
 };

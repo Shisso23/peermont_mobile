@@ -19,8 +19,8 @@ const getAccessAndRefreshTokens = () => {
   return Promise.all([storageService.getAccessToken(), storageService.getRefreshToken()]);
 };
 
-const constructOAuthSignInData = ({ email, password }) => ({
-  email,
+const constructOAuthSignInData = ({ login, password }) => ({
+  login,
   password,
   grant_type: 'password',
   client_id: appConfig.clientId,
