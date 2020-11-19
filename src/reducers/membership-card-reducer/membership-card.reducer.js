@@ -1,10 +1,13 @@
+import _ from 'lodash';
 import CreateAction from '../action-utilities/action-creator';
 
 const reducerName = 'membershipCard';
 
 const setMembershipCards = CreateAction(reducerName, 'SET_MEMBERSHIP_CARDS');
 export const setMembershipCardsAction = setMembershipCards.action;
-export const setMembershipCardsActionType = setMembershipCards.actionType;
+
+const removeMembershipCard = CreateAction(reducerName, 'REMOVE_MEMBERSHIP_CARD');
+export const removeMembershipCardAction = removeMembershipCard.action;
 
 const initialState = {
   membershipCards: [],
@@ -17,7 +20,11 @@ export default function membershipCardReducer(state = initialState, action) {
         ...state,
         membershipCards: action.payload,
       };
-
+    case removeMembershipCard.actionType:
+      return {
+        ...state,
+        membershipCards: _.remove(state.bankAccounts, { id: action.payload }),
+      };
     default:
       return state;
   }

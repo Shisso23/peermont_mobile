@@ -4,3 +4,6 @@ export { default as authNetworkService } from './sub-services/auth-network-servi
 export { default as userAuthService } from './sub-services/user-auth-service/user-auth.service';
 export { default as flashService } from './sub-services/flash-service/flash.service';
 export { default as formDataService } from './sub-services/form-data-service/form-data.service';
+export { default as bankAccountService } from './sub-services/bank-account-service/bank-account.service';
+export { default as creditCardService } from './sub-services/credit-card-service/credit-card.service';
+export { default as membershipCardService } from './sub-services/membership-card-service/membership-card.service';

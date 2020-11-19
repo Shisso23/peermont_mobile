@@ -39,6 +39,11 @@ const theme = {
       height: 45,
     },
   },
+  Divider: {
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: 'transparent',
+  },
   Input: {
     errorStyle: custom.errorStyle,
     containerStyle: {

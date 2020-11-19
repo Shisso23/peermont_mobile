@@ -1,11 +1,10 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
-import { membershipCardModel, apiMembershipCardModel } from '../../../models';
-import membershipCardUrls from './bank-account.urls';
+import membershipCardUrls from './membership-card.urls';
 
 const getMembershipCards = () => {
   const url = membershipCardUrls.membershipCardsUrl();
   const _createAndReturnMembershipCardModel = (apiResponse) => {
-    return membershipCardModel(apiResponse.data);
+    return apiResponse.data;
   };
   return authNetworkService
     .get(url)
@@ -17,6 +16,19 @@ const getMembershipCards = () => {
     });
 };
 
+const deleteMembershipCard = (id) => {
+  const url = membershipCardUrls.membershipCardUrl(id);
+  return authNetworkService
+    .delete(url)
+    .then()
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.warn(error);
+      return Promise.reject(error);
+    });
+};
+
 export default {
   getMembershipCards,
+  deleteMembershipCard,
 };
