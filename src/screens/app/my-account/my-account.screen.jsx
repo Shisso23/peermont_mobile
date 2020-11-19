@@ -1,21 +1,31 @@
 import React from 'react';
 import { Alert } from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { ListItem, Divider, Text, Button } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScrollContainer } from '../../../components/containers';
+import { LoadingComponent } from '../../../components/molecules';
+import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 
 const MyAccountScreen = () => {
+  const { loading } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
   const { creditCards } = useSelector((reducers) => reducers.creditCardReducer);
   const { bankAccounts } = useSelector((reducers) => reducers.bankAccountReducer);
   const dispatch = useDispatch();
 
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(getUserAction());
+    }, []),
+  );
+
   const _handleDelete = (id, action) => {
     Alert.alert(
-      'You sure?',
+      'Are you sure?',
       'Are you sure you want to delete this item?',
       [
         {
@@ -36,7 +46,7 @@ const MyAccountScreen = () => {
     );
   };
 
-  return (
+  return !loading ? (
     <ScrollContainer>
       <Text h4>Winners Circle Cards</Text>
       {membershipCards.map((item) => {
@@ -80,6 +90,8 @@ const MyAccountScreen = () => {
         );
       })}
     </ScrollContainer>
+  ) : (
+    <LoadingComponent />
   );
 };
 

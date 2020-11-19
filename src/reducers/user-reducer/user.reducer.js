@@ -5,10 +5,13 @@ const reducerName = 'user';
 
 const setUser = CreateAction(reducerName, 'SET_USER');
 export const setUserAction = setUser.action;
-export const setUserActionType = setUser.actionType;
+
+const setLoading = CreateAction(reducerName, 'SET_LOADING');
+export const setLoadingAction = setLoading.action;
 
 const initialState = {
   user: userModel(),
+  loading: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -18,7 +21,11 @@ export default function userReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-
+    case setLoading.actionType:
+      return {
+        ...state,
+        loading: action.payload,
+      };
     default:
       return state;
   }
