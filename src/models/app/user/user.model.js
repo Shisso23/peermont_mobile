@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { membershipCardModel } from './membership-card/membership-card.model';
+import { constructUserMembershipCardModel } from './user-membership-card/user-membership-card.model';
 
 export const userModel = ({
   id,
@@ -20,9 +20,7 @@ export const userModel = ({
   email: email || '',
   idNumber: id_number || '',
   tier: tier || '',
-  membershipCards:
-    (membership_cards && membership_cards.map((card) => membershipCardModel(card))) || [],
-  // membershipCards: membership_cards || [],
+  membershipCards: constructUserMembershipCardModel(membership_cards),
   bankAccounts: bank_accounts || [],
   creditCards: credit_cards || [],
 });
