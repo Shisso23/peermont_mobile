@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes, Text } from 'react-native';
+import { ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
@@ -38,52 +37,46 @@ const SetPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues 
   };
 
   return (
-    <KeyboardAwareScrollView
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={containerStyle}
+    <Formik
+      initialValues={initialValues}
+      initialStatus={{ apiErrors: {} }}
+      onSubmit={_handleSubmission}
+      validationSchema={validationSchema}
     >
-      <Formik
-        initialValues={initialValues}
-        initialStatus={{ apiErrors: {} }}
-        onSubmit={_handleSubmission}
-        validationSchema={validationSchema}
-      >
-        {({
-          handleChange,
-          handleSubmit,
-          values,
-          errors,
-          isSubmitting,
-          handleBlur,
-          touched,
-          status,
-        }) => {
-          const error = (name) => getFormError(name, { touched, status, errors });
-          return (
-            <>
-              <Input
-                label="Password"
-                secureTextEntry
-                value={values.password}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                errorMessage={error('password')}
-              />
-              <Input
-                label="Confirm Password"
-                secureTextEntry
-                value={values.confirmPassword}
-                onChangeText={handleChange('confirmPassword')}
-                onBlur={handleBlur('confirmPassword')}
-                errorMessage={error('confirmPassword')}
-              />
-              <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
-              <Text>{JSON.stringify(values)}</Text>
-            </>
-          );
-        }}
-      </Formik>
-    </KeyboardAwareScrollView>
+      {({
+        handleChange,
+        handleSubmit,
+        values,
+        errors,
+        isSubmitting,
+        handleBlur,
+        touched,
+        status,
+      }) => {
+        const error = (name) => getFormError(name, { touched, status, errors });
+        return (
+          <>
+            <Input
+              label="Password"
+              secureTextEntry
+              value={values.password}
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              errorMessage={error('password')}
+            />
+            <Input
+              label="Confirm Password"
+              secureTextEntry
+              value={values.confirmPassword}
+              onChangeText={handleChange('confirmPassword')}
+              onBlur={handleBlur('confirmPassword')}
+              errorMessage={error('confirmPassword')}
+            />
+            <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 

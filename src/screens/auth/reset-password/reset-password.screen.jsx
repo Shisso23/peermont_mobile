@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { ForgotPasswordForm } from '../../../components/forms';
+import { MobileNumberForm } from '../../../components/forms';
 import { resetPasswordModel } from '../../../models';
 import { requestResetPasswordOtpAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
+import { FormPageContainer } from '../../../components/containers';
 
 const ResetPasswordScreen = () => {
   const dispatch = useDispatch();
@@ -16,13 +16,13 @@ const ResetPasswordScreen = () => {
     navigation.replace('ResetPasswordOtp');
   };
   return (
-    <View>
-      <ForgotPasswordForm
+    <FormPageContainer>
+      <MobileNumberForm
         submitForm={_handleFormSubmission}
-        initialValues={resetPasswordModel({ login: '0824776117' })}
+        initialValues={resetPasswordModel()}
         onSuccess={_handleFormSuccess}
       />
-    </View>
+    </FormPageContainer>
   );
 };
 

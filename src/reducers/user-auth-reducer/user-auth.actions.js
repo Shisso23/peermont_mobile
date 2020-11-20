@@ -1,5 +1,6 @@
 import { userAuthService } from '../../services';
 import { setIsAuthenticatedAction, setTemporaryTokenAction } from './user-auth.reducer';
+import { encryptPin } from './user-auth.utils';
 
 export const signOutAction = () => {
   return (dispatch) => {
@@ -9,26 +10,52 @@ export const signOutAction = () => {
   };
 };
 
+// ==========================================================
+// Register
+// ==========================================================
 export const registerAction = ({ formData }) => {
-  return userAuthService.register({ formData }).then((_res) => {
-    // store token here
-  });
+  return (dispatch) => {
+    const _storeTempararyToken = (token) => dispatch(setTemporaryTokenAction(token));
+    const _getTemporaryToken = (encryptedPin) =>
+      userAuthService.register({ encryptedPin, cardNumber: formData.cardNumber });
+
+    return Promise.resolve(formData.pin)
+      .then(encryptPin)
+      .then(_getTemporaryToken)
+      .then(_storeTempararyToken);
+  };
 };
 
+export const verifyRegisterOtpAction = (formData) => {
+  return (dispatch, getState) => {
+    const _storeTempararyToken = (token) => dispatch(setTemporaryTokenAction(token));
+    const { token } = getState().userAuthReducer;
+    return userAuthService.verifyRegisterOtp(formData, token).then(_storeTempararyToken);
+  };
+};
+
+export const setPasswordAction = (formData) => {
+  return (_dispatch, getState) => {
+    const { token } = getState().userAuthReducer;
+    return userAuthService.setPassword(formData, token);
+  };
+}
+
+// ==========================================================
+// Reset Password
+// ==========================================================
 export const requestResetPasswordOtpAction = (formData) => {
   return (dispatch) => {
-    return userAuthService.requestResetPasswordOtp(formData).then((token) => {
-      dispatch(setTemporaryTokenAction(token));
-    });
+    const _storeTempararyToken = (token) => dispatch(setTemporaryTokenAction(token));
+    return userAuthService.requestResetPasswordOtp(formData).then(_storeTempararyToken);
   };
 };
 
 export const verifyResetPasswordOtpAction = (formData) => {
   return (dispatch, getState) => {
     const { token } = getState().userAuthReducer;
-    return userAuthService.verifyResetPasswordOtp(formData, token).then((newToken) => {
-      dispatch(setTemporaryTokenAction(newToken));
-    });
+    const _storeTempararyToken = (newToken) => dispatch(setTemporaryTokenAction(newToken));
+    return userAuthService.verifyResetPasswordOtp(formData, token).then(_storeTempararyToken);
   };
 };
 

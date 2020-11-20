@@ -1,18 +1,17 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { SetPasswordForm } from '../../../../components/forms';
 import { setPasswordModel } from '../../../../models';
-import { resetPasswordAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
+import { setPasswordAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
 import { FormPageContainer } from '../../../../components/containers';
 
-const ResetPasswordSetPasswordScreen = () => {
+const RegisterSetPasswordScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const _handleFormSubmission = (formData) => {
-    return dispatch(resetPasswordAction(formData));
+    return dispatch(setPasswordAction(formData));
   };
 
   const _handleFormSuccess = () => {
@@ -21,7 +20,7 @@ const ResetPasswordSetPasswordScreen = () => {
 
   return (
     <FormPageContainer>
-      <Text>Hello, Set new password</Text>
+      <Text>Hello, Set Register new password</Text>
       <SetPasswordForm
         initialValues={setPasswordModel()}
         submitForm={_handleFormSubmission}
@@ -31,10 +30,8 @@ const ResetPasswordSetPasswordScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+RegisterSetPasswordScreen.propTypes = {};
 
-ResetPasswordSetPasswordScreen.propTypes = {};
+RegisterSetPasswordScreen.defaultProps = {};
 
-ResetPasswordSetPasswordScreen.defaultProps = {};
-
-export default ResetPasswordSetPasswordScreen;
+export default RegisterSetPasswordScreen;

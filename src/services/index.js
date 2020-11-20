@@ -7,3 +7,4 @@ export { default as formDataService } from './sub-services/form-data-service/for
 export { default as bankAccountService } from './sub-services/bank-account-service/bank-account.service';
 export { default as creditCardService } from './sub-services/credit-card-service/credit-card.service';
 export { default as membershipCardService } from './sub-services/membership-card-service/membership-card.service';
+export { default as encryptionService } from './sub-services/encryption-service/encryption.service';

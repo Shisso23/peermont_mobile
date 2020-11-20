@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes, Text } from 'react-native';
+import { ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
@@ -38,57 +37,51 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
   };
 
   return (
-    <KeyboardAwareScrollView
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={containerStyle}
+    <Formik
+      initialValues={initialValues}
+      initialStatus={{ apiErrors: {} }}
+      onSubmit={_handleSubmission}
+      validationSchema={validationSchema}
     >
-      <Formik
-        initialValues={initialValues}
-        initialStatus={{ apiErrors: {} }}
-        onSubmit={_handleSubmission}
-        validationSchema={validationSchema}
-      >
-        {({
-          handleChange,
-          handleSubmit,
-          values,
-          errors,
-          isSubmitting,
-          handleBlur,
-          touched,
-          status,
-          setFieldValue,
-        }) => {
-          const error = (name) => getFormError(name, { touched, status, errors });
-          return (
-            <>
-              <Input
-                value={values.mobileNumber}
-                onChangeText={handleChange('mobileNumber')}
-                label="Mobile Number"
-                onBlur={handleBlur('mobileNumber')}
-                errorMessage={error('mobileNumber')}
-                leftIcon={() => (
-                  <CountrySelect
-                    onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
-                  />
-                )}
-              />
-              <Input
-                value={values.password}
-                onChangeText={handleChange('password')}
-                label="Password"
-                onBlur={handleBlur('password')}
-                secureTextEntry
-                errorMessage={error('password')}
-              />
-              <Button title="Login" onPress={handleSubmit} loading={isSubmitting} />
-              {__DEV__ && <Text>{JSON.stringify(values, null, 2)}</Text>}
-            </>
-          );
-        }}
-      </Formik>
-    </KeyboardAwareScrollView>
+      {({
+        handleChange,
+        handleSubmit,
+        values,
+        errors,
+        isSubmitting,
+        handleBlur,
+        touched,
+        status,
+        setFieldValue,
+      }) => {
+        const error = (name) => getFormError(name, { touched, status, errors });
+        return (
+          <>
+            <Input
+              value={values.mobileNumber}
+              onChangeText={handleChange('mobileNumber')}
+              label="Mobile Number"
+              onBlur={handleBlur('mobileNumber')}
+              errorMessage={error('mobileNumber')}
+              leftIcon={() => (
+                <CountrySelect
+                  onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
+                />
+              )}
+            />
+            <Input
+              value={values.password}
+              onChangeText={handleChange('password')}
+              label="Password"
+              onBlur={handleBlur('password')}
+              secureTextEntry
+              errorMessage={error('password')}
+            />
+            <Button title="Login" onPress={handleSubmit} loading={isSubmitting} />
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 

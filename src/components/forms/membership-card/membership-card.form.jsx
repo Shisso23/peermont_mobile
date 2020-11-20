@@ -36,51 +36,45 @@ const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValu
   };
 
   return (
-    <KeyboardAwareScrollView
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={containerStyle}
+    <Formik
+      initialValues={initialValues}
+      initialStatus={{ apiErrors: {} }}
+      onSubmit={_handleSubmission}
+      validationSchema={validationSchema}
     >
-      <Formik
-        initialValues={initialValues}
-        initialStatus={{ apiErrors: {} }}
-        onSubmit={_handleSubmission}
-        validationSchema={validationSchema}
-      >
-        {({
-          handleChange,
-          handleSubmit,
-          values,
-          errors,
-          isSubmitting,
-          handleBlur,
-          touched,
-          status,
-        }) => {
-          const error = (name) => getFormError(name, { touched, status, errors });
-          return (
-            <>
-              <Input
-                value={values.cardNumber}
-                onChangeText={handleChange('cardNumber')}
-                label="Card Number"
-                onBlur={handleBlur('cardNumber')}
-                errorMessage={error('cardNumber')}
-              />
-              <Input
-                value={values.pin}
-                onChangeText={handleChange('pin')}
-                label="Pin"
-                onBlur={handleBlur('pin')}
-                secureTextEntry
-                errorMessage={error('pin')}
-              />
-              <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
-              <Text>{JSON.stringify(values)}</Text>
-            </>
-          );
-        }}
-      </Formik>
-    </KeyboardAwareScrollView>
+      {({
+        handleChange,
+        handleSubmit,
+        values,
+        errors,
+        isSubmitting,
+        handleBlur,
+        touched,
+        status,
+      }) => {
+        const error = (name) => getFormError(name, { touched, status, errors });
+        return (
+          <>
+            <Input
+              value={values.cardNumber}
+              onChangeText={handleChange('cardNumber')}
+              label="Card Number"
+              onBlur={handleBlur('cardNumber')}
+              errorMessage={error('cardNumber')}
+            />
+            <Input
+              value={values.pin}
+              onChangeText={handleChange('pin')}
+              label="Pin"
+              onBlur={handleBlur('pin')}
+              secureTextEntry
+              errorMessage={error('pin')}
+            />
+            <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 

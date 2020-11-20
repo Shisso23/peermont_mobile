@@ -10,9 +10,9 @@ const ForgotPasswordLink = ({ containerStyle }) => {
       <TouchableOpacity
         style={styles.alignCenter}
         delayPressIn={0}
-        onPress={() => navigation.push('ForgotPassword')}
+        onPress={() => navigation.push('ResetPassword')}
       >
-        <Text>Forgot Password</Text>
+        <Text>Reset Password</Text>
       </TouchableOpacity>
     </View>
   );

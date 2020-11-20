@@ -1,27 +1,31 @@
 import React from 'react';
-import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { MembershipCardForm } from '../../../components/forms';
 import { membershipCardModel } from '../../../models';
 import { registerAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
+import { FormPageContainer } from '../../../components/containers';
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const _handleFormSubmit = (formData) => {
     return dispatch(registerAction({ formData }));
   };
 
-  const _onFormSuccess = () => {};
+  const _onFormSuccess = () => {
+    navigation.replace('RegisterOtp');
+  };
+
   return (
-    <View>
+    <FormPageContainer>
       <MembershipCardForm
         submitForm={_handleFormSubmit}
         onSuccess={_onFormSuccess}
-        initialValues={membershipCardModel({ card_number: '210200002655713767', pin: '1234' })}
-        // initialValues={membershipCardModel({})}
+        initialValues={membershipCardModel()}
       />
-    </View>
+    </FormPageContainer>
   );
 };
 

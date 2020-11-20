@@ -15,7 +15,7 @@ const Root = () => (
   <SafeAreaProvider>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-          <App />
+        <App />
         <Toast ref={(ref) => Toast.setRef(ref)} />
       </Provider>
     </ThemeProvider>

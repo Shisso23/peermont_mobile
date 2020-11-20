@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const FormContainer = ({ children }) => {
+const FormPageContainer = ({ children }) => {
   return (
     <KeyboardAwareScrollView
       keyboardShouldPersistTaps="handled"
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   },
 });
 
-FormContainer.propTypes = {
+FormPageContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default FormContainer;
+export default FormPageContainer;

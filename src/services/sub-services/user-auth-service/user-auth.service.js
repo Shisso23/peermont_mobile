@@ -9,10 +9,10 @@ import {
   apiMembershipCardModel,
   membershipCardModel,
   apiResetPasswordModel,
-  apiResetPasswordOtpModel,
-  resetPasswordOtpModel,
-  apiResetPasswordSetPasswordModel,
-  resetPasswordSetPasswordModel,
+  apiOtpModel,
+  otpModel,
+  apiSetPasswordModel,
+  setPasswordModel,
 } from '../../../models';
 
 const _extractAndReturnTokenFromApiResponse = (apiResponse) =>
@@ -31,15 +31,54 @@ const signOut = () => {
   return authNetworkService.delete(signOutUrl).then(authUtils.removeAccessAndRefreshTokens);
 };
 
-const register = ({ formData }) => {
+const doTokensExistInLocalStorage = () => {
+  const _trueIfBothExist = (accessToken, refreshToken) => {
+    return !_.isNull(accessToken) && !_.isNull(refreshToken);
+  };
+  return authUtils.getAccessAndRefreshTokens().then(([accessToken, refreshToken]) => {
+    return _trueIfBothExist(accessToken, refreshToken);
+  });
+};
+
+// ==========================================================
+// Register
+// ==========================================================
+const register = (formData) => {
   const registerUrl = authUrls.registerUrl();
   const apiModel = apiMembershipCardModel(formData);
-  return networkService.post(registerUrl, apiModel).catch((err) => {
-    err.errors = membershipCardModel(err.errors);
+  return networkService
+    .post(registerUrl, apiModel)
+    .then(_extractAndReturnTokenFromApiResponse)
+    .catch((err) => {
+      err.errors = membershipCardModel(err.errors);
+      return Promise.reject(err);
+    });
+};
+
+const verifyRegisterOtp = (formData, token) => {
+  const verifyRegisterOtpUrl = authUrls.verifyRegisterOtpUrl();
+  const apiModel = otpModel(formData, token);
+  return networkService
+    .post(verifyRegisterOtpUrl, apiModel)
+    .then(_extractAndReturnTokenFromApiResponse)
+    .catch((err) => {
+      err.errors = otpModel(err.errors);
+      return Promise.reject(err);
+    });
+};
+
+const setPassword = (formData, token) => {
+  const setPasswordUrl = authUrls.setPasswordUrl();
+  const apiModel = apiSetPasswordModel(formData, token);
+  return networkService.post(setPasswordUrl, apiModel).catch((err) => {
+    err.errors = setPasswordModel(err.errors);
     return Promise.reject(err);
   });
 };
 
+// ==========================================================
+// Reset Password
+// ==========================================================
 const requestResetPasswordOtp = (formData) => {
   const requestResetPasswordOtpUrl = authUrls.requestResetPasswordOtpUrl();
   const apiModel = apiResetPasswordModel(formData);
@@ -54,31 +93,22 @@ const requestResetPasswordOtp = (formData) => {
 
 const verifyResetPasswordOtp = (formData, otpToken) => {
   const verifyResetPasswordOtpUrl = authUrls.verifyResetPasswordOtpUrl();
-  const apiModel = apiResetPasswordOtpModel(formData, otpToken);
+  const apiModel = apiOtpModel(formData, otpToken);
   return networkService
     .post(verifyResetPasswordOtpUrl, apiModel)
     .then(_extractAndReturnTokenFromApiResponse)
     .catch((err) => {
-      err.errors = resetPasswordOtpModel(err.errors);
+      err.errors = otpModel(err.errors);
       return Promise.reject(err);
     });
 };
 
 const resetPassword = (formData, token) => {
   const resetPasswordUrl = authUrls.resetPasswordUrl();
-  const apiModel = apiResetPasswordSetPasswordModel(formData, token);
+  const apiModel = apiSetPasswordModel(formData, token);
   return networkService.post(resetPasswordUrl, apiModel).catch((err) => {
-    err.errors = resetPasswordSetPasswordModel(err.errors);
+    err.errors = setPasswordModel(err.errors);
     return Promise.reject(err);
-  });
-};
-
-const doTokensExistInLocalStorage = () => {
-  const _trueIfBothExist = (accessToken, refreshToken) => {
-    return !_.isNull(accessToken) && !_.isNull(refreshToken);
-  };
-  return authUtils.getAccessAndRefreshTokens().then(([accessToken, refreshToken]) => {
-    return _trueIfBothExist(accessToken, refreshToken);
   });
 };
 
@@ -90,4 +120,6 @@ export default {
   doTokensExistInLocalStorage,
   verifyResetPasswordOtp,
   resetPassword,
+  verifyRegisterOtp,
+  setPassword,
 };
