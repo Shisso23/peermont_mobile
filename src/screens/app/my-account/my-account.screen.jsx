@@ -9,6 +9,7 @@ import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
+import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 
 const MyAccountScreen = () => {
   const { loading } = useSelector((reducers) => reducers.userReducer);
@@ -24,26 +25,11 @@ const MyAccountScreen = () => {
   );
 
   const _handleDelete = (id, action) => {
-    Alert.alert(
-      'Are you sure?',
-      'Are you sure you want to delete this item?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            if (action) {
-              dispatch(action(id));
-            }
-          },
-        },
-      ],
-      { cancelable: false },
-    );
+    promptConfirmDelete('Are you sure you want to delete this item?', () => {
+      if (action) {
+        dispatch(action(id));
+      }
+    });
   };
 
   return !loading ? (
