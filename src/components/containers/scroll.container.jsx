@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, ScrollView } from 'react-native';
 
-const PageContainer = ({ children }) => {
+const ScrollContainer = ({ children }) => {
   return <ScrollView style={styles.container}>{children}</ScrollView>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
-    paddingVertical: 30,
+    flex: 1,
   },
 });
 
-PageContainer.propTypes = {
+ScrollContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default PageContainer;
+export default ScrollContainer;

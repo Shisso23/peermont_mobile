@@ -1,11 +1,13 @@
+import _ from 'lodash';
 import CreateAction from '../action-utilities/action-creator';
-// import { creditCardModel } from '../../models';
 
 const reducerName = 'creditCard';
 
 const setCreditCards = CreateAction(reducerName, 'SET_CREDIT_CARDS');
 export const setCreditCardsAction = setCreditCards.action;
-export const setCreditCardsActionType = setCreditCards.actionType;
+
+const removeCreditCard = CreateAction(reducerName, 'REMOVE_CREDIT_CARD');
+export const removeCreditCardAction = removeCreditCard.action;
 
 const initialState = {
   creditCards: [],
@@ -18,7 +20,11 @@ export default function creditCardReducer(state = initialState, action) {
         ...state,
         creditCards: action.payload,
       };
-
+    case removeCreditCard.actionType:
+      return {
+        ...state,
+        creditCards: _.remove(state.creditCards, { id: action.payload }),
+      };
     default:
       return state;
   }
