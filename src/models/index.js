@@ -1,4 +1,6 @@
-export * from './auth/forgot-password/forgot-password.model';
+export * from './auth/reset-password/reset-password.model';
+export * from './auth/reset-password/reset-password-otp.model';
+export * from './auth/reset-password/reset-password-set-password.model';
 export * from './auth/registration/registration.model';
 export * from './auth/registration/membership-card.model';
 export * from './auth/sign-in/sign-in.model';

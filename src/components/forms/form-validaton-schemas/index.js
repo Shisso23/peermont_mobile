@@ -14,13 +14,11 @@ export const registerPasswordSchema = (edit) => {
     : Yup.string().notRequired();
 };
 
-export const confirmPasswordSchema = (edit) => {
-  return !edit
-    ? Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Confirm password is required')
-    : Yup.string().notRequired();
-};
+export const numericSchema = Yup.string().matches(numberRegex, 'Can only contain digits');
+
+export const confirmPasswordSchema = Yup.string()
+  .oneOf([Yup.ref('password'), null], 'Passwords must match')
+  .required('Confirm password is required');
 
 export const termsAndConditionsSchema = (edit) => {
   return !edit ? Yup.bool().oneOf([true]) : Yup.string().notRequired();

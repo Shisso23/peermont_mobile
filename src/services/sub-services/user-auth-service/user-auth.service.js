@@ -4,12 +4,19 @@ import authUtils from './user-auth.utils';
 import networkService from '../network-service/network.service';
 import authNetworkService from '../auth-network-service/auth-network.service';
 import {
-  apiForgotPasswordModel,
-  forgotPasswordModel,
+  resetPasswordModel,
   apiSignInModel,
   apiMembershipCardModel,
   membershipCardModel,
+  apiResetPasswordModel,
+  apiResetPasswordOtpModel,
+  resetPasswordOtpModel,
+  apiResetPasswordSetPasswordModel,
+  resetPasswordSetPasswordModel,
 } from '../../../models';
+
+const _extractAndReturnTokenFromApiResponse = (apiResponse) =>
+  _.get(apiResponse, 'data.token', null);
 
 const signIn = ({ formData }) => {
   const signInUrl = authUrls.tokenUrl();
@@ -33,12 +40,35 @@ const register = ({ formData }) => {
   });
 };
 
-const forgotPassword = ({ formData }) => {
-  const forgotPasswordUrl = authUrls.forgotPasswordUrl();
-  const apiModel = apiForgotPasswordModel(formData);
+const requestResetPasswordOtp = (formData) => {
+  const requestResetPasswordOtpUrl = authUrls.requestResetPasswordOtpUrl();
+  const apiModel = apiResetPasswordModel(formData);
+  return networkService
+    .post(requestResetPasswordOtpUrl, apiModel)
+    .then(_extractAndReturnTokenFromApiResponse)
+    .catch((err) => {
+      err.errors = resetPasswordModel(err.errors);
+      return Promise.reject(err);
+    });
+};
 
-  return networkService.post(forgotPasswordUrl, apiModel).catch((err) => {
-    err.errors = forgotPasswordModel(err.errors);
+const verifyResetPasswordOtp = (formData, otpToken) => {
+  const verifyResetPasswordOtpUrl = authUrls.verifyResetPasswordOtpUrl();
+  const apiModel = apiResetPasswordOtpModel(formData, otpToken);
+  return networkService
+    .post(verifyResetPasswordOtpUrl, apiModel)
+    .then(_extractAndReturnTokenFromApiResponse)
+    .catch((err) => {
+      err.errors = resetPasswordOtpModel(err.errors);
+      return Promise.reject(err);
+    });
+};
+
+const resetPassword = (formData, token) => {
+  const resetPasswordUrl = authUrls.resetPasswordUrl();
+  const apiModel = apiResetPasswordSetPasswordModel(formData, token);
+  return networkService.post(resetPasswordUrl, apiModel).catch((err) => {
+    err.errors = resetPasswordSetPasswordModel(err.errors);
     return Promise.reject(err);
   });
 };
@@ -56,6 +86,8 @@ export default {
   signIn,
   signOut,
   register,
-  forgotPassword,
+  requestResetPasswordOtp,
   doTokensExistInLocalStorage,
+  verifyResetPasswordOtp,
+  resetPassword,
 };

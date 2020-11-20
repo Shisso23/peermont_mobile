@@ -6,15 +6,14 @@ import { Formik } from 'formik';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from 'yup';
 
-import { Button, Input } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { flashService } from '../../../services';
-import { CountrySelect } from '../../atoms';
-import { mobileNumberSchema } from '../form-validaton-schemas';
+import { NumericInput } from '../../atoms';
+import { numericSchema } from '../form-validaton-schemas';
 
-const ForgotPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const NumericalInputForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
   const validationSchema = Yup.object().shape({
-    mobileNumber: mobileNumberSchema,
+    numeric: numericSchema,
   });
 
   const _handleSubmission = (formData, actions) => {
@@ -53,7 +52,6 @@ const ForgotPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValu
           values,
           errors,
           isSubmitting,
-          handleBlur,
           touched,
           status,
           setFieldValue,
@@ -61,19 +59,13 @@ const ForgotPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValu
           const error = (name) => getFormError(name, { touched, status, errors });
           return (
             <>
-              <Input
-                value={values.mobileNumber}
-                onChangeText={handleChange('mobileNumber')}
-                onBlur={handleBlur('mobileNumber')}
-                label="Mobile Number"
-                errorMessage={error('mobileNumber')}
-                leftIcon={() => (
-                  <CountrySelect
-                    onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
-                  />
-                )}
+              <NumericInput
+                value={values.numeric}
+                onChange={(newNumeric) => setFieldValue('numeric', newNumeric)}
+                cellCount={4}
+                handleSubmit={handleSubmit}
+                errorMessage={error('numeric')}
               />
-              <Button title="Submit" onPress={handleSubmit} loading={isSubmitting} />
               {__DEV__ && <Text>{JSON.stringify(values, null, 2)}</Text>}
             </>
           );
@@ -83,16 +75,16 @@ const ForgotPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValu
   );
 };
 
-ForgotPasswordForm.propTypes = {
+NumericalInputForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   onSuccess: PropTypes.func,
   containerStyle: ViewPropTypes.style,
   initialValues: PropTypes.object.isRequired,
 };
 
-ForgotPasswordForm.defaultProps = {
+NumericalInputForm.defaultProps = {
   onSuccess: () => null,
   containerStyle: {},
 };
 
-export default ForgotPasswordForm;
+export default NumericalInputForm;

@@ -7,14 +7,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
-import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
-import { CountrySelect } from '../../atoms';
+import { passwordSchema, confirmPasswordSchema } from '../form-validaton-schemas';
+import { flashService } from '../../../services';
 
-const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const SetPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
   const validationSchema = Yup.object().shape({
-    mobileNumber: mobileNumberSchema,
     password: passwordSchema,
+    confirmPassword: confirmPasswordSchema,
   });
 
   const _handleFormSubmitError = (error, actions, formData) => {
@@ -22,16 +22,16 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
     if (_.get(error, 'statusCode') === 422) {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
-    } else if (error.statusCode === 400) {
-      actions.setFieldError('mobileNumber', 'Incorrect login credetials provided');
     } else {
-      actions.setFieldError('mobileNumber', error.message);
+      actions.setFieldError('password', error.message);
     }
   };
+
   const _handleSubmission = (formData, actions) => {
-    submitForm({ formData })
+    submitForm(formData)
       .then(() => {
         actions.setSubmitting(false);
+        flashService.success();
         onSuccess();
       })
       .catch((error) => _handleFormSubmitError(error, actions, formData));
@@ -57,33 +57,28 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
           handleBlur,
           touched,
           status,
-          setFieldValue,
         }) => {
           const error = (name) => getFormError(name, { touched, status, errors });
           return (
             <>
               <Input
-                value={values.mobileNumber}
-                onChangeText={handleChange('mobileNumber')}
-                label="Mobile Number"
-                onBlur={handleBlur('mobileNumber')}
-                errorMessage={error('mobileNumber')}
-                leftIcon={() => (
-                  <CountrySelect
-                    onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
-                  />
-                )}
-              />
-              <Input
+                label="Password"
+                secureTextEntry
                 value={values.password}
                 onChangeText={handleChange('password')}
-                label="Password"
                 onBlur={handleBlur('password')}
-                secureTextEntry
                 errorMessage={error('password')}
               />
-              <Button title="Login" onPress={handleSubmit} loading={isSubmitting} />
-              {__DEV__ && <Text>{JSON.stringify(values, null, 2)}</Text>}
+              <Input
+                label="Confirm Password"
+                secureTextEntry
+                value={values.confirmPassword}
+                onChangeText={handleChange('confirmPassword')}
+                onBlur={handleBlur('confirmPassword')}
+                errorMessage={error('confirmPassword')}
+              />
+              <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+              <Text>{JSON.stringify(values)}</Text>
             </>
           );
         }}
@@ -92,16 +87,16 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
   );
 };
 
-SignInForm.propTypes = {
+SetPasswordForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
   containerStyle: ViewPropTypes.style,
 };
 
-SignInForm.defaultProps = {
+SetPasswordForm.defaultProps = {
   onSuccess: () => null,
   containerStyle: {},
 };
 
-export default SignInForm;
+export default SetPasswordForm;
