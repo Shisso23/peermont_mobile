@@ -13,7 +13,7 @@ const CountrySelect = ({ onChange }) => {
       preferredCountries={['ZA']}
       onSelect={(c) => {
         setCountry(c.cca2);
-        onChange(c);
+        onChange(c.callingCode[0]);
       }}
     />
   );

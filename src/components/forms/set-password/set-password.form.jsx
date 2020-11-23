@@ -1,19 +1,19 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes, Text } from 'react-native';
+import { ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
 import { getFormError } from '../form-utils';
-import { cardSchema, pinSchema } from '../form-validaton-schemas';
+import { passwordSchema, confirmPasswordSchema } from '../form-validaton-schemas';
+import { flashService } from '../../../services';
 
-const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const SetPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
   const validationSchema = Yup.object().shape({
-    cardNumber: cardSchema,
-    pin: pinSchema,
+    password: passwordSchema,
+    confirmPassword: confirmPasswordSchema,
   });
 
   const _handleFormSubmitError = (error, actions, formData) => {
@@ -22,7 +22,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValu
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
     } else {
-      actions.setFieldError('cardNumber', error.message);
+      actions.setFieldError('password', error.message);
     }
   };
 
@@ -30,6 +30,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValu
     submitForm(formData)
       .then(() => {
         actions.setSubmitting(false);
+        flashService.success();
         onSuccess();
       })
       .catch((error) => _handleFormSubmitError(error, actions, formData));
@@ -56,19 +57,20 @@ const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValu
         return (
           <>
             <Input
-              value={values.cardNumber}
-              onChangeText={handleChange('cardNumber')}
-              label="Card Number"
-              onBlur={handleBlur('cardNumber')}
-              errorMessage={error('cardNumber')}
+              label="Password"
+              secureTextEntry
+              value={values.password}
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              errorMessage={error('password')}
             />
             <Input
-              value={values.pin}
-              onChangeText={handleChange('pin')}
-              label="Pin"
-              onBlur={handleBlur('pin')}
+              label="Confirm Password"
               secureTextEntry
-              errorMessage={error('pin')}
+              value={values.confirmPassword}
+              onChangeText={handleChange('confirmPassword')}
+              onBlur={handleBlur('confirmPassword')}
+              errorMessage={error('confirmPassword')}
             />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
@@ -78,16 +80,16 @@ const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValu
   );
 };
 
-MembershipCardForm.propTypes = {
+SetPasswordForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
   containerStyle: ViewPropTypes.style,
 };
 
-MembershipCardForm.defaultProps = {
+SetPasswordForm.defaultProps = {
   onSuccess: () => null,
   containerStyle: {},
 };
 
-export default MembershipCardForm;
+export default SetPasswordForm;
