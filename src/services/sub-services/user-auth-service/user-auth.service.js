@@ -57,7 +57,7 @@ const register = (formData) => {
 
 const verifyRegisterOtp = (formData, token) => {
   const verifyRegisterOtpUrl = authUrls.verifyRegisterOtpUrl();
-  const apiModel = otpModel(formData, token);
+  const apiModel = apiOtpModel(formData, token, 'registration');
   return networkService
     .post(verifyRegisterOtpUrl, apiModel)
     .then(_extractAndReturnTokenFromApiResponse)
