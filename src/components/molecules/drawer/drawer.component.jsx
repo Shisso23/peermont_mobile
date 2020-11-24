@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { signOutAction } from '../../reducers/user-auth-reducer/user-auth.actions';
+import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 
 const DrawerComponent = (props) => {
   const navigation = useNavigation();

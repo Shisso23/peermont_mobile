@@ -10,6 +10,7 @@ import RegisterOtpScreen from '../../screens/auth/register/register-otp/register
 import ResetPasswordOtpScreen from '../../screens/auth/reset-password/reset-password-otp/reset-password-otp.screen';
 import ResetPasswordSetPasswordScreen from '../../screens/auth/reset-password/set-password/reset-password-set-password.screen';
 import ResetPasswordScreen from '../../screens/auth/reset-password/reset-password.screen';
+
 import { globalScreenOptions } from '../../../theme/theme.styles';
 
 const AuthStack = createStackNavigator();

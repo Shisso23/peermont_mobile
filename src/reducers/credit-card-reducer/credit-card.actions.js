@@ -1,5 +1,9 @@
 import { setLoadingAction } from '../user-reducer/user.reducer';
-import { setCreditCardsAction, removeCreditCardAction } from './credit-card.reducer';
+import {
+  setCreditCardsAction,
+  removeCreditCardAction,
+  appendCreditCardAction,
+} from './credit-card.reducer';
 import { creditCardService } from '../../services';
 
 export const getCreditCardsAction = () => {
@@ -12,11 +16,19 @@ export const getCreditCardsAction = () => {
   };
 };
 
+export const createCreditCardAction = (formData) => {
+  return (dispatch) => {
+    const _storeNewlyCreatedCreditCard = (newCreditCard) =>
+      dispatch(appendCreditCardAction(newCreditCard));
+    return creditCardService.createCreditCard(formData).then(_storeNewlyCreatedCreditCard);
+  };
+};
+
 export const deleteCreditCardAction = (id) => {
   return (dispatch) => {
     dispatch(setLoadingAction(true));
     return creditCardService.deleteCreditCard(id).then(() => {
-      dispatch(removeCreditCardAction());
+      dispatch(removeCreditCardAction(id));
       dispatch(setLoadingAction(false));
     });
   };

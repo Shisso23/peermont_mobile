@@ -1,6 +1,5 @@
-import { userAuthService } from '../../services';
+import { userAuthService, encryptionService } from '../../services';
 import { setIsAuthenticatedAction, setTemporaryTokenAction } from './user-auth.reducer';
-import { encryptPin } from './user-auth.utils';
 
 export const signOutAction = () => {
   return (dispatch) => {
@@ -20,7 +19,7 @@ export const registerAction = ({ formData }) => {
       userAuthService.register({ encryptedPin, cardNumber: formData.cardNumber });
 
     return Promise.resolve(formData.pin)
-      .then(encryptPin)
+      .then(encryptionService.encryptPin)
       .then(_getTemporaryToken)
       .then(_storeTempararyToken);
   };
@@ -39,7 +38,7 @@ export const setPasswordAction = (formData) => {
     const { token } = getState().userAuthReducer;
     return userAuthService.setPassword(formData, token);
   };
-}
+};
 
 // ==========================================================
 // Reset Password

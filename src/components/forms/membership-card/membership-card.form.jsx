@@ -1,18 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
 import { getFormError } from '../form-utils';
-import { cardSchema, pinSchema } from '../form-validaton-schemas';
+import { membershipCardSchema, pinSchema } from '../form-validaton-schemas';
 
-const MembershipCardForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
   const validationSchema = Yup.object().shape({
-    cardNumber: cardSchema,
+    cardNumber: membershipCardSchema,
     pin: pinSchema,
   });
 
@@ -82,12 +80,10 @@ MembershipCardForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
-  containerStyle: ViewPropTypes.style,
 };
 
 MembershipCardForm.defaultProps = {
   onSuccess: () => null,
-  containerStyle: {},
 };
 
 export default MembershipCardForm;

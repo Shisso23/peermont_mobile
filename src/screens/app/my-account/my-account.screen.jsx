@@ -1,9 +1,8 @@
 import React from 'react';
-import { Alert } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { ListItem, Divider, Text, Button } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScrollContainer } from '../../../components/containers';
+import { PageContainer } from '../../../components/containers';
 import { LoadingComponent } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
@@ -17,6 +16,7 @@ const MyAccountScreen = () => {
   const { creditCards } = useSelector((reducers) => reducers.creditCardReducer);
   const { bankAccounts } = useSelector((reducers) => reducers.bankAccountReducer);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -33,8 +33,9 @@ const MyAccountScreen = () => {
   };
 
   return !loading ? (
-    <ScrollContainer>
+    <PageContainer>
       <Text h4>Winners Circle Cards</Text>
+      <Button title="Add Winners Circle" onPress={() => navigation.navigate('AddMembershipCard')} />
       {membershipCards.map((item) => {
         return (
           <ListItem key={item.id} bottomDivider>
@@ -50,6 +51,7 @@ const MyAccountScreen = () => {
       })}
       <Divider />
       <Text h4>Credit Cards</Text>
+      <Button title="Add Credit Card" onPress={() => navigation.navigate('AddCreditCard')} />
       {creditCards.map((item) => {
         return (
           <ListItem key={item.id} bottomDivider>
@@ -62,6 +64,7 @@ const MyAccountScreen = () => {
       })}
       <Divider />
       <Text h4>Bank Accounts</Text>
+      <Button title="Add Bank Account" onPress={() => navigation.navigate('AddBankAccount')} />
       {bankAccounts.map((item) => {
         return (
           <ListItem key={item.id} bottomDivider>
@@ -75,7 +78,7 @@ const MyAccountScreen = () => {
           </ListItem>
         );
       })}
-    </ScrollContainer>
+    </PageContainer>
   ) : (
     <LoadingComponent />
   );

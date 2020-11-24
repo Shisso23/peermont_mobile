@@ -1,5 +1,9 @@
 import { setLoadingAction } from '../user-reducer/user.reducer';
-import { setBankAccountsAction, removeBankAccountAction } from './bank-account.reducer';
+import {
+  setBankAccountsAction,
+  removeBankAccountAction,
+  appendBankAccountAction,
+} from './bank-account.reducer';
 import { bankAccountService } from '../../services';
 
 export const getBankAccountsAction = () => {
@@ -12,11 +16,19 @@ export const getBankAccountsAction = () => {
   };
 };
 
+export const creatBankAccountAction = (formData) => {
+  return (dispatch) => {
+    return bankAccountService.createBankAccount(formData).then((newBankAccount) => {
+      dispatch(appendBankAccountAction(newBankAccount));
+    });
+  };
+};
+
 export const deleteBankAccountAction = (id) => {
   return (dispatch) => {
     dispatch(setLoadingAction(true));
     return bankAccountService.deleteBankAccount(id).then(() => {
-      dispatch(removeBankAccountAction());
+      dispatch(removeBankAccountAction(id));
       dispatch(setLoadingAction(false));
     });
   };
