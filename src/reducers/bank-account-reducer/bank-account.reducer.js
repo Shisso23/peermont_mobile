@@ -9,6 +9,9 @@ export const setBankAccountsAction = setBankAccounts.action;
 const removeBankAccount = CreateAction(reducerName, 'REMOVE_BANK_ACCOUNT');
 export const removeBankAccountAction = removeBankAccount.action;
 
+const appendBankAccount = CreateAction(reducerName, 'APPEND_BANK_ACCOUNT');
+export const appendBankAccountAction = appendBankAccount.action;
+
 const initialState = {
   bankAccounts: [],
 };
@@ -24,6 +27,11 @@ export default function bankAccountReducer(state = initialState, action) {
       return {
         ...state,
         bankAccounts: _.remove(state.bankAccounts, { id: action.payload }),
+      };
+    case appendBankAccount.actionType:
+      return {
+        ...state,
+        bankAccounts: _.concat(state.bankAccounts, [action.payload]),
       };
     default:
       return state;

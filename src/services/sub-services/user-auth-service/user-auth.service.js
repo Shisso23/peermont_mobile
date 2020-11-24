@@ -6,8 +6,8 @@ import authNetworkService from '../auth-network-service/auth-network.service';
 import {
   resetPasswordModel,
   apiSignInModel,
-  apiMembershipCardModel,
-  membershipCardModel,
+  apiRegistrationMembershipCardModel,
+  registrationMembershipCardModel,
   apiResetPasswordModel,
   apiOtpModel,
   otpModel,
@@ -45,12 +45,12 @@ const doTokensExistInLocalStorage = () => {
 // ==========================================================
 const register = (formData) => {
   const registerUrl = authUrls.registerUrl();
-  const apiModel = apiMembershipCardModel(formData);
+  const apiModel = apiRegistrationMembershipCardModel(formData);
   return networkService
     .post(registerUrl, apiModel)
     .then(_extractAndReturnTokenFromApiResponse)
     .catch((err) => {
-      err.errors = membershipCardModel(err.errors);
+      err.errors = registrationMembershipCardModel(err.errors);
       return Promise.reject(err);
     });
 };

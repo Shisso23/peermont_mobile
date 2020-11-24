@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
-export const membershipCardModel = ({ card_number, pin } = {}) => ({
+export const membershipCardModel = ({ card_number, card_pin } = {}) => ({
   cardNumber: card_number || '',
-  pin: pin || '',
+  pin: card_pin || '',
 });
 
 export const apiMembershipCardModel = ({ cardNumber, encryptedPin } = {}) => ({
-  registration: {
+  membership_card: {
     card_number: cardNumber || '',
-    pin: encryptedPin || '',
+    card_pin: encryptedPin || '',
   },
 });

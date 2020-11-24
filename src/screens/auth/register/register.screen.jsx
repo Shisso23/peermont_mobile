@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { MembershipCardForm } from '../../../components/forms';
-import { membershipCardModel } from '../../../models';
+import { registrationMembershipCardModel } from '../../../models';
 import { registerAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { FormPageContainer } from '../../../components/containers';
 
@@ -23,7 +23,7 @@ const RegisterScreen = () => {
       <MembershipCardForm
         submitForm={_handleFormSubmit}
         onSuccess={_onFormSuccess}
-        initialValues={membershipCardModel()}
+        initialValues={registrationMembershipCardModel()}
       />
     </FormPageContainer>
   );

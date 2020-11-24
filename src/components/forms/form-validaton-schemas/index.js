@@ -25,7 +25,7 @@ export const termsAndConditionsSchema = (edit) => {
 };
 
 const MEMBERSHIP_CARD_NUMBER_LEN = 18;
-export const cardSchema = Yup.string()
+export const membershipCardSchema = Yup.string()
   .required('Please enter your card number.')
   .matches(numberRegex, 'Please ensure that your card number has only digits.')
   .length(MEMBERSHIP_CARD_NUMBER_LEN, `Card number is ${MEMBERSHIP_CARD_NUMBER_LEN} digits.`);
@@ -33,3 +33,25 @@ export const cardSchema = Yup.string()
 export const pinSchema = Yup.string()
   .required('Please enter your card pin.')
   .matches(numberRegex, 'Please ensure that your card pin has only digits.');
+
+export const creditCardNumberSchema = Yup.string()
+  .matches(numberRegex, 'Please ensure that your card number contains only digits')
+  .required('Please enter your card number');
+export const creditCardExpiryMonthSchema = Yup.string().required('Please choose expiry month');
+export const creditCardExpiryYearSchema = Yup.string().required('Please choose expiry year');
+export const creditCardTypeSchema = Yup.string().required('Please choose a card type');
+export const creditCardHolderSchema = Yup.string().required('Card holder is required');
+export const creditCardCvvSchema = Yup.string()
+  .matches(numberRegex, 'Please ensure that your cvv has only digits')
+  .min(3)
+  .max(4)
+  .required('cvv is required');
+
+export const bankAccountHolderSchema = Yup.string().required('Please enter the account holder');
+export const bankAccountAccountNumberSchema = Yup.string().required(
+  'Please enter your account number',
+);
+export const bankAccountBankIdSchema = Yup.string()
+  .matches(numberRegex)
+  .required('Please select a bank');
+export const proofOfBankDocumentSchema = Yup.string().required('Please upload proof of bank');

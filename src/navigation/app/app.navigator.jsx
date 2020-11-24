@@ -3,8 +3,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../../screens/app/home/home.screen';
 import MyAccountScreen from '../../screens/app/my-account/my-account.screen';
+
+import AddCreditCardScreen from '../../screens/app/my-account/add-account/add-credit-card/add-credit-card.screen';
+
 import { DrawerComponent } from '../../components/molecules';
 import { globalScreenOptions } from '../../../theme/theme.styles';
+import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
+import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -15,6 +20,21 @@ const AppNavigator = () => (
       name="App Home"
       component={DrawerNavigation}
       options={{ headerShown: false }}
+    />
+    <AppStack.Screen
+      name="AddCreditCard"
+      component={AddCreditCardScreen}
+      options={{ headerShown: true, title: 'Add CreditCard' }}
+    />
+    <AppStack.Screen
+      name="AddBankAccount"
+      component={AddBankAccountScreen}
+      options={{ headerShown: true, title: 'Add Bank Account' }}
+    />
+    <AppStack.Screen
+      name="AddMembershipCard"
+      component={AddMembershipCardScreen}
+      options={{ headerShown: true, title: 'Add Membership card' }}
     />
   </AppStack.Navigator>
 );
