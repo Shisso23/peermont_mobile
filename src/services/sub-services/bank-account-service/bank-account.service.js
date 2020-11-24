@@ -22,7 +22,7 @@ const getBankAccounts = () => {
     });
 };
 
-const creatBankAccount = (formData) => {
+const createBankAccount = (formData) => {
   let newBankAccount;
   const _returnNewBankAccount = () => newBankAccount;
 
@@ -64,5 +64,5 @@ const deleteBankAccount = (id) => {
 export default {
   getBankAccounts,
   deleteBankAccount,
-  creatBankAccount,
+  createBankAccount,
 };

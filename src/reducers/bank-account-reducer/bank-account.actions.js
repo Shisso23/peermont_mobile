@@ -18,7 +18,7 @@ export const getBankAccountsAction = () => {
 
 export const creatBankAccountAction = (formData) => {
   return (dispatch) => {
-    return bankAccountService.creatBankAccount(formData).then((newBankAccount) => {
+    return bankAccountService.createBankAccount(formData).then((newBankAccount) => {
       dispatch(appendBankAccountAction(newBankAccount));
     });
   };
