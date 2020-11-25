@@ -11,6 +11,8 @@ import { globalScreenOptions } from '../../../theme/theme.styles';
 import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
 import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
 
+import HealthSurveyScreen from '../../screens/app/health-survey/health-survey.screen';
+
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -35,6 +37,11 @@ const AppNavigator = () => (
       name="AddMembershipCard"
       component={AddMembershipCardScreen}
       options={{ headerShown: true, title: 'Add Membership card' }}
+    />
+    <AppStack.Screen
+      name="HealthSurvey"
+      component={HealthSurveyScreen}
+      options={{ headerShown: true, title: 'Health Survey' }}
     />
   </AppStack.Navigator>
 );

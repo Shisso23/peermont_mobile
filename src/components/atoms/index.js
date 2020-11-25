@@ -4,3 +4,4 @@ export { default as TermsAndConditions } from './terms-and-conditions';
 export { default as CountrySelect } from './country-select';
 export { default as NumericInput } from './numeric-input';
 export { default as UploadDocumentSelectionItem } from './upload-document-selection-item';
+export { default as YesNo } from './yes-no';

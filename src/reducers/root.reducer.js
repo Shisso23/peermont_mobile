@@ -6,6 +6,7 @@ import membershipCardReducer from './membership-card-reducer/membership-card.red
 import creditCardReducer from './credit-card-reducer/credit-card.reducer';
 import bankAccountReducer from './bank-account-reducer/bank-account.reducer';
 import formDataReducer from './form-data-reducer/form-data.reducer';
+import healthSurveyReducer from './health-survey-reducer/health-survey.reducer';
 
 export default combineReducers({
   userAuthReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   creditCardReducer,
   bankAccountReducer,
   formDataReducer,
+  healthSurveyReducer,
 });
