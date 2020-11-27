@@ -1,9 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-elements';
 import { NumericalInputForm } from '../../../../components/forms';
-import { verifyResetPasswordOtpAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
+import {
+  verifyResetPasswordOtpAction,
+  resetPasswordResendOtpAction,
+} from '../../../../reducers/user-auth-reducer/user-auth.actions';
 import { otpModel } from '../../../../models';
 import { FormPageContainer } from '../../../../components/containers';
 
@@ -13,6 +17,11 @@ const ResetPasswordOtpScreen = () => {
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyResetPasswordOtpAction(formData));
   };
+
+  const _handleResendOtp = () => {
+    dispatch(resetPasswordResendOtpAction());
+  };
+
   const _handleFormSuccess = () => {
     navigation.replace('ResetPasswordSetPassword');
   };
@@ -24,10 +33,9 @@ const ResetPasswordOtpScreen = () => {
         initialValues={otpModel()}
         onSuccess={_handleFormSuccess}
       />
+      <Button title="Resend OTP" onPress={_handleResendOtp} />
     </FormPageContainer>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default ResetPasswordOtpScreen;

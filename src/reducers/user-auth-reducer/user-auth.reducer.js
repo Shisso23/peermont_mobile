@@ -8,9 +8,13 @@ export const setIsAuthenticatedAction = setIsAuthenticated.action;
 const setTemporaryToken = CreateAction(reducerName, 'SET_TEMP_TOKEN');
 export const setTemporaryTokenAction = setTemporaryToken.action;
 
+const setResetPasswordFormData = CreateAction(reducerName, 'SET_RESET_PASSWORD_FORM_DATA');
+export const setResetPasswordFormDataAction = setResetPasswordFormData.action;
+
 const initialState = {
   isAuthenticated: false,
   token: null,
+  resetPasswordFormData: null,
 };
 
 export default function userAuthReducer(state = initialState, action) {
@@ -25,7 +29,11 @@ export default function userAuthReducer(state = initialState, action) {
         ...state,
         token: action.payload,
       };
-
+    case setResetPasswordFormData.actionType:
+      return {
+        ...state,
+        resetPasswordFormData: action.payload,
+      };
     default:
       return state;
   }

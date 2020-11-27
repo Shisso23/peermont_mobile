@@ -1,5 +1,9 @@
 import { userAuthService, encryptionService } from '../../services';
-import { setIsAuthenticatedAction, setTemporaryTokenAction } from './user-auth.reducer';
+import {
+  setIsAuthenticatedAction,
+  setTemporaryTokenAction,
+  setResetPasswordFormDataAction,
+} from './user-auth.reducer';
 
 export const signOutAction = () => {
   return (dispatch) => {
@@ -43,10 +47,22 @@ export const setPasswordAction = (formData) => {
 // ==========================================================
 // Reset Password
 // ==========================================================
+
 export const requestResetPasswordOtpAction = (formData) => {
   return (dispatch) => {
+    dispatch(setResetPasswordFormDataAction(formData));
     const _storeTempararyToken = (token) => dispatch(setTemporaryTokenAction(token));
     return userAuthService.requestResetPasswordOtp(formData).then(_storeTempararyToken);
+  };
+};
+
+export const resetPasswordResendOtpAction = () => {
+  return (dispatch, getState) => {
+    const { resetPasswordFormData } = getState().userAuthReducer;
+    const _storeTempararyToken = (token) => dispatch(setTemporaryTokenAction(token));
+    return userAuthService
+      .requestResetPasswordOtp(resetPasswordFormData)
+      .then(_storeTempararyToken);
   };
 };
 
