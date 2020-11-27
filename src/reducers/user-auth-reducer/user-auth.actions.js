@@ -29,6 +29,14 @@ export const registerAction = ({ formData }) => {
   };
 };
 
+export const registerResendOtpAction = () => {
+  return (dispatch, getState) => {
+    const { token } = getState().userAuthReducer;
+    const _storeTempararyToken = (newToken) => dispatch(setTemporaryTokenAction(newToken));
+    return userAuthService.registerResendOtp(token).then(_storeTempararyToken);
+  };
+};
+
 export const verifyRegisterOtpAction = (formData) => {
   return (dispatch, getState) => {
     const _storeTempararyToken = (token) => dispatch(setTemporaryTokenAction(token));
