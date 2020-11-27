@@ -1,15 +1,17 @@
-import ax from 'axios';
+import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 
 import userAuthUrls from '../user-auth-service/user-auth.urls';
 import userAuthUtils from '../user-auth-service/user-auth.utils';
+
 import {
   createAttachTokenInterceptor,
   createNetworkErrorHandlerInterceptor,
 } from '../utils/interceptors';
+
 import storageService from '../storage-service/storage.service';
 
-const axios = ax.create({
+const authNetworkService = axios.create({
   timeout: 5000,
   headers: {
     Accept: 'application/json',
@@ -38,8 +40,8 @@ const refreshTokenLogic = () => {
     });
 };
 
-createAttachTokenInterceptor(axios, storageService.getAccessToken);
-createAuthRefreshInterceptor(axios, refreshTokenLogic);
-createNetworkErrorHandlerInterceptor(axios);
+createAttachTokenInterceptor(authNetworkService, storageService.getAccessToken);
+createAuthRefreshInterceptor(authNetworkService, refreshTokenLogic);
+createNetworkErrorHandlerInterceptor(authNetworkService);
 
-export default axios;
+export default authNetworkService;
