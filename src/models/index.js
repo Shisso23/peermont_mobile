@@ -10,3 +10,6 @@ export * from './app/user/user-bank-account/user-bank-account.model';
 export * from './app/membership-card/membership-card.model';
 export * from './app/credit-card/credit-card.model';
 export * from './app/bank-account/bank-account.model';
+export * from './app/health-survey-question/health-survey-question.model';
+export * from './app/last-health-survey/last-health-survey.model';
+export * from './app/health-survey-answer/health-survey-answer.model';
