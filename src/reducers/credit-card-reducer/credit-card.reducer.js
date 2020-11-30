@@ -24,9 +24,9 @@ export default function creditCardReducer(state = initialState, action) {
         creditCards: action.payload,
       };
     case removeCreditCard.actionType:
+      _.remove(state.creditCards, { id: action.payload });
       return {
         ...state,
-        creditCards: _.remove(state.creditCards, { id: action.payload }),
       };
     case appendCreditCard.actionType:
       return {

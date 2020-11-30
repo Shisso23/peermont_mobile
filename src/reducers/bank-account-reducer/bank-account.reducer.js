@@ -24,9 +24,9 @@ export default function bankAccountReducer(state = initialState, action) {
         bankAccounts: action.payload,
       };
     case removeBankAccount.actionType:
+      _.remove(state.bankAccounts, { id: action.payload });
       return {
         ...state,
-        bankAccounts: _.remove(state.bankAccounts, { id: action.payload }),
       };
     case appendBankAccount.actionType:
       return {

@@ -25,9 +25,9 @@ export default function membershipCardReducer(state = initialState, action) {
         membershipCards: action.payload,
       };
     case removeMembershipCard.actionType:
+      _.remove(state.membershipCards, { id: action.payload });
       return {
         ...state,
-        membershipCards: _.remove(state.bankAccounts, { id: action.payload }),
       };
     case appendMembershipCard.actionType:
       return {
