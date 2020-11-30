@@ -34,7 +34,7 @@ export const deleteMembershipCardAction = (id) => {
   return (dispatch) => {
     dispatch(setLoadingAction(true));
     return membershipCardService.deleteMembershipCard(id).then(() => {
-      dispatch(removeMembershipCardAction());
+      dispatch(removeMembershipCardAction(id));
       dispatch(setLoadingAction(false));
     });
   };
