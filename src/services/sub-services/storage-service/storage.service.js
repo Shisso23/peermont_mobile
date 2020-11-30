@@ -1,6 +1,8 @@
 import config from '../../../config';
 import { saveItem, getItem, removeItem } from './storage.service.utils';
 
+const SIGN_IN_FORM = 'SIGN_IN_FORM';
+
 const accessTokenOperations = {
   getAccessToken: () => getItem(config.accessTokenKey),
   storeAccessToken: (token) => saveItem(config.accessTokenKey, token),
@@ -13,7 +15,14 @@ const refreshTokenOperations = {
   removeRefreshToken: () => removeItem(config.refreshTokenKey),
 };
 
+const signInFormOperations = {
+  getSignInForm: () => getItem(SIGN_IN_FORM),
+  storeSignInForm: (signInForm) => saveItem(SIGN_IN_FORM, signInForm),
+  removeSignInForm: () => removeItem(SIGN_IN_FORM),
+};
+
 export default {
   ...accessTokenOperations,
   ...refreshTokenOperations,
+  ...signInFormOperations,
 };

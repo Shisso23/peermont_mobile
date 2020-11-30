@@ -3,12 +3,33 @@ import {
   setIsAuthenticatedAction,
   setTemporaryTokenAction,
   setResetPasswordFormDataAction,
+  setSignInFormDataAction,
 } from './user-auth.reducer';
+import storageService from '../../services/sub-services/storage-service/storage.service';
+
+export const signInAction = (formData) => {
+  return (dispatch) => {
+    return userAuthService
+      .signIn(formData)
+      .then(() => storageService.storeSignInForm(formData))
+      .then(() => dispatch(setSignInFormDataAction(formData)));
+  };
+};
 
 export const signOutAction = () => {
   return (dispatch) => {
     userAuthService.signOut().then(() => {
       dispatch(setIsAuthenticatedAction(false));
+    });
+  };
+};
+
+export const loadSignInFormFromStorage = () => {
+  return (dispatch) => {
+    return storageService.getSignInForm().then((signInForm) => {
+      if (signInForm) {
+        dispatch(setSignInFormDataAction(signInForm));
+      }
     });
   };
 };

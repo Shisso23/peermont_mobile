@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RegisterLink, ResetPasswordLink } from '../../../components/atoms';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider, Button } from 'react-native-elements';
@@ -6,19 +10,32 @@ import { Image, StyleSheet } from 'react-native';
 import { ResetPasswordLink, TextLink, Footer } from '../../../components/atoms';
 import { SignInForm } from '../../../components/forms';
 
-import { userAuthService } from '../../../services';
 import { setIsAuthenticatedAction } from '../../../reducers/user-auth-reducer/user-auth.reducer';
-import { signInModel } from '../../../models';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { FormPageContainer } from '../../../components/containers';
 import { openUserPhoneApp } from '../../../helpers';
 import config from '../../../config';
+import {
+  signInAction,
+  loadSignInFormFromStorage,
+} from '../../../reducers/user-auth-reducer/user-auth.actions';
 
 const imageUri = require('../../../assets/images/header-alt.png');
 
 const SignInScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { signInFormData } = useSelector((reducers) => reducers.userAuthReducer);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(loadSignInFormFromStorage()).then(() => setLoading(false));
+  }, []);
+
+  const _handleFormSubmit = (formData) => {
+    return dispatch(signInAction(formData));
+  };
 
   const _onSignInSuccess = () => {
     const userPromise = dispatch(getUserAction());
@@ -26,6 +43,7 @@ const SignInScreen = () => {
       dispatch(setIsAuthenticatedAction(true));
     });
   };
+
   return (
     <FormPageContainer>
       <Image source={imageUri} resizeMode="contain" style={styles.imageStyle} />

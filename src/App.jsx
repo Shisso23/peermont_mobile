@@ -20,7 +20,7 @@ const App = () => {
     dispatch(setIsAuthenticatedAction(true));
   };
 
-  const _getUserIfTokenExists = () => {
+  const _loadAppData = () => {
     userAuthService.doTokensExistInLocalStorage().then((tokensExist) => {
       if (tokensExist) {
         _preLoadAllAppData().then(_continueToApp);
@@ -28,7 +28,7 @@ const App = () => {
     });
   };
 
-  useEffect(_getUserIfTokenExists, []);
+  useEffect(_loadAppData, []);
 
   return (
     <>
