@@ -4,6 +4,10 @@ export const membershipCardModel = ({ card_number, card_pin } = {}) => ({
   pin: card_pin || '',
 });
 
+export const membershipCardPinModel = ({ card_pin } = {}) => ({
+  numeric: card_pin || '',
+});
+
 export const apiMembershipCardModel = ({ cardNumber, encryptedPin } = {}) => ({
   membership_card: {
     card_number: cardNumber || '',

@@ -1,10 +1,13 @@
+import _ from 'lodash';
 import { setLoadingAction } from '../user-reducer/user.reducer';
 import {
   setMembershipCardsAction,
   removeMembershipCardAction,
   appendMembershipCardAction,
+  replaceCurrentMembershipCardAction,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
+import { prettyPrint } from '../../dev-utils';
 
 export const getMembershipCardsAction = () => {
   return (dispatch) => {
@@ -13,6 +16,25 @@ export const getMembershipCardsAction = () => {
       dispatch(setMembershipCardsAction(_membershipCards));
       dispatch(setLoadingAction(false));
     });
+  };
+};
+
+export const getMembershipCardBalanceAction = (formData) => {
+  return (dispatch, getState) => {
+    const { currentMembershipCard } = getState().membershipCardReducer;
+
+    return Promise.resolve(formData.numeric)
+      .then(encryptionService.encryptPin)
+      .then((encryptedPin) =>
+        membershipCardService.getMembershipCardBalance(currentMembershipCard.id, {
+          encryptedPin,
+          cardNumber: currentMembershipCard.cardNumber,
+        }),
+      )
+      .then((membershipCard) => {
+        dispatch(replaceCurrentMembershipCardAction(membershipCard));
+        prettyPrint(membershipCard);
+      });
   };
 };
 

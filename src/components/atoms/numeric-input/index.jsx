@@ -12,6 +12,7 @@ import {
 } from 'react-native-confirmation-code-field';
 
 import colors from '../../../../theme/theme.colors';
+import { custom } from '../../../../theme/theme.styles';
 
 const NumericInput = ({ value, onChange, cellCount, handleSubmit, errorMessage, ...rest }) => {
   const ref = useBlurOnFulfill({ value, cellCount });
@@ -54,7 +55,7 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, errorMessage, 
           );
         }}
       />
-      {errorMessage && <Text>{errorMessage}</Text>}
+      {errorMessage && <Text style={custom.errorStyle}>{errorMessage}</Text>}
     </>
   );
 };
