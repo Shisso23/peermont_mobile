@@ -4,10 +4,25 @@ import {
   userMembershipCardModel,
   membershipCardModel,
   apiMembershipCardModel,
+  membershipCardPinModel,
 } from '../../../models';
 
 const _createAndReturnUserMembershipCardModel = (apiResponse) => {
   return userMembershipCardModel(apiResponse.data);
+};
+
+const getMembershipCardBalance = (id, formData) => {
+  const url = membershipCardUrls.membershipCardBalanceUrl(id);
+  const apiModel = apiMembershipCardModel(formData);
+  return authNetworkService
+    .post(url, apiModel)
+    .then(_createAndReturnUserMembershipCardModel)
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.warn(err);
+      err.errors = membershipCardPinModel(err.errors);
+      return Promise.reject(err);
+    });
 };
 
 const getMembershipCards = () => {
@@ -47,4 +62,5 @@ export default {
   getMembershipCards,
   createMembershipCard,
   deleteMembershipCard,
+  getMembershipCardBalance,
 };

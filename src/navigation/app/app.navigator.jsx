@@ -12,6 +12,10 @@ import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-b
 import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
 
 import HealthSurveyScreen from '../../screens/app/health-survey/health-survey.screen';
+import MembershipCardPinScreen from '../../screens/app/membership-card-pin/membership-card-pin.screen';
+import MembershipCardDetailScreen from '../../screens/app/membership-card-detail/membership-card-detail.screen';
+import TopUpScreen from '../../screens/app/top-up/top-up.screen';
+import PayOutScreen from '../../screens/app/pay-out/pay-out.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -42,6 +46,26 @@ const AppNavigator = () => (
       name="HealthSurvey"
       component={HealthSurveyScreen}
       options={{ headerShown: true, title: 'Health Survey' }}
+    />
+    <AppStack.Screen
+      name="EnterMembershipCardPin"
+      component={MembershipCardPinScreen}
+      options={{ headerShown: true, title: 'MembershipCardPin' }}
+    />
+    <AppStack.Screen
+      name="MembershipCardDetail"
+      component={MembershipCardDetailScreen}
+      options={{ headerShown: true, title: 'MembershipCardDetail' }}
+    />
+    <AppStack.Screen
+      name="TopUp"
+      component={TopUpScreen}
+      options={{ headerShown: true, title: 'TopUp' }}
+    />
+    <AppStack.Screen
+      name="PayOut"
+      component={PayOutScreen}
+      options={{ headerShown: true, title: 'Payout' }}
     />
   </AppStack.Navigator>
 );

@@ -11,10 +11,16 @@ export const removeMembershipCardAction = removeMembershipCard.action;
 
 const appendMembershipCard = CreateAction(reducerName, 'APPEND_MEMBERSHIP_CARD');
 export const appendMembershipCardAction = appendMembershipCard.action;
-export const appendMembershipCardActionType = appendMembershipCard.actionType;
+
+const setCurrentMembershipCard = CreateAction(reducerName, 'SET_CURRENT_MEMBERSHIP_CARD');
+export const setCurrentMembershipCardAction = setCurrentMembershipCard.action;
+
+const replaceCurrentMembershipCard = CreateAction(reducerName, 'REPLACE_CURRENT_MEMBERSHIP_CARD');
+export const replaceCurrentMembershipCardAction = replaceCurrentMembershipCard.action;
 
 const initialState = {
   membershipCards: [],
+  currentMembershipCard: null,
 };
 
 export default function membershipCardReducer(state = initialState, action) {
@@ -33,6 +39,16 @@ export default function membershipCardReducer(state = initialState, action) {
       return {
         ...state,
         membershipCards: _.concat(state.membershipCards, [action.payload]),
+      };
+    case setCurrentMembershipCard.actionType:
+      return {
+        ...state,
+        currentMembershipCard: _.find(state.membershipCards, { id: action.payload }),
+      };
+    case replaceCurrentMembershipCard.actionType:
+      return {
+        ...state,
+        currentMembershipCard: action.payload,
       };
     default:
       return state;

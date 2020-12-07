@@ -1,16 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { Text } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { flashService } from '../../../services';
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
 
-const NumericalInputForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
   const validationSchema = Yup.object().shape({
     numeric: numericSchema,
   });
@@ -29,6 +29,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, containerStyle, initialValu
           actions.resetForm({ values: formData, status: { apiErrors } });
         } else {
           flashService.error(error.message);
+          actions.setFieldError('numeric', error.message);
         }
       });
   };
@@ -45,6 +46,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, containerStyle, initialValu
         const error = (name) => getFormError(name, { touched, status, errors });
         return (
           <>
+            {isSubmitting && <Text>loading </Text>}
             <NumericInput
               value={values.numeric}
               onChange={(newNumeric) => setFieldValue('numeric', newNumeric)}
@@ -62,13 +64,11 @@ const NumericalInputForm = ({ submitForm, onSuccess, containerStyle, initialValu
 NumericalInputForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   onSuccess: PropTypes.func,
-  containerStyle: ViewPropTypes.style,
   initialValues: PropTypes.object.isRequired,
 };
 
 NumericalInputForm.defaultProps = {
   onSuccess: () => null,
-  containerStyle: {},
 };
 
 export default NumericalInputForm;
