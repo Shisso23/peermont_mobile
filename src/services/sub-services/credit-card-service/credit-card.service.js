@@ -1,6 +1,11 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
 import creditCardUrls from './credit-card.urls';
-import { userCreditCardModel, apiCreditCardCardModel, creditCardModel } from '../../../models';
+import {
+  userCreditCardModel,
+  apiCreditCardCardModel,
+  creditCardModel,
+  constructUserCreditCardModels,
+} from '../../../models';
 
 const _createAndReturnUserCreditCardModel = (apiResponse) => {
   return userCreditCardModel(apiResponse.data);
@@ -10,7 +15,7 @@ const getCreditCards = () => {
   const url = creditCardUrls.creditCardsUrl();
   return authNetworkService
     .get(url)
-    .then(_createAndReturnUserCreditCardModel)
+    .then((apiResponse) => constructUserCreditCardModels(apiResponse.data))
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.warn(error);

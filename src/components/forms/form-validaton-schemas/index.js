@@ -61,3 +61,9 @@ export const surveyAnswersSchema = Yup.array().of(
     answer: Yup.bool().required('Please select'),
   }),
 );
+
+export const paymentAmountSchema = Yup.string().required('Please enter an amount');
+export const topupCreditCardIdSchema = Yup.string().when('isEft', {
+  is: false,
+  then: Yup.string().required('Please select a payment method'),
+});

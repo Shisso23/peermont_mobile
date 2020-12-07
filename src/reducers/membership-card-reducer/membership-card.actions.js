@@ -4,6 +4,7 @@ import {
   removeMembershipCardAction,
   appendMembershipCardAction,
   replaceCurrentMembershipCardAction,
+  setCurrentMembershipCardPinAction,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
 
@@ -20,17 +21,35 @@ export const getMembershipCardsAction = () => {
 export const getMembershipCardBalanceAction = (formData) => {
   return (dispatch, getState) => {
     const { currentMembershipCard } = getState().membershipCardReducer;
+    let tempEncryptedPin;
+    const clearTextPin = formData.numeric;
 
-    return Promise.resolve(formData.numeric)
+    return Promise.resolve(clearTextPin)
       .then(encryptionService.encryptPin)
-      .then((encryptedPin) =>
-        membershipCardService.getMembershipCardBalance(currentMembershipCard.id, {
+      .then((encryptedPin) => {
+        tempEncryptedPin = encryptedPin;
+        return membershipCardService.getMembershipCardBalance(currentMembershipCard.id, {
           encryptedPin,
           cardNumber: currentMembershipCard.cardNumber,
-        }),
-      )
+        });
+      })
       .then((membershipCard) => {
         dispatch(replaceCurrentMembershipCardAction(membershipCard));
+        dispatch(setCurrentMembershipCardPinAction(tempEncryptedPin));
+      });
+  };
+};
+
+export const reloadCurrentMembershipCardBalanceAction = () => {
+  return (dispatch, getState) => {
+    const { currentMembershipCardPin, currentMembershipCard } = getState().membershipCardReducer;
+    return membershipCardService
+      .getMembershipCardBalance(currentMembershipCard.id, {
+        encryptedPin: currentMembershipCardPin,
+        cardNumber: currentMembershipCard.cardNumber,
+      })
+      .then((membershipCard) => {
+        return dispatch(replaceCurrentMembershipCardAction(membershipCard));
       });
   };
 };

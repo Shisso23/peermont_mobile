@@ -17,7 +17,7 @@ import {
 import { UploadDocumentButton } from '../../molecules';
 import { custom } from '../../../../theme/theme.styles';
 
-const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
+const BankAccountForm = ({ submitForm, onSuccess, initialValues }) => {
   const { banks } = useSelector((reducers) => reducers.formDataReducer);
   const validationSchema = Yup.object().shape({
     accountHolder: bankAccountHolderSchema,
@@ -100,13 +100,13 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
   );
 };
 
-CreditCardForm.propTypes = {
+BankAccountForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
 };
 
-CreditCardForm.defaultProps = {
+BankAccountForm.defaultProps = {
   onSuccess: () => null,
 };
 
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreditCardForm;
+export default BankAccountForm;

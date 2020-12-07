@@ -9,3 +9,4 @@ export { default as creditCardService } from './sub-services/credit-card-service
 export { default as membershipCardService } from './sub-services/membership-card-service/membership-card.service';
 export { default as encryptionService } from './sub-services/encryption-service/encryption.service';
 export { default as healthSurveyService } from './sub-services/health-survey-service/health-survey.service';
+export { default as paymentService } from './sub-services/payment-service/payment.service';

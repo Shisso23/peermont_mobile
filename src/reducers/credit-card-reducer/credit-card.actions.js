@@ -1,6 +1,6 @@
-import { setLoadingAction } from '../user-reducer/user.reducer';
 import {
   setCreditCardsAction,
+  setLoadingAction,
   removeCreditCardAction,
   appendCreditCardAction,
 } from './credit-card.reducer';
