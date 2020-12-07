@@ -55,6 +55,15 @@ const register = (formData) => {
     });
 };
 
+const registerResendOtp = (token) => {
+  const registerSendOtpUrl = authUrls.registerSendOtpUrl();
+  return networkService
+    .post(registerSendOtpUrl, {
+      registration: { token },
+    })
+    .then(_extractAndReturnTokenFromApiResponse);
+};
+
 const verifyRegisterOtp = (formData, token) => {
   const verifyRegisterOtpUrl = authUrls.verifyRegisterOtpUrl();
   const apiModel = apiOtpModel(formData, token, 'registration');
@@ -117,6 +126,7 @@ export default {
   signOut,
   register,
   requestResetPasswordOtp,
+  registerResendOtp,
   doTokensExistInLocalStorage,
   verifyResetPasswordOtp,
   resetPassword,
