@@ -18,6 +18,7 @@ import TopUpScreen from '../../screens/app/payments/top-up/top-up.screen';
 import PayOutScreen from '../../screens/app/payments/pay-out/pay-out.screen';
 import PaymentOtpScreen from '../../screens/app/payments/payment-otp/payment-otp.screen';
 import TopUpCompleteScreen from '../../screens/app/payments/top-up/top-up-complete/top-up-complete.screen';
+import PayOutCompleteScreen from '../../screens/app/payments/pay-out/pay-out-complete/pay-out-complete.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -78,6 +79,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="TopUpComplete"
       component={TopUpCompleteScreen}
+      options={{ headerShown: true, title: 'Complete TopUp' }}
+    />
+    <AppStack.Screen
+      name="PayOutComplete"
+      component={PayOutCompleteScreen}
       options={{ headerShown: true, title: 'Complete PayOut' }}
     />
   </AppStack.Navigator>

@@ -16,3 +16,4 @@ export * from './app/health-survey-answer/health-survey-answer.model';
 export * from './app/payment/payment.model';
 export * from './app/payment-otp/payment-otp.model';
 export * from './app/topup/topup.model';
+export * from './app/pay-out/pay-out.model';

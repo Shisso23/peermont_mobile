@@ -1,7 +1,12 @@
 import _ from 'lodash';
 import authNetworkService from '../auth-network-service/auth-network.service';
 import bankAccountUrls from './bank-account.urls';
-import { userBankAccountModel, apiBankAccountModel, bankAccountModel } from '../../../models';
+import {
+  userBankAccountModel,
+  apiBankAccountModel,
+  bankAccountModel,
+  constructUserBankAccountModels,
+} from '../../../models';
 
 import { constructProofOfBankFormData } from './bank-account.utils';
 
@@ -9,12 +14,10 @@ const _exstractUploadDocumentId = (apiResponse) => _.get(apiResponse, 'data.id')
 
 const getBankAccounts = () => {
   const url = bankAccountUrls.bankAccountsUrl();
-  const _createAndReturnBankAccountsModel = (apiResponse) => {
-    return userBankAccountModel(apiResponse.data);
-  };
+
   return authNetworkService
     .get(url)
-    .then(_createAndReturnBankAccountsModel)
+    .then((apiResponse) => constructUserBankAccountModels(apiResponse.data))
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.warn(error);

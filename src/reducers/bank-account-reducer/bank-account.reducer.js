@@ -12,8 +12,12 @@ export const removeBankAccountAction = removeBankAccount.action;
 const appendBankAccount = CreateAction(reducerName, 'APPEND_BANK_ACCOUNT');
 export const appendBankAccountAction = appendBankAccount.action;
 
+const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
+export const setIsLoadingAction = setIsLoading.action;
+
 const initialState = {
   bankAccounts: [],
+  isLoading: false,
 };
 
 export default function bankAccountReducer(state = initialState, action) {
@@ -32,6 +36,11 @@ export default function bankAccountReducer(state = initialState, action) {
       return {
         ...state,
         bankAccounts: _.concat(state.bankAccounts, [action.payload]),
+      };
+    case setIsLoading.actionType:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;
