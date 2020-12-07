@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { setLoadingAction } from '../user-reducer/user.reducer';
 import {
   setMembershipCardsAction,
@@ -7,7 +6,6 @@ import {
   replaceCurrentMembershipCardAction,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
-import { prettyPrint } from '../../dev-utils';
 
 export const getMembershipCardsAction = () => {
   return (dispatch) => {
@@ -33,7 +31,6 @@ export const getMembershipCardBalanceAction = (formData) => {
       )
       .then((membershipCard) => {
         dispatch(replaceCurrentMembershipCardAction(membershipCard));
-        prettyPrint(membershipCard);
       });
   };
 };
