@@ -14,10 +14,10 @@ import AddMembershipCardScreen from '../../screens/app/my-account/add-account/ad
 import HealthSurveyScreen from '../../screens/app/health-survey/health-survey.screen';
 import MembershipCardPinScreen from '../../screens/app/membership-card-pin/membership-card-pin.screen';
 import MembershipCardDetailScreen from '../../screens/app/membership-card-detail/membership-card-detail.screen';
-import TopUpScreen from '../../screens/app/top-up/top-up.screen';
+import TopUpScreen from '../../screens/app/payments/top-up/top-up.screen';
 import PayOutScreen from '../../screens/app/payments/pay-out/pay-out.screen';
 import PaymentOtpScreen from '../../screens/app/payments/payment-otp/payment-otp.screen';
-import PaymentCompleteScreen from '../../screens/app/payments/payment-complete/payment-complete.screen';
+import TopUpCompleteScreen from '../../screens/app/payments/top-up/top-up-complete/top-up-complete.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -76,9 +76,9 @@ const AppNavigator = () => (
       options={{ headerShown: true, title: 'TopUp' }}
     />
     <AppStack.Screen
-      name="PaymentComplete"
-      component={PaymentCompleteScreen}
-      options={{ headerShown: true, title: 'Payment Complete' }}
+      name="TopUpComplete"
+      component={TopUpCompleteScreen}
+      options={{ headerShown: true, title: 'Complete PayOut' }}
     />
   </AppStack.Navigator>
 );

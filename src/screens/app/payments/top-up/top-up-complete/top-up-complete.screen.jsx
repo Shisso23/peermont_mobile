@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import WebView from 'react-native-webview';
 
 import { useNavigation } from '@react-navigation/native';
-import { LoadingComponent } from '../../../../components/molecules';
-import { useBackButtonLoader } from '../../../../hooks';
-import { getLastPaymentUriAction } from '../../../../reducers/payments-reducer/payments.actions';
-import { reloadCurrentMembershipCardBalanceAction } from '../../../../reducers/membership-card-reducer/membership-card.actions';
+import { LoadingComponent } from '../../../../../components/molecules';
+import { useBackButtonLoader } from '../../../../../hooks';
+import { getLastPaymentUriAction } from '../../../../../reducers/payments-reducer/payments.actions';
+import { reloadCurrentMembershipCardBalanceAction } from '../../../../../reducers/membership-card-reducer/membership-card.actions';
 
-const PaymentCompleteScreen = () => {
+const TopUpCompleteScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -29,8 +29,8 @@ const PaymentCompleteScreen = () => {
   );
 };
 
-PaymentCompleteScreen.propTypes = {};
+TopUpCompleteScreen.propTypes = {};
 
-PaymentCompleteScreen.defaultProps = {};
+TopUpCompleteScreen.defaultProps = {};
 
-export default PaymentCompleteScreen;
+export default TopUpCompleteScreen;
