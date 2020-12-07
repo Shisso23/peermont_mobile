@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
 import { verifyPaymentOtpAction } from '../../../../reducers/payments-reducer/payments.actions';
@@ -9,13 +9,15 @@ import { verifyPaymentOtpAction } from '../../../../reducers/payments-reducer/pa
 const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const route = useRoute();
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyPaymentOtpAction(formData));
   };
 
   const _handleFormSuccess = () => {
-    navigation.replace('PaymentComplete');
+    const { afterOtpRoute } = route.params;
+    navigation.replace(afterOtpRoute);
   };
 
   return (
