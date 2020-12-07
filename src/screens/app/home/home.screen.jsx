@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import _ from 'lodash';
-import { Text, ListItem, Button } from 'react-native-elements';
+import React from 'react';
+import { Text, Button } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScrollContainer } from '../../../components/containers';
+import { PageContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
-import { LoadingComponent } from '../../../components/molecules';
+import { MembershipCard } from '../../../components/molecules';
 import { setCurrentMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 
 const HomeScreen = () => {
@@ -32,7 +31,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScrollContainer>
+    <PageContainer>
       <Text h4>{user.firstName}</Text>
       <Button
         title="planning on visiting"
@@ -41,14 +40,10 @@ const HomeScreen = () => {
       />
       {membershipCards.map((item) => {
         return (
-          <ListItem key={item.id} bottomDivider onPress={() => _membershipCardPress(item.id)}>
-            <ListItem.Content>
-              <ListItem.Title>{item.cardNumber}</ListItem.Title>
-            </ListItem.Content>
-          </ListItem>
+          <MembershipCard key={item.id} card={item} onPress={() => _membershipCardPress(item.id)} />
         );
       })}
-    </ScrollContainer>
+    </PageContainer>
   );
 };
 

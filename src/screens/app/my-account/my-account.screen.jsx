@@ -3,9 +3,8 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { ListItem, Divider, Text, Button } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageContainer } from '../../../components/containers';
-import { LoadingComponent } from '../../../components/molecules';
+import { LoadingComponent, MembershipCard } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
-import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
@@ -36,19 +35,10 @@ const MyAccountScreen = () => {
     <PageContainer>
       <Text h4>Winners Circle Cards</Text>
       <Button title="Add Winners Circle" onPress={() => navigation.navigate('AddMembershipCard')} />
-      {membershipCards.map((item) => {
-        return (
-          <ListItem key={item.id} bottomDivider>
-            <ListItem.Content>
-              <ListItem.Title>{item.cardNumber}</ListItem.Title>
-            </ListItem.Content>
-            <Button
-              title="Delete"
-              onPress={() => _handleDelete(item.id, deleteMembershipCardAction)}
-            />
-          </ListItem>
-        );
+      {membershipCards.map((card) => {
+        return <MembershipCard key={card.id} card={card} hasDelete />;
       })}
+
       <Divider />
       <Text h4>Credit Cards</Text>
       <Button title="Add Credit Card" onPress={() => navigation.navigate('AddCreditCard')} />
