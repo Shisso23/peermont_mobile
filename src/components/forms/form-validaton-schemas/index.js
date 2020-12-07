@@ -67,3 +67,5 @@ export const topupCreditCardIdSchema = Yup.string().when('isEft', {
   is: false,
   then: Yup.string().required('Please select a payment method'),
 });
+
+export const payOutBankIdSchema = Yup.string().required('Please select a bank account');

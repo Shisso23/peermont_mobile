@@ -8,3 +8,4 @@ export { default as CreditCardForm } from './credit-card/credit-card.form';
 export { default as BankAccountForm } from './bank-account/bank-account.form';
 export { default as HealthSurveyForm } from './health-survey/health-survey.form';
 export { default as TopUpForm } from './top-up/top-up.form';
+export { default as PayOutForm } from './pay-out/pay-out.form';

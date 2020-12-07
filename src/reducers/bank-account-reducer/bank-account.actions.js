@@ -1,17 +1,18 @@
-import { setLoadingAction } from '../user-reducer/user.reducer';
 import {
   setBankAccountsAction,
   removeBankAccountAction,
   appendBankAccountAction,
+  setIsLoadingAction,
 } from './bank-account.reducer';
 import { bankAccountService } from '../../services';
+import { setLoadingAction } from '../user-reducer/user.reducer';
 
 export const getBankAccountsAction = () => {
   return (dispatch) => {
-    dispatch(setLoadingAction(true));
+    dispatch(setIsLoadingAction(true));
     return bankAccountService.getBankAccounts().then((_bankAccounts) => {
       dispatch(setBankAccountsAction(_bankAccounts));
-      dispatch(setLoadingAction(false));
+      dispatch(setIsLoadingAction(false));
     });
   };
 };

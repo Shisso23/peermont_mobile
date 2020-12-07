@@ -47,6 +47,23 @@ const creditCardTopUpAction = (topUpForm) => {
   };
 };
 
+export const performPayoutAction = (payOutForm) => {
+  return (dispatch, getState) => {
+    const { currentMembershipCard } = getState().membershipCardReducer;
+    return paymentService
+      .createPayment({
+        amount: payOutForm.amount,
+        membershipCardId: currentMembershipCard.id,
+        payableId: payOutForm.bankAccountId,
+        paymentType: 'payout',
+        payableType: 'BankAccount',
+      })
+      .then((paymentId) => {
+        dispatch(setPendingPaymentIdAction(paymentId));
+      });
+  };
+};
+
 export const verifyPaymentOtpAction = (paymentOtpForm) => {
   return (_dispatch, getState) => {
     const { pendingPaymentId } = getState().paymentReducer;
