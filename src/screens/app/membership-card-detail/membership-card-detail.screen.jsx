@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -17,8 +16,6 @@ const MembershipCardDetailScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 MembershipCardDetailScreen.propTypes = {};
 

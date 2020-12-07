@@ -18,9 +18,13 @@ export const setCurrentMembershipCardAction = setCurrentMembershipCard.action;
 const replaceCurrentMembershipCard = CreateAction(reducerName, 'REPLACE_CURRENT_MEMBERSHIP_CARD');
 export const replaceCurrentMembershipCardAction = replaceCurrentMembershipCard.action;
 
+const setCurrentMembershipCardPin = CreateAction(reducerName, 'SET_CURRENT_MEMBERSHIP_CARD_PIN');
+export const setCurrentMembershipCardPinAction = setCurrentMembershipCardPin.action;
+
 const initialState = {
   membershipCards: [],
   currentMembershipCard: null,
+  currentMembershipCardPin: null,
 };
 
 export default function membershipCardReducer(state = initialState, action) {
@@ -49,6 +53,11 @@ export default function membershipCardReducer(state = initialState, action) {
       return {
         ...state,
         currentMembershipCard: action.payload,
+      };
+    case setCurrentMembershipCardPin.actionType:
+      return {
+        ...state,
+        currentMembershipCardPin: action.payload,
       };
     default:
       return state;

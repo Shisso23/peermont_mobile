@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import PropTypes from 'prop-types';
+import { View, Text } from 'react-native';
 
 const PayOutScreen = () => {
   return (
@@ -9,8 +8,6 @@ const PayOutScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 PayOutScreen.propTypes = {};
 

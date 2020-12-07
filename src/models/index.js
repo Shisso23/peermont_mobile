@@ -13,3 +13,6 @@ export * from './app/bank-account/bank-account.model';
 export * from './app/health-survey-question/health-survey-question.model';
 export * from './app/last-health-survey/last-health-survey.model';
 export * from './app/health-survey-answer/health-survey-answer.model';
+export * from './app/payment/payment.model';
+export * from './app/payment-otp/payment-otp.model';
+export * from './app/topup/topup.model';

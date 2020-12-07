@@ -12,8 +12,12 @@ export const removeCreditCardAction = removeCreditCard.action;
 const appendCreditCard = CreateAction(reducerName, 'APPEND_CREDIT_CARD');
 export const appendCreditCardAction = appendCreditCard.action;
 
+const setLoading = CreateAction(reducerName, 'SET_LOADING');
+export const setLoadingAction = setLoading.action;
+
 const initialState = {
   creditCards: [],
+  isLoading: false,
 };
 
 export default function creditCardReducer(state = initialState, action) {
@@ -32,6 +36,11 @@ export default function creditCardReducer(state = initialState, action) {
       return {
         ...state,
         creditCards: _.concat(state.creditCards, [action.payload]),
+      };
+    case setLoading.actionType:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;

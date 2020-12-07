@@ -1,16 +1,33 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { TopUpForm } from '../../../components/forms';
+import { FormPageContainer } from '../../../components/containers';
+import { initiateTopUpAction } from '../../../reducers/payments-reducer/payments.actions';
+import { topUpModel } from '../../../models';
 
 const TopUpScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const _handleFormSuccess = () => {
+    navigation.replace('PaymentOtp');
+  };
+
+  const _handleFormSubmit = (formData) => {
+    return dispatch(initiateTopUpAction(formData));
+  };
+
   return (
-    <View>
-      <Text>Hello, Topup</Text>
-    </View>
+    <FormPageContainer>
+      <TopUpForm
+        initialValues={topUpModel()}
+        onSuccess={_handleFormSuccess}
+        submitForm={_handleFormSubmit}
+      />
+    </FormPageContainer>
   );
 };
-
-const styles = StyleSheet.create({});
 
 TopUpScreen.propTypes = {};
 
