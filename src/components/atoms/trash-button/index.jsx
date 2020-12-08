@@ -13,7 +13,6 @@ const TrashButton = ({ onPress, loading, containerStyle }) => {
         backgroundColor="transparent"
         color={colors.danger}
         size={20}
-        onPress={onPress}
         loading={loading}
       />
     </TouchableOpacity>
