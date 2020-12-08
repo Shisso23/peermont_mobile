@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -84,7 +83,6 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues }) => {
               items={banks.map((bank) => ({ value: bank.id, label: bank.name }))}
               placeholder="Bank"
               onChangeItem={(dropdownObject) => setFieldValue('bankId', dropdownObject.value)}
-              containerStyle={styles.removeMe}
             />
             <Text style={custom.errorStyle}>{error('bankId')}</Text>
 
@@ -109,11 +107,5 @@ BankAccountForm.propTypes = {
 BankAccountForm.defaultProps = {
   onSuccess: () => null,
 };
-
-const styles = StyleSheet.create({
-  removeMe: {
-    height: 55,
-  },
-});
 
 export default BankAccountForm;

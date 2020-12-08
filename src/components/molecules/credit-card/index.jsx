@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ViewPropTypes } from 'react-native';
-import { ListItem, Button, Avatar } from 'react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
+import { TrashButton } from '../../atoms';
+import { custom } from '../../../../theme/theme.styles';
 
 const creditCardPath = require('../../../assets/images/credit-card.png');
 
@@ -26,7 +28,13 @@ const CreditCard = ({ hasDelete, card, onPress, style }) => {
         <ListItem.Title>{card.obfuscatedCardNumber}</ListItem.Title>
         <ListItem.Subtitle>{card.cardType}</ListItem.Subtitle>
       </ListItem.Content>
-      {hasDelete && <Button title="Delete" onPress={_handleDelete} loading={isDeleting} />}
+      {hasDelete && (
+        <TrashButton
+          onPress={_handleDelete}
+          loading={isDeleting}
+          containerStyle={custom.trashButtonContainer}
+        />
+      )}
     </ListItem>
   );
 };

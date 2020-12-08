@@ -10,7 +10,7 @@ export default {
   background: '#efefef',
   secondary: '#AF7650',
   success: 'green',
-  danger: 'red',
+  danger: '#C62452',
   warning: 'orange',
   gold: '#A38C53',
 };

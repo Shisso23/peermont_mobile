@@ -16,6 +16,9 @@ export const custom = {
   selectedItemStyle: {
     backgroundColor: colors.gold,
   },
+  trashButtonContainer: {
+    marginRight: 25,
+  },
 };
 
 export const globalScreenOptions = {

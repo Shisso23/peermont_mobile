@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, Button, Avatar } from 'react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { getMembershipCardImage } from './utils';
+import { TrashButton } from '../../atoms';
+import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCard = ({ hasDelete, card, onPress }) => {
   const dispatch = useDispatch();
@@ -25,7 +27,13 @@ const MembershipCard = ({ hasDelete, card, onPress }) => {
         <ListItem.Title>{card.cardNumber}</ListItem.Title>
         <ListItem.Subtitle>{card.tierName}</ListItem.Subtitle>
       </ListItem.Content>
-      {hasDelete && <Button title="Delete" onPress={_handleDelete} loading={isDeleting} />}
+      {hasDelete && (
+        <TrashButton
+          onPress={_handleDelete}
+          loading={isDeleting}
+          containerStyle={custom.trashButtonContainer}
+        />
+      )}
     </ListItem>
   );
 };

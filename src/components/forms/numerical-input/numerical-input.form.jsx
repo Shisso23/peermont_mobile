@@ -26,7 +26,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
         if (_.get(error, 'statusCode') === 422) {
           const apiErrors = error.errors;
           flashService.error('Form Submission Error');
-          actions.resetForm({ values: formData, status: { apiErrors } });
+          actions.resetForm({ status: { apiErrors } });
         } else {
           flashService.error(error.message);
           actions.setFieldError('numeric', error.message);

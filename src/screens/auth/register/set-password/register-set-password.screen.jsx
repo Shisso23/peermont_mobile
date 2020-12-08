@@ -15,7 +15,7 @@ const RegisterSetPasswordScreen = () => {
   };
 
   const _handleFormSuccess = () => {
-    navigation.replace('SignIn');
+    navigation.pop();
   };
 
   return (

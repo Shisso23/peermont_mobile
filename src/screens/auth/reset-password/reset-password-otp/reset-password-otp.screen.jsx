@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { Button } from 'react-native-elements';
+import { Button, Divider } from 'react-native-elements';
 import { NumericalInputForm } from '../../../../components/forms';
 import {
   verifyResetPasswordOtpAction,
@@ -33,6 +33,7 @@ const ResetPasswordOtpScreen = () => {
         initialValues={otpModel()}
         onSuccess={_handleFormSuccess}
       />
+      <Divider />
       <Button title="Resend OTP" onPress={_handleResendOtp} />
     </FormPageContainer>
   );
