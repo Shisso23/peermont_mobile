@@ -60,6 +60,19 @@ const theme = {
       borderBottomColor: '#000',
     },
   },
+  ListItem: {
+    style: {
+      backgroundColor: colors.white,
+      borderRadius: 8,
+    },
+    containerStyle: {
+      backgroundColor: colors.white,
+      borderRadius: 8,
+    },
+    disabledStyle: {
+      backgroundColor: colors.grey,
+    },
+  },
 };
 
 export default theme;

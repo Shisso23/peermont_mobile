@@ -5,7 +5,6 @@ import {
   setIsLoadingAction,
 } from './bank-account.reducer';
 import { bankAccountService } from '../../services';
-import { setLoadingAction } from '../user-reducer/user.reducer';
 
 export const getBankAccountsAction = () => {
   return (dispatch) => {
@@ -27,10 +26,8 @@ export const creatBankAccountAction = (formData) => {
 
 export const deleteBankAccountAction = (id) => {
   return (dispatch) => {
-    dispatch(setLoadingAction(true));
     return bankAccountService.deleteBankAccount(id).then(() => {
       dispatch(removeBankAccountAction(id));
-      dispatch(setLoadingAction(false));
     });
   };
 };

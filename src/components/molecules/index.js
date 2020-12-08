@@ -3,3 +3,5 @@ export { default as LoadingComponent } from './loading/loading.component';
 export { default as UploadDocumentButton } from './upload-document-button';
 export { default as CompletedHealthSurvey } from './completed-health-survey';
 export { default as MembershipCard } from './membership-card';
+export { default as CreditCard } from './credit-card';
+export { default as BankAccount } from './bank-account';

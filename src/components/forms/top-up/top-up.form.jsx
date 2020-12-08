@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
-import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, ListItem } from 'react-native-elements';
+import { Button, Input, Text, ListItem, Avatar } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { getFormError } from '../form-utils';
 import { paymentAmountSchema, topupCreditCardIdSchema } from '../form-validaton-schemas';
 import { prettyOutputText } from '../../../dev-utils';
 
-import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
 import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
-import { LoadingComponent } from '../../molecules';
+import { LoadingComponent, CreditCard } from '../../molecules';
 
 const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
   const { creditCards, isLoading } = useSelector((reducers) => reducers.creditCardReducer);
@@ -82,30 +80,29 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
             {!isLoading ? (
               !_.isEmpty(creditCards) && (
                 <>
-                  {creditCards.map((creditCard) => (
-                    <ListItem
-                      key={creditCard.id}
-                      bottomDivider
-                      disabledStyle={styles.selectedCardStyle}
-                      disabled={values.creditCardId === creditCard.id && !values.isEft}
-                      onPress={() => {
-                        setFieldValue('creditCardId', creditCard.id);
-                        setFieldValue('isEft', false);
-                      }}
-                    >
-                      <ListItem.Content>
-                        <ListItem.Title>{creditCard.obfuscatedCardNumber}</ListItem.Title>
-                      </ListItem.Content>
-                    </ListItem>
-                  ))}
+                  {creditCards.map((creditCard) => {
+                    const shouldHighlight = values.creditCardId === creditCard.id && !values.isEft;
+                    return (
+                      <CreditCard
+                        key={creditCard.id}
+                        card={creditCard}
+                        style={shouldHighlight ? custom.selectedItemStyle : {}}
+                        onPress={() => {
+                          setFieldValue('creditCardId', creditCard.id);
+                          setFieldValue('isEft', false);
+                        }}
+                      />
+                    );
+                  })}
                   <ListItem
                     bottomDivider
-                    disabledStyle={styles.selectedCardStyle}
+                    disabledStyle={custom.selectedItemStyle}
                     disabled={values.isEft}
                     onPress={() => setFieldValue('isEft', true)}
                   >
+                    <Avatar />
                     <ListItem.Content>
-                      <ListItem.Title>Eft Payment</ListItem.Title>
+                      <ListItem.Title>Eft </ListItem.Title>
                     </ListItem.Content>
                   </ListItem>
                 </>
@@ -136,11 +133,4 @@ TopUpForm.propTypes = {
 TopUpForm.defaultProps = {
   onSuccess: () => null,
 };
-
-const styles = StyleSheet.create({
-  selectedCardStyle: {
-    backgroundColor: colors.warning,
-  },
-});
-
 export default TopUpForm;

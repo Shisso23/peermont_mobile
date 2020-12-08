@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, Divider } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageContainer } from '../../../components/containers';
@@ -33,11 +33,13 @@ const HomeScreen = () => {
   return (
     <PageContainer>
       <Text h4>{user.firstName}</Text>
+      <Divider />
       <Button
         title="planning on visiting"
         onPress={_handleHealthSurveyPress}
         loading={isHealthSurveyLoading}
       />
+      <Divider />
       {membershipCards.map((item) => {
         return (
           <MembershipCard key={item.id} card={item} onPress={() => _membershipCardPress(item.id)} />

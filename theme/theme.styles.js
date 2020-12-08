@@ -13,6 +13,9 @@ export const custom = {
     marginTop: 0,
     marginBottom: 0,
   },
+  selectedItemStyle: {
+    backgroundColor: colors.gold,
+  },
 };
 
 export const globalScreenOptions = {
@@ -30,5 +33,6 @@ export const globalScreenOptions = {
     fontFamily: variables.fontFamilySecondary,
     color: colors.white,
   },
+  headerTintColor: colors.white,
   cardStyle: { backgroundColor: colors.background },
 };
