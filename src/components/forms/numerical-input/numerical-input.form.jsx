@@ -30,6 +30,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
         } else {
           flashService.error(error.message);
           actions.setFieldError('numeric', error.message);
+          actions.resetForm();
         }
       });
   };
