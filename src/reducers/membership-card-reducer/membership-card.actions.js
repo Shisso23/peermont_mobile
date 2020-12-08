@@ -56,8 +56,8 @@ export const reloadCurrentMembershipCardBalanceAction = () => {
 
 export const createMembershipCardAction = (formData) => {
   return (dispatch) => {
-    const _createNewCard = (encryptPin) =>
-      membershipCardService.createMembershipCard({ encryptPin, cardNumber: formData.cardNumber });
+    const _createNewCard = (encryptedPin) =>
+      membershipCardService.createMembershipCard({ encryptedPin, cardNumber: formData.cardNumber });
     const _storeNewlyCreatedMembershipCard = (newCard) =>
       dispatch(appendMembershipCardAction(newCard));
 
