@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, ListItem, Avatar } from 'react-native-elements';
+import { Button, Input, Text, Divider } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { getFormError } from '../form-utils';
 import { prettyOutputText } from '../../../dev-utils';
 
-import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
-import { LoadingComponent } from '../../molecules';
+import { LoadingComponent, BankAccount } from '../../molecules';
 import { getBankAccountsAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schemas';
 
@@ -81,28 +80,23 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
             />
 
             <Text h4>Bank Accounts</Text>
+            <Divider />
             {!isLoading ? (
               !_.isEmpty(bankAccounts) ? (
                 <>
-                  {bankAccounts.map((bankAccount) => (
-                    <ListItem
-                      key={bankAccount.id}
-                      containerStyle={
-                        values.bankAccountId === bankAccount.id ? styles.selectedCardStyle : {}
-                      }
-                      disabled={bankAccount.status !== 'verified'}
-                      disabledStyle={styles.disabledStyle}
-                      bottomDivider
-                      onPress={() => setFieldValue('bankAccountId', bankAccount.id)}
-                    >
-                      <Avatar rounded />
-                      <ListItem.Content>
-                        <ListItem.Title>{bankAccount.accountNumber}</ListItem.Title>
-                        <ListItem.Subtitle>{bankAccount.accountHolder}</ListItem.Subtitle>
-                      </ListItem.Content>
-                      <ListItem.Title>{bankAccount.status}</ListItem.Title>
-                    </ListItem>
-                  ))}
+                  {bankAccounts.map((bankAccount) => {
+                    const shouldHighlight = values.bankAccountId === bankAccount.id;
+                    return (
+                      <BankAccount
+                        key={bankAccount.id}
+                        style={shouldHighlight ? custom.selectedItemStyle : {}}
+                        account={bankAccount}
+                        onPress={() => setFieldValue('bankAccountId', bankAccount.id)}
+                        hasAccountStatus
+                        hasDisabled
+                      />
+                    );
+                  })}
                 </>
               ) : (
                 <View>
@@ -117,6 +111,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
               title="Add Bank Account"
               onPress={() => navigation.navigate('AddBankAccount')}
             />
+            <Divider />
 
             <Button title="Add PayOut" onPress={handleSubmit} loading={isSubmitting} />
             {prettyOutputText(values)}
@@ -137,14 +132,4 @@ PayOutForm.propTypes = {
 PayOutForm.defaultProps = {
   onSuccess: () => null,
 };
-
-const styles = StyleSheet.create({
-  disabledStyle: {
-    backgroundColor: colors.danger,
-  },
-  selectedCardStyle: {
-    backgroundColor: colors.warning,
-  },
-});
-
 export default PayOutForm;

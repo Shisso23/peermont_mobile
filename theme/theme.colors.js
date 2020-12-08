@@ -6,10 +6,11 @@ export default {
   textGrey: '#707070',
   errorBackground: '#f8d7da',
   transparent: 'transparent',
-  primary: '#36DB54',
+  primary: '#0C2F58',
   background: '#efefef',
   secondary: '#AF7650',
   success: 'green',
   danger: 'red',
   warning: 'orange',
+  gold: '#A38C53',
 };

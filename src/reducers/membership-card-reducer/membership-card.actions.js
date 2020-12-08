@@ -70,10 +70,8 @@ export const createMembershipCardAction = (formData) => {
 
 export const deleteMembershipCardAction = (id) => {
   return (dispatch) => {
-    dispatch(setLoadingAction(true));
     return membershipCardService.deleteMembershipCard(id).then(() => {
       dispatch(removeMembershipCardAction(id));
-      dispatch(setLoadingAction(false));
     });
   };
 };
