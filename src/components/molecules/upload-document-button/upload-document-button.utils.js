@@ -1,7 +1,7 @@
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
 
-const successfullySelectedImage = (res) => !res.isCancel;
+const successfullySelectedImage = (res) => !res.didCancel;
 const errorOccured = (res) => res.errorCode;
 
 const constructFormData = (res) => ({
@@ -36,10 +36,5 @@ export const openUserCamera = () => {
 export const openDocumentPicker = () => {
   return DocumentPicker.pick({
     type: [DocumentPicker.types.pdf],
-  })
-    .then(constructFormData)
-    .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.warn(err);
-    });
+  }).then(constructFormData);
 };

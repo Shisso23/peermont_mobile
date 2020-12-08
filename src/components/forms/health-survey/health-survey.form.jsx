@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Button, ListItem, Text } from 'react-native-elements';
+import { Button, ListItem, Text, Divider } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { surveyAnswersSchema } from '../form-validaton-schemas';
 import { YesNo } from '../../atoms';
@@ -65,9 +65,10 @@ const HealthSurveyForm = ({ submitForm, initialValues, questions }) => {
                 </ListItem>
               );
             })}
-
-            <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+            <Divider />
             <Button title="Set all to no" onPress={_setAllCheckboxesToNo} />
+            <Divider />
+            <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
       }}

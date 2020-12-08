@@ -1,8 +1,9 @@
-import React, { createRef } from 'react';
+import React, { createRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import ActionSheet from 'react-native-actions-sheet';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   openUserGallery,
   openUserCamera,
@@ -14,16 +15,24 @@ import { custom } from '../../../../theme/theme.styles';
 const actionSheetRef = createRef();
 
 const UploadDocumentButton = ({ updateFormData, errorMessage }) => {
+  const [documentSelected, setDocumentSelected] = useState(false);
+
   const openActionSheet = () => actionSheetRef.current.setModalVisible(true);
   const closeActionSheet = () => actionSheetRef.current.setModalVisible(false);
 
   const _updateFormData = (selectedImage) => {
     updateFormData(selectedImage);
+    setDocumentSelected(true);
     closeActionSheet();
   };
 
   const _handleDocument = () => {
-    openDocumentPicker().then(_updateFormData);
+    openDocumentPicker()
+      .then(_updateFormData)
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.warn(err);
+      });
   };
 
   const _handlePhotoLibrary = () => {
@@ -36,7 +45,17 @@ const UploadDocumentButton = ({ updateFormData, errorMessage }) => {
 
   return (
     <>
-      <Button title="Choose Document" onPress={openActionSheet} />
+      <Button
+        title="Choose Document"
+        onPress={openActionSheet}
+        icon={
+          <Icon
+            name={!documentSelected ? 'upload' : 'check'}
+            color="white"
+            style={styles.iconStyle}
+          />
+        }
+      />
       <Text style={custom.errorStyle}>{errorMessage}</Text>
       <ActionSheet ref={actionSheetRef} gestureEnabled>
         <View>
@@ -61,5 +80,12 @@ UploadDocumentButton.propTypes = {
 UploadDocumentButton.defaultProps = {
   errorMessage: '',
 };
+
+const styles = StyleSheet.create({
+  iconStyle: {
+    marginRight: 8,
+    marginTop: 3,
+  },
+});
 
 export default UploadDocumentButton;

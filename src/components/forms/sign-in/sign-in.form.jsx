@@ -1,16 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Button, Input } from 'react-native-elements';
+import { Button, Input, Divider } from 'react-native-elements';
 import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { CountrySelect } from '../../atoms';
 
-const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
   const validationSchema = Yup.object().shape({
     mobileNumber: mobileNumberSchema,
     password: passwordSchema,
@@ -77,6 +76,7 @@ const SignInForm = ({ submitForm, onSuccess, containerStyle, initialValues }) =>
               secureTextEntry
               errorMessage={error('password')}
             />
+            <Divider />
             <Button title="Login" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
@@ -89,12 +89,10 @@ SignInForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
-  containerStyle: ViewPropTypes.style,
 };
 
 SignInForm.defaultProps = {
   onSuccess: () => null,
-  containerStyle: {},
 };
 
 export default SignInForm;

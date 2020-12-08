@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +15,7 @@ const ResetPasswordSetPasswordScreen = () => {
   };
 
   const _handleFormSuccess = () => {
-    navigation.replace('SignIn');
+    navigation.pop();
   };
 
   return (
@@ -30,8 +29,6 @@ const ResetPasswordSetPasswordScreen = () => {
     </FormPageContainer>
   );
 };
-
-const styles = StyleSheet.create({});
 
 ResetPasswordSetPasswordScreen.propTypes = {};
 

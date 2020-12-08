@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Button, Input } from 'react-native-elements';
+import { Button, Input, Divider } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { membershipCardSchema, pinSchema } from '../form-validaton-schemas';
 
@@ -68,6 +68,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
               secureTextEntry
               errorMessage={error('pin')}
             />
+            <Divider />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );

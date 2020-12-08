@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { Divider } from 'react-native-elements';
 import { RegisterLink, ResetPasswordLink } from '../../../components/atoms';
 import { SignInForm } from '../../../components/forms';
 
@@ -26,19 +26,12 @@ const SignInScreen = () => {
         onSuccess={_onSignInSuccess}
         initialValues={signInModel()}
       />
-      <RegisterLink containerStyle={styles.registerLink} />
-      <ResetPasswordLink containerStyle={styles.forgotPasswordLink} />
+      <Divider />
+      <RegisterLink />
+      <Divider />
+      <ResetPasswordLink />
     </FormPageContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  forgotPasswordLink: {
-    marginBottom: 30,
-  },
-  registerLink: {
-    marginVertical: 30,
-  },
-});
 
 export default SignInScreen;
