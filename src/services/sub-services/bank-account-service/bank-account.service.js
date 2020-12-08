@@ -34,13 +34,11 @@ const createBankAccount = (formData) => {
     newBankAccount = userBankAccountModel(bankAccount);
     return apiResponse;
   };
-
   const _uploadProofOfBankDocument = (bankAccountId) => {
     const proofOfBankUrl = bankAccountUrls.bankAccountUrl(bankAccountId);
     const proofOfBankData = constructProofOfBankFormData(formData.proofOfBankDocument);
     return authNetworkService.patch(proofOfBankUrl, proofOfBankData);
   };
-
   const creatBankAccountUrl = bankAccountUrls.bankAccountsUrl();
   const apiModel = apiBankAccountModel(formData);
   return authNetworkService
@@ -55,6 +53,21 @@ const createBankAccount = (formData) => {
     });
 };
 
+const updateBankAccount = (bankAccountForm) => {
+  const resetBankAccountUrl = bankAccountUrls.resetBankAccountUrl(bankAccountForm.id);
+  const apiModel = apiBankAccountModel(bankAccountForm);
+
+  return authNetworkService
+    .post(resetBankAccountUrl, apiModel)
+    .then(_exstractUploadDocumentId)
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.warn(err);
+      err.error = bankAccountModel(err.error);
+      return Promise.reject(err);
+    });
+};
+
 const deleteBankAccount = (id) => {
   const url = bankAccountUrls.bankAccountUrl(id);
   return authNetworkService.delete(url).catch((error) => {
@@ -64,8 +77,16 @@ const deleteBankAccount = (id) => {
   });
 };
 
+const uploadProofOfBankDocument = (bankAccountId, proofOfBankDocumentPath) => {
+  const proofOfBankUrl = bankAccountUrls.bankAccountUrl(bankAccountId);
+  const proofOfBankData = constructProofOfBankFormData(proofOfBankDocumentPath);
+  return authNetworkService.patch(proofOfBankUrl, proofOfBankData);
+};
+
 export default {
   getBankAccounts,
   deleteBankAccount,
   createBankAccount,
+  updateBankAccount,
+  uploadProofOfBankDocument,
 };

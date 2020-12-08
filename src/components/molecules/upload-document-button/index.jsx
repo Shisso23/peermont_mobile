@@ -14,7 +14,7 @@ import { custom } from '../../../../theme/theme.styles';
 
 const actionSheetRef = createRef();
 
-const UploadDocumentButton = ({ updateFormData, errorMessage }) => {
+const UploadDocumentButton = ({ updateFormData, errorMessage, title }) => {
   const [documentSelected, setDocumentSelected] = useState(false);
 
   const openActionSheet = () => actionSheetRef.current.setModalVisible(true);
@@ -46,7 +46,7 @@ const UploadDocumentButton = ({ updateFormData, errorMessage }) => {
   return (
     <>
       <Button
-        title="Choose Document"
+        title={title}
         onPress={openActionSheet}
         icon={
           <Icon
@@ -75,6 +75,7 @@ const UploadDocumentButton = ({ updateFormData, errorMessage }) => {
 UploadDocumentButton.propTypes = {
   updateFormData: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 UploadDocumentButton.defaultProps = {

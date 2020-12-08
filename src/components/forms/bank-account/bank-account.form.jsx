@@ -12,17 +12,18 @@ import {
   bankAccountAccountNumberSchema,
   bankAccountBankIdSchema,
   proofOfBankDocumentSchema,
+  editProofOfBankDocumentSchemea,
 } from '../form-validaton-schemas';
 import { UploadDocumentButton } from '../../molecules';
 import { custom } from '../../../../theme/theme.styles';
 
-const BankAccountForm = ({ submitForm, onSuccess, initialValues }) => {
+const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialErrors }) => {
   const { banks } = useSelector((reducers) => reducers.formDataReducer);
   const validationSchema = Yup.object().shape({
     accountHolder: bankAccountHolderSchema,
     accountNumber: bankAccountAccountNumberSchema,
     bankId: bankAccountBankIdSchema,
-    proofOfBankDocument: proofOfBankDocumentSchema,
+    proofOfBankDocument: !edit ? proofOfBankDocumentSchema : editProofOfBankDocumentSchemea,
   });
 
   const _handleFormSubmitError = (error, actions, formData) => {
@@ -50,6 +51,7 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues }) => {
       initialStatus={{ apiErrors: {} }}
       onSubmit={_handleSubmission}
       validationSchema={validationSchema}
+      initialErrors={initialErrors}
     >
       {({
         handleChange,
@@ -83,14 +85,20 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues }) => {
               items={banks.map((bank) => ({ value: bank.id, label: bank.name }))}
               placeholder="Bank"
               onChangeItem={(dropdownObject) => setFieldValue('bankId', dropdownObject.value)}
+              defaultValue={values.bankId}
             />
             <Text style={custom.errorStyle}>{error('bankId')}</Text>
 
             <UploadDocumentButton
+              title="Select Document"
               updateFormData={(newImage) => setFieldValue('proofOfBankDocument', newImage)}
-              errorMessage={error('proofOfBankDocument')}
+              errorMessage={errors.proofOfBankDocument}
             />
-            <Button title="Add Account" onPress={handleSubmit} loading={isSubmitting} />
+            <Button
+              title={!edit ? 'Add Account ' : 'Update Account'}
+              onPress={handleSubmit}
+              loading={isSubmitting}
+            />
           </>
         );
       }}
@@ -101,11 +109,15 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues }) => {
 BankAccountForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
+  initialErrors: PropTypes.object,
   onSuccess: PropTypes.func,
+  edit: PropTypes.bool,
 };
 
 BankAccountForm.defaultProps = {
   onSuccess: () => null,
+  initialErrors: {},
+  edit: false,
 };
 
 export default BankAccountForm;

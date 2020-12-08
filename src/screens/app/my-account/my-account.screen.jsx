@@ -21,6 +21,14 @@ const MyAccountScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const _handleBankFailedNav = (bankAccount) => {
+    if (bankAccount.status === 'failed') {
+      navigation.push('EditBankAccount', {
+        bankAccount,
+      });
+    }
+  };
+
   useFocusEffect(
     React.useCallback(() => {
       dispatch(getUserAction());
@@ -67,7 +75,15 @@ const MyAccountScreen = () => {
       </View>
       <Divider />
       {bankAccounts.map((item) => {
-        return <BankAccount key={item.id} account={item} hasDelete />;
+        return (
+          <BankAccount
+            key={item.id}
+            account={item}
+            hasDelete
+            hasAccountStatus
+            onPress={() => _handleBankFailedNav(item)}
+          />
+        );
       })}
     </PageContainer>
   ) : (
