@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   },
   cellText: {
     color: colors.black,
-    fontFamily: 'OpenSans-Bold',
     fontSize: 25,
     textAlign: 'center',
   },
