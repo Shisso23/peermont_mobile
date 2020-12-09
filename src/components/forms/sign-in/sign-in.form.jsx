@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { CountrySelect } from '../../atoms';
+import { infoPopUpService } from '../../../services';
 
 const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
   const passwordRef = useRef(null);
@@ -69,6 +70,15 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               leftIcon={() => (
                 <CountrySelect
                   onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
+                />
+              )}
+              rightIcon={() => (
+                <Icon
+                  name="info-circle"
+                  size={15}
+                  onPress={() => {
+                    infoPopUpService.show('Enter your mobile number linked to your account.');
+                  }}
                 />
               )}
             />

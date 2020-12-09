@@ -5,8 +5,10 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { Button, Input, Divider } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
 import { membershipCardSchema, pinSchema } from '../form-validaton-schemas';
+import { infoPopUpService } from '../../../services';
 
 const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
   const pinRef = useRef(null);
@@ -71,6 +73,17 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
               secureTextEntry
               errorMessage={error('pin')}
               onSubmitEditing={handleSubmit}
+              rightIcon={() => (
+                <Icon
+                  name="info-circle"
+                  size={15}
+                  onPress={() => {
+                    infoPopUpService.show(
+                      'Enter your Peermont Winners Circle pin for the above card number.',
+                    );
+                  }}
+                />
+              )}
             />
             <Divider />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />

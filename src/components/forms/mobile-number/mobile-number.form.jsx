@@ -5,8 +5,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
-import { flashService } from '../../../services';
+import { flashService, infoPopUpService } from '../../../services';
 import { CountrySelect } from '../../atoms';
 import { mobileNumberSchema } from '../form-validaton-schemas';
 
@@ -66,6 +67,15 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
               leftIcon={() => (
                 <CountrySelect
                   onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
+                />
+              )}
+              rightIcon={() => (
+                <Icon
+                  name="info-circle"
+                  size={15}
+                  onPress={() => {
+                    infoPopUpService.show('Enter your mobile number linked to your account.');
+                  }}
                 />
               )}
             />
