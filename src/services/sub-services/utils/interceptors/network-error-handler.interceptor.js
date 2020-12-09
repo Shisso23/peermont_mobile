@@ -1,9 +1,11 @@
 import _ from 'lodash';
+import store from '../../../../reducers/store';
 import {
   ClientNetworkError,
   ServerNetworkError,
   ServerNotFoundError,
 } from '../../../../exceptions';
+import { signOutAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
 
 const createNetworkErrorHandlerInterceptor = (axiosInstance) => {
   const _serverResponded = (error) => {
@@ -14,6 +16,7 @@ const createNetworkErrorHandlerInterceptor = (axiosInstance) => {
   };
   const _serverSideError = (statusCode) => statusCode >= 500;
   const _clientSideError = (statusCode) => statusCode >= 400;
+  const _userIsBanned = (statusCode) => statusCode === 403;
 
   return axiosInstance.interceptors.response.use(
     (response) => response,
@@ -23,6 +26,8 @@ const createNetworkErrorHandlerInterceptor = (axiosInstance) => {
         const statusCode = _.get(error, 'response.status');
         if (_serverSideError(statusCode)) {
           exception = new ServerNetworkError(statusCode, error.response.data);
+        } else if (_userIsBanned(statusCode)) {
+          store.dispatch(signOutAction());
         } else if (_clientSideError(statusCode)) {
           exception = new ClientNetworkError(statusCode, error.response.data);
         }
