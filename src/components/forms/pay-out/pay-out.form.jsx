@@ -35,10 +35,10 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
     if (_.get(error, 'statusCode') === 422) {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
+      actions.setFieldError('amount', error.errors);
     } else {
       actions.setFieldError('amount', error.message);
     }
-    actions.setFieldError('amount', error.errors);
   };
 
   const _handleSubmission = (formData, actions) => {
