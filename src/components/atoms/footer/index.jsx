@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   blackBarText: {
     color: colors.white,
-    fontFamily: 'OpenSans-Bold',
     fontSize: 11,
     lineHeight: 20,
     textAlign: 'center',
