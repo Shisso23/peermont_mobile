@@ -6,7 +6,7 @@ import { PageContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import { MembershipCard } from '../../../components/molecules';
-import { setCurrentMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.reducer';
+import { useMembershipCard } from '../../../hooks';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -14,6 +14,8 @@ const HomeScreen = () => {
   useFocusEffect(exitAppOnHardwarePressListener, []);
   const { user } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
+
+  const { viewMembershipCard } = useMembershipCard();
 
   const { isLoading: isHealthSurveyLoading } = useSelector(
     (reducers) => reducers.healthSurveyReducer,
@@ -23,11 +25,6 @@ const HomeScreen = () => {
     dispatch(initiateHealthSurveyAction()).then(() => {
       navigation.push('HealthSurvey');
     });
-  };
-
-  const _membershipCardPress = (id) => {
-    dispatch(setCurrentMembershipCardAction(id));
-    navigation.navigate('EnterMembershipCardPin');
   };
 
   return (
@@ -42,7 +39,7 @@ const HomeScreen = () => {
       <Divider />
       {membershipCards.map((item) => {
         return (
-          <MembershipCard key={item.id} card={item} onPress={() => _membershipCardPress(item.id)} />
+          <MembershipCard key={item.id} card={item} onPress={() => viewMembershipCard(item.id)} />
         );
       })}
     </PageContainer>

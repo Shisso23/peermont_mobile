@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import _ from 'lodash';
-import { ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -10,7 +9,8 @@ import { getFormError } from '../form-utils';
 import { passwordSchema, confirmPasswordSchema } from '../form-validaton-schemas';
 import { flashService } from '../../../services';
 
-const SetPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const SetPasswordForm = ({ submitForm, onSuccess, initialValues }) => {
+  const confirmPasswordRef = useRef(null);
   const validationSchema = Yup.object().shape({
     password: passwordSchema,
     confirmPassword: confirmPasswordSchema,
@@ -63,14 +63,17 @@ const SetPasswordForm = ({ submitForm, onSuccess, containerStyle, initialValues 
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               errorMessage={error('password')}
+              onSubmitEditing={() => confirmPasswordRef.current.focus()}
             />
             <Input
+              ref={confirmPasswordRef}
               label="Confirm Password"
               secureTextEntry
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
               onBlur={handleBlur('confirmPassword')}
               errorMessage={error('confirmPassword')}
+              onSubmitEditing={handleSubmit}
             />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
@@ -84,12 +87,10 @@ SetPasswordForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
-  containerStyle: ViewPropTypes.style,
 };
 
 SetPasswordForm.defaultProps = {
   onSuccess: () => null,
-  containerStyle: {},
 };
 
 export default SetPasswordForm;

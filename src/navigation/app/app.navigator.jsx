@@ -22,6 +22,8 @@ import PayOutScreen from '../../screens/app/payments/pay-out/pay-out.screen';
 import PaymentOtpScreen from '../../screens/app/payments/payment-otp/payment-otp.screen';
 import TopUpCompleteScreen from '../../screens/app/payments/top-up/top-up-complete/top-up-complete.screen';
 import PayOutCompleteScreen from '../../screens/app/payments/pay-out/pay-out-complete/pay-out-complete.screen';
+import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
+import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -32,6 +34,16 @@ const AppNavigator = () => (
       name="App Home"
       component={DrawerNavigation}
       options={{ headerShown: false }}
+    />
+    <AppStack.Screen
+      name="TermsAndConditions"
+      component={TermsAndConditionsScreen}
+      options={{ headerShown: true, title: 'Terms And Conditions' }}
+    />
+    <AppStack.Screen
+      name="PrivacyPolicy"
+      component={PrivacyPolicyScreen}
+      options={{ headerShown: true, title: 'Privacy Policy' }}
     />
     <AppStack.Screen
       name="AddCreditCard"

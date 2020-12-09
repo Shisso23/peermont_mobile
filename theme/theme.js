@@ -73,6 +73,16 @@ const theme = {
       backgroundColor: colors.grey,
     },
   },
+  Card: {
+    style: {
+      backgroundColor: colors.white,
+      borderRadius: 8,
+    },
+    containerStyle: {
+      backgroundColor: colors.white,
+      borderRadius: 8,
+    },
+  },
 };
 
 export default theme;

@@ -9,8 +9,9 @@ export default {
   primary: '#0C2F58',
   background: '#efefef',
   secondary: '#AF7650',
-  success: 'green',
+  success: '#276235',
   danger: '#C62452',
-  warning: 'orange',
+  warning: '#FFC482',
   gold: '#A38C53',
+  darkGrey: '#393939',
 };

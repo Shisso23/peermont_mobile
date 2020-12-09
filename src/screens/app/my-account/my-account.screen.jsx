@@ -12,6 +12,7 @@ import {
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { AddButton } from '../../../components/atoms';
+import { useMembershipCard } from '../../../hooks';
 
 const MyAccountScreen = () => {
   const { loading } = useSelector((reducers) => reducers.userReducer);
@@ -20,6 +21,7 @@ const MyAccountScreen = () => {
   const { bankAccounts } = useSelector((reducers) => reducers.bankAccountReducer);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { viewMembershipCard } = useMembershipCard();
 
   const _handleBankFailedNav = (bankAccount) => {
     if (bankAccount.status === 'failed') {
@@ -47,7 +49,14 @@ const MyAccountScreen = () => {
 
       <Divider />
       {membershipCards.map((card) => {
-        return <MembershipCard key={card.id} card={card} hasDelete />;
+        return (
+          <MembershipCard
+            key={card.id}
+            card={card}
+            hasDelete
+            onPress={() => viewMembershipCard(card.id)}
+          />
+        );
       })}
 
       <Divider />

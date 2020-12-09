@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import WebView from 'react-native-webview';
+import { LoadingComponent } from '../../../components/molecules';
+import config from '../../../config';
 
 const TermsAndConditionsScreen = () => {
   return (
-    <View>
-      <Text>Hello, Terms And Conditions</Text>
-    </View>
+    <WebView
+      startInLoadingState
+      renderLoading={LoadingComponent}
+      source={{ uri: `${config.hostUrl}/terms_and_conditions` }}
+    />
   );
 };
 

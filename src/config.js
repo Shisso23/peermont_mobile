@@ -8,4 +8,5 @@ export default {
   apiUrl: `${HOST_URL}${API_LOCATION}`,
   clientId: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
+  callCentreNumber: '0119281000',
 };

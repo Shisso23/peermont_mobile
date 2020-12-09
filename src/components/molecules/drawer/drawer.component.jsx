@@ -6,7 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+import { Text } from 'react-native-elements';
+import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
+import DrawerIcon from './drawer-icon';
+import colors from '../../../../theme/theme.colors';
 
 const DrawerComponent = (props) => {
   const navigation = useNavigation();
@@ -23,13 +27,39 @@ const DrawerComponent = (props) => {
   return (
     <View style={styles.wrapper}>
       <DrawerContentScrollView style={styles.drawerScrollStyle} {...props}>
-        <DrawerItem key="Home" label="Home" onPress={() => navigation.navigate('Home')} />
-        <DrawerItem label="My Account" onPress={() => navigation.navigate('MyAccount')} />
-        {/* <DrawerItem label="Inbox" onPress={() => navigation.navigate('Profile')} /> */}
-        {/* <DrawerItem label="Terms and Conditions" onPress={() => navigation.navigate('Profile')} /> */}
-        <DrawerItem label="Sign Out" onPress={_handleSignout} />
+        <DrawerItem
+          key="Home"
+          label="Home"
+          icon={() => <DrawerIcon name="home" />}
+          onPress={() => navigation.navigate('Home')}
+        />
+        <DrawerItem
+          label="My Account"
+          icon={() => <DrawerIcon name="user" />}
+          onPress={() => navigation.navigate('MyAccount')}
+        />
+        <DrawerItem
+          label="Terms And Conditions"
+          icon={() => <DrawerIcon name="file" />}
+          onPress={() => navigation.push('TermsAndConditions')}
+        />
+        <DrawerItem
+          label="Privacy Policy"
+          icon={() => <DrawerIcon name="shield-alt" />}
+          onPress={() => navigation.push('PrivacyPolicy')}
+        />
       </DrawerContentScrollView>
-      <View style={safeArea} />
+      <View style={safeArea}>
+        <DrawerItem
+          label="Sign Out"
+          icon={() => <DrawerIcon name="sign-out-alt" />}
+          onPress={_handleSignout}
+        />
+        <View style={styles.alignRow}>
+          <Text style={styles.smallText}>{`Version ${getVersion()}`}</Text>
+          <Text style={styles.smallText}>{`Build Number ${getBuildNumber()}`}</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -37,8 +67,17 @@ const DrawerComponent = (props) => {
 DrawerComponent.propTypes = {};
 
 const styles = StyleSheet.create({
+  alignRow: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 4,
+  },
   drawerScrollStyle: {
     marginTop: 20,
+  },
+  smallText: {
+    color: colors.primary,
+    fontSize: 12,
   },
   wrapper: {
     flex: 1,

@@ -67,7 +67,12 @@ export const surveyAnswersSchema = Yup.array().of(
   }),
 );
 
-export const paymentAmountSchema = Yup.string().required('Please enter an amount');
+export const paymentAmountSchema = (availableBalance) =>
+  Yup.number()
+    .max(availableBalance, 'Payout amount cannot exeed available balance')
+    .required('Please enter an amount')
+    .typeError('Can only be a number');
+
 export const topupCreditCardIdSchema = Yup.string().when('isEft', {
   is: false,
   then: Yup.string().required('Please select a payment method'),

@@ -6,9 +6,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AuthNavigator from './auth/auth.navigator';
 import AppNavigator from './app/app.navigator';
 
-// Global Screens
-// import TermsAndConditionsScreen from '../screens/global/terms-and-conditions/terms-and-conditions.screen';
-
 const RootStack = createStackNavigator();
 
 const AppContainer = () => {

@@ -3,23 +3,27 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, ListItem, Avatar } from 'react-native-elements';
+import { Button, Input, Text, ListItem, Divider } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
 import { paymentAmountSchema, topupCreditCardIdSchema } from '../form-validaton-schemas';
-import { prettyOutputText } from '../../../dev-utils';
 
 import { custom } from '../../../../theme/theme.styles';
 import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { LoadingComponent, CreditCard } from '../../molecules';
+import { CurrencyIcon, AddButton } from '../../atoms';
+
+import colors from '../../../../theme/theme.colors';
 
 const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
   const { creditCards, isLoading } = useSelector((reducers) => reducers.creditCardReducer);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
-    amount: paymentAmountSchema,
+    amount: paymentAmountSchema(Number.MAX_VALUE),
     creditCardId: topupCreditCardIdSchema,
   });
 
@@ -73,14 +77,19 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
               label="Amount"
               onBlur={handleBlur('amount')}
               errorMessage={error('amount')}
-              placeholder="R 0.00"
+              placeholder="0.00"
               keyboardType="decimal-pad"
+              leftIcon={CurrencyIcon}
             />
-
+            <View style={styles.rowAlign}>
+              <Text h4>Payment Method</Text>
+              <AddButton onPress={() => navigation.navigate('AddCreditCard')} />
+            </View>
+            <Divider />
             {!isLoading ? (
-              !_.isEmpty(creditCards) && (
-                <>
-                  {creditCards.map((creditCard) => {
+              <>
+                {!_.isEmpty(creditCards) &&
+                  creditCards.map((creditCard) => {
                     const shouldHighlight = values.creditCardId === creditCard.id && !values.isEft;
                     return (
                       <CreditCard
@@ -94,29 +103,24 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                       />
                     );
                   })}
-                  <ListItem
-                    bottomDivider
-                    disabledStyle={custom.selectedItemStyle}
-                    disabled={values.isEft}
-                    onPress={() => setFieldValue('isEft', true)}
-                  >
-                    <Avatar />
-                    <ListItem.Content>
-                      <ListItem.Title>Eft </ListItem.Title>
-                    </ListItem.Content>
-                  </ListItem>
-                </>
-              )
+                <ListItem
+                  bottomDivider
+                  disabledStyle={custom.selectedItemStyle}
+                  disabled={values.isEft}
+                  onPress={() => setFieldValue('isEft', true)}
+                >
+                  <Icon name="money-bill" size={40} color={colors.primary} />
+                  <ListItem.Content>
+                    <ListItem.Title>Eft </ListItem.Title>
+                  </ListItem.Content>
+                </ListItem>
+              </>
             ) : (
               <LoadingComponent />
             )}
-
             <Text style={custom.errorStyle}> {error('creditCardId')}</Text>
-            <Button title="Add Credit Card" onPress={() => navigation.navigate('AddCreditCard')} />
 
-            <Button title="Add TopUp" onPress={handleSubmit} loading={isSubmitting} />
-            {prettyOutputText(values)}
-            {prettyOutputText(errors)}
+            <Button title="Top Up" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
       }}
@@ -133,4 +137,11 @@ TopUpForm.propTypes = {
 TopUpForm.defaultProps = {
   onSuccess: () => null,
 };
+
+const styles = StyleSheet.create({
+  rowAlign: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
 export default TopUpForm;

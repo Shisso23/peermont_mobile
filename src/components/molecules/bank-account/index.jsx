@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { ListItem, Avatar, Text } from 'react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { useBankUri } from '../../../hooks';
-import { TrashButton } from '../../atoms';
+import { TrashButton, BankAccountStatus } from '../../atoms';
 import { custom } from '../../../../theme/theme.styles';
 
 const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatus, style }) => {
@@ -35,7 +35,7 @@ const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatu
         <ListItem.Title>{account.accountNumber}</ListItem.Title>
         <ListItem.Subtitle>{account.accountHolder}</ListItem.Subtitle>
       </ListItem.Content>
-      {hasAccountStatus && <Text>{account.status}</Text>}
+      {hasAccountStatus && <BankAccountStatus status={account.status} />}
       {hasDelete && (
         <TrashButton
           onPress={_handleDelete}

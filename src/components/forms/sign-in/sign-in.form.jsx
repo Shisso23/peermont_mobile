@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { Button, Input, Divider } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { CountrySelect } from '../../atoms';
 
 const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
+  const passwordRef = useRef(null);
   const validationSchema = Yup.object().shape({
     mobileNumber: mobileNumberSchema,
     password: passwordSchema,
@@ -59,8 +61,10 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
             <Input
               value={values.mobileNumber}
               onChangeText={handleChange('mobileNumber')}
+              keyboardType="phone-pad"
               label="Mobile Number"
               onBlur={handleBlur('mobileNumber')}
+              onSubmitEditing={() => passwordRef.current.focus()}
               errorMessage={error('mobileNumber')}
               leftIcon={() => (
                 <CountrySelect
@@ -69,15 +73,18 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               )}
             />
             <Input
+              ref={passwordRef}
               value={values.password}
               onChangeText={handleChange('password')}
               label="Password"
               onBlur={handleBlur('password')}
               secureTextEntry
               errorMessage={error('password')}
+              leftIcon={() => <Icon name="lock" size={15} />}
+              onSubmitEditing={handleSubmit}
             />
             <Divider />
-            <Button title="Login" onPress={handleSubmit} loading={isSubmitting} />
+            <Button title="Log In" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
       }}

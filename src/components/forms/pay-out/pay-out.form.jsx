@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -8,19 +8,21 @@ import { Button, Input, Text, Divider } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { getFormError } from '../form-utils';
-import { prettyOutputText } from '../../../dev-utils';
 
 import { custom } from '../../../../theme/theme.styles';
 import { LoadingComponent, BankAccount } from '../../molecules';
 import { getBankAccountsAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schemas';
+import { CurrencyIcon, AddButton } from '../../atoms';
 
 const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
+  const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
-    amount: paymentAmountSchema,
+    amount: paymentAmountSchema(currentMembershipCard.balance),
     bankAccountId: payOutBankIdSchema,
   });
 
@@ -75,11 +77,16 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
               label="Amount"
               onBlur={handleBlur('amount')}
               errorMessage={error('amount')}
-              placeholder="R 0.00"
-              keyboardType="decimal-pad"
+              placeholder="0.00"
+              keyboardType="phone-pad"
+              leftIcon={CurrencyIcon}
             />
 
-            <Text h4>Bank Accounts</Text>
+            <View style={styles.rowAlign}>
+              <Text h4>Bank Accounts</Text>
+              <AddButton onPress={() => navigation.navigate('AddBankAccount')} />
+            </View>
+
             <Divider />
             {!isLoading ? (
               !_.isEmpty(bankAccounts) ? (
@@ -100,22 +107,16 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
                 </>
               ) : (
                 <View>
-                  <Text>Look at all this empty</Text>
+                  <Text>No bank account found</Text>
                 </View>
               )
             ) : (
               <LoadingComponent />
             )}
             <Text style={custom.errorStyle}> {error('bankAccountId')}</Text>
-            <Button
-              title="Add Bank Account"
-              onPress={() => navigation.navigate('AddBankAccount')}
-            />
             <Divider />
 
-            <Button title="Add PayOut" onPress={handleSubmit} loading={isSubmitting} />
-            {prettyOutputText(values)}
-            {prettyOutputText(errors)}
+            <Button title="Pay Out" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
       }}
@@ -132,4 +133,11 @@ PayOutForm.propTypes = {
 PayOutForm.defaultProps = {
   onSuccess: () => null,
 };
+
+const styles = StyleSheet.create({
+  rowAlign: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
 export default PayOutForm;

@@ -1,9 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import { ViewPropTypes, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from 'yup';
 
 import { Button, Input } from 'react-native-elements';
@@ -12,7 +10,7 @@ import { flashService } from '../../../services';
 import { CountrySelect } from '../../atoms';
 import { mobileNumberSchema } from '../form-validaton-schemas';
 
-const MobileNumberForm = ({ submitForm, onSuccess, containerStyle, initialValues }) => {
+const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
   const validationSchema = Yup.object().shape({
     mobileNumber: mobileNumberSchema,
   });
@@ -61,8 +59,10 @@ const MobileNumberForm = ({ submitForm, onSuccess, containerStyle, initialValues
               value={values.mobileNumber}
               onChangeText={handleChange('mobileNumber')}
               onBlur={handleBlur('mobileNumber')}
+              keyboardType="phone-pad"
               label="Mobile Number"
               errorMessage={error('mobileNumber')}
+              onSubmitEditing={handleSubmit}
               leftIcon={() => (
                 <CountrySelect
                   onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
@@ -80,13 +80,11 @@ const MobileNumberForm = ({ submitForm, onSuccess, containerStyle, initialValues
 MobileNumberForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   onSuccess: PropTypes.func,
-  containerStyle: ViewPropTypes.style,
   initialValues: PropTypes.object.isRequired,
 };
 
 MobileNumberForm.defaultProps = {
   onSuccess: () => null,
-  containerStyle: {},
 };
 
 export default MobileNumberForm;

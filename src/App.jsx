@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
+import { StatusBar } from 'react-native';
 import NavigationContainer from './navigation/root.navigator';
 import { userAuthService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import { getUserAction } from './reducers/user-reducer/user.actions';
 import { loadAllFormDataAction } from './reducers/form-data-reducer/form-data.actions';
+import colors from '../theme/theme.colors';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,7 +30,12 @@ const App = () => {
 
   useEffect(_getUserIfTokenExists, []);
 
-  return <NavigationContainer />;
+  return (
+    <>
+      <StatusBar backgroundColor={colors.primary} />
+      <NavigationContainer />
+    </>
+  );
 };
 
 export default App;

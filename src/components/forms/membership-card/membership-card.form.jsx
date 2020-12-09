@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
@@ -9,6 +9,7 @@ import { getFormError } from '../form-utils';
 import { membershipCardSchema, pinSchema } from '../form-validaton-schemas';
 
 const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
+  const pinRef = useRef(null);
   const validationSchema = Yup.object().shape({
     cardNumber: membershipCardSchema,
     pin: pinSchema,
@@ -59,14 +60,17 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
               label="Card Number"
               onBlur={handleBlur('cardNumber')}
               errorMessage={error('cardNumber')}
+              onSubmitEditing={() => pinRef.current.focus()}
             />
             <Input
+              ref={pinRef}
               value={values.pin}
               onChangeText={handleChange('pin')}
               label="Pin"
               onBlur={handleBlur('pin')}
               secureTextEntry
               errorMessage={error('pin')}
+              onSubmitEditing={handleSubmit}
             />
             <Divider />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />

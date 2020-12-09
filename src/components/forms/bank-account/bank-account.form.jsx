@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
@@ -18,6 +18,7 @@ import { UploadDocumentButton } from '../../molecules';
 import { custom } from '../../../../theme/theme.styles';
 
 const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialErrors }) => {
+  const accountNumberRef = useRef(null);
   const { banks } = useSelector((reducers) => reducers.formDataReducer);
   const validationSchema = Yup.object().shape({
     accountHolder: bankAccountHolderSchema,
@@ -73,8 +74,10 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
               label="Account Holder"
               onBlur={handleBlur('accountHolder')}
               errorMessage={error('accountHolder')}
+              onEndEditing={() => accountNumberRef.current.focus()}
             />
             <Input
+              ref={accountNumberRef}
               value={values.accountNumber}
               onChangeText={handleChange('accountNumber')}
               label="Account Number"

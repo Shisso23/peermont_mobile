@@ -12,6 +12,8 @@ import ResetPasswordSetPasswordScreen from '../../screens/auth/reset-password/se
 import ResetPasswordScreen from '../../screens/auth/reset-password/reset-password.screen';
 
 import { globalScreenOptions } from '../../../theme/theme.styles';
+import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
+import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
 
 const AuthStack = createStackNavigator();
 const AuthNavigator = () => {
@@ -21,7 +23,7 @@ const AuthNavigator = () => {
         name="SignIn"
         component={SignInScreen}
         options={{
-          title: 'Sign In',
+          title: 'Login',
         }}
       />
 
@@ -29,6 +31,17 @@ const AuthNavigator = () => {
         name="Register"
         component={RegisterScreen}
         options={{ title: 'Register' }}
+      />
+
+      <AuthStack.Screen
+        name="TermsAndConditions"
+        component={TermsAndConditionsScreen}
+        options={{ title: 'Terms And Conditions' }}
+      />
+      <AuthStack.Screen
+        name="PrivacyPolicy"
+        component={PrivacyPolicyScreen}
+        options={{ title: 'Privacy Policy' }}
       />
       <AuthStack.Screen
         name="RegisterOtp"
