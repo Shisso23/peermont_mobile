@@ -60,6 +60,8 @@ buck-out/
 
 # Environment
 .env
+.env.*
+!.env.example
 
 # Ctags file
 tags

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import RNBootSplash from 'react-native-bootsplash';
 import { useDispatch } from 'react-redux';
 import { StatusBar } from 'react-native';
 import NavigationContainer from './navigation/root.navigator';
@@ -25,6 +26,7 @@ const App = () => {
       if (tokensExist) {
         dispatch(loadAppDataForSignedInUserAction()).then(_continueToApp);
       }
+      RNBootSplash.hide({ fade: true });
     });
   };
 
