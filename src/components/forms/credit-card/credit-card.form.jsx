@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -20,6 +21,7 @@ import {
   expiryYearsDropdownData,
   cardTypesDropdownData,
 } from './credit-card-form-data';
+import { infoPopUpService } from '../../../services';
 import { isMasterCard, isVisa } from './credit-card.utils';
 import { custom } from '../../../../theme/theme.styles';
 
@@ -93,6 +95,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
             <Input
               value={values.cardNumber}
               onChangeText={handleChange('cardNumber')}
+              keyboardType="numeric"
               label="Card Number"
               onBlur={() => {
                 _changeCardTypeToMatchCardNumber();
@@ -128,9 +131,21 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
             <Input
               value={values.cvv}
               onChangeText={handleChange('cvv')}
+              keyboardType="numeric"
               label="CVV"
               onBlur={handleBlur('cvv')}
               errorMessage={error('cvv')}
+              rightIcon={() => (
+                <Icon
+                  name="info-circle"
+                  size={15}
+                  onPress={() => {
+                    infoPopUpService.show(
+                      "Your CVV number is never saved, it's only used for verification.",
+                    );
+                  }}
+                />
+              )}
             />
             <Button title="Submit" onPress={handleSubmit} loading={isSubmitting} />
           </>

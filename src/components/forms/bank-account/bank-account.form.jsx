@@ -79,6 +79,7 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
             <Input
               ref={accountNumberRef}
               value={values.accountNumber}
+              keyboardType="numeric"
               onChangeText={handleChange('accountNumber')}
               label="Account Number"
               onBlur={handleBlur('accountNumber')}
