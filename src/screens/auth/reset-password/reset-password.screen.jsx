@@ -1,14 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { MobileNumberForm } from '../../../components/forms';
-import { resetPasswordModel } from '../../../models';
 import { requestResetPasswordOtpAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { FormPageContainer } from '../../../components/containers';
 
 const ResetPasswordScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { signInFormData } = useSelector((reducers) => reducers.userAuthReducer);
   const _handleFormSubmission = (formData) => {
     return dispatch(requestResetPasswordOtpAction(formData));
   };
@@ -19,7 +19,7 @@ const ResetPasswordScreen = () => {
     <FormPageContainer>
       <MobileNumberForm
         submitForm={_handleFormSubmission}
-        initialValues={resetPasswordModel()}
+        initialValues={signInFormData}
         onSuccess={_handleFormSuccess}
       />
     </FormPageContainer>

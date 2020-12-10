@@ -10,6 +10,7 @@ import {
   loadAppDataAction,
   loadAppDataForSignedInUserAction,
 } from './reducers/app-reducer/app.actions';
+import AutoSignOut from './components/atoms/auto-sign-out';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
 
   return (
     <>
+      <AutoSignOut />
       <StatusBar backgroundColor={colors.primary} />
       <NavigationContainer />
     </>
