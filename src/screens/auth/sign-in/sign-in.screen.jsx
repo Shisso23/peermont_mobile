@@ -1,28 +1,32 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { StyleSheet, Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Divider, Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import { Image, StyleSheet } from 'react-native';
 import { ResetPasswordLink, TextLink, Footer } from '../../../components/atoms';
+
 import { SignInForm } from '../../../components/forms';
 
-import { userAuthService } from '../../../services';
 import { setIsAuthenticatedAction } from '../../../reducers/user-auth-reducer/user-auth.reducer';
-import { signInModel } from '../../../models';
-import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { FormPageContainer } from '../../../components/containers';
 import { openUserPhoneApp } from '../../../helpers';
 import config from '../../../config';
+import { signInAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
+import { loadAppDataForSignedInUserAction } from '../../../reducers/app-reducer/app.actions';
 
 const imageUri = require('../../../assets/images/header-alt.png');
 
 const SignInScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { signInFormData } = useSelector((reducers) => reducers.userAuthReducer);
+
+  const _handleFormSubmit = (formData) => {
+    return dispatch(signInAction(formData));
+  };
 
   const _onSignInSuccess = () => {
-    const userPromise = dispatch(getUserAction());
-    userPromise.then(() => {
+    dispatch(loadAppDataForSignedInUserAction()).then(() => {
       dispatch(setIsAuthenticatedAction(true));
     });
   };
@@ -33,9 +37,9 @@ const SignInScreen = () => {
       <Divider />
 
       <SignInForm
-        submitForm={userAuthService.signIn}
+        submitForm={_handleFormSubmit}
         onSuccess={_onSignInSuccess}
-        initialValues={signInModel()}
+        initialValues={signInFormData}
       />
       <Divider />
       <Button title="Register" onPress={() => navigation.push('Register')} />

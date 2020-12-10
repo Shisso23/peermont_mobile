@@ -9,4 +9,5 @@ export default {
   clientId: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
   callCentreNumber: '0119281000',
+  autoSignOutTimeout: 120,
 };

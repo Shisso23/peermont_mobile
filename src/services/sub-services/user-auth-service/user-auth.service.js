@@ -18,7 +18,7 @@ import {
 const _extractAndReturnTokenFromApiResponse = (apiResponse) =>
   _.get(apiResponse, 'data.token', null);
 
-const signIn = ({ formData }) => {
+const signIn = (formData) => {
   const signInUrl = authUrls.tokenUrl();
   const apiModel = apiSignInModel(formData);
   const oAuthData = authUtils.constructOAuthSignInData(apiModel);

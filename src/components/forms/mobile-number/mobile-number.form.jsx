@@ -66,7 +66,11 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
               onSubmitEditing={handleSubmit}
               leftIcon={() => (
                 <CountrySelect
-                  onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
+                  initialCountry={values.country}
+                  onChange={(country) => {
+                    setFieldValue('country', country.abbreviation);
+                    setFieldValue('callingCode', country.callingCode);
+                  }}
                 />
               )}
               rightIcon={() => (

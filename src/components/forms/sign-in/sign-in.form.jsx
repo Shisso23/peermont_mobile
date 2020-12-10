@@ -29,8 +29,9 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
       actions.setFieldError('mobileNumber', error.message);
     }
   };
+
   const _handleSubmission = (formData, actions) => {
-    submitForm({ formData })
+    submitForm(formData)
       .then(() => {
         actions.setSubmitting(false);
         onSuccess();
@@ -44,6 +45,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
       initialStatus={{ apiErrors: {} }}
       onSubmit={_handleSubmission}
       validationSchema={validationSchema}
+      enableReinitialize
     >
       {({
         handleChange,
@@ -69,7 +71,11 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               errorMessage={error('mobileNumber')}
               leftIcon={() => (
                 <CountrySelect
-                  onChange={(callingCode) => setFieldValue('callingCode', callingCode)}
+                  initialCountry={values.country}
+                  onChange={(country) => {
+                    setFieldValue('country', country.abbreviation);
+                    setFieldValue('callingCode', country.callingCode);
+                  }}
                 />
               )}
               rightIcon={() => (

@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 import { parseMobile } from '../auth-utils/auth.utils';
 
-export const signInModel = ({ mobileNumber, password, callingCode } = {}) => ({
+export const signInModel = ({ mobileNumber, callingCode, country } = {}) => ({
   mobileNumber: mobileNumber || '',
-  password: password || '',
+  password: '',
   callingCode: callingCode || '27',
+  country: country || 'ZA',
 });
 
 export const apiSignInModel = ({ mobileNumber, password, callingCode } = {}) => ({
