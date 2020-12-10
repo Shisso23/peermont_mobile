@@ -1,3 +1,4 @@
+import { CardStyleInterpolators } from '@react-navigation/stack';
 import colors from './theme.colors';
 import variables from './theme.variables';
 
@@ -22,6 +23,7 @@ export const custom = {
 };
 
 export const globalScreenOptions = {
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
   headerBackTitleVisible: false,
   headerStyle: {
     backgroundColor: colors.primary,
