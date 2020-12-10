@@ -42,6 +42,11 @@ const HomeScreen = () => {
           <MembershipCard key={item.id} card={item} onPress={() => viewMembershipCard(item.id)} />
         );
       })}
+      <Divider />
+      <Button
+        title="Add Winners Circle Card"
+        onPress={() => navigation.navigate('AddMembershipCard')}
+      />
     </PageContainer>
   );
 };
