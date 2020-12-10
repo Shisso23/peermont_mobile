@@ -5,25 +5,24 @@ import { StatusBar } from 'react-native';
 import NavigationContainer from './navigation/root.navigator';
 import { userAuthService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
-import { getUserAction } from './reducers/user-reducer/user.actions';
-import { loadAllFormDataAction } from './reducers/form-data-reducer/form-data.actions';
 import colors from '../theme/theme.colors';
+import {
+  loadAppDataAction,
+  loadAppDataForSignedInUserAction,
+} from './reducers/app-reducer/app.actions';
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const _preLoadAllAppData = () => {
-    return Promise.all([dispatch(getUserAction()), dispatch(loadAllFormDataAction())]);
-  };
 
   const _continueToApp = () => {
     dispatch(setIsAuthenticatedAction(true));
   };
 
   const _loadAppData = () => {
+    dispatch(loadAppDataAction());
     userAuthService.doTokensExistInLocalStorage().then((tokensExist) => {
       if (tokensExist) {
-        _preLoadAllAppData().then(_continueToApp);
+        dispatch(loadAppDataForSignedInUserAction()).then(_continueToApp);
       }
     });
   };
