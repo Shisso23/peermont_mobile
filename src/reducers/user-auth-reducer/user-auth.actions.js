@@ -18,8 +18,8 @@ export const signInAction = (formData) => {
 
 export const signOutAction = () => {
   return (dispatch) => {
-    userAuthService.signOut().then(() => {
-      dispatch(setIsAuthenticatedAction(false));
+    return userAuthService.signOut().then(() => {
+      return dispatch(setIsAuthenticatedAction(false));
     });
   };
 };

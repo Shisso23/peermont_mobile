@@ -12,6 +12,7 @@ import {
   loadAppDataForSignedInUserAction,
 } from './reducers/app-reducer/app.actions';
 import AutoSignOut from './components/atoms/auto-sign-out';
+import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,15 +23,26 @@ const App = () => {
 
   const _loadAppData = () => {
     dispatch(loadAppDataAction());
-    userAuthService.doTokensExistInLocalStorage().then((tokensExist) => {
-      if (tokensExist) {
-        dispatch(loadAppDataForSignedInUserAction()).then(_continueToApp);
-      }
-      RNBootSplash.hide({ fade: true });
-    });
+    userAuthService
+      .doTokensExistInLocalStorage()
+      .then((tokensExist) => {
+        if (tokensExist) {
+          return dispatch(loadAppDataForSignedInUserAction()).then(_continueToApp);
+        }
+        return Promise.resolve();
+      })
+      .finally(() => {
+        RNBootSplash.hide({ fade: true });
+      });
   };
 
-  useEffect(_loadAppData, []);
+  useEffect(() => {
+    if (!__DEV__) {
+      dispatch(signOutAction()).then(_loadAppData);
+    } else {
+      _loadAppData();
+    }
+  }, []);
 
   return (
     <>

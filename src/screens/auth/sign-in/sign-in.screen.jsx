@@ -1,4 +1,5 @@
 import React from 'react';
+import RNBootSplash from 'react-native-bootsplash';
 import { StyleSheet, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Divider, Button } from 'react-native-elements';
@@ -26,9 +27,14 @@ const SignInScreen = () => {
   };
 
   const _onSignInSuccess = () => {
-    dispatch(loadAppDataForSignedInUserAction()).then(() => {
-      dispatch(setIsAuthenticatedAction(true));
-    });
+    RNBootSplash.show();
+    dispatch(loadAppDataForSignedInUserAction())
+      .then(() => {
+        return dispatch(setIsAuthenticatedAction(true));
+      })
+      .finally(() => {
+        RNBootSplash.hide({ fade: true });
+      });
   };
   return (
     <FormPageContainer>
