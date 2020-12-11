@@ -3,6 +3,7 @@ import { BackHandler, StyleSheet, ActivityIndicator } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/stack';
 
 import { useNavigation } from '@react-navigation/native';
+import { globalScreenOptions } from '../../../theme/theme.styles';
 
 const blockAndroidBackButton = () => true;
 export const useBackButtonLoader = (functionToExecute) => {
@@ -24,9 +25,14 @@ export const useBackButtonLoader = (functionToExecute) => {
     navigation.setOptions({
       headerLeft: () =>
         isLoading ? (
-          <ActivityIndicator animating size="small" color="black" style={styles.loader} />
+          <ActivityIndicator
+            animating
+            size="small"
+            color={globalScreenOptions.headerTintColor}
+            style={styles.loader}
+          />
         ) : (
-          <HeaderBackButton onPress={onBack} />
+          <HeaderBackButton onPress={onBack} tintColor={globalScreenOptions.headerTintColor} />
         ),
     });
   }, [navigation, isLoading]);
