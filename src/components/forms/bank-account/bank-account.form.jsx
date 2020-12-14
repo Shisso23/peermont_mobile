@@ -3,8 +3,9 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { Picker } from '@react-native-picker/picker';
 import { Button, Input, Text } from 'react-native-elements';
-import DropdownPicker from 'react-native-dropdown-picker';
+
 import { useSelector } from 'react-redux';
 import { getFormError } from '../form-utils';
 import {
@@ -85,12 +86,15 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
               onBlur={handleBlur('accountNumber')}
               errorMessage={error('accountNumber')}
             />
-            <DropdownPicker
-              items={banks.map((bank) => ({ value: bank.id, label: bank.name }))}
-              placeholder="Bank"
-              onChangeItem={(dropdownObject) => setFieldValue('bankId', dropdownObject.value)}
-              defaultValue={values.bankId}
-            />
+            <Picker
+              onValueChange={(value) => setFieldValue('bankId', value)}
+              selectedValue={values.bankId}
+            >
+              <Picker.Item label="Select a bank..." value="" />
+              {banks.map((bank) => (
+                <Picker.Item key={bank.id} label={bank.name} value={bank.id} />
+              ))}
+            </Picker>
             <Text style={custom.errorStyle}>{error('bankId')}</Text>
 
             <UploadDocumentButton
