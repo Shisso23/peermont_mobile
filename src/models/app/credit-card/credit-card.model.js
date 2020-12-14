@@ -13,6 +13,7 @@ export const creditCardModel = ({
   expiryMonth: expiry_month || '',
   expiryYear: expiry_year || '',
   cvv: cvv || '',
+  expiryDate: '',
 });
 
 export const apiCreditCardCardModel = ({

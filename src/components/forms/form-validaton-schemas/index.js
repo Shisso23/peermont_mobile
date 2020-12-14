@@ -37,8 +37,8 @@ export const pinSchema = Yup.string()
 export const creditCardNumberSchema = Yup.string()
   .matches(numberRegex, 'Please ensure that your card number contains only digits')
   .required('Please enter your card number');
-export const creditCardExpiryMonthSchema = Yup.string().required('Please choose expiry month');
-export const creditCardExpiryYearSchema = Yup.string().required('Please choose expiry year');
+
+export const creditCardExpiryDateSchema = Yup.string().required('Please choose expiry date');
 export const creditCardTypeSchema = Yup.string().required('Please choose a card type');
 export const creditCardHolderSchema = Yup.string().required('Card holder is required');
 export const creditCardCvvSchema = Yup.string()

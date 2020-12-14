@@ -1,38 +1,33 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import _ from 'lodash';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text } from 'react-native-elements';
-import DropdownPicker from 'react-native-dropdown-picker';
+import { Button, Input } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import {
   creditCardNumberSchema,
-  creditCardExpiryMonthSchema,
   creditCardHolderSchema,
-  creditCardExpiryYearSchema,
   creditCardTypeSchema,
   creditCardCvvSchema,
+  creditCardExpiryDateSchema,
 } from '../form-validaton-schemas';
-import {
-  expiryMonthsDropdownData,
-  expiryYearsDropdownData,
-  cardTypesDropdownData,
-} from './credit-card-form-data';
 import { infoPopUpService } from '../../../services';
-import { isMasterCard, isVisa } from './credit-card.utils';
-import { custom } from '../../../../theme/theme.styles';
+import { isMasterCard, isVisa, formatCardExpiryDate } from './credit-card.utils';
 
 const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
+  const cardHolderRef = useRef(null);
+  const expiryDatRef = useRef(null);
+  const cvvRef = useRef(null);
+
   const validationSchema = Yup.object().shape({
     cardHolder: creditCardHolderSchema,
     cardNumber: creditCardNumberSchema,
-    expiryMonth: creditCardExpiryMonthSchema,
-    expiryYear: creditCardExpiryYearSchema,
     cardType: creditCardTypeSchema,
     cvv: creditCardCvvSchema,
+    expiryDate: creditCardExpiryDateSchema,
   });
 
   const _handleFormSubmitError = (error, actions, formData) => {
@@ -41,7 +36,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
     } else {
-      actions.setFieldError('cardHolder', error.message);
+      actions.setFieldError('cardNumber', error.message);
     }
   };
 
@@ -73,80 +68,80 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
         setFieldValue,
       }) => {
         const error = (name) => getFormError(name, { touched, status, errors });
-        let cardTypeDropdownController;
         const _changeCardTypeToMatchCardNumber = () => {
           if (isMasterCard(values.cardNumber)) {
             setFieldValue('cardType', 'MASTERCARD');
-            cardTypeDropdownController.selectItem('MASTERCARD');
           } else if (isVisa(values.cardNumber)) {
             setFieldValue('cardType', 'VISA');
-            cardTypeDropdownController.selectItem('VISA');
           }
         };
         return (
           <>
             <Input
-              value={values.cardHolder}
-              onChangeText={handleChange('cardHolder')}
-              label="Card Holder"
-              onBlur={handleBlur('cardHolder')}
-              errorMessage={error('cardHolder')}
-            />
-            <Input
               value={values.cardNumber}
               onChangeText={handleChange('cardNumber')}
               keyboardType="numeric"
               label="Card Number"
-              onBlur={() => {
+              placeholder="0000 0000 0000 0000"
+              onBlur={(e) => {
                 _changeCardTypeToMatchCardNumber();
-                handleBlur('cardNumber');
+                handleBlur('cardNumber')(e);
               }}
               errorMessage={error('cardNumber')}
+              onSubmitEditing={() => cardHolderRef.current.focus()}
             />
-            <DropdownPicker
-              items={expiryMonthsDropdownData}
-              placeholder="Expiry Month"
-              onChangeItem={(dropdownObject) => setFieldValue('expiryMonth', dropdownObject.value)}
-              containerStyle={styles.removeMe}
-            />
-            <Text style={custom.errorStyle}>{error('expiryMonth')}</Text>
-            <DropdownPicker
-              items={expiryYearsDropdownData()}
-              placeholder="Expiry Year"
-              onChangeItem={(dropdownObject) => setFieldValue('expiryYear', dropdownObject.value)}
-              containerStyle={styles.removeMe}
-            />
-            <Text style={custom.errorStyle}>{error('expiryYear')}</Text>
-            <DropdownPicker
-              controller={(instance) => {
-                cardTypeDropdownController = instance;
-              }}
-              items={cardTypesDropdownData}
-              value={values.cardType}
-              placeholder="Card Type"
-              onChangeItem={(dropdownObject) => setFieldValue('cardType', dropdownObject.value)}
-              containerStyle={styles.removeMe}
-            />
-            <Text style={custom.errorStyle}>{error('cardType')}</Text>
             <Input
-              value={values.cvv}
-              onChangeText={handleChange('cvv')}
-              keyboardType="numeric"
-              label="CVV"
-              onBlur={handleBlur('cvv')}
-              errorMessage={error('cvv')}
-              rightIcon={() => (
-                <Icon
-                  name="info-circle"
-                  size={15}
-                  onPress={() => {
-                    infoPopUpService.show(
-                      "Your CVV number is never saved, it's only used for verification.",
-                    );
-                  }}
-                />
-              )}
+              ref={cardHolderRef}
+              value={values.cardHolder}
+              onChangeText={handleChange('cardHolder')}
+              placeholder="Name on Card"
+              label="Card Holder"
+              onBlur={handleBlur('cardHolder')}
+              errorMessage={error('cardHolder')}
+              onSubmitEditing={() => expiryDatRef.current.focus()}
             />
+            <View style={styles.rowAlign}>
+              <Input
+                ref={expiryDatRef}
+                containerStyle={styles.flexMargin}
+                value={values.expiryDate}
+                onChangeText={(value) => {
+                  const formatted = formatCardExpiryDate(value, values.expiryDate);
+                  setFieldValue('expiryMonth', formatted.substr(0, 2));
+                  setFieldValue('expiryYear', formatted.substr(3, 2));
+                  handleChange('expiryDate')(formatted);
+                }}
+                keyboardType="phone-pad"
+                label="Expiry Date"
+                placeholder="MM/YY"
+                onBlur={handleBlur('expiryDate')}
+                errorMessage={error('expiryDate')}
+                onSubmitEditing={() => cvvRef.current.focus()}
+              />
+              <Input
+                ref={cvvRef}
+                value={values.cvv}
+                containerStyle={styles.flex}
+                onChangeText={handleChange('cvv')}
+                keyboardType="phone-pad"
+                placeholder="000"
+                label="CVV"
+                onBlur={handleBlur('cvv')}
+                errorMessage={error('cvv')}
+                onSubmitEditing={handleSubmit}
+                rightIcon={() => (
+                  <Icon
+                    name="info-circle"
+                    size={15}
+                    onPress={() => {
+                      infoPopUpService.show(
+                        "Your CVV number is never saved, it's only used for verification.",
+                      );
+                    }}
+                  />
+                )}
+              />
+            </View>
             <Button title="Submit" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
@@ -166,8 +161,15 @@ CreditCardForm.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-  removeMe: {
-    height: 55,
+  flex: {
+    flex: 1,
+  },
+  flexMargin: {
+    flex: 1,
+    marginRight: 10,
+  },
+  rowAlign: {
+    flexDirection: 'row',
   },
 });
 
