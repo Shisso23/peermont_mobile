@@ -43,8 +43,8 @@ export const creditCardTypeSchema = Yup.string().required('Please choose a card 
 export const creditCardHolderSchema = Yup.string().required('Card holder is required');
 export const creditCardCvvSchema = Yup.string()
   .matches(numberRegex, 'Please ensure that your cvv has only digits')
-  .min(3)
-  .max(4)
+  .min(3, 'cvv invalid')
+  .max(4, 'cvv invalid')
   .required('cvv is required');
 
 export const bankAccountHolderSchema = Yup.string().required('Please enter the account holder');
