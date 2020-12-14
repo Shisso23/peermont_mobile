@@ -19,7 +19,7 @@ import { isMasterCard, isVisa, formatCardExpiryDate } from './credit-card.utils'
 
 const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
   const cardHolderRef = useRef(null);
-  const expiryDatRef = useRef(null);
+  const expiryDateRef = useRef(null);
   const cvvRef = useRef(null);
 
   const validationSchema = Yup.object().shape({
@@ -98,11 +98,11 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
               label="Card Holder"
               onBlur={handleBlur('cardHolder')}
               errorMessage={error('cardHolder')}
-              onSubmitEditing={() => expiryDatRef.current.focus()}
+              onSubmitEditing={() => expiryDateRef.current.focus()}
             />
             <View style={styles.rowAlign}>
               <Input
-                ref={expiryDatRef}
+                ref={expiryDateRef}
                 containerStyle={styles.flexMargin}
                 value={values.expiryDate}
                 onChangeText={(value) => {
