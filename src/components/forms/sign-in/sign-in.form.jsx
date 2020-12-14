@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 
 import { Button, Input, Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Keyboard } from 'react-native';
 import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { CountrySelect } from '../../atoms';
@@ -33,6 +34,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
   const _handleSubmission = (formData, actions) => {
     submitForm(formData)
       .then(() => {
+        Keyboard.dismiss();
         actions.setSubmitting(false);
         onSuccess();
       })

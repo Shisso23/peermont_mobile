@@ -1,4 +1,4 @@
-import { BackHandler, Platform, Linking } from 'react-native';
+import { BackHandler, Platform, Linking, Alert } from 'react-native';
 
 export const exitAppOnHardwarePressListener = () => {
   BackHandler.addEventListener('hardwareBackPress', hardwareBackPressExitApp);
@@ -7,8 +7,18 @@ export const exitAppOnHardwarePressListener = () => {
   };
 };
 const hardwareBackPressExitApp = () => {
-  // we can add a prompt here
-  BackHandler.exitApp();
+  Alert.alert(
+    'You are about to exit the app',
+    'You will be signed out. Would you like to continue?',
+    [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      { text: 'YES', onPress: BackHandler.exitApp },
+    ],
+  );
   return true;
 };
 
