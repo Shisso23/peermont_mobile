@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import RNBootSplash from 'react-native-bootsplash';
 import { useDispatch } from 'react-redux';
-import { StatusBar } from 'react-native';
+import { StatusBar, LogBox } from 'react-native';
 import NavigationContainer from './navigation/root.navigator';
 import { userAuthService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
@@ -42,6 +42,10 @@ const App = () => {
     } else {
       _loadAppData();
     }
+  }, []);
+
+  useEffect(() => {
+    LogBox.ignoreLogs(['Require cycle: ']);
   }, []);
 
   return (
