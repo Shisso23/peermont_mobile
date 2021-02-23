@@ -10,6 +10,7 @@ import { DrawerComponent } from '../../components/molecules';
 import { globalScreenOptions } from '../../../theme/theme.styles';
 
 import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
+import UploadBankAccountDocumentScreen from '../../screens/app/my-account/add-account/add-bank-account-document/upload-bank-account-document.screen';
 import EditBankAccountScreen from '../../screens/app/my-account/edit-account/edit-bank-account/edit-bank-account.screen';
 
 import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
@@ -54,6 +55,11 @@ const AppNavigator = () => (
       name="AddBankAccount"
       component={AddBankAccountScreen}
       options={{ headerShown: true, title: 'Add Bank Account' }}
+    />
+    <AppStack.Screen
+      name="UploadBankAccountDocument"
+      component={UploadBankAccountDocumentScreen}
+      options={{ headerShown: true, title: 'Upload Bank Account Document' }}
     />
     <AppStack.Screen
       name="EditBankAccount"

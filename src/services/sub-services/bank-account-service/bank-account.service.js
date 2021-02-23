@@ -10,7 +10,7 @@ import {
 
 import { constructProofOfBankFormData } from './bank-account.utils';
 
-const _exstractUploadDocumentId = (apiResponse) => _.get(apiResponse, 'data.id');
+const _extractUploadDocumentId = (apiResponse) => _.get(apiResponse, 'data.id');
 
 const getBankAccounts = () => {
   const url = bankAccountUrls.bankAccountsUrl();
@@ -29,28 +29,31 @@ const createBankAccount = (formData) => {
   let newBankAccount;
   const _returnNewBankAccount = () => newBankAccount;
 
-  const _exstractNewBankAccount = (apiResponse) => {
+  const _extractNewBankAccount = (apiResponse) => {
     const bankAccount = _.get(apiResponse, 'data');
     newBankAccount = userBankAccountModel(bankAccount);
     return apiResponse;
   };
-  const _uploadProofOfBankDocument = (bankAccountId) => {
-    const proofOfBankUrl = bankAccountUrls.bankAccountUrl(bankAccountId);
-    const proofOfBankData = constructProofOfBankFormData(formData.proofOfBankDocument);
-    return authNetworkService.patch(proofOfBankUrl, proofOfBankData);
-  };
-  const creatBankAccountUrl = bankAccountUrls.bankAccountsUrl();
+
+  const createBankAccountUrl = bankAccountUrls.bankAccountsUrl();
   const apiModel = apiBankAccountModel(formData);
   return authNetworkService
-    .post(creatBankAccountUrl, apiModel)
-    .then(_exstractNewBankAccount)
-    .then(_exstractUploadDocumentId)
-    .then(_uploadProofOfBankDocument)
+    .post(createBankAccountUrl, apiModel)
+    .then(_extractNewBankAccount)
     .then(_returnNewBankAccount)
     .catch((err) => {
       err.error = bankAccountModel(err.error);
       return Promise.reject(err);
     });
+};
+
+const uploadBankAccountDocument = (bankAccountId, formData) => {
+  const bankAccountUrl = bankAccountUrls.bankAccountUrl(bankAccountId);
+  const proofOfBankData = constructProofOfBankFormData(formData.proofOfBankDocument);
+  return authNetworkService.patch(bankAccountUrl, proofOfBankData).catch((err) => {
+    err.error = bankAccountModel(err.error);
+    return Promise.reject(err);
+  });
 };
 
 const updateBankAccount = (bankAccountForm) => {
@@ -59,7 +62,7 @@ const updateBankAccount = (bankAccountForm) => {
 
   return authNetworkService
     .post(resetBankAccountUrl, apiModel)
-    .then(_exstractUploadDocumentId)
+    .then(_extractUploadDocumentId)
     .catch((err) => {
       // eslint-disable-next-line no-console
       console.warn(err);
@@ -87,6 +90,7 @@ export default {
   getBankAccounts,
   deleteBankAccount,
   createBankAccount,
+  uploadBankAccountDocument,
   updateBankAccount,
   uploadProofOfBankDocument,
 };

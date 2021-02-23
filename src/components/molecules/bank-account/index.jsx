@@ -3,6 +3,8 @@ import { ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { ListItem, Avatar } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
+import _ from 'lodash';
+
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { useBankUri } from '../../../hooks';
@@ -30,7 +32,7 @@ const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatu
       bottomDivider
       disabled={hasDisabled && account.status !== 'verified'}
     >
-      <Avatar source={{ uri: bankUri }} />
+      <Avatar source={_.isEmpty(bankUri) ? null : { uri: bankUri }} />
       <ListItem.Content>
         <ListItem.Title>{account.accountNumber}</ListItem.Title>
         <ListItem.Subtitle>{account.accountHolder}</ListItem.Subtitle>

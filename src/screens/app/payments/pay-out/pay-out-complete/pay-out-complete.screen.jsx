@@ -16,7 +16,10 @@ const PayOutCompleteScreen = () => {
 
   return (
     <View>
-      <Text>Your payout has been submitted, you will be notified when it has been proccessed</Text>
+      <Text>
+        Your payout has been submitted for approval, it may take up to 48 hours (excl. public
+        holidays and weekends) to appear in your bank account processed
+      </Text>
     </View>
   );
 };

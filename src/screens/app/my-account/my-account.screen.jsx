@@ -3,6 +3,8 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Divider, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
+import _ from 'lodash';
+
 import { PageContainer } from '../../../components/containers';
 import {
   LoadingComponent,
@@ -21,10 +23,10 @@ const MyAccountScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const _handleBankFailedNav = (bankAccount) => {
-    if (bankAccount.status === 'failed') {
-      navigation.push('EditBankAccount', {
-        bankAccount,
+  const _handleBankUpdateNav = (bankAccount) => {
+    if (bankAccount.status !== 'verified') {
+      navigation.push('UploadBankAccountDocument', {
+        bankAccountId: _.get(bankAccount, 'id'),
       });
     }
   };
@@ -81,7 +83,7 @@ const MyAccountScreen = () => {
             account={item}
             hasDelete
             hasAccountStatus
-            onPress={() => _handleBankFailedNav(item)}
+            onPress={() => _handleBankUpdateNav(item)}
           />
         );
       })}

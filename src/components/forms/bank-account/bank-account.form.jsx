@@ -12,10 +12,7 @@ import {
   bankAccountHolderSchema,
   bankAccountAccountNumberSchema,
   bankAccountBankIdSchema,
-  proofOfBankDocumentSchema,
-  editProofOfBankDocumentSchemea,
 } from '../form-validaton-schemas';
-import { UploadDocumentButton } from '../../molecules';
 import { custom } from '../../../../theme/theme.styles';
 
 const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialErrors }) => {
@@ -25,7 +22,6 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
     accountHolder: bankAccountHolderSchema,
     accountNumber: bankAccountAccountNumberSchema,
     bankId: bankAccountBankIdSchema,
-    proofOfBankDocument: !edit ? proofOfBankDocumentSchema : editProofOfBankDocumentSchemea,
   });
 
   const _handleFormSubmitError = (error, actions, formData) => {
@@ -40,9 +36,9 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
 
   const _handleSubmission = (formData, actions) => {
     submitForm(formData)
-      .then(() => {
+      .then((bankAccountId) => {
         actions.setSubmitting(false);
-        onSuccess();
+        onSuccess(bankAccountId);
       })
       .catch((error) => _handleFormSubmitError(error, actions, formData));
   };
@@ -96,12 +92,6 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
               ))}
             </Picker>
             <Text style={custom.errorStyle}>{error('bankId')}</Text>
-
-            <UploadDocumentButton
-              title="Select Document"
-              updateFormData={(newImage) => setFieldValue('proofOfBankDocument', newImage)}
-              errorMessage={errors.proofOfBankDocument}
-            />
             <Button
               title={!edit ? 'Add Account ' : 'Update Account'}
               onPress={handleSubmit}
