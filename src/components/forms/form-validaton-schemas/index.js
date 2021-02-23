@@ -56,11 +56,6 @@ export const bankAccountBankIdSchema = Yup.string()
   .required('Please select a bank');
 export const proofOfBankDocumentSchema = Yup.string().required('Please upload proof of bank');
 
-export const editProofOfBankDocumentSchemea = Yup.string().when('proofOfBankingStatus', {
-  is: 'failed',
-  then: Yup.string().required('Please re-upload your proof of bank'),
-});
-
 export const surveyAnswersSchema = Yup.array().of(
   Yup.object().shape({
     answer: Yup.bool().required('Please select'),

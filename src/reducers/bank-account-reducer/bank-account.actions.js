@@ -17,10 +17,19 @@ export const getBankAccountsAction = () => {
   };
 };
 
-export const creatBankAccountAction = (formData) => {
+export const createBankAccountAction = (formData) => {
   return (dispatch) => {
     return bankAccountService.createBankAccount(formData).then((newBankAccount) => {
       dispatch(appendBankAccountAction(newBankAccount));
+      return _.get(newBankAccount, 'id');
+    });
+  };
+};
+
+export const uploadBankAccountDocumentAction = (bankAccountId, formData) => {
+  return (dispatch) => {
+    return bankAccountService.uploadBankAccountDocument(bankAccountId, formData).then(() => {
+      dispatch(getBankAccountsAction());
     });
   };
 };
