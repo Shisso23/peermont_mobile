@@ -37,10 +37,16 @@ export const getLastPaymentUri = (paymentId) => {
 
 export const createEft = () => {
   const url = paymentUrls.eftPaymentUrl();
-  const _exstractAndReturnPayableId = (apiResponse) => _.get(apiResponse, 'data.id');
+  const _extractAndReturnPayableId = (apiResponse) => _.get(apiResponse, 'data.id');
   return authNetworkService
     .post(url, { instant_eft: { bank_id: null } })
-    .then(_exstractAndReturnPayableId);
+    .then(_extractAndReturnPayableId);
+};
+
+export const getTransactions = () => {
+  const transactionsUrl = paymentUrls.transactions();
+  const returnTransactions = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.get(transactionsUrl).then(returnTransactions);
 };
 
 export default {
@@ -48,4 +54,5 @@ export default {
   verifyPaymentOtp,
   getLastPaymentUri,
   createEft,
+  getTransactions,
 };

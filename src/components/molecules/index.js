@@ -5,3 +5,4 @@ export { default as CompletedHealthSurvey } from './completed-health-survey';
 export { default as MembershipCard } from './membership-card';
 export { default as CreditCard } from './credit-card';
 export { default as BankAccount } from './bank-account';
+export { default as Transaction } from './transaction';

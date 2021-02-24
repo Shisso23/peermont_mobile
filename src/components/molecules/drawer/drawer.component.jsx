@@ -34,6 +34,16 @@ const DrawerComponent = (props) => {
           onPress={() => navigation.navigate('Home')}
         />
         <DrawerItem
+          label="Transactions"
+          icon={() => <DrawerIcon name="history" />}
+          onPress={() => navigation.push('Transactions')}
+        />
+        <DrawerItem
+          label="Visit Palacebet"
+          icon={() => <DrawerIcon name="link" />}
+          onPress={() => navigation.push('PalaceBet')}
+        />
+        <DrawerItem
           label="My Account"
           icon={() => <DrawerIcon name="user" />}
           onPress={() => navigation.navigate('MyAccount')}
