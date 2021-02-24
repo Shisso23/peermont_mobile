@@ -1,5 +1,10 @@
 import { paymentService } from '../../services';
-import { setPendingPaymentIdAction, setPaymentUriActionAction } from './payments.reducer';
+import {
+  setPendingPaymentIdAction,
+  setPaymentUriActionAction,
+  setTransactionsAction,
+  setIsLoadingAction,
+} from './payments.reducer';
 
 export const initiateTopUpAction = (topUpFormData) => {
   return (dispatch) => {
@@ -82,5 +87,15 @@ export const getLastPaymentUriAction = () => {
     return paymentService.getLastPaymentUri(pendingPaymentId).then((paymentUri) => {
       dispatch(setPaymentUriActionAction(paymentUri));
     });
+  };
+};
+
+export const getTransactions = () => {
+  return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+    return paymentService
+      .getTransactions()
+      .then((transactions) => dispatch(setTransactionsAction(transactions)))
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };

@@ -25,6 +25,8 @@ import TopUpCompleteScreen from '../../screens/app/payments/top-up/top-up-comple
 import PayOutCompleteScreen from '../../screens/app/payments/pay-out/pay-out-complete/pay-out-complete.screen';
 import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
 import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
+import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
+import TransactionsScreen from '../../screens/app/transactions/transactions';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -45,6 +47,16 @@ const AppNavigator = () => (
       name="PrivacyPolicy"
       component={PrivacyPolicyScreen}
       options={{ headerShown: true, title: 'Privacy Policy' }}
+    />
+    <AppStack.Screen
+      name="PalaceBet"
+      component={PalaceBetScreen}
+      options={{ headerShown: true, title: 'Palace Bet' }}
+    />
+    <AppStack.Screen
+      name="Transactions"
+      component={TransactionsScreen}
+      options={{ headerShown: true, title: 'Transactions' }}
     />
     <AppStack.Screen
       name="AddCreditCard"
