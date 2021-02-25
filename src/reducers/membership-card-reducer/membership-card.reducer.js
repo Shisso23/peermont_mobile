@@ -6,6 +6,9 @@ const reducerName = 'membershipCard';
 const setMembershipCards = CreateAction(reducerName, 'SET_MEMBERSHIP_CARDS');
 export const setMembershipCardsAction = setMembershipCards.action;
 
+const setMembershipCardPins = CreateAction(reducerName, 'SET_MEMBERSHIP_CARD_PINS');
+export const setMembershipCardPinsAction = setMembershipCardPins.action;
+
 const removeMembershipCard = CreateAction(reducerName, 'REMOVE_MEMBERSHIP_CARD');
 export const removeMembershipCardAction = removeMembershipCard.action;
 
@@ -23,6 +26,7 @@ export const setCurrentMembershipCardPinAction = setCurrentMembershipCardPin.act
 
 const initialState = {
   membershipCards: [],
+  membershipCardPins: [],
   currentMembershipCard: null,
   currentMembershipCardPin: null,
 };
@@ -33,6 +37,11 @@ export default function membershipCardReducer(state = initialState, action) {
       return {
         ...state,
         membershipCards: action.payload,
+      };
+    case setMembershipCardPins.actionType:
+      return {
+        ...state,
+        membershipCardPins: action.payload,
       };
     case removeMembershipCard.actionType:
       _.remove(state.membershipCards, { id: action.payload });
