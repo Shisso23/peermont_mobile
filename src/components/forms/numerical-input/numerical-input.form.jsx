@@ -10,7 +10,7 @@ import { flashService } from '../../../services';
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
 
-const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
+const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialValues }, ref) => {
   const validationSchema = Yup.object().shape({
     numeric: numericSchema,
   });
@@ -19,7 +19,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
     submitForm(formData)
       .then(() => {
         actions.setSubmitting(false);
-        onSuccess();
+        onSuccess(formData);
       })
       .catch((error) => {
         actions.setSubmitting(false);
@@ -42,6 +42,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
       onSubmit={_handleSubmission}
       validationSchema={validationSchema}
       enableReinitialize
+      innerRef={ref}
     >
       {({ handleSubmit, values, errors, isSubmitting, touched, status, setFieldValue }) => {
         const error = (name) => getFormError(name, { touched, status, errors });
@@ -60,7 +61,7 @@ const NumericalInputForm = ({ submitForm, onSuccess, initialValues }) => {
       }}
     </Formik>
   );
-};
+});
 
 NumericalInputForm.propTypes = {
   submitForm: PropTypes.func.isRequired,

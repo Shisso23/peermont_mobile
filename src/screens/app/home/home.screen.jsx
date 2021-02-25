@@ -37,9 +37,13 @@ const HomeScreen = () => {
         loading={isHealthSurveyLoading}
       />
       <Divider />
-      {membershipCards.map((item) => {
+      {membershipCards.map((item, index) => {
         return (
-          <MembershipCard key={item.id} card={item} onPress={() => viewMembershipCard(item.id)} />
+          <MembershipCard
+            key={item.id}
+            card={item}
+            onPress={() => viewMembershipCard(item.id, index)}
+          />
         );
       })}
       <Divider />

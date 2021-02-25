@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { setLoadingAction } from '../user-reducer/user.reducer';
 import {
   setMembershipCardsAction,
@@ -5,6 +7,7 @@ import {
   appendMembershipCardAction,
   replaceCurrentMembershipCardAction,
   setCurrentMembershipCardPinAction,
+  setMembershipCardPinsAction,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
 
@@ -73,5 +76,25 @@ export const deleteMembershipCardAction = (id) => {
     return membershipCardService.deleteMembershipCard(id).then(() => {
       dispatch(removeMembershipCardAction(id));
     });
+  };
+};
+
+export const rememberCardPin = (pin) => {
+  return (dispatch, getState) => {
+    const membershipCardReducer = _.get(getState(), 'membershipCardReducer', {});
+    const membershipCards = _.get(membershipCardReducer, 'membershipCards', {});
+    const membershipCardPins = _.get(membershipCardReducer, 'membershipCardPins', {});
+    const currentCardId = _.get(membershipCardReducer, 'currentMembershipCard.id', 0);
+
+    membershipCards.forEach((card, index) => {
+      if (_.get(card, 'id') === currentCardId) {
+        membershipCardPins[index] = {
+          card_id: currentCardId,
+          card_pin: pin,
+        };
+      }
+    });
+
+    dispatch(setMembershipCardPinsAction(membershipCardPins));
   };
 };
