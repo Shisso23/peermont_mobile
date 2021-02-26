@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Text } from 'react-native';
+import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import _ from 'lodash';
@@ -42,6 +42,7 @@ const MembershipCardPinScreen = () => {
 
   return (
     <FormPageContainer>
+      <Text h4>Insert Winners Circle Pin</Text>
       <Text>Please enter membership card pin for: {currentMembershipCard.cardNumber}</Text>
       <NumericalInputForm
         submitForm={_handleFormSubmission}

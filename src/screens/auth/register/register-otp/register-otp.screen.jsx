@@ -14,6 +14,7 @@ import { FormPageContainer } from '../../../../components/containers';
 const RegisterOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyRegisterOtpAction(formData));
   };
