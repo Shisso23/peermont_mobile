@@ -1,17 +1,20 @@
 import React, { useRef } from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import _ from 'lodash';
 
+import PropTypes from 'prop-types';
 import { Button, Input, Divider } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
 import { membershipCardSchema, pinSchema } from '../form-validaton-schemas';
 import { infoPopUpService } from '../../../services';
 
 const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
+  const navigation = useNavigation();
   const pinRef = useRef(null);
+
   const validationSchema = Yup.object().shape({
     cardNumber: membershipCardSchema,
     pin: pinSchema,
@@ -23,7 +26,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
     } else {
-      actions.setFieldError('cardNumber', error.message);
+      navigation.push('RegisterError', { errorMessage: _.get(error, 'message') });
     }
   };
 
@@ -64,6 +67,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
               onBlur={handleBlur('cardNumber')}
               errorMessage={error('cardNumber')}
               onSubmitEditing={() => pinRef.current.focus()}
+              maxLength={18}
             />
             <Input
               ref={pinRef}

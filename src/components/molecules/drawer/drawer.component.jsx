@@ -20,7 +20,7 @@ const DrawerComponent = (props) => {
     paddingBottom: insets.bottom,
     paddingLeft: insets.left,
   };
-  const _handleSignout = () => {
+  const _handleSignOut = () => {
     dispatch(signOutAction());
   };
 
@@ -34,6 +34,11 @@ const DrawerComponent = (props) => {
           onPress={() => navigation.navigate('Home')}
         />
         <DrawerItem
+          label="My Account"
+          icon={() => <DrawerIcon name="user" />}
+          onPress={() => navigation.navigate('MyAccount')}
+        />
+        <DrawerItem
           label="Transactions"
           icon={() => <DrawerIcon name="history" />}
           onPress={() => navigation.push('Transactions')}
@@ -42,11 +47,6 @@ const DrawerComponent = (props) => {
           label="Visit Palacebet"
           icon={() => <DrawerIcon name="link" />}
           onPress={() => navigation.push('PalaceBet')}
-        />
-        <DrawerItem
-          label="My Account"
-          icon={() => <DrawerIcon name="user" />}
-          onPress={() => navigation.navigate('MyAccount')}
         />
         <DrawerItem
           label="Terms And Conditions"
@@ -63,7 +63,7 @@ const DrawerComponent = (props) => {
         <DrawerItem
           label="Sign Out"
           icon={() => <DrawerIcon name="sign-out-alt" />}
-          onPress={_handleSignout}
+          onPress={_handleSignOut}
         />
         <View style={styles.alignRow}>
           <Text style={styles.smallText}>{`Version ${getVersion()}`}</Text>

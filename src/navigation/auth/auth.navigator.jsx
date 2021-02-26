@@ -6,6 +6,7 @@ import SignInScreen from '../../screens/auth/sign-in/sign-in.screen';
 import RegisterSetPasswordScreen from '../../screens/auth/register/set-password/register-set-password.screen';
 import RegisterScreen from '../../screens/auth/register/register.screen';
 import RegisterOtpScreen from '../../screens/auth/register/register-otp/register-otp.screen';
+import RegisterErrorScreen from '../../screens/auth/register/register-error/register-error';
 
 import ResetPasswordOtpScreen from '../../screens/auth/reset-password/reset-password-otp/reset-password-otp.screen';
 import ResetPasswordSetPasswordScreen from '../../screens/auth/reset-password/set-password/reset-password-set-password.screen';
@@ -53,7 +54,11 @@ const AuthNavigator = () => {
         component={RegisterSetPasswordScreen}
         options={{ title: 'Create Password' }}
       />
-
+      <AuthStack.Screen
+        name="RegisterError"
+        component={RegisterErrorScreen}
+        options={{ title: 'Register Error' }}
+      />
       <AuthStack.Screen
         name="ResetPassword"
         component={ResetPasswordScreen}

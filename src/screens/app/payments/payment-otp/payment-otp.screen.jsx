@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Text } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NumericalInputForm } from '../../../../components/forms';
@@ -22,6 +23,7 @@ const PaymentOtpScreen = () => {
 
   return (
     <View>
+      <Text h4>OTP</Text>
       <NumericalInputForm
         submitForm={_handleFormSubmission}
         initialValues={otpModel()}
