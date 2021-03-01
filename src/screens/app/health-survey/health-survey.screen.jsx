@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
+import { Text } from 'react-native-elements';
+
 import { submitHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import { CompletedHealthSurvey } from '../../../components/molecules';
 import { FormPageContainer, PageContainer } from '../../../components/containers';
@@ -21,6 +23,7 @@ const HealthSurveyScreen = () => {
 
   return displayHealthSurveyForm ? (
     <FormPageContainer>
+      <Text h4>Health Survey</Text>
       <HealthSurveyForm
         submitForm={_handleSubmission}
         initialValues={constructHealthSurveyAnswerModels(healthSurveyQuestions)}

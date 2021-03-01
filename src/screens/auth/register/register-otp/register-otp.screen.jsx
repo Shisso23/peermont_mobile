@@ -29,6 +29,7 @@ const RegisterOtpScreen = () => {
   return (
     <FormPageContainer>
       <Text>Please enter otp</Text>
+      <Text>Please enter the OTP that we have sent to your device to register.</Text>
       <NumericalInputForm
         submitForm={_handleFormSubmission}
         initialValues={otpModel()}

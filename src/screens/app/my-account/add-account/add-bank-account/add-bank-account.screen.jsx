@@ -1,6 +1,8 @@
 import React from 'react';
+import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+
 import { FormPageContainer } from '../../../../../components/containers';
 import { BankAccountForm } from '../../../../../components/forms';
 import { bankAccountModel } from '../../../../../models';
@@ -21,6 +23,8 @@ const AddBankAccountScreen = () => {
 
   return (
     <FormPageContainer>
+      <Text h4>Add Account</Text>
+      <Text>Please provide your account details</Text>
       <BankAccountForm
         submitForm={_handleFormSubmit}
         initialValues={bankAccountModel()}
