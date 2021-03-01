@@ -14,4 +14,5 @@ export default {
   warning: '#FFC482',
   gold: '#A38C53',
   darkGrey: '#393939',
+  cardInfoBackGroundGrey: 'rgba(95,95,95,0.8)',
 };
