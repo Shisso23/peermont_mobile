@@ -49,13 +49,10 @@ const styles = StyleSheet.create({
 });
 
 RegisterCardModal.propTypes = {
-  visible: PropTypes.bool,
-  setModalVisible: PropTypes.func,
+  visible: PropTypes.bool.isRequired,
+  setModalVisible: PropTypes.func.isRequired,
 };
 
-RegisterCardModal.defaultProps = {
-  visible: false,
-  setModalVisible: () => {},
-};
+RegisterCardModal.defaultProps = {};
 
 export default RegisterCardModal;
