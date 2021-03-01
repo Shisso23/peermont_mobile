@@ -1,10 +1,10 @@
 import React from 'react';
+import { Text } from 'react-native-elements';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Text } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { flashService } from '../../../services';
 import { NumericInput } from '../../atoms';

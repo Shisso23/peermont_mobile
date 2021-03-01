@@ -69,6 +69,13 @@ export const performPayoutAction = (payOutForm) => {
   };
 };
 
+export const sendPaymentOtpAction = (sendTo) => {
+  return (dispatch, getState) => {
+    const { pendingPaymentId } = getState().paymentReducer;
+    return paymentService.sendPaymentOtp(pendingPaymentId, sendTo);
+  };
+};
+
 export const verifyPaymentOtpAction = (paymentOtpForm) => {
   return (_dispatch, getState) => {
     const { pendingPaymentId } = getState().paymentReducer;
