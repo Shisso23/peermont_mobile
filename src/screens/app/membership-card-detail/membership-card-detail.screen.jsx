@@ -10,11 +10,12 @@ const MembershipCardDetailScreen = () => {
   const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
   const navigation = useNavigation();
   const membershipCardImage = getMembershipCardImage(currentMembershipCard.tierName);
+
   return (
     <PageContainer>
       <Card>
-        <Card.Title>{currentMembershipCard.cardNumber}</Card.Title>
         <Card.Image style={styles.imageStyle} resizeMode="contain" source={membershipCardImage} />
+        <Card.Title>{currentMembershipCard.cardNumber}</Card.Title>
         <ListItem>
           <ListItem.Content>
             <ListItem.Title>Player Balance</ListItem.Title>
@@ -29,8 +30,18 @@ const MembershipCardDetailScreen = () => {
         </ListItem>
 
         <View style={styles.rowView}>
-          <Button title="Top up" onPress={() => navigation.push('TopUp')} />
-          <Button title="Pay out" onPress={() => navigation.push('PayOut')} />
+          <Button
+            title="Top up"
+            onPress={() =>
+              navigation.push('TopUp', { balance: currentMembershipCard.balanceFormat })
+            }
+          />
+          <Button
+            title="Pay out"
+            onPress={() =>
+              navigation.push('PayOut', { balance: currentMembershipCard.balanceFormat })
+            }
+          />
         </View>
       </Card>
 

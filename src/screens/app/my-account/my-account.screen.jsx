@@ -39,6 +39,7 @@ const MyAccountScreen = () => {
 
   return !loading ? (
     <PageContainer>
+      <Text h3>My Account</Text>
       <View style={styles.rowAlign}>
         <Text h4>Winners Circle Cards</Text>
         <AddButton

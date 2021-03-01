@@ -43,7 +43,9 @@ const MembershipCardPinScreen = () => {
   return (
     <FormPageContainer>
       <Text h4>Insert Winners Circle Pin</Text>
-      <Text>Please enter membership card pin for: {currentMembershipCard.cardNumber}</Text>
+      <Text>
+        Please enter your 4 digit membership card pin for: {currentMembershipCard.cardNumber}
+      </Text>
       <NumericalInputForm
         submitForm={_handleFormSubmission}
         initialValues={initialValues}

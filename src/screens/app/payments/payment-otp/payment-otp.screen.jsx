@@ -24,6 +24,7 @@ const PaymentOtpScreen = () => {
   return (
     <View>
       <Text h4>OTP</Text>
+      <Text>Please enter the OTP that we have sent to your device to proceed.</Text>
       <NumericalInputForm
         submitForm={_handleFormSubmission}
         initialValues={otpModel()}

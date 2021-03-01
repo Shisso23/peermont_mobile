@@ -28,6 +28,7 @@ const ResetPasswordOtpScreen = () => {
   return (
     <FormPageContainer>
       <Text>Please enter otp</Text>
+      <Text>Please enter the OTP that we have sent to your device to reset your password.</Text>
       <NumericalInputForm
         submitForm={_handleFormSubmission}
         initialValues={otpModel()}

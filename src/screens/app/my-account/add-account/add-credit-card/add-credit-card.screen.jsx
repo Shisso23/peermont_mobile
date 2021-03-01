@@ -1,6 +1,8 @@
 import React from 'react';
+import { Text } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+
 import { CreditCardForm } from '../../../../../components/forms';
 import { creditCardModel } from '../../../../../models';
 import { FormPageContainer } from '../../../../../components/containers';
@@ -18,6 +20,8 @@ const AddCreditCardScreen = () => {
 
   return (
     <FormPageContainer>
+      <Text h4>Add Credit Card</Text>
+      <Text>Please provide your card details</Text>
       <CreditCardForm
         submitForm={_handleSubmission}
         initialValues={creditCardModel()}
