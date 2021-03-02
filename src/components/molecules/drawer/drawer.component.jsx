@@ -13,13 +13,15 @@ import DrawerIcon from './drawer-icon';
 import colors from '../../../../theme/theme.colors';
 
 const DrawerComponent = (props) => {
-  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
-  const safeArea = {
+  const navigation = useNavigation();
+
+  const safeAreaStyle = {
     paddingBottom: insets.bottom,
     paddingLeft: insets.left,
   };
+
   const _handleSignOut = () => {
     dispatch(signOutAction());
   };
@@ -59,7 +61,7 @@ const DrawerComponent = (props) => {
           onPress={() => navigation.push('PrivacyPolicy')}
         />
       </DrawerContentScrollView>
-      <View style={safeArea}>
+      <View style={safeAreaStyle}>
         <DrawerItem
           label="Sign Out"
           icon={() => <DrawerIcon name="sign-out-alt" />}
