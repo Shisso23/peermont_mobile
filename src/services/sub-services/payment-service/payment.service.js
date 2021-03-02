@@ -1,7 +1,12 @@
 import _ from 'lodash';
 import paymentUrls from './payment.urls';
 import authNetworkService from '../auth-network-service/auth-network.service';
-import { apiPaymentModel, apiPaymentOtpModel, otpModel } from '../../../models';
+import {
+  apiPaymentModel,
+  apiSendPaymentOtpModel,
+  apiPaymentOtpModel,
+  otpModel,
+} from '../../../models';
 
 const _extractAndReturnPaymentId = (apiResponse) => _.get(apiResponse, 'data.id');
 
@@ -17,6 +22,13 @@ const createPayment = (input) => {
       console.warn(err);
       return Promise.reject(err);
     });
+};
+
+export const sendPaymentOtp = (paymentId, sendTo) => {
+  const url = paymentUrls.sendOtp(paymentId);
+  const apiModel = apiSendPaymentOtpModel(sendTo);
+
+  return authNetworkService.post(url, apiModel);
 };
 
 export const verifyPaymentOtp = (paymentOtpForm, pendingPaymentId, currentMembershipCardPin) => {
@@ -51,6 +63,7 @@ export const getTransactions = () => {
 
 export default {
   createPayment,
+  sendPaymentOtp,
   verifyPaymentOtp,
   getLastPaymentUri,
   createEft,

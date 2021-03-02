@@ -1,11 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+import {
+  sendPaymentOtpAction,
+  verifyPaymentOtpAction,
+} from '../../../../reducers/payments-reducer/payments.actions';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
-import { verifyPaymentOtpAction } from '../../../../reducers/payments-reducer/payments.actions';
 
 const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
@@ -21,6 +25,10 @@ const PaymentOtpScreen = () => {
     navigation.replace(afterOtpRoute);
   };
 
+  const _handleResendOTP = () => {
+    return dispatch(sendPaymentOtpAction(''));
+  };
+
   return (
     <View>
       <Text h4>OTP</Text>
@@ -30,6 +38,7 @@ const PaymentOtpScreen = () => {
         initialValues={otpModel()}
         onSuccess={_handleFormSuccess}
       />
+      <Button title="Resend OTP" onPress={_handleResendOTP} />
     </View>
   );
 };
