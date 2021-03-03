@@ -41,3 +41,7 @@ export const globalScreenOptions = {
   headerTintColor: colors.white,
   cardStyle: { backgroundColor: colors.background },
 };
+
+export const drawerStyle = {
+  backgroundColor: colors.transparent,
+};
