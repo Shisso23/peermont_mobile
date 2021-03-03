@@ -49,12 +49,15 @@ const MyAccountScreen = () => {
       </View>
 
       <Divider />
-      {membershipCards.map((card) => {
-        return <MembershipCard key={card.id} card={card} hasDelete />;
-      })}
+      {_.isEmpty(membershipCards) ? (
+        <Text>No membership cards found</Text>
+      ) : (
+        membershipCards.map((card) => {
+          return <MembershipCard key={card.id} card={card} hasDelete />;
+        })
+      )}
 
       <Divider />
-
       <View style={styles.rowAlign}>
         <Text h4>Credit Cards</Text>
         <AddButton
@@ -64,9 +67,13 @@ const MyAccountScreen = () => {
       </View>
 
       <Divider />
-      {creditCards.map((item) => {
-        return <CreditCard key={item.id} card={item} hasDelete />;
-      })}
+      {_.isEmpty(creditCards) ? (
+        <Text>No credit cards found</Text>
+      ) : (
+        creditCards.map((item) => {
+          return <CreditCard key={item.id} card={item} hasDelete />;
+        })
+      )}
 
       <Divider />
       <View style={styles.rowAlign}>
@@ -76,18 +83,23 @@ const MyAccountScreen = () => {
           containerStyle={styles.addPadding}
         />
       </View>
+
       <Divider />
-      {bankAccounts.map((item) => {
-        return (
-          <BankAccount
-            key={item.id}
-            account={item}
-            hasDelete
-            hasAccountStatus
-            onPress={() => _handleBankUpdateNav(item)}
-          />
-        );
-      })}
+      {_.isEmpty(bankAccounts) ? (
+        <Text>No bank account found</Text>
+      ) : (
+        bankAccounts.map((item) => {
+          return (
+            <BankAccount
+              key={item.id}
+              account={item}
+              hasDelete
+              hasAccountStatus
+              onPress={() => _handleBankUpdateNav(item)}
+            />
+          );
+        })
+      )}
     </PageContainer>
   ) : (
     <LoadingComponent />
