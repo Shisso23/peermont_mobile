@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -13,6 +14,8 @@ import {
 import { membershipCardPinModel } from '../../../models';
 import HealthSurveyScreen from '../health-survey/health-survey.screen';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
+import { Modal } from '../../../components/atoms';
+import colors from '../../../../theme/theme.colors';
 
 const MembershipCardPinScreen = () => {
   const dispatch = useDispatch();
@@ -22,6 +25,7 @@ const MembershipCardPinScreen = () => {
   const { currentMembershipCard, isLoading } = useSelector(
     (reducers) => reducers.membershipCardReducer,
   );
+  const [isAutoFill, setIsAutoFill] = useState(false);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(getMembershipCardBalanceAction(formData)).then(() => {});
@@ -41,6 +45,7 @@ const MembershipCardPinScreen = () => {
   useEffect(() => {
     const { current } = formRef;
     if (!_.isNull(current) && cardPin.length === 4) {
+      setIsAutoFill(true);
       current.handleSubmit();
     }
   }, [cardPin]);
@@ -57,6 +62,12 @@ const MembershipCardPinScreen = () => {
         onSuccess={_handleFormSuccess}
         ref={formRef}
       />
+      <Modal visible={isLoading && isAutoFill}>
+        <View>
+          <ActivityIndicator animating size="large" color={colors.gold} />
+          <Text>Loading Card</Text>
+        </View>
+      </Modal>
     </FormPageContainer>
   );
 };

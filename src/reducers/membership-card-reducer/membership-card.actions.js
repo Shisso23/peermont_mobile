@@ -30,6 +30,8 @@ export const getMembershipCardBalanceAction = (formData) => {
     let tempEncryptedPin;
     const clearTextPin = formData.numeric;
 
+    dispatch(setMembershipCardIsLoading(true));
+
     return Promise.resolve(clearTextPin)
       .then(encryptionService.encryptPin)
       .then((encryptedPin) => {
@@ -42,7 +44,8 @@ export const getMembershipCardBalanceAction = (formData) => {
       .then((membershipCard) => {
         dispatch(replaceCurrentMembershipCardAction(membershipCard));
         dispatch(setCurrentMembershipCardPinAction(tempEncryptedPin));
-      });
+      })
+      .finally(() => dispatch(setMembershipCardIsLoading(false)));
   };
 };
 
