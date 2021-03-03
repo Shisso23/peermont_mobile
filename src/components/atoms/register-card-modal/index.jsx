@@ -1,24 +1,22 @@
 import React from 'react';
-import { View, Modal, TouchableOpacity, Image, Dimensions, StyleSheet } from 'react-native';
+import { Image, Dimensions, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import colors from '../../../../theme/theme.colors';
+import Modal from '../modal/modal';
 
 const { width: screenWidth } = Dimensions.get('window');
 const exampleCard = require('../../../assets/images/example-membership-card.png');
 
 const RegisterCardModal = ({ visible, setModalVisible }) => {
   return (
-    <Modal animationType="fade" transparent visible={visible}>
-      <TouchableOpacity onPress={setModalVisible} style={styles.closeIconContainer}>
-        <Icon name="times" color={colors.white} size={20} style={styles.closeIcon} />
-      </TouchableOpacity>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Image resizeMode="contain" source={exampleCard} style={styles.cardImage} />
-        </View>
-      </View>
+    <Modal
+      transparent
+      backgroundFade
+      hasCloseButton
+      visible={visible}
+      setModalVisible={setModalVisible}
+    >
+      <Image resizeMode="contain" source={exampleCard} style={styles.cardImage} />
     </Modal>
   );
 };
@@ -26,25 +24,6 @@ const RegisterCardModal = ({ visible, setModalVisible }) => {
 const styles = StyleSheet.create({
   cardImage: {
     width: screenWidth * 0.9,
-  },
-  centeredView: {
-    alignItems: 'center',
-    backgroundColor: colors.cardInfoBackGroundGrey,
-    flex: 1,
-    justifyContent: 'center',
-  },
-  closeIcon: {
-    marginHorizontal: 20,
-    paddingTop: 20,
-  },
-  closeIconContainer: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    zIndex: 1,
-  },
-  modalView: {
-    alignItems: 'center',
   },
 });
 
