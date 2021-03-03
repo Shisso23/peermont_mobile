@@ -12,16 +12,19 @@ import {
 } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { membershipCardPinModel } from '../../../models';
 import HealthSurveyScreen from '../health-survey/health-survey.screen';
+import { useDisableBackButtonWhileLoading } from '../../../hooks';
 
 const MembershipCardPinScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   const formRef = useRef(null);
-  const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
+  const { currentMembershipCard, isLoading } = useSelector(
+    (reducers) => reducers.membershipCardReducer,
+  );
 
   const _handleFormSubmission = (formData) => {
-    return dispatch(getMembershipCardBalanceAction(formData));
+    return dispatch(getMembershipCardBalanceAction(formData)).then(() => {});
   };
 
   const _handleFormSuccess = (formData) => {
@@ -32,6 +35,8 @@ const MembershipCardPinScreen = () => {
 
   const { cardPin = '' } = route.params;
   const initialValues = membershipCardPinModel({ card_pin: cardPin });
+
+  useDisableBackButtonWhileLoading(isLoading);
 
   useEffect(() => {
     const { current } = formRef;

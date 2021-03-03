@@ -1,13 +1,12 @@
 import React from 'react';
-import { StyleSheet, ActivityIndicator, ViewPropTypes } from 'react-native';
+import { StyleSheet, ActivityIndicator, ViewPropTypes, Pressable } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../../../theme/theme.colors';
 
 const TrashButton = ({ onPress, loading, containerStyle }) => {
   return !loading ? (
-    <TouchableOpacity onPress={onPress} containerStyle={containerStyle}>
+    <Pressable onPress={onPress} style={containerStyle}>
       <Icon
         name="trash"
         backgroundColor="transparent"
@@ -15,7 +14,7 @@ const TrashButton = ({ onPress, loading, containerStyle }) => {
         size={20}
         loading={loading}
       />
-    </TouchableOpacity>
+    </Pressable>
   ) : (
     <ActivityIndicator size="small" style={styles.loaderStyle} color={colors.danger} />
   );

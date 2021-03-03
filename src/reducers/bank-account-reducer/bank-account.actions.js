@@ -10,27 +10,40 @@ import { bankAccountService } from '../../services';
 export const getBankAccountsAction = () => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return bankAccountService.getBankAccounts().then((_bankAccounts) => {
-      dispatch(setBankAccountsAction(_bankAccounts));
-      dispatch(setIsLoadingAction(false));
-    });
+
+    return bankAccountService
+      .getBankAccounts()
+      .then((_bankAccounts) => {
+        dispatch(setBankAccountsAction(_bankAccounts));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const createBankAccountAction = (formData) => {
   return (dispatch) => {
-    return bankAccountService.createBankAccount(formData).then((newBankAccount) => {
-      dispatch(appendBankAccountAction(newBankAccount));
-      return _.get(newBankAccount, 'id');
-    });
+    dispatch(setIsLoadingAction(true));
+
+    return bankAccountService
+      .createBankAccount(formData)
+      .then((newBankAccount) => {
+        dispatch(appendBankAccountAction(newBankAccount));
+        return _.get(newBankAccount, 'id');
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const uploadBankAccountDocumentAction = (bankAccountId, formData) => {
   return (dispatch) => {
-    return bankAccountService.uploadBankAccountDocument(bankAccountId, formData).then(() => {
-      dispatch(getBankAccountsAction());
-    });
+    dispatch(setIsLoadingAction(true));
+
+    return bankAccountService
+      .uploadBankAccountDocument(bankAccountId, formData)
+      .then(() => {
+        dispatch(getBankAccountsAction());
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
