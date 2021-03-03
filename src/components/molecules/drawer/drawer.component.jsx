@@ -34,31 +34,37 @@ const DrawerComponent = (props) => {
           label="Home"
           icon={() => <DrawerIcon name="home" />}
           onPress={() => navigation.navigate('Home')}
+          labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="My Account"
           icon={() => <DrawerIcon name="user" />}
           onPress={() => navigation.navigate('MyAccount')}
+          labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Transactions"
           icon={() => <DrawerIcon name="history" />}
           onPress={() => navigation.push('Transactions')}
+          labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Visit Palacebet"
           icon={() => <DrawerIcon name="link" />}
           onPress={() => navigation.push('PalaceBet')}
+          labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Terms And Conditions"
           icon={() => <DrawerIcon name="file" />}
           onPress={() => navigation.push('TermsAndConditions')}
+          labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Privacy Policy"
           icon={() => <DrawerIcon name="shield-alt" />}
           onPress={() => navigation.push('PrivacyPolicy')}
+          labelStyle={styles.labelStyle}
         />
       </DrawerContentScrollView>
       <View style={safeAreaStyle}>
@@ -66,6 +72,7 @@ const DrawerComponent = (props) => {
           label="Sign Out"
           icon={() => <DrawerIcon name="sign-out-alt" />}
           onPress={_handleSignOut}
+          labelStyle={styles.labelStyle}
         />
         <View style={styles.alignRow}>
           <Text style={styles.smallText}>{`Version ${getVersion()}`}</Text>
@@ -88,11 +95,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   smallText: {
-    color: colors.primary,
+    color: colors.white,
     fontSize: 12,
   },
   wrapper: {
+    backgroundColor: colors.darkGrey,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
     flex: 1,
+  },
+  labelStyle: {
+    color: colors.white,
   },
 });
 

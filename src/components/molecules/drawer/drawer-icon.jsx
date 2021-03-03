@@ -6,7 +6,7 @@ import colors from '../../../../theme/theme.colors';
 
 const DrawerIcon = ({ name }) => (
   <View style={styles.wrapper}>
-    <Icon name={name} color={colors.primary} size={styles.iconSize} />
+    <Icon name={name} color={colors.white} size={styles.iconSize} />
   </View>
 );
 

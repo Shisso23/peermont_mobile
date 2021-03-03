@@ -7,7 +7,7 @@ import MyAccountScreen from '../../screens/app/my-account/my-account.screen';
 import AddCreditCardScreen from '../../screens/app/my-account/add-account/add-credit-card/add-credit-card.screen';
 
 import { DrawerComponent } from '../../components/molecules';
-import { globalScreenOptions } from '../../../theme/theme.styles';
+import { drawerStyle, globalScreenOptions } from '../../../theme/theme.styles';
 
 import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
 import UploadBankAccountDocumentScreen from '../../screens/app/my-account/add-account/add-bank-account-document/upload-bank-account-document.screen';
@@ -131,6 +131,7 @@ function DrawerNavigation() {
   return (
     <Drawer.Navigator
       screenOptions={globalScreenOptions}
+      drawerStyle={drawerStyle}
       drawerContent={(props) => <DrawerComponent {...props} />}
     >
       <Drawer.Screen
