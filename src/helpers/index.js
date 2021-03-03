@@ -6,6 +6,7 @@ export const exitAppOnHardwarePressListener = () => {
     BackHandler.removeEventListener('hardwareBackPress', hardwareBackPressExitApp);
   };
 };
+
 const hardwareBackPressExitApp = () => {
   Alert.alert(
     'You are about to exit the app',

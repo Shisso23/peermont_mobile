@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FormPageContainer } from '../../../../../components/containers';
 import { UploadDocumentForm } from '../../../../../components/forms';
 import { bankAccountDocumentModel } from '../../../../../models';
 import { uploadBankAccountDocumentAction } from '../../../../../reducers/bank-account-reducer/bank-account.actions';
-import { useBackButtonLoader } from '../../../../../hooks';
+import { useDisableBackButtonWhileLoading } from '../../../../../hooks';
 
 const UploadBankAccountDocumentScreen = () => {
   const navigation = useNavigation();
@@ -21,9 +21,8 @@ const UploadBankAccountDocumentScreen = () => {
     navigation.pop(2);
   };
 
-  useBackButtonLoader(() => {
-    navigation.pop(2);
-  });
+  const { isLoading } = useSelector((reducer) => reducer.bankAccountReducer);
+  useDisableBackButtonWhileLoading(isLoading, 2);
 
   return (
     <FormPageContainer>

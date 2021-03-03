@@ -97,6 +97,7 @@ const MyAccountScreen = () => {
 MyAccountScreen.propTypes = {};
 
 MyAccountScreen.defaultProps = {};
+
 const styles = StyleSheet.create({
   addPadding: {
     paddingHorizontal: 15,

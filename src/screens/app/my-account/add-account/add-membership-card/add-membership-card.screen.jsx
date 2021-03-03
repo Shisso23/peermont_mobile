@@ -1,16 +1,18 @@
 import React from 'react';
 import { Text } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { FormPageContainer } from '../../../../../components/containers';
 import { MembershipCardForm } from '../../../../../components/forms';
 import { membershipCardModel } from '../../../../../models';
 import { createMembershipCardAction } from '../../../../../reducers/membership-card-reducer/membership-card.actions';
+import { useDisableBackButtonWhileLoading } from '../../../../../hooks/disable-back-button-while-loading/use-disable-back-button-while-loading';
 
 const AddMembershipCardScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const _handleSubmission = (formData) => {
     return dispatch(createMembershipCardAction(formData));
   };
@@ -18,6 +20,9 @@ const AddMembershipCardScreen = () => {
   const _handleSuccess = () => {
     navigation.pop();
   };
+
+  const { isLoading } = useSelector((reducer) => reducer.membershipCardReducer);
+  useDisableBackButtonWhileLoading(isLoading, 2);
 
   return (
     <FormPageContainer>

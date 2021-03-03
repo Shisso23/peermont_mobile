@@ -8,16 +8,19 @@ import {
   replaceCurrentMembershipCardAction,
   setCurrentMembershipCardPinAction,
   setMembershipCardPinsAction,
+  setIsLoadingAction as setMembershipCardIsLoading,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
 
 export const getMembershipCardsAction = () => {
   return (dispatch) => {
     dispatch(setLoadingAction(true));
-    return membershipCardService.getMembershipCards().then((_membershipCards) => {
-      dispatch(setMembershipCardsAction(_membershipCards));
-      dispatch(setLoadingAction(false));
-    });
+    return membershipCardService
+      .getMembershipCards()
+      .then((_membershipCards) => {
+        dispatch(setMembershipCardsAction(_membershipCards));
+      })
+      .finally(() => dispatch(setLoadingAction(false)));
   };
 };
 
@@ -59,6 +62,8 @@ export const reloadCurrentMembershipCardBalanceAction = () => {
 
 export const createMembershipCardAction = (formData) => {
   return (dispatch) => {
+    dispatch(setMembershipCardIsLoading(true));
+
     const _createNewCard = (encryptedPin) =>
       membershipCardService.createMembershipCard({ encryptedPin, cardNumber: formData.cardNumber });
     const _storeNewlyCreatedMembershipCard = (newCard) =>
@@ -67,7 +72,8 @@ export const createMembershipCardAction = (formData) => {
     return Promise.resolve(formData.pin)
       .then(encryptionService.encryptPin)
       .then(_createNewCard)
-      .then(_storeNewlyCreatedMembershipCard);
+      .then(_storeNewlyCreatedMembershipCard)
+      .finally(() => dispatch(setMembershipCardIsLoading(false)));
   };
 };
 
