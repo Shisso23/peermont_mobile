@@ -28,11 +28,15 @@ import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-pol
 import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
 import TransactionsScreen from '../../screens/app/transactions/transactions';
 
+import { BackHeader, BurgerHeader } from '../../components/headers';
+
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const AppNavigator = () => (
-  <AppStack.Navigator screenOptions={globalScreenOptions}>
+  <AppStack.Navigator
+    screenOptions={{ ...globalScreenOptions, headerLeft: (props) => <BackHeader {...props} /> }}
+  >
     <AppStack.Screen
       name="App Home"
       component={DrawerNavigation}
@@ -130,7 +134,7 @@ const AppNavigator = () => (
 function DrawerNavigation() {
   return (
     <Drawer.Navigator
-      screenOptions={globalScreenOptions}
+      screenOptions={{ ...globalScreenOptions, headerLeft: (props) => <BurgerHeader {...props} /> }}
       drawerStyle={drawerStyle}
       drawerContent={(props) => <DrawerComponent {...props} />}
     >
