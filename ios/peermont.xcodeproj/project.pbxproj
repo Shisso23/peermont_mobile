@@ -16,6 +16,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* peermontTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* peermontTests.m */; };
 		303EF0D45BDB51145FA7640A /* libPods-peermont-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9465EDEDE33CD9A3605A842D /* libPods-peermont-tvOSTests.a */; };
+		3BC74B0525EF79F200D03E65 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BC74B0325EF79F200D03E65 /* OpenSans-Bold.ttf */; };
+		3BC74B0625EF79F200D03E65 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BC74B0425EF79F200D03E65 /* OpenSans-Regular.ttf */; };
 		57E3CA65ADD0FBB2E24C0108 /* libPods-peermont-peermontTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC0EC0AC028F83449C5947E /* libPods-peermont-peermontTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		D69636F225826465009BA9BF /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69636F125826465009BA9BF /* BootSplash.storyboard */; };
@@ -55,6 +57,8 @@
 		2D02E47B1E0B4A5D006451C7 /* peermont-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peermont-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* peermont-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "peermont-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32417F5660DC4D74AD2F761E /* Pods-peermont-peermontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont-peermontTests.debug.xcconfig"; path = "Target Support Files/Pods-peermont-peermontTests/Pods-peermont-peermontTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3BC74B0325EF79F200D03E65 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		3BC74B0425EF79F200D03E65 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		40D4A94AF9A02047015D126A /* Pods-peermont.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont.debug.xcconfig"; path = "Target Support Files/Pods-peermont/Pods-peermont.debug.xcconfig"; sourceTree = "<group>"; };
 		7AC0EC0AC028F83449C5947E /* libPods-peermont-peermontTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-peermont-peermontTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = peermont/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -168,6 +172,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7D1BFADDC8034C08BCB3C6A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3BC74B0325EF79F200D03E65 /* OpenSans-Bold.ttf */,
+				3BC74B0425EF79F200D03E65 /* OpenSans-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +197,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				944E7691B358455664950123 /* Pods */,
+				7D1BFADDC8034C08BCB3C6A6 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -385,8 +399,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69636F225826465009BA9BF /* BootSplash.storyboard in Resources */,
+				3BC74B0525EF79F200D03E65 /* OpenSans-Bold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3BC74B0625EF79F200D03E65 /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
