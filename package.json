@@ -86,5 +86,10 @@
       "npx prettier --write",
       "eslint --ext .js,.jsx --fix-dry-run"
     ]
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }
