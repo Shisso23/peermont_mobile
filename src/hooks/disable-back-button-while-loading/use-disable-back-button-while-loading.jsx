@@ -1,9 +1,9 @@
 import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { HeaderBackButton } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
 
 import { globalScreenOptions } from '../../../theme/theme.styles';
+import { BackHeader } from '../../components/headers';
 
 export const useDisableBackButtonWhileLoading = (isLoading, backPopAmount) => {
   const navigation = useNavigation();
