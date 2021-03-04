@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
+
 import { NumericalInputForm } from '../../../../components/forms';
 import {
   verifyRegisterOtpAction,
@@ -10,10 +11,12 @@ import {
 } from '../../../../reducers/user-auth-reducer/user-auth.actions';
 import { otpModel } from '../../../../models';
 import { FormPageContainer } from '../../../../components/containers';
+import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const RegisterOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { isLoading } = useSelector((reducer) => reducer.userAuthReducer);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyRegisterOtpAction(formData));
@@ -25,6 +28,8 @@ const RegisterOtpScreen = () => {
   const _handleResendOtp = () => {
     dispatch(registerResendOtpAction());
   };
+
+  useDisableBackButtonWhileLoading(isLoading);
 
   return (
     <FormPageContainer>

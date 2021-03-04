@@ -12,6 +12,7 @@ import { useDisableBackButtonWhileLoading } from '../../../../../hooks/disable-b
 const AddMembershipCardScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { isLoading } = useSelector((reducer) => reducer.membershipCardReducer);
 
   const _handleSubmission = (formData) => {
     return dispatch(createMembershipCardAction(formData));
@@ -21,7 +22,6 @@ const AddMembershipCardScreen = () => {
     navigation.pop();
   };
 
-  const { isLoading } = useSelector((reducer) => reducer.membershipCardReducer);
   useDisableBackButtonWhileLoading(isLoading, 2);
 
   return (

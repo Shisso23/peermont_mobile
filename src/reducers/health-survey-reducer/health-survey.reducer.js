@@ -2,8 +2,8 @@ import CreateAction from '../action-utilities/action-creator';
 
 const reducerName = 'healthSurvey';
 
-const isLoading = CreateAction(reducerName, 'SET_IS_LOADING');
-export const setIsLoadingAction = isLoading.action;
+const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
+export const setIsLoadingAction = setIsLoading.action;
 
 const setHealthSurveyQuestions = CreateAction(reducerName, 'SET_HEALTH_SURVEY_QUESTIONS');
 export const setHealthSurveyQuestionsAction = setHealthSurveyQuestions.action;
@@ -19,7 +19,7 @@ const initialState = {
 
 export default function healthSurveyReducer(state = initialState, action) {
   switch (action.type) {
-    case isLoading.actionType:
+    case setIsLoading.actionType:
       return {
         ...state,
         isLoading: action.payload,

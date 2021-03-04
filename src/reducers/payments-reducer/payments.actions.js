@@ -17,6 +17,8 @@ export const initiateTopUpAction = (topUpFormData) => {
 
 const eftTopUpAction = (topUpForm) => {
   return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { currentMembershipCard } = getState().membershipCardReducer;
     return paymentService
       .createEft()
@@ -31,12 +33,15 @@ const eftTopUpAction = (topUpForm) => {
       )
       .then((paymentId) => {
         dispatch(setPendingPaymentIdAction(paymentId));
-      });
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 const creditCardTopUpAction = (topUpForm) => {
   return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { currentMembershipCard } = getState().membershipCardReducer;
     return paymentService
       .createPayment({
@@ -48,12 +53,15 @@ const creditCardTopUpAction = (topUpForm) => {
       })
       .then((paymentId) => {
         dispatch(setPendingPaymentIdAction(paymentId));
-      });
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const performPayoutAction = (payOutForm) => {
   return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { currentMembershipCard } = getState().membershipCardReducer;
     return paymentService
       .createPayment({
@@ -65,26 +73,31 @@ export const performPayoutAction = (payOutForm) => {
       })
       .then((paymentId) => {
         dispatch(setPendingPaymentIdAction(paymentId));
-      });
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const sendPaymentOtpAction = (sendTo) => {
   return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { pendingPaymentId } = getState().paymentReducer;
-    return paymentService.sendPaymentOtp(pendingPaymentId, sendTo);
+    return paymentService
+      .sendPaymentOtp(pendingPaymentId, sendTo)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const verifyPaymentOtpAction = (paymentOtpForm) => {
-  return (_dispatch, getState) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { pendingPaymentId } = getState().paymentReducer;
     const { currentMembershipCardPin } = getState().membershipCardReducer;
-    return paymentService.verifyPaymentOtp(
-      paymentOtpForm,
-      pendingPaymentId,
-      currentMembershipCardPin,
-    );
+    return paymentService
+      .verifyPaymentOtp(paymentOtpForm, pendingPaymentId, currentMembershipCardPin)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 

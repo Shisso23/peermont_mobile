@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useEffect } from 'react';
-import { ActivityIndicator, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
@@ -23,17 +22,13 @@ export const useDisableBackButtonWhileLoading = (isLoading, backPopAmount) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () =>
-        isLoading ? (
-          <ActivityIndicator
-            animating
-            size="small"
-            color={globalScreenOptions.headerTintColor}
-            style={styles.loader}
-          />
-        ) : (
-          <HeaderBackButton onPress={onBack} tintColor={globalScreenOptions.headerTintColor} />
-        ),
+      headerLeft: () => (
+        <HeaderBackButton
+          onPress={onBack}
+          tintColor={globalScreenOptions.headerTintColor}
+          disabled={isLoading}
+        />
+      ),
     });
   }, [isLoading]);
 
@@ -42,10 +37,6 @@ export const useDisableBackButtonWhileLoading = (isLoading, backPopAmount) => {
     navigation.addListener('beforeRemove', _checkGoBack);
   }, [isLoading]);
 };
-
-const styles = StyleSheet.create({
-  loader: { marginLeft: 12, marginTop: 2 },
-});
 
 useDisableBackButtonWhileLoading.propTypes = {
   isLoading: PropTypes.bool.isRequired,

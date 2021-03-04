@@ -8,10 +8,11 @@ import { CompletedHealthSurvey } from '../../../components/molecules';
 import { FormPageContainer, PageContainer } from '../../../components/containers';
 import { HealthSurveyForm } from '../../../components/forms';
 import { constructHealthSurveyAnswerModels } from '../../../models';
+import { useDisableBackButtonWhileLoading } from '../../../hooks';
 
 const HealthSurveyScreen = () => {
   const dispatch = useDispatch();
-  const { healthSurveyQuestions, lastHealthSurvey } = useSelector(
+  const { healthSurveyQuestions, lastHealthSurvey, isLoading } = useSelector(
     (reducers) => reducers.healthSurveyReducer,
   );
 
@@ -20,6 +21,8 @@ const HealthSurveyScreen = () => {
   };
 
   const displayHealthSurveyForm = _.isNull(lastHealthSurvey) || lastHealthSurvey?.hasExpired;
+
+  useDisableBackButtonWhileLoading(isLoading);
 
   return displayHealthSurveyForm ? (
     <FormPageContainer>

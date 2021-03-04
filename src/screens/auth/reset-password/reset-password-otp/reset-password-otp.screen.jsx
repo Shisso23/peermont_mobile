@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { Button, Divider } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+
 import { NumericalInputForm } from '../../../../components/forms';
 import {
   verifyResetPasswordOtpAction,
@@ -10,10 +11,13 @@ import {
 } from '../../../../reducers/user-auth-reducer/user-auth.actions';
 import { otpModel } from '../../../../models';
 import { FormPageContainer } from '../../../../components/containers';
+import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const ResetPasswordOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { isLoading } = useSelector((reducer) => reducer.userAuthReducer);
+
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyResetPasswordOtpAction(formData));
   };
@@ -25,6 +29,9 @@ const ResetPasswordOtpScreen = () => {
   const _handleFormSuccess = () => {
     navigation.replace('ResetPasswordSetPassword');
   };
+
+  useDisableBackButtonWhileLoading(isLoading);
+
   return (
     <FormPageContainer>
       <Text>Please enter otp</Text>
