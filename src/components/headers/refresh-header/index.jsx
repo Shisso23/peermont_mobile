@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 import colors from '../../../../theme/theme.colors';
 
-const RefreshHeader = ({ refreshFunction, disable }) => {
+const RefreshHeader = ({ refreshFunction, disabled }) => {
   return (
-    <TouchableOpacity onPress={refreshFunction} disable={disable}>
+    <TouchableOpacity onPress={refreshFunction} disabled={disabled}>
       <Icon
         type="font-awesome-5"
         name="redo-alt"
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 
 RefreshHeader.propTypes = {
   refreshFunction: PropTypes.func.isRequired,
-  disable: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 RefreshHeader.defaultProps = {
-  disable: false,
+  disabled: false,
 };
 
 export default RefreshHeader;

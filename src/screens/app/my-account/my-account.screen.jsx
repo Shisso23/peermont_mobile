@@ -40,7 +40,7 @@ const MyAccountScreen = () => {
 
   useRefreshHeaderButton(() => {
     dispatch(getUserAction());
-  });
+  }, loading);
 
   return !loading ? (
     <ScrollContainer>
