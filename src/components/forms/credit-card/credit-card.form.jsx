@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input } from 'react-native-elements';
+import { Button, Input, Divider } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import {
   creditCardNumberSchema,
@@ -143,6 +143,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 )}
               />
             </View>
+            <Divider />
             <Button title="Submit" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );

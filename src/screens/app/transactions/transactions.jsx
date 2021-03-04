@@ -1,10 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
 import _ from 'lodash';
 
-import { PageContainer } from '../../../components/containers';
+import { ScrollContainer } from '../../../components/containers';
 import { LoadingComponent, Transaction } from '../../../components';
 import { getTransactions } from '../../../reducers/payments-reducer/payments.actions';
 
@@ -19,12 +18,11 @@ const TransactionsScreen = () => {
   );
 
   return !isLoading ? (
-    <PageContainer>
-      <Text h4>Mobile App Transactions</Text>
+    <ScrollContainer>
       {transactions.map((transaction) => {
         return <Transaction transaction={transaction} key={_.get(transaction, 'id')} />;
       })}
-    </PageContainer>
+    </ScrollContainer>
   ) : (
     <LoadingComponent />
   );

@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ListItem, Text } from 'react-native-elements';
+import { StyleSheet } from 'react-native';
+import { ListItem } from 'react-native-elements';
 import _ from 'lodash';
 import Moment from 'moment';
 import PropTypes from 'prop-types';
-
-import colors from '../../../../theme/theme.colors';
 
 const Transaction = ({ transaction }) => {
   const getPayableNumber = (item) => {
@@ -28,16 +26,12 @@ const Transaction = ({ transaction }) => {
     <ListItem key={_.get(transaction, 'id')} bottomDivider>
       <ListItem.Content>
         <ListItem.Title>{payableType}</ListItem.Title>
-        <View style={styles.container}>
-          <View>
-            <ListItem.Subtitle>{updatedAt}</ListItem.Subtitle>
-            <ListItem.Subtitle>{payable}</ListItem.Subtitle>
-          </View>
-          <View style={styles.alignRight}>
-            <Text style={styles.amountStyle}>R{amount}</Text>
-            <Text style={styles.statusStyle}>{status}</Text>
-          </View>
-        </View>
+        <ListItem.Subtitle>{updatedAt}</ListItem.Subtitle>
+        {payable && <ListItem.Subtitle>{payable}</ListItem.Subtitle>}
+      </ListItem.Content>
+      <ListItem.Content style={styles.alignRight}>
+        <ListItem.Title h4>{amount}</ListItem.Title>
+        <ListItem.Subtitle>{status}</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
   );
@@ -54,18 +48,6 @@ Transaction.defaultProps = {
 const styles = StyleSheet.create({
   alignRight: {
     alignItems: 'flex-end',
-  },
-  amountStyle: {
-    fontWeight: 'bold',
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  statusStyle: {
-    color: colors.darkGrey,
   },
 });
 

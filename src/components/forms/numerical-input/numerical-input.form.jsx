@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -6,7 +7,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { getFormError } from '../form-utils';
-import { flashService } from '../../../services';
+// import { flashService } from '../../../services';
+import { custom } from '../../../../theme/theme.styles';
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
 
@@ -25,10 +27,10 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
         actions.setSubmitting(false);
         if (_.get(error, 'statusCode') === 422) {
           const apiErrors = error.errors;
-          flashService.error('Form Submission Error');
+          // flashService.error('Form Submission Error');
           actions.resetForm({ status: { apiErrors } });
         } else {
-          flashService.error(error.message);
+          // flashService.error(error.message);
           actions.setFieldError('numeric', error.message);
           actions.resetForm();
         }
@@ -48,19 +50,37 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
         const error = (name) => getFormError(name, { touched, status, errors });
         return (
           <>
-            {isSubmitting && <Text>loading </Text>}
             <NumericInput
               value={values.numeric}
               onChange={(newNumeric) => setFieldValue('numeric', newNumeric)}
               cellCount={4}
               handleSubmit={handleSubmit}
-              errorMessage={error('numeric')}
             />
+            <View style={styles.messageStyle}>
+              {isSubmitting && <Text style={styles.submittingStyle}>Submitting...</Text>}
+              {error('numeric') && (
+                <Text style={[custom.errorStyle, styles.errorStyle]}>{error('numeric')}</Text>
+              )}
+            </View>
           </>
         );
       }}
     </Formik>
   );
+});
+
+const styles = StyleSheet.create({
+  errorStyle: {
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  messageStyle: {
+    height: 20,
+  },
+  submittingStyle: {
+    marginTop: 10,
+    textAlign: 'center',
+  },
 });
 
 NumericalInputForm.propTypes = {

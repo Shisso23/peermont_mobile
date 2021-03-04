@@ -1,6 +1,6 @@
 export default {
   fontFamily: 'OpenSans-Regular',
   fontSize: 16,
-  fontFamilySecondary: 'OpenSans-Regular',
+  fontFamilySecondary: 'OpenSans-Bold',
   borderRadius: 10,
 };

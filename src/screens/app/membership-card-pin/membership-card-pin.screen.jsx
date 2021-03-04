@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
 import { Text } from 'react-native-elements';
+import { ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import _ from 'lodash';
 
 import { NumericalInputForm } from '../../../components/forms';
-import { FormPageContainer } from '../../../components/containers';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
 import {
   getMembershipCardBalanceAction,
   rememberCardPin,
@@ -16,6 +16,7 @@ import HealthSurveyScreen from '../health-survey/health-survey.screen';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
 import { Modal } from '../../../components/atoms';
 import colors from '../../../../theme/theme.colors';
+import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCardPinScreen = () => {
   const dispatch = useDispatch();
@@ -51,24 +52,29 @@ const MembershipCardPinScreen = () => {
   }, [cardPin]);
 
   return (
-    <FormPageContainer>
-      <Text h4>Insert Winners Circle Pin</Text>
-      <Text>
-        Please enter your 4 digit membership card pin for: {currentMembershipCard.cardNumber}
-      </Text>
-      <NumericalInputForm
-        submitForm={_handleFormSubmission}
-        initialValues={initialValues}
-        onSuccess={_handleFormSuccess}
-        ref={formRef}
-      />
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Enter your Peermont Winners Circle card PIN</Text>
+        <Text style={custom.centerSubtitle}>
+          Please enter your 4 digit PIN for Peermont Winners Circle card number{' '}
+          {currentMembershipCard.cardNumber}.
+        </Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <NumericalInputForm
+          submitForm={_handleFormSubmission}
+          initialValues={initialValues}
+          onSuccess={_handleFormSuccess}
+          ref={formRef}
+        />
+      </PaddedContainer>
       <Modal visible={isLoading && isAutoFill}>
         <View>
           <ActivityIndicator animating size="large" color={colors.gold} />
           <Text>Loading Card</Text>
         </View>
       </Modal>
-    </FormPageContainer>
+    </KeyboardScrollContainer>
   );
 };
 

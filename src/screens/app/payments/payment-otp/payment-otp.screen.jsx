@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Button, Text } from 'react-native-elements';
+import { Button, Text, Divider } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -10,6 +9,8 @@ import {
 } from '../../../../reducers/payments-reducer/payments.actions';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
+import { custom } from '../../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const PaymentOtpScreen = () => {
@@ -27,23 +28,32 @@ const PaymentOtpScreen = () => {
     navigation.replace(afterOtpRoute);
   };
 
-  const _handleResendOTP = () => {
+  const _handleResendOtp = () => {
     return dispatch(sendPaymentOtpAction(''));
   };
 
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <View>
-      <Text h4>OTP</Text>
-      <Text>Please enter the OTP that we have sent to your device to proceed.</Text>
-      <NumericalInputForm
-        submitForm={_handleFormSubmission}
-        initialValues={otpModel()}
-        onSuccess={_handleFormSuccess}
-      />
-      <Button title="Resend OTP" onPress={_handleResendOTP} />
-    </View>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>One Time Pin</Text>
+        <Text style={custom.centerSubtitle}>
+          We have sent a SMS with a One Time Pin(OTP) to your mobile number for validation.
+        </Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <NumericalInputForm
+          submitForm={_handleFormSubmission}
+          initialValues={otpModel()}
+          onSuccess={_handleFormSuccess}
+        />
+      </PaddedContainer>
+      <Divider />
+      <PaddedContainer>
+        <Button title="Resend OTP" onPress={_handleResendOtp} />
+      </PaddedContainer>
+    </KeyboardScrollContainer>
   );
 };
 

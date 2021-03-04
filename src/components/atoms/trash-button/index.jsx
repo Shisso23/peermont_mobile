@@ -10,7 +10,7 @@ const TrashButton = ({ onPress, loading, containerStyle }) => {
       <Icon
         name="trash"
         backgroundColor="transparent"
-        color={colors.danger}
+        color={colors.grey}
         size={20}
         loading={loading}
       />
@@ -22,7 +22,7 @@ const TrashButton = ({ onPress, loading, containerStyle }) => {
 
 const styles = StyleSheet.create({
   loaderStyle: {
-    marginRight: 15,
+    marginRight: 0,
     marginTop: 2,
   },
 });

@@ -3,11 +3,12 @@ import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FormPageContainer } from '../../../../../components/containers';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../../../components/containers';
 import { BankAccountForm } from '../../../../../components/forms';
 import { bankAccountModel } from '../../../../../models';
 import { createBankAccountAction } from '../../../../../reducers/bank-account-reducer/bank-account.actions';
 import { useDisableBackButtonWhileLoading } from '../../../../../hooks';
+import { custom } from '../../../../../../theme/theme.styles';
 
 const AddBankAccountScreen = () => {
   const navigation = useNavigation();
@@ -27,15 +28,22 @@ const AddBankAccountScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <FormPageContainer>
-      <Text h4>Add Account</Text>
-      <Text>Please provide your account details</Text>
-      <BankAccountForm
-        submitForm={_handleFormSubmit}
-        initialValues={bankAccountModel()}
-        onSuccess={_handleFormSuccess}
-      />
-    </FormPageContainer>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Add Bank Account</Text>
+        <Text style={custom.centerSubtitle}>
+          Enter your bank account details. Approval may take 48 hours to process, not including
+          weekends and public holidays.
+        </Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <BankAccountForm
+          submitForm={_handleFormSubmit}
+          initialValues={bankAccountModel()}
+          onSuccess={_handleFormSuccess}
+        />
+      </PaddedContainer>
+    </KeyboardScrollContainer>
   );
 };
 

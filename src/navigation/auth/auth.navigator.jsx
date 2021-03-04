@@ -24,7 +24,8 @@ const AuthNavigator = () => {
         name="SignIn"
         component={SignInScreen}
         options={{
-          title: 'Login',
+          headerShown: false,
+          title: 'Log In',
         }}
       />
 
@@ -47,12 +48,12 @@ const AuthNavigator = () => {
       <AuthStack.Screen
         name="RegisterOtp"
         component={RegisterOtpScreen}
-        options={{ title: 'Register Otp' }}
+        options={{ title: 'One Time Pin' }}
       />
       <AuthStack.Screen
         name="RegisterSetPassword"
         component={RegisterSetPasswordScreen}
-        options={{ title: 'Create Password' }}
+        options={{ title: 'Set Password' }}
       />
       <AuthStack.Screen
         name="RegisterError"
@@ -67,7 +68,7 @@ const AuthNavigator = () => {
       <AuthStack.Screen
         name="ResetPasswordOtp"
         component={ResetPasswordOtpScreen}
-        options={{ title: 'Otp' }}
+        options={{ title: 'One Time Pin' }}
       />
       <AuthStack.Screen
         name="ResetPasswordSetPassword"

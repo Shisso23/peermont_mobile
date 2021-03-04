@@ -3,12 +3,24 @@ import colors from './theme.colors';
 import variables from './theme.variables';
 
 export const custom = {
+  centerTitle: {
+    color: colors.gold,
+    fontFamily: variables.fontFamilySecondary,
+    fontSize: 28,
+    fontWeight: 'normal',
+    marginBottom: 5,
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  centerSubtitle: {
+    textAlign: 'center',
+  },
   errorStyle: {
     fontFamily: variables.fontFamily,
     color: colors.danger,
     fontSize: 15,
     height: 26,
-    marginLeft: 10,
+    marginLeft: 0,
     paddingTop: 0,
     paddingBottom: 0,
     marginTop: 0,
@@ -16,9 +28,6 @@ export const custom = {
   },
   selectedItemStyle: {
     backgroundColor: colors.gold,
-  },
-  trashButtonContainer: {
-    marginRight: 25,
   },
 };
 
@@ -33,13 +42,14 @@ export const globalScreenOptions = {
     },
     shadowColor: 'transparent',
     elevation: 0,
+    borderBottomColor: colors.gold,
+    borderBottomWidth: 4,
   },
   headerTitleStyle: {
     fontFamily: variables.fontFamilySecondary,
     color: colors.white,
   },
   headerTintColor: colors.white,
-  cardStyle: { backgroundColor: colors.background },
 };
 
 export const drawerStyle = {

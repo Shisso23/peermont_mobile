@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { SetPasswordForm } from '../../../../components/forms';
 import { setPasswordModel } from '../../../../models';
 import { resetPasswordAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
-import { FormPageContainer } from '../../../../components/containers';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
+import { custom } from '../../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const ResetPasswordSetPasswordScreen = () => {
@@ -25,14 +26,18 @@ const ResetPasswordSetPasswordScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <FormPageContainer>
-      <Text>Hello, Set new password</Text>
-      <SetPasswordForm
-        initialValues={setPasswordModel()}
-        submitForm={_handleFormSubmission}
-        onSuccess={_handleFormSuccess}
-      />
-    </FormPageContainer>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Enter your new password</Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <SetPasswordForm
+          initialValues={setPasswordModel()}
+          submitForm={_handleFormSubmission}
+          onSuccess={_handleFormSuccess}
+        />
+      </PaddedContainer>
+    </KeyboardScrollContainer>
   );
 };
 

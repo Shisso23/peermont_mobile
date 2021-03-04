@@ -5,9 +5,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import _ from 'lodash';
 
 import { TopUpForm } from '../../../../components/forms';
-import { FormPageContainer } from '../../../../components/containers';
+import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
 import { initiateTopUpAction } from '../../../../reducers/payments-reducer/payments.actions';
 import { topUpModel } from '../../../../models';
+import { custom } from '../../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const TopUpScreen = () => {
@@ -29,15 +30,23 @@ const TopUpScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <FormPageContainer>
-      <Text h4>Top Up</Text>
-      <Text>Balance: {_.get(route, 'params.balance')}</Text>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Top Up</Text>
+        <Text style={custom.centerSubtitle}>
+          Please enter an amount and select a payment method to top up your card.
+        </Text>
+        <Text h4 style={custom.centerSubtitle}>
+          Your balance is {_.get(route, 'params.balance')}
+        </Text>
+      </PaddedContainer>
+
       <TopUpForm
         initialValues={topUpModel()}
         onSuccess={_handleFormSuccess}
         submitForm={_handleFormSubmit}
       />
-    </FormPageContainer>
+    </KeyboardScrollContainer>
   );
 };
 

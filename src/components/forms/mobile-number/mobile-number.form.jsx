@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Button, Input } from 'react-native-elements';
+import { Button, Input, Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
 import { flashService, infoPopUpService } from '../../../services';
@@ -83,7 +83,8 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
                 />
               )}
             />
-            <Button title="Submit" onPress={handleSubmit} loading={isSubmitting} />
+            <Divider />
+            <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
       }}

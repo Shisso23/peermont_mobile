@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { Divider, Text } from 'react-native-elements';
+import { Text, Divider, ListItem } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import _ from 'lodash';
 
-import { PageContainer } from '../../../components/containers';
+import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import {
   LoadingComponent,
   MembershipCard,
@@ -38,55 +38,69 @@ const MyAccountScreen = () => {
   );
 
   return !loading ? (
-    <PageContainer>
-      <Text h3>My Account</Text>
-      <View style={styles.rowAlign}>
-        <Text h4>Winners Circle Cards</Text>
-        <AddButton
-          onPress={() => navigation.navigate('AddMembershipCard')}
-          containerStyle={styles.addPadding}
-        />
-      </View>
-
+    <ScrollContainer>
       <Divider />
+      <PaddedContainer>
+        <View style={styles.rowAlign}>
+          <Text h3>Winners Circle Cards</Text>
+          <AddButton
+            onPress={() => navigation.navigate('AddMembershipCard')}
+            containerStyle={styles.addPadding}
+          />
+        </View>
+      </PaddedContainer>
       {_.isEmpty(membershipCards) ? (
-        <Text>No membership cards found</Text>
+        <ListItem>
+          <ListItem.Content>
+            <ListItem.Title>You don&#39;t have any Winners Circle Cards setup</ListItem.Title>
+            <ListItem.Subtitle>Click the plus button above to add a card.</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
       ) : (
         membershipCards.map((card) => {
           return <MembershipCard key={card.id} card={card} hasDelete />;
         })
       )}
 
-      <Divider />
-      <View style={styles.rowAlign}>
-        <Text h4>Credit Cards</Text>
-        <AddButton
-          onPress={() => navigation.navigate('AddCreditCard')}
-          containerStyle={styles.addPadding}
-        />
-      </View>
-
-      <Divider />
+      <PaddedContainer>
+        <View style={styles.rowAlign}>
+          <Text h3>Credit Cards</Text>
+          <AddButton
+            onPress={() => navigation.navigate('AddCreditCard')}
+            containerStyle={styles.addPadding}
+          />
+        </View>
+      </PaddedContainer>
       {_.isEmpty(creditCards) ? (
-        <Text>No credit cards found</Text>
+        <ListItem>
+          <ListItem.Content>
+            <ListItem.Title>You don&#39;t have any credit cards setup</ListItem.Title>
+            <ListItem.Subtitle>Click the plus button above to add a credit card.</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
       ) : (
         creditCards.map((item) => {
           return <CreditCard key={item.id} card={item} hasDelete />;
         })
       )}
-
-      <Divider />
-      <View style={styles.rowAlign}>
-        <Text h4>Bank Accounts</Text>
-        <AddButton
-          onPress={() => navigation.navigate('AddBankAccount')}
-          containerStyle={styles.addPadding}
-        />
-      </View>
-
-      <Divider />
+      <PaddedContainer>
+        <View style={styles.rowAlign}>
+          <Text h3>Bank Accounts</Text>
+          <AddButton
+            onPress={() => navigation.navigate('AddBankAccount')}
+            containerStyle={styles.addPadding}
+          />
+        </View>
+      </PaddedContainer>
       {_.isEmpty(bankAccounts) ? (
-        <Text>No bank account found</Text>
+        <ListItem>
+          <ListItem.Content>
+            <ListItem.Title>You don&#39;t have any bank accounts setup</ListItem.Title>
+            <ListItem.Subtitle>
+              Click the plus button above to add a bank account.
+            </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
       ) : (
         bankAccounts.map((item) => {
           return (
@@ -100,7 +114,7 @@ const MyAccountScreen = () => {
           );
         })
       )}
-    </PageContainer>
+    </ScrollContainer>
   ) : (
     <LoadingComponent />
   );
@@ -112,7 +126,7 @@ MyAccountScreen.defaultProps = {};
 
 const styles = StyleSheet.create({
   addPadding: {
-    paddingHorizontal: 15,
+    paddingLeft: 10,
   },
   rowAlign: {
     flexDirection: 'row',

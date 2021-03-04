@@ -3,13 +3,14 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, ListItem, Divider } from 'react-native-elements';
+import { Button, Input, Text, ListItem } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
 import { paymentAmountSchema, topupCreditCardIdSchema } from '../form-validaton-schemas';
+import { PaddedContainer } from '../../containers';
 
 import { custom } from '../../../../theme/theme.styles';
 import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
@@ -71,25 +72,26 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
         const error = (name) => getFormError(name, { touched, status, errors });
         return (
           <>
-            <Input
-              value={values.amount}
-              onChangeText={handleChange('amount')}
-              label="Amount"
-              onBlur={handleBlur('amount')}
-              errorMessage={error('amount')}
-              placeholder="0.00"
-              keyboardType="decimal-pad"
-              leftIcon={CurrencyIcon}
-            />
-            <View style={styles.rowAlign}>
-              <Text h4>Payment Method</Text>
-              <AddButton onPress={() => navigation.navigate('AddCreditCard')} />
-            </View>
-            <Divider />
+            <PaddedContainer>
+              <Input
+                value={values.amount}
+                onChangeText={handleChange('amount')}
+                label="Amount"
+                onBlur={handleBlur('amount')}
+                errorMessage={error('amount')}
+                placeholder="0.00"
+                keyboardType="decimal-pad"
+                leftIcon={CurrencyIcon}
+              />
+              <View style={styles.rowAlign}>
+                <Text h4>Payment Method</Text>
+                <AddButton onPress={() => navigation.navigate('AddCreditCard')} />
+              </View>
+            </PaddedContainer>
             {!isLoading ? (
-              <>
-                {!_.isEmpty(creditCards) &&
-                  creditCards.map((creditCard) => {
+              !_.isEmpty(creditCards) ? (
+                <>
+                  {creditCards.map((creditCard) => {
                     const shouldHighlight = values.creditCardId === creditCard.id && !values.isEft;
                     return (
                       <CreditCard
@@ -103,24 +105,35 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                       />
                     );
                   })}
-                <ListItem
-                  bottomDivider
-                  disabledStyle={custom.selectedItemStyle}
-                  disabled={values.isEft}
-                  onPress={() => setFieldValue('isEft', true)}
-                >
-                  <Icon name="money-bill" size={40} color={colors.primary} />
+                  <ListItem
+                    bottomDivider
+                    disabledStyle={custom.selectedItemStyle}
+                    disabled={values.isEft}
+                    onPress={() => setFieldValue('isEft', true)}
+                  >
+                    <Icon name="money-bill" size={40} color={colors.primary} />
+                    <ListItem.Content>
+                      <ListItem.Title>Instant EFT</ListItem.Title>
+                    </ListItem.Content>
+                  </ListItem>
+                </>
+              ) : (
+                <ListItem>
                   <ListItem.Content>
-                    <ListItem.Title>Eft </ListItem.Title>
+                    <ListItem.Title>You don&#39;t have any credit cards setup</ListItem.Title>
+                    <ListItem.Subtitle>
+                      Click the plus button above to add a credit card.
+                    </ListItem.Subtitle>
                   </ListItem.Content>
                 </ListItem>
-              </>
+              )
             ) : (
               <LoadingComponent />
             )}
-            <Text style={custom.errorStyle}> {error('creditCardId')}</Text>
-
-            <Button title="Top Up" onPress={handleSubmit} loading={isSubmitting} />
+            <Text style={[custom.errorStyle, styles.errorStyle]}> {error('creditCardId')}</Text>
+            <PaddedContainer>
+              <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+            </PaddedContainer>
           </>
         );
       }}
@@ -139,6 +152,9 @@ TopUpForm.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+  errorStyle: {
+    paddingLeft: 12,
+  },
   rowAlign: {
     flexDirection: 'row',
     justifyContent: 'space-between',

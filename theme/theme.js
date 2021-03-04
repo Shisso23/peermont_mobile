@@ -4,28 +4,32 @@ import { custom } from './theme.styles';
 
 const theme = {
   colors: {
-    primary: colors.primary,
+    primary: colors.gold,
   },
   Text: {
     style: {
       fontFamily: variables.fontFamily,
       fontSize: variables.fontSize,
     },
-    h1style: {
+    h1Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontSize: 30,
+      fontSize: 28,
+      color: colors.gold,
     },
-    h2style: {
+    h2Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontSize: 26,
+      fontWeight: 'normal',
+      fontSize: 24,
     },
-    h3style: {
+    h3Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontSize: 22,
+      fontWeight: 'normal',
+      fontSize: 20,
     },
-    h4style: {
+    h4Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontSize: 18,
+      fontWeight: 'normal',
+      fontSize: 16,
     },
   },
   Button: {
@@ -33,10 +37,14 @@ const theme = {
     color: colors.primary,
     titleStyle: {
       fontFamily: variables.fontFamilySecondary,
+      fontSize: 20,
     },
     buttonStyle: {
-      borderRadius: variables.borderRadius,
-      height: 45,
+      borderRadius: 25,
+      height: 50,
+    },
+    containerStyle: {
+      marginHorizontal: 30,
     },
   },
   Divider: {
@@ -45,7 +53,21 @@ const theme = {
     backgroundColor: 'transparent',
   },
   Input: {
+    labelStyle: {
+      color: colors.black,
+      marginBottom: 3,
+      fontFamily: variables.fontFamilySecondary,
+      fontWeight: 'normal',
+    },
     errorStyle: custom.errorStyle,
+    inputContainerStyle: {
+      backgroundColor: colors.white,
+      borderColor: '#bcbdc1',
+      borderBottomWidth: 0.28,
+      borderRadius: 8,
+      paddingLeft: 10,
+      paddingRight: 5,
+    },
     containerStyle: {
       paddingLeft: 0,
       paddingRight: 0,
@@ -57,17 +79,17 @@ const theme = {
       paddingLeft: 0,
       paddingRight: 0,
       borderBottomWidth: 1,
-      borderBottomColor: '#000',
+      borderBottomColor: colors.black,
+      fontFamily: variables.fontFamilySecondary,
+      fontSize: 16,
     },
   },
   ListItem: {
     style: {
       backgroundColor: colors.white,
-      borderRadius: 8,
     },
     containerStyle: {
       backgroundColor: colors.white,
-      borderRadius: 8,
     },
     disabledStyle: {
       backgroundColor: colors.grey,
