@@ -5,7 +5,7 @@ import { Button, Icon } from 'react-native-elements';
 import colors from '../../../../theme/theme.colors';
 
 const BackHeader = (props) => {
-  const burgerIcon = () => (
+  const backIcon = () => (
     <Icon
       type="font-awesome-5"
       name="caret-left"
@@ -15,7 +15,7 @@ const BackHeader = (props) => {
     />
   );
 
-  return <Button icon={burgerIcon} type="clear" {...props} />;
+  return <Button icon={backIcon} type="clear" {...props} />;
 };
 
 const styles = StyleSheet.create({

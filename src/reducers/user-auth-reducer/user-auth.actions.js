@@ -4,6 +4,7 @@ import {
   setTemporaryTokenAction,
   setResetPasswordFormDataAction,
   setSignInFormDataAction,
+  setIsLoadingAction,
 } from './user-auth.reducer';
 import storageService from '../../services/sub-services/storage-service/storage.service';
 
@@ -39,6 +40,8 @@ export const loadSignInFormFromStorage = () => {
 // ==========================================================
 export const registerAction = ({ formData }) => {
   return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+
     const _storeTemporaryToken = (token) => dispatch(setTemporaryTokenAction(token));
     const _getTemporaryToken = (encryptedPin) =>
       userAuthService.register({ encryptedPin, cardNumber: formData.cardNumber });
@@ -46,7 +49,8 @@ export const registerAction = ({ formData }) => {
     return Promise.resolve(formData.pin)
       .then(encryptionService.encryptPin)
       .then(_getTemporaryToken)
-      .then(_storeTemporaryToken);
+      .then(_storeTemporaryToken)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
@@ -60,16 +64,25 @@ export const registerResendOtpAction = () => {
 
 export const verifyRegisterOtpAction = (formData) => {
   return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const _storeTemporaryToken = (token) => dispatch(setTemporaryTokenAction(token));
     const { token } = getState().userAuthReducer;
-    return userAuthService.verifyRegisterOtp(formData, token).then(_storeTemporaryToken);
+    return userAuthService
+      .verifyRegisterOtp(formData, token)
+      .then(_storeTemporaryToken)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const setPasswordAction = (formData) => {
-  return (_dispatch, getState) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { token } = getState().userAuthReducer;
-    return userAuthService.setPassword(formData, token);
+    return userAuthService
+      .setPassword(formData, token)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
@@ -79,9 +92,14 @@ export const setPasswordAction = (formData) => {
 
 export const requestResetPasswordOtpAction = (formData) => {
   return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+
     dispatch(setResetPasswordFormDataAction(formData));
     const _storeTemporaryToken = (token) => dispatch(setTemporaryTokenAction(token));
-    return userAuthService.requestResetPasswordOtp(formData).then(_storeTemporaryToken);
+    return userAuthService
+      .requestResetPasswordOtp(formData)
+      .then(_storeTemporaryToken)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
@@ -97,15 +115,24 @@ export const resetPasswordResendOtpAction = () => {
 
 export const verifyResetPasswordOtpAction = (formData) => {
   return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { token } = getState().userAuthReducer;
     const _storeTemporaryToken = (newToken) => dispatch(setTemporaryTokenAction(newToken));
-    return userAuthService.verifyResetPasswordOtp(formData, token).then(_storeTemporaryToken);
+    return userAuthService
+      .verifyResetPasswordOtp(formData, token)
+      .then(_storeTemporaryToken)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
 export const resetPasswordAction = (formData) => {
-  return (_dispatch, getState) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
     const { token } = getState().userAuthReducer;
-    return userAuthService.resetPassword(formData, token);
+    return userAuthService
+      .resetPassword(formData, token)
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };

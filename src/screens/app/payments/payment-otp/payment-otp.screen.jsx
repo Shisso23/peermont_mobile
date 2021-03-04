@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import {
@@ -10,11 +10,13 @@ import {
 } from '../../../../reducers/payments-reducer/payments.actions';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
+import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
+  const { isLoading } = useSelector((reducer) => reducer.paymentReducer);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyPaymentOtpAction(formData));
@@ -28,6 +30,8 @@ const PaymentOtpScreen = () => {
   const _handleResendOTP = () => {
     return dispatch(sendPaymentOtpAction(''));
   };
+
+  useDisableBackButtonWhileLoading(isLoading);
 
   return (
     <View>

@@ -15,6 +15,7 @@ const _noSurveyFound = (err) => {
 export const initiateHealthSurveyAction = () => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
+
     const _getLastSurvey = () => healthSurveyService.getLastCompletedHealthSurvey();
     const _storeSurvey = (lastHealthSurvey) =>
       dispatch(setLastHealthSurveyAction(lastHealthSurvey));
@@ -32,9 +33,14 @@ export const initiateHealthSurveyAction = () => {
 
 export const submitHealthSurveyAction = (formData) => {
   return (dispatch) => {
-    return healthSurveyService.submitHealthSurvey(formData).then((newHealthSurvey) => {
-      dispatch(setLastHealthSurveyAction(newHealthSurvey));
-    });
+    dispatch(setIsLoadingAction(true));
+
+    return healthSurveyService
+      .submitHealthSurvey(formData)
+      .then((newHealthSurvey) => {
+        dispatch(setLastHealthSurveyAction(newHealthSurvey));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 

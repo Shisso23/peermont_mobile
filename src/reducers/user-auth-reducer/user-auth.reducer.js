@@ -3,6 +3,9 @@ import { signInModel } from '../../models';
 
 const reducerName = 'user-auth';
 
+const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
+export const setIsLoadingAction = setIsLoading.action;
+
 const setIsAuthenticated = CreateAction(reducerName, 'SET_IS_AUTHENTICATED');
 export const setIsAuthenticatedAction = setIsAuthenticated.action;
 
@@ -16,6 +19,7 @@ const setSignInFormData = CreateAction(reducerName, 'SET_SIGN_IN_FORM_DATA');
 export const setSignInFormDataAction = setSignInFormData.action;
 
 const initialState = {
+  isLoading: false,
   isAuthenticated: false,
   token: null,
   resetPasswordFormData: null,
@@ -24,6 +28,11 @@ const initialState = {
 
 export default function userAuthReducer(state = initialState, action) {
   switch (action.type) {
+    case setIsLoading.actionType:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     case setIsAuthenticated.actionType:
       return {
         ...state,
