@@ -8,8 +8,9 @@ import { TopUpForm } from '../../../../components/forms';
 import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
 import { initiateTopUpAction } from '../../../../reducers/payments-reducer/payments.actions';
 import { topUpModel } from '../../../../models';
+import { useDisableBackButtonWhileLoading, useRefreshHeaderButton } from '../../../../hooks';
+import { getCreditCardsAction } from '../../../../reducers/credit-card-reducer/credit-card.actions';
 import { custom } from '../../../../../theme/theme.styles';
-import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const TopUpScreen = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ const TopUpScreen = () => {
   };
 
   useDisableBackButtonWhileLoading(isLoading);
+
+  useRefreshHeaderButton(() => {
+    dispatch(getCreditCardsAction());
+  }, isLoading);
 
   return (
     <KeyboardScrollContainer>

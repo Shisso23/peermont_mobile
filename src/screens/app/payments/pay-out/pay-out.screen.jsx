@@ -9,7 +9,8 @@ import { payOutModel } from '../../../../models';
 import { performPayoutAction } from '../../../../reducers/payments-reducer/payments.actions';
 import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
-import { useDisableBackButtonWhileLoading } from '../../../../hooks';
+import { useDisableBackButtonWhileLoading, useRefreshHeaderButton } from '../../../../hooks';
+import { getBankAccountsAction } from '../../../../reducers/bank-account-reducer/bank-account.actions';
 
 const PayOutScreen = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ const PayOutScreen = () => {
   };
 
   useDisableBackButtonWhileLoading(isLoading);
+
+  useRefreshHeaderButton(() => {
+    dispatch(getBankAccountsAction());
+  }, isLoading);
 
   return (
     <KeyboardScrollContainer>

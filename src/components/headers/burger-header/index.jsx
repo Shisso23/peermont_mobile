@@ -1,24 +1,24 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 import colors from '../../../../theme/theme.colors';
 
-const BurgerHeader = () => {
+const BurgerHeader = (props) => {
   const navigation = useNavigation();
 
-  const burgerIcon = () => (
-    <Icon
-      type="font-awesome-5"
-      name="bars"
-      size={14}
-      color={colors.white}
-      containerStyle={styles.iconContainerStyle}
-    />
+  return (
+    <TouchableOpacity onPress={() => navigation.openDrawer()} {...props}>
+      <Icon
+        type="font-awesome-5"
+        name="bars"
+        size={14}
+        color={colors.white}
+        containerStyle={styles.iconContainerStyle}
+      />
+    </TouchableOpacity>
   );
-
-  return <Button type="clear" icon={burgerIcon} onPress={() => navigation.openDrawer()} />;
 };
 
 const styles = StyleSheet.create({
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 30,
     justifyContent: 'center',
-    marginLeft: 10,
+    marginLeft: 20,
     width: 30,
   },
 });

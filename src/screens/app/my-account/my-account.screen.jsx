@@ -14,6 +14,7 @@ import {
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { AddButton } from '../../../components/atoms';
+import { useRefreshHeaderButton } from '../../../hooks';
 
 const MyAccountScreen = () => {
   const { loading } = useSelector((reducers) => reducers.userReducer);
@@ -36,6 +37,10 @@ const MyAccountScreen = () => {
       dispatch(getUserAction());
     }, []),
   );
+
+  useRefreshHeaderButton(() => {
+    dispatch(getUserAction());
+  });
 
   return !loading ? (
     <ScrollContainer>
