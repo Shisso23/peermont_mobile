@@ -10,10 +10,10 @@ export const useRefreshHeaderButton = (refreshFunction, disableIfLoading) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <RefreshHeader refreshFunction={refreshFunction} disable={disableIfLoading} />
+        <RefreshHeader refreshFunction={refreshFunction} disabled={disableIfLoading} />
       ),
     });
-  }, []);
+  }, [disableIfLoading]);
 };
 
 useRefreshHeaderButton.propTypes = {
