@@ -11,6 +11,7 @@ import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import DrawerIcon from './drawer-icon';
 import colors from '../../../../theme/theme.colors';
+import variables from '../../../../theme/theme.variables';
 
 const DrawerComponent = (props) => {
   const insets = useSafeAreaInsets();
@@ -43,13 +44,13 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
-          label="Transactions"
+          label="Mobile App Transactions"
           icon={() => <DrawerIcon name="history" />}
           onPress={() => navigation.navigate('Transactions')}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
-          label="Visit Palacebet"
+          label="Visit PalaceBet"
           icon={() => <DrawerIcon name="link" />}
           onPress={() => navigation.navigate('PalaceBet')}
           labelStyle={styles.labelStyle}
@@ -94,18 +95,19 @@ const styles = StyleSheet.create({
   drawerScrollStyle: {
     marginTop: 20,
   },
+  labelStyle: {
+    color: colors.white,
+    fontFamily: variables.fontFamily,
+  },
   smallText: {
     color: colors.white,
     fontSize: 12,
   },
   wrapper: {
     backgroundColor: colors.darkGrey,
-    borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
+    borderTopRightRadius: 20,
     flex: 1,
-  },
-  labelStyle: {
-    color: colors.white,
   },
 });
 

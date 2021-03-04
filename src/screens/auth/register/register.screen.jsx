@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-
+import { Divider, ListItem, Text } from 'react-native-elements';
 import { MembershipCardForm } from '../../../components/forms';
 import { registrationMembershipCardModel } from '../../../models';
 import { registerAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
-import { FormPageContainer } from '../../../components/containers';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
+import { Contact } from '../../../components/atoms';
+import { custom } from '../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
 
 const RegisterScreen = () => {
@@ -24,13 +26,41 @@ const RegisterScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <FormPageContainer>
-      <MembershipCardForm
-        submitForm={_handleFormSubmit}
-        onSuccess={_onFormSuccess}
-        initialValues={registrationMembershipCardModel()}
-      />
-    </FormPageContainer>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Register</Text>
+        <Text style={custom.centerSubtitle}>
+          Enter your Winners Circle Card details. You will receive a SMS with a One Time Pin(OTP) on
+          your mobile number for validation.
+        </Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <MembershipCardForm
+          submitForm={_handleFormSubmit}
+          onSuccess={_onFormSuccess}
+          initialValues={registrationMembershipCardModel()}
+        />
+      </PaddedContainer>
+      <Divider />
+      <Divider />
+      <ListItem onPress={() => navigation.navigate('TermsAndConditions')} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Subtitle>Terms And Conditions</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <ListItem onPress={() => navigation.navigate('PrivacyPolicy')} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Subtitle>Privacy Policy</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <PaddedContainer>
+        <Text h4>Need help?</Text>
+      </PaddedContainer>
+      <Contact />
+      <Divider />
+    </KeyboardScrollContainer>
   );
 };
 

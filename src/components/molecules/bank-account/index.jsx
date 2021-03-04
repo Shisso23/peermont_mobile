@@ -9,7 +9,6 @@ import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { useBankUri } from '../../../hooks';
 import { TrashButton, BankAccountStatus } from '../../atoms';
-import { custom } from '../../../../theme/theme.styles';
 
 const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatus, style }) => {
   const [isDeleting, setDeleting] = useState(false);
@@ -38,13 +37,7 @@ const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatu
         <ListItem.Subtitle>{account.accountHolder}</ListItem.Subtitle>
       </ListItem.Content>
       {hasAccountStatus && <BankAccountStatus status={account.status} />}
-      {hasDelete && (
-        <TrashButton
-          onPress={_handleDelete}
-          loading={isDeleting}
-          containerStyle={custom.trashButtonContainer}
-        />
-      )}
+      {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}
     </ListItem>
   );
 };

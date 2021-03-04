@@ -60,12 +60,12 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="Transactions"
       component={TransactionsScreen}
-      options={{ headerShown: true, title: 'Transactions' }}
+      options={{ headerShown: true, title: 'Mobile App Transactions' }}
     />
     <AppStack.Screen
       name="AddCreditCard"
       component={AddCreditCardScreen}
-      options={{ headerShown: true, title: 'Add CreditCard' }}
+      options={{ headerShown: true, title: 'Add Credit Card' }}
     />
     <AppStack.Screen
       name="AddBankAccount"
@@ -75,7 +75,7 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="UploadBankAccountDocument"
       component={UploadBankAccountDocumentScreen}
-      options={{ headerShown: true, title: 'Upload Bank Account Document' }}
+      options={{ headerShown: true, title: 'Upload Document' }}
     />
     <AppStack.Screen
       name="EditBankAccount"
@@ -85,7 +85,7 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="AddMembershipCard"
       component={AddMembershipCardScreen}
-      options={{ headerShown: true, title: 'Add Membership card' }}
+      options={{ headerShown: true, title: 'Add Winners Circle Card' }}
     />
     <AppStack.Screen
       name="HealthSurvey"
@@ -95,38 +95,38 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="EnterMembershipCardPin"
       component={MembershipCardPinScreen}
-      options={{ headerShown: true, title: 'MembershipCardPin' }}
+      options={{ headerShown: true, title: 'Card PIN' }}
     />
     <AppStack.Screen
       name="MembershipCardDetail"
       component={MembershipCardDetailScreen}
-      options={{ headerShown: true, title: 'MembershipCardDetail' }}
+      options={{ headerShown: true, title: 'Winners Circle Card' }}
     />
     <AppStack.Screen
       name="PayOut"
       component={PayOutScreen}
-      options={{ headerShown: true, title: 'Payout' }}
+      options={{ headerShown: true, title: 'Pay Out' }}
     />
 
     <AppStack.Screen
       name="PaymentOtp"
       component={PaymentOtpScreen}
-      options={{ headerShown: true, title: 'Payment Otp' }}
+      options={{ headerShown: true, title: 'Payment OTP' }}
     />
     <AppStack.Screen
       name="TopUp"
       component={TopUpScreen}
-      options={{ headerShown: true, title: 'TopUp' }}
+      options={{ headerShown: true, title: 'Top Up' }}
     />
     <AppStack.Screen
       name="TopUpComplete"
       component={TopUpCompleteScreen}
-      options={{ headerShown: true, title: 'Complete TopUp' }}
+      options={{ headerShown: true, title: 'Complete Top Up' }}
     />
     <AppStack.Screen
       name="PayOutComplete"
       component={PayOutCompleteScreen}
-      options={{ headerShown: true, title: 'Complete PayOut' }}
+      options={{ headerShown: true, title: 'Complete Pay Out' }}
     />
   </AppStack.Navigator>
 );
@@ -150,7 +150,7 @@ function DrawerNavigation() {
         name="MyAccount"
         component={MyAccountScreen}
         options={{
-          title: 'Account',
+          title: 'My Account',
           headerShown: true,
         }}
       />

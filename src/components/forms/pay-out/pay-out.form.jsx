@@ -4,10 +4,11 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, Divider } from 'react-native-elements';
+import { Button, Input, Text, ListItem } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { getFormError } from '../form-utils';
+import { PaddedContainer } from '../../containers';
 
 import { custom } from '../../../../theme/theme.styles';
 import { LoadingComponent, BankAccount } from '../../molecules';
@@ -71,23 +72,23 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
         const error = (name) => getFormError(name, { touched, status, errors });
         return (
           <>
-            <Input
-              value={values.amount}
-              onChangeText={handleChange('amount')}
-              label="Amount"
-              onBlur={handleBlur('amount')}
-              errorMessage={error('amount')}
-              placeholder="0.00"
-              keyboardType="phone-pad"
-              leftIcon={CurrencyIcon}
-            />
+            <PaddedContainer>
+              <Input
+                value={values.amount}
+                onChangeText={handleChange('amount')}
+                label="Amount"
+                onBlur={handleBlur('amount')}
+                errorMessage={error('amount')}
+                placeholder="0.00"
+                keyboardType="phone-pad"
+                leftIcon={CurrencyIcon}
+              />
 
-            <View style={styles.rowAlign}>
-              <Text h4>Bank Accounts</Text>
-              <AddButton onPress={() => navigation.navigate('AddBankAccount')} />
-            </View>
-
-            <Divider />
+              <View style={styles.rowAlign}>
+                <Text h4>Bank Accounts</Text>
+                <AddButton onPress={() => navigation.navigate('AddBankAccount')} />
+              </View>
+            </PaddedContainer>
             {!isLoading ? (
               !_.isEmpty(bankAccounts) ? (
                 <>
@@ -106,17 +107,22 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
                   })}
                 </>
               ) : (
-                <View>
-                  <Text>No bank account found</Text>
-                </View>
+                <ListItem>
+                  <ListItem.Content>
+                    <ListItem.Title>You don&#39;t have any bank accounts setup</ListItem.Title>
+                    <ListItem.Subtitle>
+                      Click the plus button above to add a bank account.
+                    </ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
               )
             ) : (
               <LoadingComponent />
             )}
-            <Text style={custom.errorStyle}> {error('bankAccountId')}</Text>
-            <Divider />
-
-            <Button title="Pay Out" onPress={handleSubmit} loading={isSubmitting} />
+            <Text style={[custom.errorStyle, styles.errorStyle]}> {error('bankAccountId')}</Text>
+            <PaddedContainer>
+              <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
+            </PaddedContainer>
           </>
         );
       }}
@@ -135,6 +141,9 @@ PayOutForm.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+  errorStyle: {
+    paddingLeft: 12,
+  },
   rowAlign: {
     flexDirection: 'row',
     justifyContent: 'space-between',

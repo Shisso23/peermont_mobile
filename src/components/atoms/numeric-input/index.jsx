@@ -12,9 +12,8 @@ import {
 } from 'react-native-confirmation-code-field';
 
 import colors from '../../../../theme/theme.colors';
-import { custom } from '../../../../theme/theme.styles';
 
-const NumericInput = ({ value, onChange, cellCount, handleSubmit, errorMessage, ...rest }) => {
+const NumericInput = ({ value, onChange, cellCount, handleSubmit, ...rest }) => {
   const ref = useBlurOnFulfill({ value, cellCount });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -45,31 +44,40 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, errorMessage, 
           }
 
           return (
-            <View
-              key={index}
-              onLayout={getCellOnLayoutHandler(index)}
-              style={[styles.cell, isFocused && styles.focusCell]}
-            >
-              <Text style={styles.cellText}>{textChild}</Text>
+            <View style={styles.cellsContainer}>
+              <View
+                key={index}
+                onLayout={getCellOnLayoutHandler(index)}
+                style={[styles.cell, isFocused && styles.focusCell]}
+              >
+                <Text style={styles.cellText}>{textChild}</Text>
+              </View>
             </View>
           );
         }}
       />
-      {errorMessage && <Text style={custom.errorStyle}>{errorMessage}</Text>}
     </>
   );
 };
 
 const styles = StyleSheet.create({
   cell: {
-    borderBottomWidth: 1,
+    backgroundColor: colors.white,
+    borderBottomWidth: 0.28,
+    borderColor: colors.inputBorderColor,
+    borderRadius: 8,
     height: 40,
-    width: 40,
+    width: 42,
   },
   cellText: {
     color: colors.black,
     fontSize: 25,
     textAlign: 'center',
+  },
+  cellsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 
@@ -77,11 +85,8 @@ NumericInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   cellCount: PropTypes.number.isRequired,
-  errorMessage: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
 };
 
-NumericInput.defaultProps = {
-  errorMessage: null,
-};
 export default NumericInput;

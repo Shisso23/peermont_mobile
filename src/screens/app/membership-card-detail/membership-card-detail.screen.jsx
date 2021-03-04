@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Button, Divider, Card, ListItem, Text } from 'react-native-elements';
+import { Button, Divider, ListItem, Text, Avatar } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import { PageContainer } from '../../../components/containers';
+import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { getMembershipCardImage } from '../../../components/molecules/membership-card/utils';
 
 const MembershipCardDetailScreen = () => {
@@ -12,52 +11,52 @@ const MembershipCardDetailScreen = () => {
   const membershipCardImage = getMembershipCardImage(currentMembershipCard.tierName);
 
   return (
-    <PageContainer>
-      <Card>
-        <Card.Image style={styles.imageStyle} resizeMode="contain" source={membershipCardImage} />
-        <Card.Title>{currentMembershipCard.cardNumber}</Card.Title>
-        <ListItem>
-          <ListItem.Content>
-            <ListItem.Title>Player Balance</ListItem.Title>
-          </ListItem.Content>
-          <Text>{currentMembershipCard.balanceFormat}</Text>
-        </ListItem>
-        <ListItem>
-          <ListItem.Content>
-            <ListItem.Title>Leisure Points Balance</ListItem.Title>
-          </ListItem.Content>
-          <Text>{currentMembershipCard.pointsBalance}</Text>
-        </ListItem>
-
-        <View style={styles.rowView}>
-          <Button
-            title="Top up"
-            onPress={() =>
-              navigation.push('TopUp', { balance: currentMembershipCard.balanceFormat })
-            }
-          />
-          <Button
-            title="Pay out"
-            onPress={() =>
-              navigation.push('PayOut', { balance: currentMembershipCard.balanceFormat })
-            }
-          />
-        </View>
-      </Card>
-
+    <ScrollContainer>
       <Divider />
+      <ListItem bottomDivider>
+        <Avatar size="medium" imageProps={{ resizeMode: 'contain' }} source={membershipCardImage} />
+        <ListItem.Content>
+          <ListItem.Title h4>{currentMembershipCard.cardNumber}</ListItem.Title>
+          <ListItem.Subtitle>{currentMembershipCard.tierName}</ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
+      <ListItem bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Player Balance</ListItem.Title>
+        </ListItem.Content>
+        <Text h4>{currentMembershipCard.balanceFormat}</Text>
+      </ListItem>
+      <PaddedContainer>
+        <Button
+          title="Top Up"
+          onPress={() =>
+            navigation.navigate('TopUp', { balance: currentMembershipCard.balanceFormat })
+          }
+        />
+        <Divider />
+        <Button
+          title="Pay Out"
+          onPress={() =>
+            navigation.navigate('PayOut', { balance: currentMembershipCard.balanceFormat })
+          }
+        />
+      </PaddedContainer>
       <Divider />
-    </PageContainer>
+      <PaddedContainer>
+        <Text h4>Points Balances</Text>
+      </PaddedContainer>
+      <ListItem bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Leisure Points Balance</ListItem.Title>
+        </ListItem.Content>
+        <Text h4>{currentMembershipCard.pointsBalance}</Text>
+      </ListItem>
+    </ScrollContainer>
   );
 };
 
 MembershipCardDetailScreen.propTypes = {};
 
 MembershipCardDetailScreen.defaultProps = {};
-
-const styles = StyleSheet.create({
-  imageStyle: { height: 150 },
-  rowView: { flexDirection: 'row', justifyContent: 'space-around' },
-});
 
 export default MembershipCardDetailScreen;

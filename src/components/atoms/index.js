@@ -12,4 +12,5 @@ export { default as Footer } from './footer';
 export { default as CurrencyIcon } from './currency-icon';
 export { default as AutoSignOut } from './auto-sign-out';
 export { default as RegisterCardModal } from './register-card-modal';
+export { default as Contact } from './contact';
 export { default as Modal } from './modal/modal';

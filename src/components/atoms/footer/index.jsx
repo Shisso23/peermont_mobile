@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import colors from '../../../../theme/theme.colors';
 
 const Footer = () => {
@@ -27,8 +28,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
   },
   blackBarText: {
-    color: colors.white,
-    fontSize: 11,
+    color: colors.lightGrey,
+    fontSize: 14,
     lineHeight: 20,
     textAlign: 'center',
   },
@@ -37,8 +38,7 @@ const styles = StyleSheet.create({
   },
   goldBar: {
     backgroundColor: colors.gold,
-    height: 5,
-    marginTop: 30,
+    height: 4,
   },
 });
 

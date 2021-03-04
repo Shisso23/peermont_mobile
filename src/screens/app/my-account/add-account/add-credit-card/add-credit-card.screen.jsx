@@ -5,9 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import { CreditCardForm } from '../../../../../components/forms';
 import { creditCardModel } from '../../../../../models';
-import { FormPageContainer } from '../../../../../components/containers';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../../../components/containers';
 import { createCreditCardAction } from '../../../../../reducers/credit-card-reducer/credit-card.actions';
 import { useDisableBackButtonWhileLoading } from '../../../../../hooks/disable-back-button-while-loading/use-disable-back-button-while-loading';
+import { custom } from '../../../../../../theme/theme.styles';
 
 const AddCreditCardScreen = () => {
   const dispatch = useDispatch();
@@ -25,15 +26,19 @@ const AddCreditCardScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <FormPageContainer>
-      <Text h4>Add Credit Card</Text>
-      <Text>Please provide your card details</Text>
-      <CreditCardForm
-        submitForm={_handleSubmission}
-        initialValues={creditCardModel()}
-        onSuccess={_handleFormSuccess}
-      />
-    </FormPageContainer>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Add Credit Card</Text>
+        <Text style={custom.centerSubtitle}>Enter your credit card details.</Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <CreditCardForm
+          submitForm={_handleSubmission}
+          initialValues={creditCardModel()}
+          onSuccess={_handleFormSuccess}
+        />
+      </PaddedContainer>
+    </KeyboardScrollContainer>
   );
 };
 

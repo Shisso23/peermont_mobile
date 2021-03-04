@@ -3,11 +3,12 @@ import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
-import { FormPageContainer } from '../../../../../components/containers';
+import { KeyboardScrollContainer, PaddedContainer } from '../../../../../components/containers';
 import { MembershipCardForm } from '../../../../../components/forms';
 import { membershipCardModel } from '../../../../../models';
 import { createMembershipCardAction } from '../../../../../reducers/membership-card-reducer/membership-card.actions';
 import { useDisableBackButtonWhileLoading } from '../../../../../hooks/disable-back-button-while-loading/use-disable-back-button-while-loading';
+import { custom } from '../../../../../../theme/theme.styles';
 
 const AddMembershipCardScreen = () => {
   const dispatch = useDispatch();
@@ -25,15 +26,22 @@ const AddMembershipCardScreen = () => {
   useDisableBackButtonWhileLoading(isLoading, 2);
 
   return (
-    <FormPageContainer>
-      <Text h4>Add Card</Text>
-      <Text>Provide your Winner Circle card details</Text>
-      <MembershipCardForm
-        initialValues={membershipCardModel()}
-        submitForm={_handleSubmission}
-        onSuccess={_handleSuccess}
-      />
-    </FormPageContainer>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Add Card</Text>
+        <Text style={custom.centerSubtitle}>
+          Enter your Winners Circle Card details. You will receive a SMS with a One Time Pin(OTP) on
+          your mobile number for validation.
+        </Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        <MembershipCardForm
+          initialValues={membershipCardModel()}
+          submitForm={_handleSubmission}
+          onSuccess={_handleSuccess}
+        />
+      </PaddedContainer>
+    </KeyboardScrollContainer>
   );
 };
 

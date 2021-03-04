@@ -51,7 +51,7 @@ const UploadDocumentForm = ({ submitForm, onSuccess, initialValues, initialError
               updateFormData={(newDocument) => setFieldValue('proofOfBankDocument', newDocument)}
               errorMessage={errors.proofOfBankDocument}
             />
-            <Button title="Upload Document" onPress={handleSubmit} loading={isSubmitting} />
+            <Button title="Upload" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );
       }}

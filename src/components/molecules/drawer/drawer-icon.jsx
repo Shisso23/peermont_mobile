@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 30,
     justifyContent: 'center',
-    width: 25,
+    width: 20,
   },
 });
 export default DrawerIcon;

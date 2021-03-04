@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Button, Input } from 'react-native-elements';
+import { Button, Input, Divider } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { passwordSchema, confirmPasswordSchema } from '../form-validaton-schemas';
 import { flashService } from '../../../services';
@@ -75,6 +75,7 @@ const SetPasswordForm = ({ submitForm, onSuccess, initialValues }) => {
               errorMessage={error('confirmPassword')}
               onSubmitEditing={handleSubmit}
             />
+            <Divider />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
         );

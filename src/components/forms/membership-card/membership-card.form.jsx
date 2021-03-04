@@ -84,7 +84,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 value={values.pin}
                 onChangeText={handleChange('pin')}
                 keyboardType="numeric"
-                label="Pin"
+                label="Card PIN"
                 onBlur={handleBlur('pin')}
                 secureTextEntry
                 errorMessage={error('pin')}

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text, Button, Divider } from 'react-native-elements';
+import { Text, Button, ListItem } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
+import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 
 import colors from '../../../../theme/theme.colors';
-import { PageContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import { useMembershipCard } from '../../../hooks';
@@ -16,20 +16,20 @@ import getCardType from '../../../helpers/getCardType';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  useFocusEffect(exitAppOnHardwarePressListener, []);
+  useFocusEffect(exitAppOnHardwarePressListener);
   const { user } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const { viewMembershipCard } = useMembershipCard();
 
-  const { isLoading: isHealthSurveyLoading } = useSelector(
-    (reducers) => reducers.healthSurveyReducer,
-  );
+  // const { isLoading: isHealthSurveyLoading } = useSelector(
+  //   (reducers) => reducers.healthSurveyReducer,
+  // );
 
   const _handleHealthSurveyPress = () => {
     dispatch(initiateHealthSurveyAction()).then(() => {
-      navigation.push('HealthSurvey');
+      navigation.navigate('HealthSurvey');
     });
   };
 
@@ -54,42 +54,54 @@ const HomeScreen = () => {
   const _keyExtractor = (item) => _.get(item, 'id', '').toString();
 
   return (
-    <PageContainer>
-      <Text h4>{user.firstName}</Text>
-      <Divider />
-      <Button
-        title="planning on visiting"
-        onPress={_handleHealthSurveyPress}
-        loading={isHealthSurveyLoading}
-      />
-      <Divider />
-      <Text h4>Select Card</Text>
-      <View style={styles.carouselContainer}>
-        <Carousel
-          data={membershipCards}
-          extraData={membershipCards}
-          renderItem={_renderMembershipCardItem}
-          sliderWidth={500}
-          itemWidth={250}
-          onSnapToItem={_setActiveSlideIndex}
-          removeClippedSubviews={false}
-          keyExtractor={_keyExtractor}
-        />
-        <Pagination
-          dotsLength={membershipCards.length}
-          activeDotIndex={activeSlideIndex}
-          dotStyle={styles.activePagination}
-          inactiveDotStyle={styles.inactivePagination}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={1}
-        />
-      </View>
-      <Divider />
-      <Button
-        title="Add Winners Circle Card"
-        onPress={() => navigation.navigate('AddMembershipCard')}
-      />
-    </PageContainer>
+    <ScrollContainer>
+      <PaddedContainer>
+        <Text h3>{user.firstName}</Text>
+      </PaddedContainer>
+      <ListItem onPress={_handleHealthSurveyPress} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title h4>Plan on visiting?</ListItem.Title>
+          <ListItem.Subtitle>Take our health survey.</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <PaddedContainer>
+        <Text h3>Winners Circle Cards</Text>
+      </PaddedContainer>
+      {_.isEmpty(membershipCards) ? (
+        <ListItem>
+          <ListItem.Content>
+            <ListItem.Title>You don&#39;t have any Winners Circle Cards setup</ListItem.Title>
+            <ListItem.Subtitle>Click the button below to add a card.</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+      ) : (
+        <View style={styles.carouselContainer}>
+          <Carousel
+            data={membershipCards}
+            extraData={membershipCards}
+            renderItem={_renderMembershipCardItem}
+            sliderWidth={500}
+            itemWidth={250}
+            onSnapToItem={_setActiveSlideIndex}
+            removeClippedSubviews={false}
+            keyExtractor={_keyExtractor}
+          />
+          <Pagination
+            dotsLength={membershipCards.length}
+            activeDotIndex={activeSlideIndex}
+            dotStyle={styles.activePagination}
+            inactiveDotStyle={styles.inactivePagination}
+            containerStyle={styles.containerStyle}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={1}
+          />
+        </View>
+      )}
+      <PaddedContainer>
+        <Button title="Add Card" onPress={() => navigation.navigate('AddMembershipCard')} />
+      </PaddedContainer>
+    </ScrollContainer>
   );
 };
 
@@ -102,7 +114,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
     borderRadius: 5,
     height: 10,
-    marginHorizontal: -4,
     width: 10,
   },
   carouselCardNumber: {
@@ -119,6 +130,10 @@ const styles = StyleSheet.create({
   carouselImage: {
     height: 200,
     width: 250,
+  },
+  containerStyle: {
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   inactivePagination: {
     backgroundColor: colors.white,

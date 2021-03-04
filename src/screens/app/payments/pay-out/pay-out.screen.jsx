@@ -7,7 +7,8 @@ import _ from 'lodash';
 import { PayOutForm } from '../../../../components/forms';
 import { payOutModel } from '../../../../models';
 import { performPayoutAction } from '../../../../reducers/payments-reducer/payments.actions';
-import { FormPageContainer } from '../../../../components/containers';
+import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
+import { custom } from '../../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 
 const PayOutScreen = () => {
@@ -29,16 +30,22 @@ const PayOutScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return (
-    <FormPageContainer>
-      <Text h4>Pay Out</Text>
-      <Text>Balance: {_.get(route, 'params.balance')}</Text>
-      <Text>Payouts may take 48 hours to process, not including weekends and public holidays</Text>
+    <KeyboardScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Pay Out</Text>
+        <Text style={custom.centerSubtitle}>
+          Payouts may take 48 hours to process, not including weekends and public holidays.
+        </Text>
+        <Text h4 style={custom.centerSubtitle}>
+          Your balance is {_.get(route, 'params.balance')}
+        </Text>
+      </PaddedContainer>
       <PayOutForm
         initialValues={payOutModel()}
         submitForm={_handleSubmission}
         onSuccess={_handleSuccess}
       />
-    </FormPageContainer>
+    </KeyboardScrollContainer>
   );
 };
 

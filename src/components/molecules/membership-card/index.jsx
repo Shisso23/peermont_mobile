@@ -6,7 +6,6 @@ import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { getMembershipCardImage } from './utils';
 import { TrashButton } from '../../atoms';
-import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCard = ({ hasDelete, card, onPress }) => {
   const dispatch = useDispatch();
@@ -24,16 +23,11 @@ const MembershipCard = ({ hasDelete, card, onPress }) => {
     <ListItem key={card.id} bottomDivider onPress={onPress}>
       <Avatar size="medium" imageProps={{ resizeMode: 'contain' }} source={imagePath} />
       <ListItem.Content>
-        <ListItem.Title>{card.cardNumber}</ListItem.Title>
+        <ListItem.Title h4>{card.cardNumber}</ListItem.Title>
         <ListItem.Subtitle>{card.tierName}</ListItem.Subtitle>
       </ListItem.Content>
-      {hasDelete && (
-        <TrashButton
-          onPress={_handleDelete}
-          loading={isDeleting}
-          containerStyle={custom.trashButtonContainer}
-        />
-      )}
+      {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}
+      {!hasDelete && <ListItem.Chevron />}
     </ListItem>
   );
 };

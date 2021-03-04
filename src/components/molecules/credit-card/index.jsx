@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { TrashButton } from '../../atoms';
-import { custom } from '../../../../theme/theme.styles';
 
 const creditCardPath = require('../../../assets/images/credit-card.png');
 
@@ -28,13 +27,7 @@ const CreditCard = ({ hasDelete, card, onPress, style }) => {
         <ListItem.Title>{card.obfuscatedCardNumber}</ListItem.Title>
         <ListItem.Subtitle>{card.cardType}</ListItem.Subtitle>
       </ListItem.Content>
-      {hasDelete && (
-        <TrashButton
-          onPress={_handleDelete}
-          loading={isDeleting}
-          containerStyle={custom.trashButtonContainer}
-        />
-      )}
+      {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}
     </ListItem>
   );
 };
