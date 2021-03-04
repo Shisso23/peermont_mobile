@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
-import { globalScreenOptions } from '../../../theme/theme.styles';
 import { BackHeader } from '../../components/headers';
 
 export const useDisableBackButtonWhileLoading = (isLoading, backPopAmount) => {
@@ -22,13 +21,7 @@ export const useDisableBackButtonWhileLoading = (isLoading, backPopAmount) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <HeaderBackButton
-          onPress={onBack}
-          tintColor={globalScreenOptions.headerTintColor}
-          disabled={isLoading}
-        />
-      ),
+      headerLeft: () => <BackHeader onPress={onBack} disabled={isLoading} />,
     });
   }, [isLoading]);
 
