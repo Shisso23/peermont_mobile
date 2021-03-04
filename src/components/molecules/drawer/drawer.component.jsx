@@ -45,25 +45,25 @@ const DrawerComponent = (props) => {
         <DrawerItem
           label="Transactions"
           icon={() => <DrawerIcon name="history" />}
-          onPress={() => navigation.push('Transactions')}
+          onPress={() => navigation.navigate('Transactions')}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Visit Palacebet"
           icon={() => <DrawerIcon name="link" />}
-          onPress={() => navigation.push('PalaceBet')}
+          onPress={() => navigation.navigate('PalaceBet')}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Terms And Conditions"
           icon={() => <DrawerIcon name="file" />}
-          onPress={() => navigation.push('TermsAndConditions')}
+          onPress={() => navigation.navigate('TermsAndConditions')}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
           label="Privacy Policy"
           icon={() => <DrawerIcon name="shield-alt" />}
-          onPress={() => navigation.push('PrivacyPolicy')}
+          onPress={() => navigation.navigate('PrivacyPolicy')}
           labelStyle={styles.labelStyle}
         />
       </DrawerContentScrollView>

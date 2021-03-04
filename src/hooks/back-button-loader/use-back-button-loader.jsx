@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, ActivityIndicator } from 'react-native';
-import { HeaderBackButton } from '@react-navigation/stack';
 
 import { useNavigation } from '@react-navigation/native';
 import { globalScreenOptions } from '../../../theme/theme.styles';
+import { BackHeader } from '../../components/headers';
 
 const blockAndroidBackButton = () => true;
 export const useBackButtonLoader = (functionToExecute) => {
@@ -32,7 +32,7 @@ export const useBackButtonLoader = (functionToExecute) => {
             style={styles.loader}
           />
         ) : (
-          <HeaderBackButton onPress={onBack} tintColor={globalScreenOptions.headerTintColor} />
+          <BackHeader onPress={onBack} tintColor={globalScreenOptions.headerTintColor} />
         ),
     });
   }, [navigation, isLoading]);
