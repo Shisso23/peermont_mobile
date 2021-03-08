@@ -13,7 +13,7 @@ import {
   BankAccount,
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
-import { AddButton } from '../../../components/atoms';
+import { AddButton, Watermark } from '../../../components/atoms';
 import { useRefreshHeaderButton } from '../../../hooks';
 
 const MyAccountScreen = () => {
@@ -43,83 +43,88 @@ const MyAccountScreen = () => {
   }, loading);
 
   return !loading ? (
-    <ScrollContainer>
-      <Divider />
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h3>Winners Circle Cards</Text>
-          <AddButton
-            onPress={() => navigation.navigate('AddMembershipCard')}
-            containerStyle={styles.addPadding}
-          />
-        </View>
-      </PaddedContainer>
-      {_.isEmpty(membershipCards) ? (
-        <ListItem>
-          <ListItem.Content>
-            <ListItem.Title>You don&#39;t have any Winners Circle Cards setup</ListItem.Title>
-            <ListItem.Subtitle>Click the plus button above to add a card.</ListItem.Subtitle>
-          </ListItem.Content>
-        </ListItem>
-      ) : (
-        membershipCards.map((card) => {
-          return <MembershipCard key={card.id} card={card} hasDelete />;
-        })
-      )}
-
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h3>Credit Cards</Text>
-          <AddButton
-            onPress={() => navigation.navigate('AddCreditCard')}
-            containerStyle={styles.addPadding}
-          />
-        </View>
-      </PaddedContainer>
-      {_.isEmpty(creditCards) ? (
-        <ListItem>
-          <ListItem.Content>
-            <ListItem.Title>You don&#39;t have any credit cards setup</ListItem.Title>
-            <ListItem.Subtitle>Click the plus button above to add a credit card.</ListItem.Subtitle>
-          </ListItem.Content>
-        </ListItem>
-      ) : (
-        creditCards.map((item) => {
-          return <CreditCard key={item.id} card={item} hasDelete />;
-        })
-      )}
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h3>Bank Accounts</Text>
-          <AddButton
-            onPress={() => navigation.navigate('AddBankAccount')}
-            containerStyle={styles.addPadding}
-          />
-        </View>
-      </PaddedContainer>
-      {_.isEmpty(bankAccounts) ? (
-        <ListItem>
-          <ListItem.Content>
-            <ListItem.Title>You don&#39;t have any bank accounts setup</ListItem.Title>
-            <ListItem.Subtitle>
-              Click the plus button above to add a bank account.
-            </ListItem.Subtitle>
-          </ListItem.Content>
-        </ListItem>
-      ) : (
-        bankAccounts.map((item) => {
-          return (
-            <BankAccount
-              key={item.id}
-              account={item}
-              hasDelete
-              hasAccountStatus
-              onPress={() => _handleBankUpdateNav(item)}
+    <>
+      <Watermark />
+      <ScrollContainer>
+        <Divider />
+        <PaddedContainer>
+          <View style={styles.rowAlign}>
+            <Text h3>Winners Circle Cards</Text>
+            <AddButton
+              onPress={() => navigation.navigate('AddMembershipCard')}
+              containerStyle={styles.addPadding}
             />
-          );
-        })
-      )}
-    </ScrollContainer>
+          </View>
+        </PaddedContainer>
+        {_.isEmpty(membershipCards) ? (
+          <ListItem>
+            <ListItem.Content>
+              <ListItem.Title>You don&#39;t have any Winners Circle Cards setup</ListItem.Title>
+              <ListItem.Subtitle>Click the plus button above to add a card.</ListItem.Subtitle>
+            </ListItem.Content>
+          </ListItem>
+        ) : (
+          membershipCards.map((card) => {
+            return <MembershipCard key={card.id} card={card} hasDelete />;
+          })
+        )}
+
+        <PaddedContainer>
+          <View style={styles.rowAlign}>
+            <Text h3>Credit Cards</Text>
+            <AddButton
+              onPress={() => navigation.navigate('AddCreditCard')}
+              containerStyle={styles.addPadding}
+            />
+          </View>
+        </PaddedContainer>
+        {_.isEmpty(creditCards) ? (
+          <ListItem>
+            <ListItem.Content>
+              <ListItem.Title>You don&#39;t have any credit cards setup</ListItem.Title>
+              <ListItem.Subtitle>
+                Click the plus button above to add a credit card.
+              </ListItem.Subtitle>
+            </ListItem.Content>
+          </ListItem>
+        ) : (
+          creditCards.map((item) => {
+            return <CreditCard key={item.id} card={item} hasDelete />;
+          })
+        )}
+        <PaddedContainer>
+          <View style={styles.rowAlign}>
+            <Text h3>Bank Accounts</Text>
+            <AddButton
+              onPress={() => navigation.navigate('AddBankAccount')}
+              containerStyle={styles.addPadding}
+            />
+          </View>
+        </PaddedContainer>
+        {_.isEmpty(bankAccounts) ? (
+          <ListItem>
+            <ListItem.Content>
+              <ListItem.Title>You don&#39;t have any bank accounts setup</ListItem.Title>
+              <ListItem.Subtitle>
+                Click the plus button above to add a bank account.
+              </ListItem.Subtitle>
+            </ListItem.Content>
+          </ListItem>
+        ) : (
+          bankAccounts.map((item) => {
+            return (
+              <BankAccount
+                key={item.id}
+                account={item}
+                hasDelete
+                hasAccountStatus
+                onPress={() => _handleBankUpdateNav(item)}
+              />
+            );
+          })
+        )}
+      </ScrollContainer>
+    </>
   ) : (
     <LoadingComponent />
   );
