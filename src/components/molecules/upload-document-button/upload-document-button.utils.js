@@ -1,8 +1,8 @@
-import ImagePicker from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
 
 const successfullySelectedImage = (res) => !res.didCancel;
-const errorOccured = (res) => res.errorCode;
+const errorOccurred = (res) => res.errorCode;
 
 const constructFormData = (res) => ({
   uri: res.uri,
@@ -18,7 +18,7 @@ const genericLaunch = (launchFunction) => {
     launchFunction(imageOptions, (res) => {
       if (successfullySelectedImage(res)) {
         resolve(constructFormData(res));
-      } else if (errorOccured(res)) {
+      } else if (errorOccurred(res)) {
         reject();
       }
     });
@@ -26,11 +26,11 @@ const genericLaunch = (launchFunction) => {
 };
 
 export const openUserGallery = () => {
-  return genericLaunch(ImagePicker.launchImageLibrary);
+  return genericLaunch(launchImageLibrary);
 };
 
 export const openUserCamera = () => {
-  return genericLaunch(ImagePicker.launchCamera);
+  return genericLaunch(launchCamera);
 };
 
 export const openDocumentPicker = () => {
