@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, ListItem, Text } from 'react-native-elements';
+import { Badge, Icon, ListItem, Text } from 'react-native-elements';
 import Collapsible from 'react-native-collapsible';
 import { useDispatch } from 'react-redux';
 import Moment from 'moment';
@@ -35,9 +35,11 @@ const Inbox = ({ inbox }) => {
   };
 
   const _renderCollapseText = () => (
-    <Collapsible collapsed={isCollapsed} collapsedHeight={20}>
-      <ListItem.Title>{message}</ListItem.Title>
-    </Collapsible>
+    <>
+      <Collapsible collapsed={isCollapsed} collapsedHeight={20}>
+        <ListItem.Title>{message}</ListItem.Title>
+      </Collapsible>
+    </>
   );
 
   const _renderText = () => <Text onTextLayout={_handleNeedForCollapse}>{message}</Text>;
@@ -48,6 +50,9 @@ const Inbox = ({ inbox }) => {
         {needsCollapse ? _renderCollapseText() : _renderText()}
         <ListItem.Subtitle>{sendAt}</ListItem.Subtitle>
       </ListItem.Content>
+      {needsCollapse && isSeen && (
+        <Icon name={isCollapsed ? 'chevron-down' : 'chevron-up'} type="font-awesome-5" size={15} />
+      )}
       {!isSeen && <Badge status="error" />}
     </ListItem>
   );
