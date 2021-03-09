@@ -50,6 +50,12 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
+          label="Inbox"
+          icon={() => <DrawerIcon name="inbox" />}
+          onPress={() => navigation.navigate('Inbox')}
+          labelStyle={styles.labelStyle}
+        />
+        <DrawerItem
           label="Visit PalaceBet"
           icon={() => <DrawerIcon name="link" />}
           onPress={() => navigation.navigate('PalaceBet')}
