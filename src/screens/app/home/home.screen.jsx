@@ -125,7 +125,10 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     alignItems: 'center',
-    marginBottom: 10,
+    backgroundColor: colors.white,
+    borderBottomWidth: 0.28,
+    borderColor: colors.inputBorderColor,
+    paddingBottom: 10,
   },
   carouselImage: {
     height: 200,

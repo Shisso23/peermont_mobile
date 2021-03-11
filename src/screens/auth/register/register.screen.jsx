@@ -41,6 +41,9 @@ const RegisterScreen = () => {
           initialValues={registrationMembershipCardModel()}
         />
       </PaddedContainer>
+      <Text style={custom.centerSubtitle}>
+        By clicking Next, you agree to our Terms and Conditions and our Privacy Policy.
+      </Text>
       <Divider />
       <Divider />
       <ListItem onPress={() => navigation.navigate('TermsAndConditions')} bottomDivider>
