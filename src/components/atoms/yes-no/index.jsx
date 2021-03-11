@@ -1,7 +1,7 @@
 import React, { useState, useImperativeHandle } from 'react';
 import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 import { CheckBox } from 'react-native-elements';
+import PropTypes from 'prop-types';
 
 const YesNo = React.forwardRef(({ setFormValue }, ref) => {
   const [yesChecked, setYesChecked] = useState(false);
@@ -24,16 +24,27 @@ const YesNo = React.forwardRef(({ setFormValue }, ref) => {
   };
 
   return (
-    <View style={styles.wapper}>
-      <CheckBox title="yes" ref={ref} onPress={_handleYes} checked={yesChecked} />
-      <CheckBox title="no" onPress={_handleNo} checked={noChecked} />
+    <View style={styles.wrapper}>
+      <CheckBox
+        ref={ref}
+        onPress={_handleYes}
+        checked={yesChecked}
+        containerStyle={styles.containerStyle}
+      />
+      <CheckBox onPress={_handleNo} checked={noChecked} containerStyle={styles.containerStyle} />
     </View>
   );
 });
 
 const styles = StyleSheet.create({
-  wapper: {
+  containerStyle: {
+    padding: 0,
+  },
+  wrapper: {
+    flex: 1,
+    flexGrow: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
