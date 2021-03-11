@@ -26,8 +26,8 @@ import PayOutCompleteScreen from '../../screens/app/payments/pay-out/pay-out-com
 import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
 import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
 import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
-import TransactionsScreen from '../../screens/app/transactions/transactions';
 import InboxScreen from '../../screens/app/inbox/inbox.screen';
+import TransactionsScreen from '../../screens/app/transactions/transactions.screen';
 
 import { BackHeader, BurgerHeader } from '../../components/headers';
 

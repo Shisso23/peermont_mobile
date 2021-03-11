@@ -29,6 +29,12 @@ export const custom = {
   selectedItemStyle: {
     backgroundColor: colors.gold,
   },
+  bold: {
+    fontWeight: 'bold',
+  },
+  listItemContainerStyle: {
+    backgroundColor: colors.reactBackgroundColor,
+  },
 };
 
 export const globalScreenOptions = {

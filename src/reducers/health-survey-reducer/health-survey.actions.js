@@ -1,4 +1,4 @@
-import { healthSurveyService, flashService } from '../../services';
+import { healthSurveyService } from '../../services';
 import {
   setHealthSurveyQuestionsAction,
   setIsLoadingAction,
@@ -26,7 +26,7 @@ export const initiateHealthSurveyAction = () => {
       .then(_storeSurvey)
       .catch(_noSurveyFound)
       .then(_getAndStoreQuestions)
-      .catch((err) => flashService.error(err.message))
+      .catch(() => {})
       .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
