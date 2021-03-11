@@ -11,3 +11,4 @@ export { default as membershipCardService } from './sub-services/membership-card
 export { default as encryptionService } from './sub-services/encryption-service/encryption.service';
 export { default as healthSurveyService } from './sub-services/health-survey-service/health-survey.service';
 export { default as paymentService } from './sub-services/payment-service/payment.service';
+export { default as inboxService } from './sub-services/inbox-service/inbox.service';
