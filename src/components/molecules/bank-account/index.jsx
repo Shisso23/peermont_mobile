@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { ListItem, Avatar } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { useBankUri } from '../../../hooks';
 import { TrashButton, BankAccountStatus } from '../../atoms';
+import { custom } from '../../../../theme/theme.styles';
 
-const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatus, style }) => {
+const BankAccount = ({ hasDelete, account, onPress, disabled, hasAccountStatus, style }) => {
   const [isDeleting, setDeleting] = useState(false);
+  const { isLoading } = useSelector((reducer) => reducer.bankAccountReducer);
 
   const { bankUri } = useBankUri(account.bankId);
 
@@ -29,7 +31,8 @@ const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatu
       onPress={onPress}
       containerStyle={style}
       bottomDivider
-      disabled={hasDisabled && account.status !== 'verified'}
+      disabled={disabled || isLoading}
+      disabledStyle={custom.disabledTouchable}
     >
       <Avatar source={_.isEmpty(bankUri) ? null : { uri: bankUri }} />
       <ListItem.Content>
@@ -44,19 +47,19 @@ const BankAccount = ({ hasDelete, hasDisabled, account, onPress, hasAccountStatu
 
 BankAccount.propTypes = {
   hasDelete: PropTypes.bool,
+  disabled: PropTypes.bool,
   account: PropTypes.object.isRequired,
   onPress: PropTypes.func,
   hasAccountStatus: PropTypes.bool,
   style: ViewPropTypes.style,
-  hasDisabled: PropTypes.bool,
 };
 
 BankAccount.defaultProps = {
   hasDelete: false,
+  disabled: false,
   hasAccountStatus: false,
   onPress: () => null,
   style: {},
-  hasDisabled: false,
 };
 
 export default BankAccount;

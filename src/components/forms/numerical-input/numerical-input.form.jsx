@@ -7,10 +7,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { getFormError } from '../form-utils';
-// import { flashService } from '../../../services';
-import { custom } from '../../../../theme/theme.styles';
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
+import { custom } from '../../../../theme/theme.styles';
 
 const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialValues }, ref) => {
   const validationSchema = Yup.object().shape({
@@ -27,10 +26,8 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
         actions.setSubmitting(false);
         if (_.get(error, 'statusCode') === 422) {
           const apiErrors = error.errors;
-          // flashService.error('Form Submission Error');
           actions.resetForm({ status: { apiErrors } });
         } else {
-          // flashService.error(error.message);
           actions.setFieldError('numeric', error.message);
           actions.resetForm();
         }
@@ -55,6 +52,7 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
               onChange={(newNumeric) => setFieldValue('numeric', newNumeric)}
               cellCount={4}
               handleSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
             />
             <View style={styles.messageStyle}>
               {isSubmitting && <Text style={styles.submittingStyle}>Submitting...</Text>}

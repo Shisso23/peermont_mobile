@@ -35,6 +35,9 @@ export const custom = {
   listItemContainerStyle: {
     backgroundColor: colors.reactBackgroundColor,
   },
+  disabledTouchable: {
+    backgroundColor: colors.transparent,
+  },
 };
 
 export const globalScreenOptions = {

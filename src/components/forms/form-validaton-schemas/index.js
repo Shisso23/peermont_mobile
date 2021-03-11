@@ -54,7 +54,7 @@ export const bankAccountAccountNumberSchema = Yup.string().required(
 export const bankAccountBankIdSchema = Yup.string()
   .matches(numberRegex)
   .required('Please select a bank');
-export const proofOfBankDocumentSchema = Yup.string().required('Please upload proof of bank');
+export const proofOfBankDocumentSchema = Yup.string().required('Please select a document above');
 
 export const surveyAnswersSchema = Yup.array().of(
   Yup.object().shape({
