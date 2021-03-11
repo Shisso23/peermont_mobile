@@ -21,7 +21,7 @@ const RefreshHeader = ({ refreshFunction, disabled }) => {
 
 const styles = StyleSheet.create({
   iconContainerStyle: {
-    marginRight: 10,
+    marginRight: 15,
   },
 });
 

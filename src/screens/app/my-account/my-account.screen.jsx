@@ -25,11 +25,9 @@ const MyAccountScreen = () => {
   const navigation = useNavigation();
 
   const _handleBankUpdateNav = (bankAccount) => {
-    if (bankAccount.status !== 'verified') {
-      navigation.push('UploadBankAccountDocument', {
-        bankAccountId: _.get(bankAccount, 'id'),
-      });
-    }
+    navigation.navigate('UploadBankAccountDocument', {
+      bankAccountId: _.get(bankAccount, 'id'),
+    });
   };
 
   useFocusEffect(
@@ -65,7 +63,7 @@ const MyAccountScreen = () => {
           </ListItem>
         ) : (
           membershipCards.map((card) => {
-            return <MembershipCard key={card.id} card={card} hasDelete />;
+            return <MembershipCard key={card.id} card={card} hasDelete disabled />;
           })
         )}
 
@@ -89,7 +87,7 @@ const MyAccountScreen = () => {
           </ListItem>
         ) : (
           creditCards.map((item) => {
-            return <CreditCard key={item.id} card={item} hasDelete />;
+            return <CreditCard key={item.id} card={item} hasDelete disabled />;
           })
         )}
         <PaddedContainer>
@@ -119,6 +117,7 @@ const MyAccountScreen = () => {
                 hasDelete
                 hasAccountStatus
                 onPress={() => _handleBankUpdateNav(item)}
+                disabled={_.get(item, 'status') === 'verified'}
               />
             );
           })

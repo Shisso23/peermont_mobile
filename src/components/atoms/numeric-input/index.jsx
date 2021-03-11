@@ -44,9 +44,8 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, ...rest }) => 
           }
 
           return (
-            <View style={styles.cellsContainer}>
+            <View key={index} style={styles.cellsContainer}>
               <View
-                key={index}
                 onLayout={getCellOnLayoutHandler(index)}
                 style={[styles.cell, isFocused && styles.focusCell]}
               >

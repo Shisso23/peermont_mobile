@@ -100,8 +100,8 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
                         style={shouldHighlight ? custom.selectedItemStyle : {}}
                         account={bankAccount}
                         onPress={() => setFieldValue('bankAccountId', bankAccount.id)}
+                        disabled={_.get(bankAccount, 'status') !== 'verified'}
                         hasAccountStatus
-                        hasDisabled
                       />
                     );
                   })}

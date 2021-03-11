@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { ViewPropTypes } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
+
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { TrashButton } from '../../atoms';
+import { custom } from '../../../../theme/theme.styles';
 
 const creditCardPath = require('../../../assets/images/credit-card.png');
 
-const CreditCard = ({ hasDelete, card, onPress, style }) => {
+const CreditCard = ({ hasDelete, card, onPress, disabled, style }) => {
   const [isDeleting, setDeleting] = useState(false);
 
   const dispatch = useDispatch();
@@ -21,7 +23,14 @@ const CreditCard = ({ hasDelete, card, onPress, style }) => {
   };
 
   return (
-    <ListItem key={card.id} onPress={onPress} containerStyle={style} bottomDivider>
+    <ListItem
+      key={card.id}
+      onPress={onPress}
+      containerStyle={style}
+      bottomDivider
+      disabled={disabled}
+      disabledStyle={custom.disabledTouchable}
+    >
       <Avatar source={creditCardPath} imageProps={{ resizeMode: 'contain' }} size="medium" />
       <ListItem.Content>
         <ListItem.Title>{card.obfuscatedCardNumber}</ListItem.Title>
@@ -34,6 +43,7 @@ const CreditCard = ({ hasDelete, card, onPress, style }) => {
 
 CreditCard.propTypes = {
   hasDelete: PropTypes.bool,
+  disabled: PropTypes.bool,
   card: PropTypes.object.isRequired,
   onPress: PropTypes.func,
   style: ViewPropTypes.style,
@@ -41,6 +51,7 @@ CreditCard.propTypes = {
 
 CreditCard.defaultProps = {
   hasDelete: false,
+  disabled: false,
   onPress: () => null,
   style: {},
 };

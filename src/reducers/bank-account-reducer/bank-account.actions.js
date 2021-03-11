@@ -64,8 +64,12 @@ export const updateBankAccountAction = (bankAccountForm) => {
 
 export const deleteBankAccountAction = (id) => {
   return (dispatch) => {
-    return bankAccountService.deleteBankAccount(id).then(() => {
-      dispatch(removeBankAccountAction(id));
-    });
+    dispatch(setIsLoadingAction(true));
+    return bankAccountService
+      .deleteBankAccount(id)
+      .then(() => {
+        dispatch(removeBankAccountAction(id));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ListItem, Avatar } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
+
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteMembershipCardAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { getMembershipCardImage } from './utils';
 import { TrashButton } from '../../atoms';
+import { custom } from '../../../../theme/theme.styles';
 
-const MembershipCard = ({ hasDelete, card, onPress }) => {
+const MembershipCard = ({ hasDelete, card, onPress, disabled }) => {
   const dispatch = useDispatch();
   const imagePath = getMembershipCardImage(card.tierName);
   const [isDeleting, setDeleting] = useState(false);
@@ -20,7 +22,13 @@ const MembershipCard = ({ hasDelete, card, onPress }) => {
   };
 
   return (
-    <ListItem key={card.id} bottomDivider onPress={onPress}>
+    <ListItem
+      key={card.id}
+      bottomDivider
+      onPress={onPress}
+      disabled={disabled}
+      disabledStyle={custom.disabledTouchable}
+    >
       <Avatar size="medium" imageProps={{ resizeMode: 'contain' }} source={imagePath} />
       <ListItem.Content>
         <ListItem.Title h4>{card.cardNumber}</ListItem.Title>
@@ -34,12 +42,14 @@ const MembershipCard = ({ hasDelete, card, onPress }) => {
 
 MembershipCard.propTypes = {
   hasDelete: PropTypes.bool,
+  disabled: PropTypes.bool,
   card: PropTypes.object.isRequired,
   onPress: PropTypes.func,
 };
 
 MembershipCard.defaultProps = {
   hasDelete: false,
+  disabled: false,
   onPress: () => null,
 };
 

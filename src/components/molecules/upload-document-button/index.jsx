@@ -56,7 +56,7 @@ const UploadDocumentButton = ({ updateFormData, errorMessage, title }) => {
           />
         }
       />
-      <Text style={custom.errorStyle}>{errorMessage}</Text>
+      <Text style={[custom.errorStyle, custom.centerSubtitle]}>{errorMessage}</Text>
       <ActionSheet ref={actionSheetRef} gestureEnabled>
         <View>
           <UploadDocumentSelectionItem title="Take Photo" onPress={_handleCamera} />
