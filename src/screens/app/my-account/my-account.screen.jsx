@@ -66,7 +66,6 @@ const MyAccountScreen = () => {
             return <MembershipCard key={card.id} card={card} hasDelete disabled />;
           })
         )}
-
         <PaddedContainer>
           <View style={styles.rowAlign}>
             <Text h3>Credit Cards</Text>
@@ -122,6 +121,7 @@ const MyAccountScreen = () => {
             );
           })
         )}
+        <Divider />
       </ScrollContainer>
     </>
   ) : (

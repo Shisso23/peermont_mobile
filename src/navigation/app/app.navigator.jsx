@@ -101,7 +101,7 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="EnterMembershipCardPin"
       component={MembershipCardPinScreen}
-      options={{ headerShown: true, title: 'Card PIN' }}
+      options={{ headerShown: true, title: 'Winners Circle Card PIN' }}
     />
     <AppStack.Screen
       name="MembershipCardDetail"

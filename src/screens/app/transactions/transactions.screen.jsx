@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Divider } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
 import _ from 'lodash';
 
@@ -22,6 +23,7 @@ const TransactionsScreen = () => {
       {transactions.map((transaction) => {
         return <Transaction transaction={transaction} key={_.get(transaction, 'id')} />;
       })}
+      <Divider />
     </ScrollContainer>
   ) : (
     <LoadingComponent />

@@ -54,7 +54,7 @@ const MembershipCardPinScreen = () => {
   return (
     <KeyboardScrollContainer>
       <PaddedContainer>
-        <Text style={custom.centerTitle}>Enter your Peermont Winners Circle card PIN</Text>
+        <Text style={custom.centerTitle}>Card PIN</Text>
         <Text style={custom.centerSubtitle}>
           Please enter your 4 digit PIN for Peermont Winners Circle card number{' '}
           {currentMembershipCard.cardNumber}.

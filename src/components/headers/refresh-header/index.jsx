@@ -7,15 +7,19 @@ import colors from '../../../../theme/theme.colors';
 
 const RefreshHeader = ({ refreshFunction, disabled }) => {
   return (
-    <TouchableOpacity onPress={refreshFunction} disabled={disabled}>
-      <Icon
-        type="font-awesome-5"
-        name="redo-alt"
-        size={16}
-        color={colors.white}
-        containerStyle={styles.iconContainerStyle}
-      />
-    </TouchableOpacity>
+    <>
+      {!disabled && (
+        <TouchableOpacity onPress={refreshFunction} disabled={disabled}>
+          <Icon
+            type="font-awesome-5"
+            name="redo-alt"
+            size={16}
+            color={colors.white}
+            containerStyle={styles.iconContainerStyle}
+          />
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 
