@@ -9,6 +9,7 @@ import { FormPageContainer, PageContainer } from '../../../components/containers
 import { HealthSurveyForm } from '../../../components/forms';
 import { constructHealthSurveyAnswerModels } from '../../../models';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
+import { custom } from '../../../../theme/theme.styles';
 
 const HealthSurveyScreen = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,10 @@ const HealthSurveyScreen = () => {
 
   return displayHealthSurveyForm ? (
     <FormPageContainer>
-      <Text h4>Health Survey</Text>
+      <Text style={custom.centerSubtitle}>
+        Please answer the following general health questionnaire up to{' '}
+        <Text style={custom.bold}>8 hours</Text> before you plan on visiting us.
+      </Text>
       <HealthSurveyForm
         submitForm={_handleSubmission}
         initialValues={constructHealthSurveyAnswerModels(healthSurveyQuestions)}
@@ -35,6 +39,7 @@ const HealthSurveyScreen = () => {
     </FormPageContainer>
   ) : (
     <PageContainer>
+      <Text style={custom.centerTitle}>Health Survey</Text>
       <CompletedHealthSurvey survey={lastHealthSurvey} />
     </PageContainer>
   );
