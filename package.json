@@ -7,7 +7,9 @@
     "ios": "npx react-native run-ios",
     "start": "npx react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "initEnv": "[ ! -f .env ] && { echo \"Created environment file.\"; cp .env.example .env; } || echo \"Environment file exists.\"",
+    "postinstall": "yarn initEnv && { cd ios; pod install; cd ..; } && npx jetify"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",
@@ -86,11 +88,6 @@
     "*.{js,jsx,ts,tsx}": [
       "npx prettier --write",
       "eslint --ext .js,.jsx --fix-dry-run"
-    ]
-  },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts/"
     ]
   }
 }
