@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "506320111286",
+    "project_id": "peermont-winners-circle-app",
+    "storage_bucket": "peermont-winners-circle-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506320111286:android:17239b3d6f3cf1397e0817",
+        "android_client_info": {
+          "package_name": "com.peermont"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506320111286-ge1cvr5uqaa1haqnm23kf5ueikn463rc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peermont",
+            "certificate_hash": "e49210cb8a15d67a709e482527a12881e9d34586"
+          }
+        },
+        {
+          "client_id": "506320111286-l0flnr7gnsim48beaqqmmgigeki8ivu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwZDUe6b35bJ0fFlMDB6BX3Yq3-6cDlHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506320111286-l0flnr7gnsim48beaqqmmgigeki8ivu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

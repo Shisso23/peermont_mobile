@@ -3,5 +3,6 @@ import appConfig from '../../../config';
 const { apiUrl } = appConfig;
 
 export default {
-  userUrl: () => `${apiUrl}/users/show_details`,
+  userShowDetailsUrl: () => `${apiUrl}/users/show_details`,
+  userUrl: (userId) => `${apiUrl}/users/${userId}`,
 };

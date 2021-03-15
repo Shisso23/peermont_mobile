@@ -1,5 +1,7 @@
+import _ from 'lodash';
+
 import { setUserAction, setLoadingAction } from './user.reducer';
-import { userService } from '../../services';
+import { firebaseService, userService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
 import { setBankAccountsAction } from '../bank-account-reducer/bank-account.reducer';
@@ -13,6 +15,17 @@ export const getUserAction = () => {
       dispatch(setCreditCardsAction(_user.creditCards));
       dispatch(setBankAccountsAction(_user.bankAccounts));
       dispatch(setLoadingAction(false));
+    });
+  };
+};
+
+export const updateFirebaseToken = () => {
+  return () => {
+    return userService.getUser().then((user) => {
+      return firebaseService.getAndSetToken().then((firebaseToken) => {
+        const userId = _.get(user, 'id');
+        return userService.updateFirebaseToken(userId, firebaseToken);
+      });
     });
   };
 };

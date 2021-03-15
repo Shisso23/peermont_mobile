@@ -5,7 +5,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { ThemeProvider } from 'react-native-elements';
 import { Provider } from 'react-redux';
-
 import { name as appName } from './app.json';
 import App from './src/App';
 import theme from './theme/theme';

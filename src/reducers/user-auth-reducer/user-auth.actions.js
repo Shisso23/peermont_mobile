@@ -7,13 +7,15 @@ import {
   setIsLoadingAction,
 } from './user-auth.reducer';
 import storageService from '../../services/sub-services/storage-service/storage.service';
+import { updateFirebaseToken } from '../user-reducer/user.actions';
 
 export const signInAction = (formData) => {
   return (dispatch) => {
     return userAuthService
       .signIn(formData)
       .then(() => storageService.storeSignInForm(formData))
-      .then(() => dispatch(setSignInFormDataAction(formData)));
+      .then(() => dispatch(setSignInFormDataAction(formData)))
+      .then(() => dispatch(updateFirebaseToken()));
   };
 };
 

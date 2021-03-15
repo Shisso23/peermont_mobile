@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-
 import RNBootSplash from 'react-native-bootsplash';
 import { useDispatch } from 'react-redux';
 import { StatusBar, LogBox } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 import NavigationContainer from './navigation/root.navigator';
-import { userAuthService } from './services';
+import { firebaseService, userAuthService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import colors from '../theme/theme.colors';
 import {
@@ -47,6 +47,40 @@ const App = () => {
   useEffect(() => {
     LogBox.ignoreLogs(['Require cycle: ']);
   }, []);
+
+  useEffect(() => {
+    messaging()
+      .registerDeviceForRemoteMessages()
+      .then(() => {
+        checkPermission().then(() => {
+          createNotificationListeners().then(() => {
+            messaging().setBackgroundMessageHandler((remoteMessage) => {
+              firebaseService.processMessage(remoteMessage);
+            });
+          });
+        });
+      });
+  }, []);
+
+  const checkPermission = async () => {
+    const enabled = await messaging().hasPermission();
+    if (enabled === 1) {
+      await firebaseService.getAndSetToken();
+    } else {
+      requestPermission().then();
+    }
+  };
+
+  const requestPermission = async () => {
+    await messaging().requestPermission();
+    await firebaseService.getAndSetToken();
+  };
+
+  const createNotificationListeners = async () => {
+    messaging().onMessage((remoteMessage) => {
+      firebaseService.processMessage(remoteMessage);
+    });
+  };
 
   return (
     <>
