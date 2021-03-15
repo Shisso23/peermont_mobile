@@ -26,3 +26,9 @@ export const userModel = ({
   bankAccounts: constructUserBankAccountModels(bank_accounts),
   creditCards: constructUserCreditCardModels(credit_cards),
 });
+
+export const userFirebaseTokenModal = (firebaseToken) => ({
+  user: {
+    fcm_registration_token: firebaseToken || null,
+  },
+});
