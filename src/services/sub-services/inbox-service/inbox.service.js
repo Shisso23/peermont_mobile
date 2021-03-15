@@ -9,8 +9,8 @@ export const getInbox = () => {
   return authNetworkService.get(inboxUrl).then(returnInbox);
 };
 
-export const seeInbox = (inboxId) => {
-  const seeInboxUrl = inboxUrls.seeInboxUrl(inboxId);
+export const seeInbox = (inboxLinkId) => {
+  const seeInboxUrl = inboxUrls.seeInboxUrl(inboxLinkId);
   return authNetworkService.get(seeInboxUrl);
 };
 

@@ -11,10 +11,10 @@ import { seeInbox } from '../../../reducers/inbox-reducer/inbox.actions';
 const Inbox = ({ inbox }) => {
   const dispatch = useDispatch();
 
-  const inboxId = _.get(inbox, 'id');
+  const inboxLinkId = _.get(inbox, 'id');
   const message = _.get(inbox, 'message');
   const seen = _.get(inbox, 'seen');
-  const sendAt = Moment(_.get(inbox, 'send_at')).format('YYYY/MM/DD, hh:mm');
+  const sentAt = Moment(_.get(inbox, 'sent_at')).format('YYYY/MM/DD, hh:mm');
 
   const [needsCollapse, setNeedsCollapse] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -22,7 +22,7 @@ const Inbox = ({ inbox }) => {
 
   const _handleCollapse = () => {
     if (!isSeen) {
-      dispatch(seeInbox(inboxId));
+      dispatch(seeInbox(inboxLinkId));
       setIsSeen(true);
     }
     setIsCollapsed(!isCollapsed);
@@ -48,7 +48,7 @@ const Inbox = ({ inbox }) => {
     <ListItem onPress={_handleCollapse} bottomDivider>
       <ListItem.Content>
         {needsCollapse ? _renderCollapseText() : _renderText()}
-        <ListItem.Subtitle>{sendAt}</ListItem.Subtitle>
+        <ListItem.Subtitle>{sentAt}</ListItem.Subtitle>
       </ListItem.Content>
       {needsCollapse && isSeen && (
         <Icon name={isCollapsed ? 'chevron-down' : 'chevron-up'} type="font-awesome-5" size={15} />

@@ -11,6 +11,6 @@ export const getInbox = () => {
   };
 };
 
-export const seeInbox = (inboxId) => {
-  return () => inboxService.seeInbox(inboxId);
+export const seeInbox = (inboxLinkId) => {
+  return () => inboxService.seeInbox(inboxLinkId);
 };
