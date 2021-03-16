@@ -7,6 +7,7 @@ const getUser = () => {
   const _createAndReturnUserModel = (apiResponse) => {
     return userModel(apiResponse.data);
   };
+
   return authNetworkService
     .get(url)
     .then(_createAndReturnUserModel)

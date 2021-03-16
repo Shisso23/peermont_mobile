@@ -23,7 +23,7 @@ const InboxScreen = () => {
 
   return !isLoading ? (
     <ScrollContainer>
-      <Text style={[custom.centerSubtitle, styles.helpText]}>Click to read</Text>
+      <Text style={[custom.centerSubtitle, styles.helpText]}>Click to mark as read</Text>
       {inbox.map((message) => {
         return <Inbox inbox={message} key={_.get(message, 'id')} />;
       })}
