@@ -20,12 +20,11 @@ export const getUserAction = () => {
 };
 
 export const updateFirebaseToken = () => {
-  return () => {
-    return userService.getUser().then((user) => {
-      return firebaseService.getAndSetToken().then((firebaseToken) => {
-        const userId = _.get(user, 'id');
-        return userService.updateFirebaseToken(userId, firebaseToken);
-      });
+  return (_dispatch, getState) => {
+    const { user } = getState().userReducer;
+    return firebaseService.getAndSetToken().then((firebaseToken) => {
+      const userId = _.get(user, 'id');
+      return userService.updateFirebaseToken(userId, firebaseToken);
     });
   };
 };

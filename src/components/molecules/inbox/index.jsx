@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { Badge, Icon, ListItem, Text } from 'react-native-elements';
 import Collapsible from 'react-native-collapsible';
 import { useDispatch } from 'react-redux';
@@ -51,12 +52,24 @@ const Inbox = ({ inbox }) => {
         <ListItem.Subtitle>{sentAt}</ListItem.Subtitle>
       </ListItem.Content>
       {needsCollapse && isSeen && (
-        <Icon name={isCollapsed ? 'chevron-down' : 'chevron-up'} type="font-awesome-5" size={15} />
+        <Icon
+          name={isCollapsed ? 'chevron-down' : 'chevron-up'}
+          type="font-awesome-5"
+          size={15}
+          containerStyle={styles.chevronContainer}
+        />
       )}
       {!isSeen && <Badge status="error" />}
     </ListItem>
   );
 };
+
+const styles = StyleSheet.create({
+  chevronContainer: {
+    alignSelf: 'flex-start',
+    marginTop: 10,
+  },
+});
 
 Inbox.propTypes = {
   inbox: PropTypes.object,
