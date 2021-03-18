@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { setUserAction, setLoadingAction } from './user.reducer';
 import { firebaseService, userService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
@@ -20,11 +18,9 @@ export const getUserAction = () => {
 };
 
 export const updateFirebaseToken = () => {
-  return (_dispatch, getState) => {
-    const { user } = getState().userReducer;
+  return () => {
     return firebaseService.getAndSetToken().then((firebaseToken) => {
-      const userId = _.get(user, 'id');
-      return userService.updateFirebaseToken(userId, firebaseToken);
+      return userService.updateFirebaseToken(firebaseToken);
     });
   };
 };

@@ -12,8 +12,13 @@ const info = (message) => {
   Toast.show({ text1: 'Info', text2: message, type: 'info' });
 };
 
+const inbox = (title, message) => {
+  Toast.show({ text1: title, text2: message, type: 'info' });
+};
+
 export default {
   success,
   error,
   info,
+  inbox,
 };

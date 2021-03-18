@@ -42,7 +42,9 @@ const saveMessage = async (remoteMessage) => {
 };
 
 const processMessage = (remoteMessage) => {
-  FlashService.info(_.get(remoteMessage, 'notification.body', ''));
+  const title = _.get(remoteMessage, 'notification.title', 'Peermont');
+  const body = _.get(remoteMessage, 'notification.body', '');
+  FlashService.inbox(title, body);
 };
 
 export default {
