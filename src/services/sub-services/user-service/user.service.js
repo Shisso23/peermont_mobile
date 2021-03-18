@@ -18,8 +18,8 @@ const getUser = () => {
     });
 };
 
-const updateFirebaseToken = (userId, firebaseToken) => {
-  const url = userUrls.userUrl(userId);
+const updateFirebaseToken = (firebaseToken) => {
+  const url = userUrls.updateDetailsUrl();
   const fireBaseModel = userFirebaseTokenModal(firebaseToken);
 
   return authNetworkService.put(url, fireBaseModel);
