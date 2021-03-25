@@ -6,5 +6,5 @@ export { default as MembershipCard } from './membership-card';
 export { default as CreditCard } from './credit-card';
 export { default as BankAccount } from './bank-account';
 export { default as Transaction } from './transaction';
-export { default as Inbox } from './inbox';
+export { default as Notification } from './notification';
 export { default as BiometricSettings } from './biometrics/biometrics-settings.component';

@@ -26,7 +26,7 @@ import PayOutCompleteScreen from '../../screens/app/payments/pay-out/pay-out-com
 import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
 import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
 import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
-import InboxScreen from '../../screens/app/inbox/inbox.screen';
+import NotificationsScreen from '../../screens/app/notification/notifications.screen';
 import TransactionsScreen from '../../screens/app/transactions/transactions.screen';
 
 import { BackHeader, BurgerHeader } from '../../components/headers';
@@ -64,9 +64,9 @@ const AppNavigator = () => (
       options={{ headerShown: true, title: 'Mobile App Transactions' }}
     />
     <AppStack.Screen
-      name="Inbox"
-      component={InboxScreen}
-      options={{ headerShown: true, title: 'Inbox' }}
+      name="Notifications"
+      component={NotificationsScreen}
+      options={{ headerShown: true, title: 'Notifications' }}
     />
     <AppStack.Screen
       name="AddCreditCard"

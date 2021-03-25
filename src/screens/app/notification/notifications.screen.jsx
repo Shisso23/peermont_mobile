@@ -6,26 +6,26 @@ import { useFocusEffect } from '@react-navigation/native';
 import _ from 'lodash';
 
 import { ScrollContainer } from '../../../components/containers';
-import { LoadingComponent, Inbox } from '../../../components';
-import { getInbox } from '../../../reducers/inbox-reducer/inbox.actions';
+import { LoadingComponent, Notification } from '../../../components';
+import { getNotification } from '../../../reducers/notification-reducer/notification.actions';
 import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
 
-const InboxScreen = () => {
-  const { inbox, isLoading } = useSelector((reducers) => reducers.inboxReducer);
+const NotificationsScreen = () => {
+  const { notification, isLoading } = useSelector((reducers) => reducers.notificationReducer);
   const dispatch = useDispatch();
 
   useFocusEffect(
     React.useCallback(() => {
-      dispatch(getInbox());
+      dispatch(getNotification());
     }, []),
   );
 
   return !isLoading ? (
     <ScrollContainer>
       <Text style={[custom.centerSubtitle, styles.helpText]}>Click to mark as read</Text>
-      {inbox.map((message) => {
-        return <Inbox inbox={message} key={_.get(message, 'id')} />;
+      {notification.map((message) => {
+        return <Notification notification={message} key={_.get(message, 'id')} />;
       })}
     </ScrollContainer>
   ) : (
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
   },
 });
 
-InboxScreen.propTypes = {};
+NotificationsScreen.propTypes = {};
 
-InboxScreen.defaultProps = {};
+NotificationsScreen.defaultProps = {};
 
-export default InboxScreen;
+export default NotificationsScreen;

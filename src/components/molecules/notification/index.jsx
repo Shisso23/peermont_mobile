@@ -7,15 +7,15 @@ import Moment from 'moment';
 import _ from 'lodash';
 
 import PropTypes from 'prop-types';
-import { seeInbox } from '../../../reducers/inbox-reducer/inbox.actions';
+import { seeNotification } from '../../../reducers/notification-reducer/notification.actions';
 
-const Inbox = ({ inbox }) => {
+const Notification = ({ notification }) => {
   const dispatch = useDispatch();
 
-  const inboxLinkId = _.get(inbox, 'id');
-  const message = _.get(inbox, 'message');
-  const seen = _.get(inbox, 'seen');
-  const sentAt = Moment(_.get(inbox, 'sent_at')).format('YYYY/MM/DD, hh:mm');
+  const notificationLinkId = _.get(notification, 'id');
+  const message = _.get(notification, 'message');
+  const seen = _.get(notification, 'seen');
+  const sentAt = Moment(_.get(notification, 'sent_at')).format('YYYY/MM/DD, hh:mm');
 
   const [needsCollapse, setNeedsCollapse] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -23,7 +23,7 @@ const Inbox = ({ inbox }) => {
 
   const _handleCollapse = () => {
     if (!isSeen) {
-      dispatch(seeInbox(inboxLinkId));
+      dispatch(seeNotification(notificationLinkId));
       setIsSeen(true);
     }
     setIsCollapsed(!isCollapsed);
@@ -71,12 +71,12 @@ const styles = StyleSheet.create({
   },
 });
 
-Inbox.propTypes = {
-  inbox: PropTypes.object,
+Notification.propTypes = {
+  notification: PropTypes.object,
 };
 
-Inbox.defaultProps = {
-  inbox: {},
+Notification.defaultProps = {
+  notification: {},
 };
 
-export default Inbox;
+export default Notification;
