@@ -1,29 +1,31 @@
 import React, { useEffect } from 'react';
-import RNBootSplash from 'react-native-bootsplash';
+import { StatusBar, LogBox, Platform } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { StatusBar, LogBox } from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 import messaging from '@react-native-firebase/messaging';
+
+import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
 import { firebaseService, userAuthService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
-import colors from '../theme/theme.colors';
+import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
 import {
   loadAppDataAction,
   loadAppDataForSignedInUserAction,
 } from './reducers/app-reducer/app.actions';
-import AutoSignOut from './components/atoms/auto-sign-out';
-import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
+import { AutoSignOut } from './components/atoms';
+import { useBiometricLogin } from './hooks';
 
 const App = () => {
   const dispatch = useDispatch();
+  const biometricLogin = useBiometricLogin();
 
   const _continueToApp = () => {
     dispatch(setIsAuthenticatedAction(true));
   };
 
-  const _loadAppData = () => {
-    dispatch(loadAppDataAction());
-    userAuthService
+  const _loadAuthData = () => {
+    return userAuthService
       .doTokensExistInLocalStorage()
       .then((tokensExist) => {
         if (tokensExist) {
@@ -32,23 +34,43 @@ const App = () => {
         return Promise.resolve();
       })
       .finally(() => {
-        RNBootSplash.hide({ fade: true });
+        if (Platform.OS === 'android') {
+          RNBootSplash.hide({ fade: true });
+        }
       });
   };
 
-  useEffect(() => {
+  const _loadAppData = () => {
+    dispatch(loadAppDataAction());
     if (!__DEV__) {
-      dispatch(signOutAction()).then(_loadAppData);
+      biometricLogin().then(_loadAuthData);
     } else {
-      _loadAppData();
+      _loadAuthData();
     }
-  }, []);
+  };
+
+  const requestPermission = async () => {
+    await messaging().requestPermission();
+    await firebaseService.getAndSetToken();
+  };
+
+  const checkPermission = async () => {
+    const enabled = await messaging().hasPermission();
+    if (enabled === 1) {
+      await firebaseService.getAndSetToken();
+    } else {
+      requestPermission();
+    }
+  };
+
+  const createNotificationListeners = async () => {
+    messaging().onMessage((remoteMessage) => {
+      firebaseService.processMessage(remoteMessage);
+    });
+  };
 
   useEffect(() => {
     LogBox.ignoreLogs(['Require cycle: ']);
-  }, []);
-
-  useEffect(() => {
     messaging()
       .registerDeviceForRemoteMessages()
       .then(() => {
@@ -59,28 +81,15 @@ const App = () => {
             });
           });
         });
+      })
+      .finally(() => {
+        if (!__DEV__) {
+          dispatch(signOutAction()).then(_loadAppData);
+        } else {
+          _loadAppData();
+        }
       });
   }, []);
-
-  const checkPermission = async () => {
-    const enabled = await messaging().hasPermission();
-    if (enabled === 1) {
-      await firebaseService.getAndSetToken();
-    } else {
-      requestPermission().then();
-    }
-  };
-
-  const requestPermission = async () => {
-    await messaging().requestPermission();
-    await firebaseService.getAndSetToken();
-  };
-
-  const createNotificationListeners = async () => {
-    messaging().onMessage((remoteMessage) => {
-      firebaseService.processMessage(remoteMessage);
-    });
-  };
 
   return (
     <>

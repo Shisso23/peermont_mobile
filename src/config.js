@@ -11,4 +11,5 @@ export default {
   callCentreNumber: '0119281000',
   autoSignOutTimeout: 120,
   fcmTokenKey: 'fcmToken',
+  biometricOtpOut: 'biometric_opt_out',
 };

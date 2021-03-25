@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
-import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 
 import colors from '../../../../theme/theme.colors';
+import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
+import { useMembershipCard, useBiometricRegister } from '../../../hooks';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
-import { useMembershipCard } from '../../../hooks';
 import getCardType from '../../../helpers/getCardType';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const biometricRegister = useBiometricRegister();
   useFocusEffect(exitAppOnHardwarePressListener);
   const { user } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
@@ -36,6 +37,10 @@ const HomeScreen = () => {
   const _setActiveSlideIndex = (index) => {
     setActiveSlideIndex(index);
   };
+
+  useEffect(() => {
+    biometricRegister();
+  }, []);
 
   // eslint-disable-next-line react/prop-types
   const _renderMembershipCardItem = ({ item, index }) => {

@@ -21,8 +21,15 @@ const signInFormOperations = {
   removeSignInForm: () => removeItem(SIGN_IN_FORM),
 };
 
+const biometricOperations = {
+  getBiometricOtpOut: () => getItem(config.biometricOtpOut),
+  storeBiometricOtpOut: (key) => saveItem(config.biometricOtpOut, key),
+  removeBiometricOtpOut: () => removeItem(config.biometricOtpOut),
+};
+
 export default {
   ...accessTokenOperations,
   ...refreshTokenOperations,
   ...signInFormOperations,
+  ...biometricOperations,
 };

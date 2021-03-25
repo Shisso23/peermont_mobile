@@ -1,6 +1,7 @@
 import appConfig from '../../../config';
 
 const { hostUrl, apiUrl } = appConfig;
+
 export default {
   tokenUrl: () => `${hostUrl}/oauth/token`,
 
@@ -14,4 +15,6 @@ export default {
   setPasswordUrl: () => `${apiUrl}/users/reset_password`,
 
   signOutUrl: () => `${hostUrl}/users/sign_out`,
+
+  userBiometricKeysUrl: () => `${apiUrl}/user_biometric_keys`,
 };

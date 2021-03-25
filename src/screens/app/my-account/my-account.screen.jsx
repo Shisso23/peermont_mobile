@@ -11,6 +11,7 @@ import {
   MembershipCard,
   CreditCard,
   BankAccount,
+  BiometricSettings,
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { AddButton, Watermark } from '../../../components/atoms';
@@ -122,6 +123,12 @@ const MyAccountScreen = () => {
           })
         )}
         <Divider />
+        <PaddedContainer>
+          <View style={styles.rowAlign}>
+            <Text h3>Biometrics Login</Text>
+            <BiometricSettings />
+          </View>
+        </PaddedContainer>
       </ScrollContainer>
     </>
   ) : (
