@@ -22,7 +22,7 @@ const updateFirebaseToken = (firebaseToken) => {
   const url = userUrls.updateDetailsUrl();
   const fireBaseModel = userFirebaseTokenModal(firebaseToken);
 
-  return authNetworkService.put(url, fireBaseModel);
+  return authNetworkService.patch(url, fireBaseModel);
 };
 
 export default {

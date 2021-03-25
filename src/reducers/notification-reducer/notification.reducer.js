@@ -1,24 +1,24 @@
 import CreateAction from '../action-utilities/action-creator';
 
-const reducerName = 'inbox';
+const reducerName = 'notification';
 
-const setInbox = CreateAction(reducerName, 'SET_INBOX');
-export const setInboxAction = setInbox.action;
+const setNotification = CreateAction(reducerName, 'SET_NOTIFICATION');
+export const setNotificationAction = setNotification.action;
 
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
 const initialState = {
-  inbox: [],
+  notification: [],
   isLoading: false,
 };
 
-export default function inboxReducer(state = initialState, action) {
+export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
-    case setInbox.actionType:
+    case setNotification.actionType:
       return {
         ...state,
-        inbox: action.payload,
+        notification: action.payload,
       };
     case setIsLoading.actionType:
       return {
