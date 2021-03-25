@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>506320111286-h2gubmljfu2dgaf9q95l4gea6f0mfqju.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.506320111286-h2gubmljfu2dgaf9q95l4gea6f0mfqju</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>506320111286-ge1cvr5uqaa1haqnm23kf5ueikn463rc.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDzZQr7b0Gelt1C_nSqAUAzZPgaB1PFS00</string>
+	<key>GCM_SENDER_ID</key>
+	<string>506320111286</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.peermont</string>
+	<key>PROJECT_ID</key>
+	<string>peermont-winners-circle-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>peermont-winners-circle-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:506320111286:ios:1fbad74c47d0dc247e0817</string>
+</dict>
+</plist>

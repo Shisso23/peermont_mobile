@@ -18,12 +18,16 @@ export const setResetPasswordFormDataAction = setResetPasswordFormData.action;
 const setSignInFormData = CreateAction(reducerName, 'SET_SIGN_IN_FORM_DATA');
 export const setSignInFormDataAction = setSignInFormData.action;
 
+const setBiometricPublicKey = new CreateAction(reducerName, 'SET_BIOMETRIC_PUBLIC_KEY');
+export const setBiometricPublicKeyAction = setBiometricPublicKey.action;
+
 const initialState = {
   isLoading: false,
   isAuthenticated: false,
   token: null,
   resetPasswordFormData: null,
   signInFormData: signInModel(),
+  biometricPublicKey: '',
 };
 
 export default function userAuthReducer(state = initialState, action) {
@@ -52,6 +56,11 @@ export default function userAuthReducer(state = initialState, action) {
       return {
         ...state,
         signInFormData: signInModel(action.payload),
+      };
+    case setBiometricPublicKey.actionType:
+      return {
+        ...state,
+        biometricPublicKey: action.payload,
       };
     default:
       return state;

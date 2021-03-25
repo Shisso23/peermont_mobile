@@ -121,6 +121,16 @@ const resetPassword = (formData, token) => {
   });
 };
 
+const createUserBiometricKey = (publicKey) => {
+  const url = authUrls.userBiometricKeysUrl();
+  const data = {
+    user_biometric_key: {
+      public_key: publicKey,
+    },
+  };
+  return authNetworkService.post(url, data);
+};
+
 export default {
   signIn,
   signOut,
@@ -132,4 +142,5 @@ export default {
   resetPassword,
   verifyRegisterOtp,
   setPassword,
+  createUserBiometricKey,
 };

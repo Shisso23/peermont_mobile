@@ -1,4 +1,6 @@
-import { userAuthService, encryptionService } from '../../services';
+import _ from 'lodash';
+
+import { userAuthService, encryptionService, storageService } from '../../services';
 import {
   setIsAuthenticatedAction,
   setTemporaryTokenAction,
@@ -6,8 +8,8 @@ import {
   setSignInFormDataAction,
   setIsLoadingAction,
 } from './user-auth.reducer';
-import storageService from '../../services/sub-services/storage-service/storage.service';
 import { updateFirebaseToken } from '../user-reducer/user.actions';
+import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const signInAction = (formData) => {
   return (dispatch) => {
@@ -34,6 +36,38 @@ export const loadSignInFormFromStorage = () => {
         dispatch(setSignInFormDataAction(signInForm));
       }
     });
+  };
+};
+
+export const signInWithBiometricsAction = (signature) => {
+  return (dispatch, getState) => {
+    const { signInFormData } = getState().userAuthReducer;
+    const formData = {
+      mobileNumber: parseMobile(
+        _.get(signInFormData, 'mobileNumber'),
+        _.get(signInFormData, 'callingCode'),
+      ),
+      password: signature,
+    };
+    return userAuthService
+      .signIn(formData)
+      .then(() => storageService.storeSignInForm(formData))
+      .then(() => dispatch(setSignInFormDataAction(formData)));
+  };
+};
+
+export const createUserBiometricKey = (publicKey) => {
+  return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+    return userAuthService
+      .createUserBiometricKey(publicKey)
+      .then((response) => {
+        return _.get(response, 'data', {});
+      })
+      .catch((error) => {
+        throw error;
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 

@@ -13,3 +13,4 @@ export { default as healthSurveyService } from './sub-services/health-survey-ser
 export { default as paymentService } from './sub-services/payment-service/payment.service';
 export { default as inboxService } from './sub-services/inbox-service/inbox.service';
 export { default as firebaseService } from './sub-services/firebase-service/firebase.service';
+export { default as storageService } from './sub-services/storage-service/storage.service';
