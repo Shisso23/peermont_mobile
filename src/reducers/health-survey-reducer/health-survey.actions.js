@@ -21,8 +21,7 @@ export const initiateHealthSurveyAction = () => {
       dispatch(setLastHealthSurveyAction(lastHealthSurvey));
     const _getAndStoreQuestions = dispatch(getHealthSurveyQuestionsAction());
 
-    return Promise.resolve()
-      .then(_getLastSurvey)
+    return _getLastSurvey()
       .then(_storeSurvey)
       .catch(_noSurveyFound)
       .then(_getAndStoreQuestions)
@@ -46,6 +45,7 @@ export const submitHealthSurveyAction = (formData) => {
 
 const getHealthSurveyQuestionsAction = () => {
   return (dispatch) => {
+    console.log('_getAndStoreQuestions');
     return healthSurveyService
       .getHealthSurveyQuestions()
       .then((questions) => {

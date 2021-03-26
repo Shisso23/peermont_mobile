@@ -21,7 +21,7 @@ const HealthSurveyScreen = () => {
     return dispatch(submitHealthSurveyAction(formData));
   };
 
-  const displayHealthSurveyForm = _.isNull(lastHealthSurvey) || lastHealthSurvey?.hasExpired;
+  const displayHealthSurveyForm = _.isEmpty(lastHealthSurvey) || lastHealthSurvey?.hasExpired;
 
   useDisableBackButtonWhileLoading(isLoading);
 

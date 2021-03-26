@@ -14,7 +14,7 @@ export const setLastHealthSurveyAction = setLastHealthSurvey.action;
 const initialState = {
   isLoading: false,
   healthSurveyQuestions: [],
-  lastHealthSurvey: null,
+  lastHealthSurvey: {},
 };
 
 export default function healthSurveyReducer(state = initialState, action) {
@@ -28,7 +28,6 @@ export default function healthSurveyReducer(state = initialState, action) {
       return {
         ...state,
         healthSurveyQuestions: action.payload,
-        lastHealthSurvey: null,
       };
     case setLastHealthSurvey.actionType:
       return {

@@ -24,10 +24,6 @@ const HomeScreen = () => {
 
   const { viewMembershipCard } = useMembershipCard();
 
-  // const { isLoading: isHealthSurveyLoading } = useSelector(
-  //   (reducers) => reducers.healthSurveyReducer,
-  // );
-
   const _handleHealthSurveyPress = () => {
     dispatch(initiateHealthSurveyAction()).then(() => {
       navigation.navigate('HealthSurvey');
