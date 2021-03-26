@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text, Button, ListItem } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import _ from 'lodash';
 
 import colors from '../../../../theme/theme.colors';
@@ -12,6 +13,7 @@ import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useMembershipCard, useBiometricRegister } from '../../../hooks';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import getCardType from '../../../helpers/getCardType';
+import { custom } from '../../../../theme/theme.styles';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -57,26 +59,26 @@ const HomeScreen = () => {
   return (
     <ScrollContainer>
       <PaddedContainer>
-        <Text h3>{user.firstName}</Text>
+        <Text style={custom.centerTitleSmall}>{user.firstName}</Text>
       </PaddedContainer>
-      <ListItem onPress={_handleHealthSurveyPress} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title h4>Plan on visiting?</ListItem.Title>
-          <ListItem.Subtitle>Take our health survey.</ListItem.Subtitle>
-        </ListItem.Content>
-        <ListItem.Chevron />
-      </ListItem>
       <PaddedContainer>
-        <Text h3>Winners Circle Cards</Text>
+        <View style={custom.surveyContainer}>
+          <TouchableOpacity style={custom.surveyButton} onPress={_handleHealthSurveyPress}>
+            <Icon name="cube" size={20} />
+            <View style={custom.surveyText}>
+              <Text style={custom.surveyTitle}>Planning on visiting?</Text>
+              <Text style={custom.surveySubText}>Take our health survey to grant access.</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <Text style={custom.centerTitle}>Select Card</Text>
+        {_.isEmpty(membershipCards) && (
+          <Text style={custom.centerSubtitle}>
+            You don&#39;t have any Winners Circle Cards setup. Click the button below to add a card.
+          </Text>
+        )}
       </PaddedContainer>
-      {_.isEmpty(membershipCards) ? (
-        <ListItem>
-          <ListItem.Content>
-            <ListItem.Title>You don&#39;t have any Winners Circle Cards setup</ListItem.Title>
-            <ListItem.Subtitle>Click the button below to add a card.</ListItem.Subtitle>
-          </ListItem.Content>
-        </ListItem>
-      ) : (
+      {!_.isEmpty(membershipCards) && (
         <View style={styles.carouselContainer}>
           <Carousel
             data={membershipCards}

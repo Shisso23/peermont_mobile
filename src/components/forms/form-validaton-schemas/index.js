@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 const numberRegex = /^[0-9]+$/;
 
 export const emailSchema = Yup.string().email('Invalid Email').trim().required('Email is required');
-export const mobileNumberSchema = Yup.string().required('Please enter a mobile number');
+export const mobileNumberSchema = Yup.string().required('Mobile number is required');
 export const passwordSchema = Yup.string().required('Password is required');
 
 export const registerPasswordSchema = (edit) => {
@@ -26,35 +26,33 @@ export const termsAndConditionsSchema = (edit) => {
 
 const MEMBERSHIP_CARD_NUMBER_LEN = 18;
 export const membershipCardSchema = Yup.string()
-  .required('Please enter your card number.')
-  .matches(numberRegex, 'Please ensure that your card number has only digits.')
-  .length(MEMBERSHIP_CARD_NUMBER_LEN, `Card number is ${MEMBERSHIP_CARD_NUMBER_LEN} digits.`);
+  .required('Card number is required')
+  .matches(numberRegex, 'Card number can only contain digits')
+  .length(MEMBERSHIP_CARD_NUMBER_LEN, `Card number must be ${MEMBERSHIP_CARD_NUMBER_LEN} digits`);
 
 export const pinSchema = Yup.string()
-  .required('Please enter your card pin.')
-  .matches(numberRegex, 'Please ensure that your card pin has only digits.');
+  .required('Card PIN is required')
+  .matches(numberRegex, 'Card PIN can only contain digits');
 
 export const creditCardNumberSchema = Yup.string()
-  .matches(numberRegex, 'Please ensure that your card number contains only digits')
-  .required('Please enter your card number');
+  .matches(numberRegex, 'Card number can only contain digits')
+  .required('Card number is required');
 
-export const creditCardExpiryDateSchema = Yup.string().required('Please choose expiry date');
-export const creditCardTypeSchema = Yup.string().required('Please choose a card type');
+export const creditCardExpiryDateSchema = Yup.string().required('Expiry date is required');
+export const creditCardTypeSchema = Yup.string().required('Card type is required');
 export const creditCardHolderSchema = Yup.string().required('Card holder is required');
 export const creditCardCvvSchema = Yup.string()
-  .matches(numberRegex, 'Please ensure that your cvv has only digits')
-  .min(3, 'cvv invalid')
-  .max(4, 'cvv invalid')
-  .required('cvv is required');
+  .matches(numberRegex, 'CVV can only contain digits')
+  .min(3, 'CVV invalid')
+  .max(4, 'CVV invalid')
+  .required('CVV is required');
 
-export const bankAccountHolderSchema = Yup.string().required('Please enter the account holder');
-export const bankAccountAccountNumberSchema = Yup.string().required(
-  'Please enter your account number',
-);
+export const bankAccountHolderSchema = Yup.string().required('Account holder is required');
+export const bankAccountAccountNumberSchema = Yup.string().required('Account number is required');
 export const bankAccountBankIdSchema = Yup.string()
   .matches(numberRegex)
   .required('Please select a bank');
-export const proofOfBankDocumentSchema = Yup.string().required('Please select a document above');
+export const proofOfBankDocumentSchema = Yup.string().required('Select a document above');
 
 export const surveyAnswersSchema = Yup.array().of(
   Yup.object().shape({
@@ -64,13 +62,13 @@ export const surveyAnswersSchema = Yup.array().of(
 
 export const paymentAmountSchema = (availableBalance) =>
   Yup.number()
-    .max(availableBalance, 'Payout amount cannot exeed available balance')
-    .required('Please enter an amount')
-    .typeError('Can only be a number');
+    .max(availableBalance, 'Amount cannot exceed available balance')
+    .required('Amount is required')
+    .typeError('Amount can only be a number');
 
 export const topupCreditCardIdSchema = Yup.string().when('isEft', {
   is: false,
-  then: Yup.string().required('Please select a payment method'),
+  then: Yup.string().required('Payment method required'),
 });
 
-export const payOutBankIdSchema = Yup.string().required('Please select a bank account');
+export const payOutBankIdSchema = Yup.string().required('Bank account required');

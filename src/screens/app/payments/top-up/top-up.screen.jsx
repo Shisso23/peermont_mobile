@@ -38,9 +38,7 @@ const TopUpScreen = () => {
     <KeyboardScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>Top Up</Text>
-        <Text style={custom.centerSubtitle}>
-          Please enter an amount and select a payment method to top up your card.
-        </Text>
+        <Text style={custom.centerSubtitle}>Enter an amount and select a payment method.</Text>
         <Text h4 style={custom.centerSubtitle}>
           Your balance is {_.get(route, 'params.balance')}
         </Text>

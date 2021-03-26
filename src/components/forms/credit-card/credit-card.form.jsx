@@ -81,8 +81,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
               value={values.cardNumber}
               onChangeText={handleChange('cardNumber')}
               keyboardType="numeric"
-              label="Card Number"
-              placeholder="0000 0000 0000 0000"
+              placeholder="Credit Card Number"
               onBlur={(e) => {
                 _changeCardTypeToMatchCardNumber();
                 handleBlur('cardNumber')(e);
@@ -95,8 +94,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
               ref={cardHolderRef}
               value={values.cardHolder}
               onChangeText={handleChange('cardHolder')}
-              placeholder="Name on Card"
-              label="Card Holder"
+              placeholder="Card Holder"
               onBlur={handleBlur('cardHolder')}
               errorMessage={error('cardHolder')}
               onSubmitEditing={() => expiryDateRef.current.focus()}
@@ -125,8 +123,8 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 containerStyle={styles.flex}
                 onChangeText={handleChange('cvv')}
                 keyboardType="phone-pad"
-                placeholder="000"
                 label="CVV"
+                placeholder="000"
                 onBlur={handleBlur('cvv')}
                 errorMessage={error('cvv')}
                 onSubmitEditing={handleSubmit}

@@ -68,7 +68,7 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
             <Input
               value={values.accountHolder}
               onChangeText={handleChange('accountHolder')}
-              label="Account Holder"
+              placeholder="Account Holder"
               onBlur={handleBlur('accountHolder')}
               errorMessage={error('accountHolder')}
               onEndEditing={() => accountNumberRef.current.focus()}
@@ -78,7 +78,7 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
               value={values.accountNumber}
               keyboardType="numeric"
               onChangeText={handleChange('accountNumber')}
-              label="Account Number"
+              placeholder="Account Number"
               onBlur={handleBlur('accountNumber')}
               errorMessage={error('accountNumber')}
             />

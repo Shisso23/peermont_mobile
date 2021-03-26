@@ -75,7 +75,7 @@ const BiometricSettings = () => {
       )}
       {!isAvailable && (
         <>
-          <Text styles={styles.settingsText}>Biometric Login is currently not available.</Text>
+          <Text styles={styles.settingsText}>Not available</Text>
         </>
       )}
     </View>

@@ -1,11 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Text, Divider } from 'react-native-elements';
 
 import { submitHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import { CompletedHealthSurvey } from '../../../components/molecules';
-import { FormPageContainer, PageContainer } from '../../../components/containers';
+import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { HealthSurveyForm } from '../../../components/forms';
 import { constructHealthSurveyAnswerModels } from '../../../models';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
@@ -26,22 +26,25 @@ const HealthSurveyScreen = () => {
   useDisableBackButtonWhileLoading(isLoading);
 
   return displayHealthSurveyForm ? (
-    <FormPageContainer>
-      <Text style={custom.centerSubtitle}>
-        Please answer the following general health questionnaire up to{' '}
-        <Text style={custom.bold}>8 hours</Text> before you plan on visiting us.
-      </Text>
+    <ScrollContainer>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Health Survey</Text>
+        <Text style={custom.centerSubtitle}>
+          Please answer the following general health questionnaire up to{' '}
+          <Text style={custom.bold}>8 hours</Text> before you plan on visiting us.
+        </Text>
+      </PaddedContainer>
       <HealthSurveyForm
         submitForm={_handleSubmission}
         initialValues={constructHealthSurveyAnswerModels(healthSurveyQuestions)}
         questions={healthSurveyQuestions}
       />
-    </FormPageContainer>
+      <Divider />
+    </ScrollContainer>
   ) : (
-    <PageContainer>
-      <Text style={custom.centerTitle}>Health Survey</Text>
+    <ScrollContainer>
       <CompletedHealthSurvey survey={lastHealthSurvey} />
-    </PageContainer>
+    </ScrollContainer>
   );
 };
 

@@ -4,6 +4,7 @@ import { Button, Divider, ListItem, Text, Avatar } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { getMembershipCardImage } from '../../../components/molecules/membership-card/utils';
+import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCardDetailScreen = () => {
   const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
@@ -12,7 +13,9 @@ const MembershipCardDetailScreen = () => {
 
   return (
     <ScrollContainer>
-      <Divider />
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Winners Circle Card</Text>
+      </PaddedContainer>
       <ListItem bottomDivider>
         <Avatar size="medium" imageProps={{ resizeMode: 'contain' }} source={membershipCardImage} />
         <ListItem.Content>
@@ -22,7 +25,7 @@ const MembershipCardDetailScreen = () => {
       </ListItem>
       <ListItem bottomDivider>
         <ListItem.Content>
-          <ListItem.Title>Player Balance</ListItem.Title>
+          <ListItem.Title h4>Player Balance</ListItem.Title>
         </ListItem.Content>
         <Text h4>{currentMembershipCard.balanceFormat}</Text>
       </ListItem>

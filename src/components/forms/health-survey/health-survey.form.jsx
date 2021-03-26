@@ -49,7 +49,7 @@ const HealthSurveyForm = ({ submitForm, initialValues, questions }) => {
         const error = (name) => getFormError(name, { touched, status, errors });
         return (
           <>
-            <ListItem key={0} containerStyle={custom.listItemContainerStyle}>
+            <ListItem key={0}>
               <ListItem.Content style={styles.questionContainer} />
               <View style={styles.answerContainer}>
                 <Text style={styles.answerPadding}>Y</Text>
@@ -60,7 +60,7 @@ const HealthSurveyForm = ({ submitForm, initialValues, questions }) => {
             {questions.map((question, index) => {
               const answerLocation = `answers[${index}].answer`;
               return (
-                <ListItem key={question.id} containerStyle={custom.listItemContainerStyle}>
+                <ListItem key={question.id}>
                   <ListItem.Content style={styles.questionContainer}>
                     <ListItem.Title>{question.text}</ListItem.Title>
                     {!_.isEmpty(error(answerLocation)) && (

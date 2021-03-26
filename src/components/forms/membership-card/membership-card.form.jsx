@@ -70,11 +70,12 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 value={values.cardNumber}
                 onChangeText={handleChange('cardNumber')}
                 keyboardType="numeric"
-                label="Card Number"
+                placeholder="Card Number"
                 onBlur={handleBlur('cardNumber')}
                 errorMessage={error('cardNumber')}
                 onSubmitEditing={() => pinRef.current.focus()}
                 maxLength={18}
+                leftIcon={() => <Icon name="credit-card" size={15} />}
                 rightIcon={() => (
                   <Icon name="info-circle" size={15} onPress={_handleModalVisibility} />
                 )}
@@ -84,18 +85,19 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 value={values.pin}
                 onChangeText={handleChange('pin')}
                 keyboardType="numeric"
-                label="Card PIN"
+                placeholder="Card PIN"
                 onBlur={handleBlur('pin')}
                 secureTextEntry
                 errorMessage={error('pin')}
                 onSubmitEditing={handleSubmit}
+                leftIcon={() => <Icon name="lock" size={15} />}
                 rightIcon={() => (
                   <Icon
                     name="info-circle"
                     size={15}
                     onPress={() => {
                       infoPopUpService.show(
-                        'Enter your Peermont Winners Circle pin for the above card number.',
+                        'Enter your Peermont Winners Circle PIN for the above card number.',
                       );
                     }}
                   />

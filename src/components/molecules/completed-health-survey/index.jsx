@@ -7,6 +7,7 @@ import moment from 'moment';
 
 import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
+import { PaddedContainer } from '../../containers';
 
 const CompletedHealthSurvey = ({ survey }) => {
   const allowed = _.get(survey, 'allowed');
@@ -23,26 +24,28 @@ const CompletedHealthSurvey = ({ survey }) => {
 
   return (
     <View>
-      <Divider />
-      <Text style={custom.centerSubtitle}>{success ? successText : failedText}</Text>
+      <PaddedContainer>
+        <Text style={custom.centerTitle}>Health Survey</Text>
+        <Text style={custom.centerSubtitle}>{success ? successText : failedText}</Text>
+      </PaddedContainer>
+      <PaddedContainer>
+        {success ? (
+          <Icon type="font-awesome-5" name="check" color={colors.success} size={160} />
+        ) : (
+          <Icon type="font-awesome-5" name="times" color={colors.danger} size={160} />
+        )}
 
-      <Divider />
-      {success ? (
-        <Icon type="font-awesome-5" name="check" color={colors.success} size={200} />
-      ) : (
-        <Icon type="font-awesome-5" name="times" color={colors.danger} size={200} />
-      )}
+        <Divider />
+        <Text style={custom.centerSubtitle}>
+          {success ? 'This screen is valid for 8 hours' : null}
+        </Text>
 
-      <Divider />
-      <Text style={custom.centerSubtitle}>
-        {success ? 'This screen is valid for 8 hours' : null}
-      </Text>
+        <Divider />
+        <Text style={custom.centerSubtitle}>Created at: {completedAt}</Text>
 
-      <Divider />
-      <Text style={custom.centerSubtitle}>Created at: {completedAt}</Text>
-
-      <Divider />
-      <Text style={custom.centerSubtitle}>Expires at: {expiresAt}</Text>
+        <Divider />
+        <Text style={custom.centerSubtitle}>Expires at: {expiresAt}</Text>
+      </PaddedContainer>
     </View>
   );
 };
