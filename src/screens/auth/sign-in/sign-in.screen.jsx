@@ -4,6 +4,7 @@ import { StyleSheet, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Divider, Button, ListItem, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { custom } from '../../../../theme/theme.styles';
 import { Footer, Contact } from '../../../components/atoms';
 
 import { SignInForm } from '../../../components/forms';
@@ -38,6 +39,8 @@ const SignInScreen = () => {
     <KeyboardScrollContainer>
       <PaddedContainer>
         <Image source={imageUri} resizeMode="contain" style={styles.imageStyle} />
+        <Text style={custom.centerTitle}>Log In</Text>
+        <Text style={custom.centerSubtitle}>Enter your details below to log in.</Text>
       </PaddedContainer>
       <PaddedContainer>
         <SignInForm
@@ -50,16 +53,12 @@ const SignInScreen = () => {
         <Button title="Register" onPress={() => navigation.navigate('Register')} />
       </PaddedContainer>
       <Divider />
-      <PaddedContainer>
-        <Text h4>Forgot your password?</Text>
-      </PaddedContainer>
       <ListItem onPress={() => navigation.navigate('ResetPassword')} bottomDivider>
         <ListItem.Content>
           <ListItem.Subtitle>Reset Password</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-      <Divider />
       <ListItem onPress={() => navigation.navigate('TermsAndConditions')} bottomDivider>
         <ListItem.Content>
           <ListItem.Subtitle>Terms And Conditions</ListItem.Subtitle>
@@ -72,9 +71,6 @@ const SignInScreen = () => {
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-      <PaddedContainer>
-        <Text h4>Need help?</Text>
-      </PaddedContainer>
       <Contact />
       <Divider />
       <Footer />
@@ -82,7 +78,7 @@ const SignInScreen = () => {
   );
 };
 const styles = StyleSheet.create({
-  imageStyle: { alignSelf: 'center', height: 120 },
+  imageStyle: { alignSelf: 'center', height: 120, marginTop: 20, marginBottom: 10 },
 });
 
 export default SignInScreen;

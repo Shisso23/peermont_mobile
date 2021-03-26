@@ -25,55 +25,47 @@ const AuthNavigator = () => {
         component={SignInScreen}
         options={{
           headerShown: false,
-          title: 'Log In',
+          title: '',
         }}
       />
 
-      <AuthStack.Screen
-        name="Register"
-        component={RegisterScreen}
-        options={{ title: 'Register' }}
-      />
+      <AuthStack.Screen name="Register" component={RegisterScreen} options={{ title: '' }} />
 
       <AuthStack.Screen
         name="TermsAndConditions"
         component={TermsAndConditionsScreen}
-        options={{ title: 'Terms And Conditions' }}
+        options={{ title: '' }}
       />
       <AuthStack.Screen
         name="PrivacyPolicy"
         component={PrivacyPolicyScreen}
-        options={{ title: 'Privacy Policy' }}
+        options={{ title: '' }}
       />
-      <AuthStack.Screen
-        name="RegisterOtp"
-        component={RegisterOtpScreen}
-        options={{ title: 'One Time Pin' }}
-      />
+      <AuthStack.Screen name="RegisterOtp" component={RegisterOtpScreen} options={{ title: '' }} />
       <AuthStack.Screen
         name="RegisterSetPassword"
         component={RegisterSetPasswordScreen}
-        options={{ title: 'Set Password' }}
+        options={{ title: '' }}
       />
       <AuthStack.Screen
         name="RegisterError"
         component={RegisterErrorScreen}
-        options={{ title: 'Register Error' }}
+        options={{ title: '' }}
       />
       <AuthStack.Screen
         name="ResetPassword"
         component={ResetPasswordScreen}
-        options={{ title: 'Reset Password' }}
+        options={{ title: '' }}
       />
       <AuthStack.Screen
         name="ResetPasswordOtp"
         component={ResetPasswordOtpScreen}
-        options={{ title: 'One Time Pin' }}
+        options={{ title: '' }}
       />
       <AuthStack.Screen
         name="ResetPasswordSetPassword"
         component={ResetPasswordSetPasswordScreen}
-        options={{ title: 'New Password' }}
+        options={{ title: '' }}
       />
     </AuthStack.Navigator>
   );

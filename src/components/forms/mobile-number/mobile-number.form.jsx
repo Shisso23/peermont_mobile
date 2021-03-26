@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { Button, Input, Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getFormError } from '../form-utils';
-import { flashService, infoPopUpService } from '../../../services';
+import { infoPopUpService } from '../../../services';
 import { CountrySelect } from '../../atoms';
 import { mobileNumberSchema } from '../form-validaton-schemas';
 
@@ -26,10 +26,7 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
         actions.setSubmitting(false);
         if (_.get(error, 'statusCode') === 422) {
           const apiErrors = error.errors;
-          flashService.error('Form Submission Error');
           actions.resetForm({ values: formData, status: { apiErrors } });
-        } else {
-          flashService.error(error.message);
         }
       });
   };
@@ -61,7 +58,7 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
               onChangeText={handleChange('mobileNumber')}
               onBlur={handleBlur('mobileNumber')}
               keyboardType="phone-pad"
-              label="Mobile Number"
+              placeholder="Mobile Number (e.g. 0821234567)"
               errorMessage={error('mobileNumber')}
               onSubmitEditing={handleSubmit}
               leftIcon={() => (

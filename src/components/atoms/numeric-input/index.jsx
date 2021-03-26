@@ -62,9 +62,9 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, ...rest }) => 
 const styles = StyleSheet.create({
   cell: {
     backgroundColor: colors.white,
-    borderBottomWidth: 0.28,
-    borderColor: colors.inputBorderColor,
-    borderRadius: 8,
+    borderBottomWidth: 0.5,
+    borderColor: colors.black,
+    borderRadius: 0,
     height: 40,
     width: 42,
   },

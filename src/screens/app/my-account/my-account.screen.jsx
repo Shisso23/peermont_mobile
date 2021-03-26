@@ -16,6 +16,7 @@ import {
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { AddButton, Watermark } from '../../../components/atoms';
 import { useRefreshHeaderButton } from '../../../hooks';
+import { custom } from '../../../../theme/theme.styles';
 
 const MyAccountScreen = () => {
   const { loading } = useSelector((reducers) => reducers.userReducer);
@@ -45,10 +46,12 @@ const MyAccountScreen = () => {
     <>
       <Watermark />
       <ScrollContainer>
-        <Divider />
+        <PaddedContainer>
+          <Text style={custom.centerTitle}>My Account</Text>
+        </PaddedContainer>
         <PaddedContainer>
           <View style={styles.rowAlign}>
-            <Text h3>Winners Circle Cards</Text>
+            <Text h4>Winners Circle Cards</Text>
             <AddButton
               onPress={() => navigation.navigate('AddMembershipCard')}
               containerStyle={styles.addPadding}
@@ -69,7 +72,7 @@ const MyAccountScreen = () => {
         )}
         <PaddedContainer>
           <View style={styles.rowAlign}>
-            <Text h3>Credit Cards</Text>
+            <Text h4>Credit Cards</Text>
             <AddButton
               onPress={() => navigation.navigate('AddCreditCard')}
               containerStyle={styles.addPadding}
@@ -92,7 +95,7 @@ const MyAccountScreen = () => {
         )}
         <PaddedContainer>
           <View style={styles.rowAlign}>
-            <Text h3>Bank Accounts</Text>
+            <Text h4>Bank Accounts</Text>
             <AddButton
               onPress={() => navigation.navigate('AddBankAccount')}
               containerStyle={styles.addPadding}
@@ -125,7 +128,7 @@ const MyAccountScreen = () => {
         <Divider />
         <PaddedContainer>
           <View style={styles.rowAlign}>
-            <Text h3>Biometrics Login</Text>
+            <Text h4>Biometrics Login</Text>
             <BiometricSettings />
           </View>
         </PaddedContainer>

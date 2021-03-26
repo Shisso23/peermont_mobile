@@ -10,7 +10,7 @@ const BackHeader = (props) => {
       <Icon
         type="font-awesome-5"
         name="caret-left"
-        size={30}
+        size={20}
         color={colors.white}
         containerStyle={styles.iconContainerStyle}
       />

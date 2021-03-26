@@ -13,7 +13,7 @@ const BurgerHeader = (props) => {
       <Icon
         type="font-awesome-5"
         name="bars"
-        size={14}
+        size={15}
         color={colors.white}
         containerStyle={styles.iconContainerStyle}
       />

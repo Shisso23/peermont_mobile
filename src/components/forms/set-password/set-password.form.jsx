@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import { Button, Input, Divider } from 'react-native-elements';
 import { getFormError } from '../form-utils';
 import { passwordSchema, confirmPasswordSchema } from '../form-validaton-schemas';
-import { flashService } from '../../../services';
 
 const SetPasswordForm = ({ submitForm, onSuccess, initialValues }) => {
   const confirmPasswordRef = useRef(null);
@@ -30,7 +29,6 @@ const SetPasswordForm = ({ submitForm, onSuccess, initialValues }) => {
     submitForm(formData)
       .then(() => {
         actions.setSubmitting(false);
-        flashService.success();
         onSuccess();
       })
       .catch((error) => _handleFormSubmitError(error, actions, formData));
@@ -57,7 +55,7 @@ const SetPasswordForm = ({ submitForm, onSuccess, initialValues }) => {
         return (
           <>
             <Input
-              label="Password"
+              placeholder="Password"
               secureTextEntry
               value={values.password}
               onChangeText={handleChange('password')}
@@ -67,7 +65,7 @@ const SetPasswordForm = ({ submitForm, onSuccess, initialValues }) => {
             />
             <Input
               ref={confirmPasswordRef}
-              label="Confirm Password"
+              placeholder="Confirm Password"
               secureTextEntry
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}

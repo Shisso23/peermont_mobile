@@ -46,93 +46,93 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="TermsAndConditions"
       component={TermsAndConditionsScreen}
-      options={{ headerShown: true, title: 'Terms And Conditions' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="PrivacyPolicy"
       component={PrivacyPolicyScreen}
-      options={{ headerShown: true, title: 'Privacy Policy' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="PalaceBet"
       component={PalaceBetScreen}
-      options={{ headerShown: true, title: 'Palace Bet' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="Transactions"
       component={TransactionsScreen}
-      options={{ headerShown: true, title: 'Mobile App Transactions' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="Notifications"
       component={NotificationsScreen}
-      options={{ headerShown: true, title: 'Notifications' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="AddCreditCard"
       component={AddCreditCardScreen}
-      options={{ headerShown: true, title: 'Add Credit Card' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="AddBankAccount"
       component={AddBankAccountScreen}
-      options={{ headerShown: true, title: 'Add Bank Account' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="UploadBankAccountDocument"
       component={UploadBankAccountDocumentScreen}
-      options={{ headerShown: true, title: 'Upload Document' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="EditBankAccount"
       component={EditBankAccountScreen}
-      options={{ headerShown: true, title: 'Edit Bank Account' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="AddMembershipCard"
       component={AddMembershipCardScreen}
-      options={{ headerShown: true, title: 'Add Winners Circle Card' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="HealthSurvey"
       component={HealthSurveyScreen}
-      options={{ headerShown: true, title: 'Health Survey' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="EnterMembershipCardPin"
       component={MembershipCardPinScreen}
-      options={{ headerShown: true, title: 'Winners Circle Card PIN' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="MembershipCardDetail"
       component={MembershipCardDetailScreen}
-      options={{ headerShown: true, title: 'Winners Circle Card' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="PayOut"
       component={PayOutScreen}
-      options={{ headerShown: true, title: 'Pay Out' }}
+      options={{ headerShown: true, title: '' }}
     />
 
     <AppStack.Screen
       name="PaymentOtp"
       component={PaymentOtpScreen}
-      options={{ headerShown: true, title: 'Payment OTP' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="TopUp"
       component={TopUpScreen}
-      options={{ headerShown: true, title: 'Top Up' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="TopUpComplete"
       component={TopUpCompleteScreen}
-      options={{ headerShown: true, title: 'Complete Top Up' }}
+      options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
       name="PayOutComplete"
       component={PayOutCompleteScreen}
-      options={{ headerShown: true, title: 'Complete Pay Out' }}
+      options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>
 );
@@ -148,7 +148,7 @@ function DrawerNavigation() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Peermont',
+          title: '',
           headerShown: true,
         }}
       />
@@ -156,7 +156,7 @@ function DrawerNavigation() {
         name="MyAccount"
         component={MyAccountScreen}
         options={{
-          title: 'My Account',
+          title: '',
           headerShown: true,
         }}
       />

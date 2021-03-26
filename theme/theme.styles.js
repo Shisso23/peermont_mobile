@@ -8,11 +8,21 @@ export const custom = {
     fontFamily: variables.fontFamilySecondary,
     fontSize: 28,
     fontWeight: 'normal',
-    marginBottom: 5,
-    marginTop: 10,
+    marginBottom: 10,
+    marginTop: 20,
     textAlign: 'center',
   },
   centerSubtitle: {
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  centerTitleSmall: {
+    color: colors.gold,
+    fontFamily: variables.fontFamilySecondary,
+    fontSize: 22,
+    fontWeight: 'normal',
+    marginBottom: 10,
+    marginTop: 20,
     textAlign: 'center',
   },
   errorStyle: {
@@ -38,6 +48,41 @@ export const custom = {
   disabledTouchable: {
     backgroundColor: colors.transparent,
   },
+  surveyContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.veryLightGrey,
+    paddingBottom: 20,
+  },
+  surveyText: {
+    marginLeft: 30,
+  },
+  surveyTitle: {
+    fontSize: 18,
+    fontFamily: 'OpenSans-Bold',
+    color: colors.greyBlack,
+  },
+  surveySubText: {
+    fontSize: 13,
+    fontFamily: 'OpenSans-Regular',
+    color: colors.darkGrey,
+  },
+  surveyButton: {
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    flexDirection: 'row',
+    backgroundColor: colors.veryLightGrey,
+    borderRadius: 35,
+    padding: 13,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginHorizontal: 10,
+  },
 };
 
 export const globalScreenOptions = {
@@ -59,6 +104,7 @@ export const globalScreenOptions = {
     color: colors.white,
   },
   headerTintColor: colors.white,
+  cardStyle: { backgroundColor: 'white' },
 };
 
 export const drawerStyle = {

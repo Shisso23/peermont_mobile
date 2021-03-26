@@ -58,9 +58,6 @@ const RegisterScreen = () => {
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-      <PaddedContainer>
-        <Text h4>Need help?</Text>
-      </PaddedContainer>
       <Contact />
       <Divider />
     </KeyboardScrollContainer>

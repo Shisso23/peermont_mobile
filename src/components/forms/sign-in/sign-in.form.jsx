@@ -25,7 +25,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
     } else if (error.statusCode === 400) {
-      actions.setFieldError('mobileNumber', 'Incorrect login credetials provided');
+      actions.setFieldError('mobileNumber', 'Invalid mobile number or password');
     } else {
       actions.setFieldError('mobileNumber', error.message);
     }
@@ -67,8 +67,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               value={values.mobileNumber}
               onChangeText={handleChange('mobileNumber')}
               keyboardType="phone-pad"
-              label="Mobile Number"
-              placeholder="e.g. 0821234567"
+              placeholder="Mobile Number (e.g. 0821234567)"
               onBlur={handleBlur('mobileNumber')}
               onSubmitEditing={() => passwordRef.current.focus()}
               errorMessage={error('mobileNumber')}
@@ -95,7 +94,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               ref={passwordRef}
               value={values.password}
               onChangeText={handleChange('password')}
-              label="Password"
+              placeholder="Password"
               onBlur={handleBlur('password')}
               secureTextEntry
               errorMessage={error('password')}

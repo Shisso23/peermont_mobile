@@ -5,6 +5,7 @@ import { custom } from './theme.styles';
 const theme = {
   colors: {
     primary: colors.gold,
+    background: '#ffffff',
   },
   Text: {
     style: {
@@ -44,7 +45,7 @@ const theme = {
       height: 50,
     },
     containerStyle: {
-      marginHorizontal: 30,
+      marginHorizontal: 50,
     },
   },
   Divider: {
@@ -53,6 +54,7 @@ const theme = {
     backgroundColor: 'transparent',
   },
   Input: {
+    placeholderTextColor: colors.gray,
     labelStyle: {
       color: colors.black,
       marginBottom: 3,
@@ -62,9 +64,9 @@ const theme = {
     errorStyle: custom.errorStyle,
     inputContainerStyle: {
       backgroundColor: colors.white,
-      borderColor: '#bcbdc1',
-      borderBottomWidth: 0.28,
-      borderRadius: 8,
+      borderColor: '#000000',
+      borderBottomWidth: 0.5,
+      borderRadius: 0,
       paddingLeft: 10,
       paddingRight: 5,
     },
@@ -90,6 +92,7 @@ const theme = {
     },
     containerStyle: {
       backgroundColor: colors.white,
+      paddingHorizontal: 20,
     },
     disabledStyle: {
       backgroundColor: colors.grey,

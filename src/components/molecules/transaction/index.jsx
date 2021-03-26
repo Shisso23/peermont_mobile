@@ -4,7 +4,6 @@ import { ListItem } from 'react-native-elements';
 import _ from 'lodash';
 import Moment from 'moment';
 import PropTypes from 'prop-types';
-import { custom } from '../../../../theme/theme.styles';
 
 const Transaction = ({ transaction }) => {
   const getPayableNumber = (item) => {
@@ -24,11 +23,7 @@ const Transaction = ({ transaction }) => {
   const status = _.get(transaction, 'status');
 
   return (
-    <ListItem
-      key={_.get(transaction, 'id')}
-      bottomDivider
-      containerStyle={custom.listItemContainerStyle}
-    >
+    <ListItem key={_.get(transaction, 'id')} bottomDivider>
       <ListItem.Content>
         <ListItem.Title>{payableType}</ListItem.Title>
         <ListItem.Subtitle>{updatedAt}</ListItem.Subtitle>

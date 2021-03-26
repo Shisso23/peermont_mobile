@@ -25,8 +25,9 @@ const Contact = () => {
       </ListItem>
       <ListItem bottomDivider>
         <ListItem.Content>
-          <ListItem.Title>Black Card Members</ListItem.Title>
-          <ListItem.Subtitle>Please contact your host for assistance.</ListItem.Subtitle>
+          <ListItem.Subtitle>
+            Black Card Members, please contact your host for assistance.
+          </ListItem.Subtitle>
         </ListItem.Content>
       </ListItem>
     </>

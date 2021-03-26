@@ -8,7 +8,7 @@ const PaddedContainer = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 50,
     paddingVertical: 15,
   },
 });

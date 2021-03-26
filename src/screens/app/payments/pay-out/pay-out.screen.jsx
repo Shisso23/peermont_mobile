@@ -39,7 +39,8 @@ const PayOutScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Pay Out</Text>
         <Text style={custom.centerSubtitle}>
-          Payouts may take 48 hours to process, not including weekends and public holidays.
+          Enter an amount and select a bank account. Payouts may take 48 hours to process, not
+          including weekends and public holidays.
         </Text>
         <Text h4 style={custom.centerSubtitle}>
           Your balance is {_.get(route, 'params.balance')}
