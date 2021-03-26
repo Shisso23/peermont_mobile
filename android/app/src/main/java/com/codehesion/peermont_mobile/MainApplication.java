@@ -1,4 +1,4 @@
-package com.peermont;
+package com.codehesion.peermont_mobile;
 
 import android.app.Application;
 import android.content.Context;

@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.peermont"
+        applicationId "com.codehesion.peermont_mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
