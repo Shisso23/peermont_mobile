@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:506320111286:android:17239b3d6f3cf1397e0817",
         "android_client_info": {
-          "package_name": "com.peermont"
+          "package_name": "com.codehesion.peermont_mobile"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "506320111286-ge1cvr5uqaa1haqnm23kf5ueikn463rc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.peermont",
+            "package_name": "com.codehesion.peermont_mobile",
             "certificate_hash": "e49210cb8a15d67a709e482527a12881e9d34586"
           }
         },
