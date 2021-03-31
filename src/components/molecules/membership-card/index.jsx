@@ -31,7 +31,7 @@ const MembershipCard = ({ hasDelete, card, onPress, disabled }) => {
     >
       <Avatar size="medium" imageProps={{ resizeMode: 'contain' }} source={imagePath} />
       <ListItem.Content>
-        <ListItem.Title h4>{card.cardNumber}</ListItem.Title>
+        <ListItem.Title>{card.cardNumber}</ListItem.Title>
         <ListItem.Subtitle>{card.tierName}</ListItem.Subtitle>
       </ListItem.Content>
       {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}

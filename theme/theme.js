@@ -19,17 +19,14 @@ const theme = {
     },
     h2Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontWeight: 'normal',
       fontSize: 24,
     },
     h3Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontWeight: 'normal',
       fontSize: 20,
     },
     h4Style: {
       fontFamily: variables.fontFamilySecondary,
-      fontWeight: 'normal',
       fontSize: 16,
     },
   },
@@ -59,7 +56,6 @@ const theme = {
       color: colors.black,
       marginBottom: 3,
       fontFamily: variables.fontFamilySecondary,
-      fontWeight: 'normal',
     },
     errorStyle: custom.errorStyle,
     inputContainerStyle: {

@@ -58,7 +58,7 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
               onChangeText={handleChange('mobileNumber')}
               onBlur={handleBlur('mobileNumber')}
               keyboardType="phone-pad"
-              placeholder="Mobile Number (e.g. 0821234567)"
+              placeholder="Mobile (e.g. 0821234567)"
               errorMessage={error('mobileNumber')}
               onSubmitEditing={handleSubmit}
               leftIcon={() => (
