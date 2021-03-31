@@ -67,7 +67,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               value={values.mobileNumber}
               onChangeText={handleChange('mobileNumber')}
               keyboardType="phone-pad"
-              placeholder="Mobile Number (e.g. 0821234567)"
+              placeholder="Mobile (e.g. 0821234567)"
               onBlur={handleBlur('mobileNumber')}
               onSubmitEditing={() => passwordRef.current.focus()}
               errorMessage={error('mobileNumber')}
