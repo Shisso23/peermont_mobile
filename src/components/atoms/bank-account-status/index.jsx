@@ -16,6 +16,11 @@ const BankAccountStatus = ({ status }) => {
     icon = 'check-circle';
     color = colors.success;
     textStyle = { color };
+  } else if (status === 'approval_required') {
+    icon = 'clock';
+    color = colors.warning;
+    textStyle = { color };
+    status = 'Awaiting approval';
   } else {
     icon = 'times';
     color = colors.danger;

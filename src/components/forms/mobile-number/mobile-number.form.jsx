@@ -75,7 +75,9 @@ const MobileNumberForm = ({ submitForm, onSuccess, initialValues }) => {
                   name="info-circle"
                   size={15}
                   onPress={() => {
-                    infoPopUpService.show('Enter your mobile number linked to your account.');
+                    infoPopUpService.show(
+                      'Enter your mobile number linked to your Winners Circle account.',
+                    );
                   }}
                 />
               )}

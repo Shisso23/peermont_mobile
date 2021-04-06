@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { openUserPhoneApp } from '../../../helpers';
+import { openUserPhoneApp, openEmailApp } from '../../../helpers';
 import config from '../../../config';
 
 const Contact = () => {
@@ -16,7 +16,7 @@ const Contact = () => {
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-      <ListItem bottomDivider>
+      <ListItem onPress={() => openEmailApp(config.customerCareEmail)} bottomDivider>
         <ListItem.Subtitle>Email</ListItem.Subtitle>
         <ListItem.Content style={styles.alignRight}>
           <ListItem.Subtitle>customercare@peermont.com</ListItem.Subtitle>

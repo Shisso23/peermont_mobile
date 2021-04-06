@@ -1,22 +1,21 @@
 import React, { useEffect } from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import { StyleSheet, View } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Input, Text, ListItem, CheckBox } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, ListItem } from 'react-native-elements';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import { getFormError } from '../form-utils';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import { paymentAmountSchema, topupCreditCardIdSchema } from '../form-validaton-schemas';
 import { PaddedContainer } from '../../containers';
-
-import { custom } from '../../../../theme/theme.styles';
 import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { LoadingComponent, CreditCard } from '../../molecules';
 import { CurrencyIcon, AddButton } from '../../atoms';
-
+import { getFormError } from '../form-utils';
+import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
 
 const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
@@ -92,29 +91,27 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
               !_.isEmpty(creditCards) ? (
                 <>
                   {creditCards.map((creditCard) => {
-                    const shouldHighlight = values.creditCardId === creditCard.id && !values.isEft;
+                    const isSelected = values.creditCardId === creditCard.id && !values.isEft;
+
                     return (
                       <CreditCard
                         key={creditCard.id}
                         card={creditCard}
-                        style={shouldHighlight ? custom.selectedItemStyle : {}}
                         onPress={() => {
                           setFieldValue('creditCardId', creditCard.id);
                           setFieldValue('isEft', false);
                         }}
+                        hasCheckBox
+                        isCheckBoxSelected={isSelected}
                       />
                     );
                   })}
-                  <ListItem
-                    bottomDivider
-                    disabledStyle={custom.selectedItemStyle}
-                    disabled={values.isEft}
-                    onPress={() => setFieldValue('isEft', true)}
-                  >
+                  <ListItem bottomDivider onPress={() => setFieldValue('isEft', true)}>
                     <Icon name="money-bill" size={40} color={colors.primary} />
                     <ListItem.Content>
                       <ListItem.Title>Instant EFT</ListItem.Title>
                     </ListItem.Content>
+                    <CheckBox checked={values.isEft} disabled />
                   </ListItem>
                 </>
               ) : (

@@ -4,7 +4,6 @@ import {
   userMembershipCardModel,
   membershipCardModel,
   apiMembershipCardModel,
-  membershipCardPinModel,
 } from '../../../models';
 
 const _createAndReturnUserMembershipCardModel = (apiResponse) => {
@@ -19,8 +18,6 @@ const getMembershipCardBalance = (id, formData) => {
     .then(_createAndReturnUserMembershipCardModel)
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.warn(err);
-      err.errors = membershipCardPinModel(err.errors);
       return Promise.reject(err);
     });
 };

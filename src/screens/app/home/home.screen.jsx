@@ -7,30 +7,27 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import _ from 'lodash';
 
-import colors from '../../../../theme/theme.colors';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useMembershipCard, useBiometricRegister } from '../../../hooks';
-import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import { hasIncomingNotification } from '../../../reducers/notification-reducer/notification.actions';
 import getCardType from '../../../helpers/getCardType';
 import { custom } from '../../../../theme/theme.styles';
+import colors from '../../../../theme/theme.colors';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const biometricRegister = useBiometricRegister();
-  useFocusEffect(exitAppOnHardwarePressListener);
-  const { user } = useSelector((reducers) => reducers.userReducer);
-  const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-
   const { viewMembershipCard } = useMembershipCard();
 
+  const { user } = useSelector((reducers) => reducers.userReducer);
+  const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
+
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
   const _handleHealthSurveyPress = () => {
-    dispatch(initiateHealthSurveyAction()).then(() => {
-      navigation.navigate('HealthSurvey');
-    });
+    navigation.navigate('HealthSurvey');
   };
 
   const _setActiveSlideIndex = (index) => {
@@ -46,6 +43,8 @@ const HomeScreen = () => {
   useEffect(() => {
     biometricRegister();
   }, []);
+
+  useFocusEffect(exitAppOnHardwarePressListener);
 
   // eslint-disable-next-line react/prop-types
   const _renderMembershipCardItem = ({ item, index }) => {

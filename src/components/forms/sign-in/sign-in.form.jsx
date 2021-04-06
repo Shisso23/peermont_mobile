@@ -12,7 +12,7 @@ import { getFormError } from '../form-utils';
 import { CountrySelect } from '../../atoms';
 import { infoPopUpService } from '../../../services';
 
-const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
+const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues }) => {
   const passwordRef = useRef(null);
   const validationSchema = Yup.object().shape({
     mobileNumber: mobileNumberSchema,
@@ -38,7 +38,10 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
         actions.setSubmitting(false);
         onSuccess();
       })
-      .catch((error) => _handleFormSubmitError(error, actions, formData));
+      .catch((error) => {
+        onFailure();
+        _handleFormSubmitError(error, actions, formData);
+      });
   };
 
   return (
@@ -54,7 +57,6 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
         handleSubmit,
         values,
         errors,
-        isSubmitting,
         handleBlur,
         touched,
         status,
@@ -85,7 +87,9 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
                   name="info-circle"
                   size={15}
                   onPress={() => {
-                    infoPopUpService.show('Enter your mobile number linked to your account.');
+                    infoPopUpService.show(
+                      'Enter your mobile number linked to your Winners Circle Account.',
+                    );
                   }}
                 />
               )}
@@ -102,7 +106,7 @@ const SignInForm = ({ submitForm, onSuccess, initialValues }) => {
               onSubmitEditing={handleSubmit}
             />
             <Divider />
-            <Button title="Log In" onPress={handleSubmit} loading={isSubmitting} />
+            <Button title="Log In" onPress={handleSubmit} />
           </>
         );
       }}
@@ -114,10 +118,12 @@ SignInForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
+  onFailure: PropTypes.func,
 };
 
 SignInForm.defaultProps = {
   onSuccess: () => null,
+  onFailure: () => null,
 };
 
 export default SignInForm;

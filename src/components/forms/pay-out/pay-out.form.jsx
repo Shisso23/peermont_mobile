@@ -1,35 +1,30 @@
-import React, { useEffect } from 'react';
-import _ from 'lodash';
-import { View, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Button, Input, ListItem, Text } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input, Text, ListItem } from 'react-native-elements';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+import { custom } from '../../../../theme/theme.styles';
+
 import { getFormError } from '../form-utils';
 import { PaddedContainer } from '../../containers';
-
-import { custom } from '../../../../theme/theme.styles';
-import { LoadingComponent, BankAccount } from '../../molecules';
-import { getBankAccountsAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
+import { BankAccount, LoadingComponent } from '../../molecules';
 import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schemas';
-import { CurrencyIcon, AddButton } from '../../atoms';
+import { AddButton, CurrencyIcon } from '../../atoms';
 
 const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
+  const navigation = useNavigation();
+
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
   const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
 
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     amount: paymentAmountSchema(currentMembershipCard.balance),
     bankAccountId: payOutBankIdSchema,
   });
-
-  useEffect(() => {
-    dispatch(getBankAccountsAction());
-  }, []);
 
   const _handleFormSubmitError = (error, actions, formData) => {
     actions.setSubmitting(false);
@@ -57,6 +52,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
       initialStatus={{ apiErrors: {} }}
       onSubmit={_handleSubmission}
       validationSchema={validationSchema}
+      enableReinitialize
     >
       {({
         handleChange,
@@ -93,15 +89,17 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
               !_.isEmpty(bankAccounts) ? (
                 <>
                   {bankAccounts.map((bankAccount) => {
-                    const shouldHighlight = values.bankAccountId === bankAccount.id;
+                    const isSelected = values.bankAccountId === bankAccount.id;
+
                     return (
                       <BankAccount
                         key={bankAccount.id}
-                        style={shouldHighlight ? custom.selectedItemStyle : {}}
                         account={bankAccount}
                         onPress={() => setFieldValue('bankAccountId', bankAccount.id)}
                         disabled={_.get(bankAccount, 'status') !== 'verified'}
                         hasAccountStatus
+                        hasCheckBox
+                        isCheckBoxSelected={isSelected}
                       />
                     );
                   })}

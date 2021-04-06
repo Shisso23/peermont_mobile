@@ -1,13 +1,12 @@
 import React from 'react';
-
 import { StyleSheet, View } from 'react-native';
-import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
-import { useNavigation } from '@react-navigation/native';
-
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import { Text } from 'react-native-elements';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getBuildNumber, getVersion } from 'react-native-device-info';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
+
 import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import DrawerIcon from './drawer-icon';
 import colors from '../../../../theme/theme.colors';

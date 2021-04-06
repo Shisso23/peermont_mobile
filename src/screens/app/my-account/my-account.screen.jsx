@@ -97,10 +97,11 @@ const MyAccountScreen = () => {
         )}
         <PaddedContainer>
           <View style={styles.rowAlign}>
-            <Text h4>Bank Accounts</Text>
+            <Text h4>Payout Bank Accounts</Text>
             <AddButton
               onPress={() => navigation.navigate('AddBankAccount')}
               containerStyle={styles.addPadding}
+              disabled={!_.isEmpty(bankAccounts)}
             />
           </View>
         </PaddedContainer>
@@ -130,7 +131,7 @@ const MyAccountScreen = () => {
         <Divider />
         <PaddedContainer>
           <View style={styles.rowAlign}>
-            <Text h4>Biometrics Login</Text>
+            <Text h4>Biometric Login</Text>
             <BiometricSettings />
           </View>
         </PaddedContainer>

@@ -15,8 +15,7 @@ const CompletedHealthSurvey = ({ survey }) => {
   const completedAt = moment(_.get(survey, 'created_at')).format('YYYY-MM-DD HH:mm:ss');
   const expiresAt = moment(_.get(survey, 'created_at')).add('8', 'h').format('YYYY-MM-DD HH:mm:ss');
 
-  const successText = 'Thanks for your answers, please show this screen to the guards upon entry.';
-
+  const successText = 'Thanks for your answers, please show this pass to the guards upon entry.';
   const failedText =
     'Thanks for your answers, unfortunately we have identified a possible risk in your assessment and cannot allow access.';
 
@@ -36,9 +35,7 @@ const CompletedHealthSurvey = ({ survey }) => {
         )}
 
         <Divider />
-        <Text style={custom.centerSubtitle}>
-          {success ? 'This screen is valid for 8 hours' : null}
-        </Text>
+        <Text style={custom.centerSubtitle}>{success && 'This pass is valid for 8 hours'}</Text>
 
         <Divider />
         <Text style={custom.centerSubtitle}>Created at: {completedAt}</Text>

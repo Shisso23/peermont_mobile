@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Divider, Text } from 'react-native-elements';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 
-import { getFormError } from '../form-utils';
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
 import { custom } from '../../../../theme/theme.styles';
@@ -24,15 +23,20 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
       })
       .catch((error) => {
         actions.setSubmitting(false);
+        const apiErrors = _.get(error, 'errors');
+
         if (_.get(error, 'statusCode') === 422) {
-          const apiErrors = error.errors;
           actions.resetForm({ status: { apiErrors } });
         } else {
-          actions.setFieldError('numeric', error.message);
-          actions.resetForm();
+          actions.setFieldValue('numeric', '');
+          actions.setFieldError('numeric', apiErrors);
         }
       });
   };
+
+  const _renderErrorMessage = (message) => (
+    <Text style={[custom.errorStyle, styles.errorStyle]}>{message}</Text>
+  );
 
   return (
     <Formik
@@ -43,8 +47,7 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
       enableReinitialize
       innerRef={ref}
     >
-      {({ handleSubmit, values, errors, isSubmitting, touched, status, setFieldValue }) => {
-        const error = (name) => getFormError(name, { touched, status, errors });
+      {({ handleSubmit, values, isSubmitting, setFieldValue }) => {
         return (
           <>
             <NumericInput
@@ -54,11 +57,9 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}
             />
+            <Divider />
             <View style={styles.messageStyle}>
-              {isSubmitting && <Text style={styles.submittingStyle}>Submitting...</Text>}
-              {error('numeric') && (
-                <Text style={[custom.errorStyle, styles.errorStyle]}>{error('numeric')}</Text>
-              )}
+              <ErrorMessage name="numeric" render={_renderErrorMessage} />
             </View>
           </>
         );
@@ -74,10 +75,6 @@ const styles = StyleSheet.create({
   },
   messageStyle: {
     height: 20,
-  },
-  submittingStyle: {
-    marginTop: 10,
-    textAlign: 'center',
   },
 });
 
