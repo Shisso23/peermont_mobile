@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Text } from 'react-native-elements';
 import { ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,6 @@ const MembershipCardPinScreen = () => {
   const { currentMembershipCard, isLoading } = useSelector(
     (reducers) => reducers.membershipCardReducer,
   );
-  const [isAutoFill, setIsAutoFill] = useState(false);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(getMembershipCardBalanceAction(formData)).then(() => {});
@@ -46,7 +45,6 @@ const MembershipCardPinScreen = () => {
   useEffect(() => {
     const { current } = formRef;
     if (!_.isNull(current) && cardPin.length === 4) {
-      setIsAutoFill(true);
       current.handleSubmit();
     }
   }, [cardPin]);
@@ -68,10 +66,14 @@ const MembershipCardPinScreen = () => {
           ref={formRef}
         />
       </PaddedContainer>
-      <Modal visible={isLoading && isAutoFill}>
+      <Modal
+        visible={isLoading}
+        transparent
+        backgroundFade
+        backgroundFadeColor={colors.whiteTransparent}
+      >
         <View>
           <ActivityIndicator animating size="large" color={colors.gold} />
-          <Text>Loading Card</Text>
         </View>
       </Modal>
     </KeyboardScrollContainer>

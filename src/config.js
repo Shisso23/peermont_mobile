@@ -9,6 +9,7 @@ export default {
   clientId: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
   callCentreNumber: '0119281000',
+  customerCareEmail: 'customercare@peermont.com',
   autoSignOutTimeout: 120,
   fcmTokenKey: 'fcmToken',
   fcmEnabled: 'fcmEnabled',

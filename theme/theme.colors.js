@@ -19,4 +19,5 @@ export default {
   cardInfoBackGroundGrey: 'rgba(95,95,95,0.8)',
   inputBorderColor: '#bcbdc1',
   reactBackgroundColor: '#F2F2F2',
+  whiteTransparent: 'rgba(255,255,255,0.5)',
 };

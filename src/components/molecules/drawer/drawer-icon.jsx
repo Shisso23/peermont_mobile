@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import PropTypes from 'prop-types';
+
 import colors from '../../../../theme/theme.colors';
 
 const DrawerIcon = ({ name }) => (
@@ -13,6 +14,7 @@ const DrawerIcon = ({ name }) => (
 DrawerIcon.propTypes = {
   name: PropTypes.string.isRequired,
 };
+
 const styles = StyleSheet.create({
   iconSize: 20,
   wrapper: {
@@ -22,4 +24,5 @@ const styles = StyleSheet.create({
     width: 23,
   },
 });
+
 export default DrawerIcon;

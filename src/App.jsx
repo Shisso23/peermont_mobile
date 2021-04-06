@@ -6,39 +6,31 @@ import messaging from '@react-native-firebase/messaging';
 
 import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
-import { firebaseService, userAuthService } from './services';
+import { firebaseService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import { hasIncomingNotification } from './reducers/notification-reducer/notification.actions';
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
-import {
-  loadAppDataAction,
-  loadAppDataForSignedInUserAction,
-} from './reducers/app-reducer/app.actions';
+import { loadAppDataAction } from './reducers/app-reducer/app.actions';
 import { AutoSignOut } from './components/atoms';
-import { useBiometricLogin } from './hooks';
+import { useBiometricLogin, useAuthentication } from './hooks';
 
 const App = () => {
   const dispatch = useDispatch();
   const biometricLogin = useBiometricLogin();
+  const { authenticate } = useAuthentication();
 
   const _continueToApp = () => {
     dispatch(setIsAuthenticatedAction(true));
   };
 
+  const _handleAuthFinally = () => {
+    if (Platform.OS === 'android') {
+      RNBootSplash.hide({ fade: true });
+    }
+  };
+
   const _loadAuthData = () => {
-    return userAuthService
-      .doTokensExistInLocalStorage()
-      .then((tokensExist) => {
-        if (tokensExist) {
-          return dispatch(loadAppDataForSignedInUserAction()).then(_continueToApp);
-        }
-        return Promise.resolve();
-      })
-      .finally(() => {
-        if (Platform.OS === 'android') {
-          RNBootSplash.hide({ fade: true });
-        }
-      });
+    return authenticate(_continueToApp, _handleAuthFinally);
   };
 
   const _loadAppData = () => {

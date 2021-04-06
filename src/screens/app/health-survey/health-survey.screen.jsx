@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, Divider } from 'react-native-elements';
 
-import { submitHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
-import { CompletedHealthSurvey } from '../../../components/molecules';
+import {
+  initiateHealthSurveyAction,
+  submitHealthSurveyAction,
+} from '../../../reducers/health-survey-reducer/health-survey.actions';
+import { CompletedHealthSurvey, LoadingComponent } from '../../../components/molecules';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { HealthSurveyForm } from '../../../components/forms';
 import { constructHealthSurveyAnswerModels } from '../../../models';
@@ -23,9 +26,15 @@ const HealthSurveyScreen = () => {
 
   const displayHealthSurveyForm = _.isEmpty(lastHealthSurvey) || lastHealthSurvey?.hasExpired;
 
+  useEffect(() => {
+    dispatch(initiateHealthSurveyAction());
+  }, []);
+
   useDisableBackButtonWhileLoading(isLoading);
 
-  return displayHealthSurveyForm ? (
+  return isLoading ? (
+    <LoadingComponent />
+  ) : displayHealthSurveyForm ? (
     <ScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>Health Survey</Text>

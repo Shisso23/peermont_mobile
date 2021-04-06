@@ -1,18 +1,21 @@
 import React from 'react';
 import { StyleSheet, ViewPropTypes } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import colors from '../../../../theme/theme.colors';
 
-const AddButton = ({ onPress, containerStyle }) => {
+const AddButton = ({ onPress, containerStyle, disabled }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       containerStyle={containerStyle}
       style={styles.touchableStyle}
     >
-      <Icon name="plus" backgroundColor={colors.warning} size={20} color={colors.black} />
+      {!disabled && (
+        <Icon name="plus" backgroundColor={colors.warning} size={20} color={colors.black} />
+      )}
     </TouchableOpacity>
   );
 };
@@ -20,10 +23,12 @@ const AddButton = ({ onPress, containerStyle }) => {
 AddButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   containerStyle: ViewPropTypes.style,
+  disabled: PropTypes.bool,
 };
 
 AddButton.defaultProps = {
   containerStyle: {},
+  disabled: false,
 };
 
 const styles = StyleSheet.create({

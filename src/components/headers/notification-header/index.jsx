@@ -16,7 +16,7 @@ const NotificationHeader = () => {
         <Icon
           type="font-awesome-5"
           name="inbox"
-          size={16}
+          size={20}
           color={colors.white}
           containerStyle={styles.iconContainerStyle}
         />

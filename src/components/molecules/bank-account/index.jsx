@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ViewPropTypes } from 'react-native';
-import PropTypes from 'prop-types';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar, CheckBox } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteBankAccountAction } from '../../../reducers/bank-account-reducer/bank-account.actions';
@@ -11,19 +11,35 @@ import { useBankUri } from '../../../hooks';
 import { TrashButton, BankAccountStatus } from '../../atoms';
 import { custom } from '../../../../theme/theme.styles';
 
-const BankAccount = ({ hasDelete, account, onPress, disabled, hasAccountStatus, style }) => {
-  const [isDeleting, setDeleting] = useState(false);
-  const { isLoading } = useSelector((reducer) => reducer.bankAccountReducer);
+const BankAccount = ({
+  hasDelete,
+  account,
+  onPress,
+  disabled,
+  hasAccountStatus,
+  style,
+  hasCheckBox,
+  isCheckBoxSelected,
+}) => {
+  const dispatch = useDispatch();
 
+  const [isDeleting, setDeleting] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const { isLoading } = useSelector((reducer) => reducer.bankAccountReducer);
   const { bankUri } = useBankUri(account.bankId);
 
-  const dispatch = useDispatch();
   const _handleDelete = () => {
     promptConfirmDelete('Are you sure you want to delete this item?', () => {
       setDeleting(true);
       dispatch(deleteBankAccountAction(account.id));
     });
   };
+  const _handleIsCheckBoxSelected = () => setIsChecked(isCheckBoxSelected);
+
+  useEffect(() => {
+    _handleIsCheckBoxSelected();
+  }, [isCheckBoxSelected]);
 
   return (
     <ListItem
@@ -39,8 +55,11 @@ const BankAccount = ({ hasDelete, account, onPress, disabled, hasAccountStatus, 
         <ListItem.Title>{account.accountNumber}</ListItem.Title>
         <ListItem.Subtitle>{account.accountHolder}</ListItem.Subtitle>
       </ListItem.Content>
-      {hasAccountStatus && <BankAccountStatus status={account.status} />}
+      {hasAccountStatus && (!hasCheckBox || disabled) && (
+        <BankAccountStatus status={account.status} />
+      )}
       {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}
+      {hasCheckBox && !disabled && <CheckBox checked={isChecked} disabled />}
     </ListItem>
   );
 };
@@ -52,6 +71,8 @@ BankAccount.propTypes = {
   onPress: PropTypes.func,
   hasAccountStatus: PropTypes.bool,
   style: ViewPropTypes.style,
+  hasCheckBox: PropTypes.bool,
+  isCheckBoxSelected: PropTypes.bool,
 };
 
 BankAccount.defaultProps = {
@@ -60,6 +81,8 @@ BankAccount.defaultProps = {
   hasAccountStatus: false,
   onPress: () => null,
   style: {},
+  hasCheckBox: false,
+  isCheckBoxSelected: false,
 };
 
 export default BankAccount;

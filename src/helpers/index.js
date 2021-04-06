@@ -30,3 +30,8 @@ export const openUserPhoneApp = (phoneNumber) => {
   });
   Linking.openURL(number);
 };
+
+export const openEmailApp = (emailAddress) => {
+  const email = `mailto:${emailAddress}`;
+  Linking.openURL(email);
+};

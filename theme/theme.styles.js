@@ -35,7 +35,7 @@ export const custom = {
     marginBottom: 0,
   },
   selectedItemStyle: {
-    backgroundColor: colors.gold,
+    backgroundColor: colors.transparent,
   },
   bold: {
     fontWeight: 'bold',

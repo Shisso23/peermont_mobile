@@ -15,6 +15,7 @@ export const getBankAccountsAction = () => {
       .getBankAccounts()
       .then((_bankAccounts) => {
         dispatch(setBankAccountsAction(_bankAccounts));
+        return _bankAccounts;
       })
       .finally(() => dispatch(setIsLoadingAction(false)));
   };

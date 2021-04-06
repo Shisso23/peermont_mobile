@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -16,7 +16,12 @@ const PayOutScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
+
+  const [initialBankAccountId, setInitialBankAccountId] = useState();
+
   const { isLoading } = useSelector((reducer) => reducer.paymentReducer);
+
+  const initialBankAccountValues = payOutModel({ bankAccountId: initialBankAccountId });
 
   const _handleSubmission = (formData) => {
     return dispatch(performPayoutAction(formData));
@@ -30,9 +35,25 @@ const PayOutScreen = () => {
 
   useDisableBackButtonWhileLoading(isLoading);
 
+  const _getBankAccountsAndAutoSelectFirst = () => {
+    dispatch(getBankAccountsAction()).then((resp) => {
+      const bankAccount = _.nth(resp, 0);
+      const status = _.get(bankAccount, 'status');
+
+      if (status === 'verified') {
+        const id = _.get(bankAccount, 'id');
+        setInitialBankAccountId(id);
+      }
+    });
+  };
+
   useRefreshHeaderButton(() => {
-    dispatch(getBankAccountsAction());
+    _getBankAccountsAndAutoSelectFirst();
   }, isLoading);
+
+  useEffect(() => {
+    _getBankAccountsAndAutoSelectFirst();
+  }, []);
 
   return (
     <KeyboardScrollContainer>
@@ -47,7 +68,7 @@ const PayOutScreen = () => {
         </Text>
       </PaddedContainer>
       <PayOutForm
-        initialValues={payOutModel()}
+        initialValues={initialBankAccountValues}
         submitForm={_handleSubmission}
         onSuccess={_handleSuccess}
       />

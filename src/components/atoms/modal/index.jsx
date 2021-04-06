@@ -12,7 +12,10 @@ const Modal = ({
   hasCloseButton,
   transparent,
   backgroundFade,
+  backgroundFadeColor,
 }) => {
+  const backgroundFadeStyle = { backgroundColor: backgroundFadeColor };
+
   return (
     <RNModal animationType="fade" transparent={transparent} visible={visible}>
       {hasCloseButton && (
@@ -20,7 +23,7 @@ const Modal = ({
           <Icon name="times" color={colors.white} size={20} style={styles.closeIcon} />
         </TouchableOpacity>
       )}
-      <View style={[styles.centeredView, backgroundFade ? styles.backgroundFade : null]}>
+      <View style={[styles.centeredView, backgroundFade ? backgroundFadeStyle : null]}>
         <View style={styles.modalView}>{children}</View>
       </View>
     </RNModal>
@@ -28,9 +31,6 @@ const Modal = ({
 };
 
 const styles = StyleSheet.create({
-  backgroundFade: {
-    backgroundColor: colors.cardInfoBackGroundGrey,
-  },
   centeredView: {
     alignItems: 'center',
     flex: 1,
@@ -58,6 +58,7 @@ Modal.propTypes = {
   hasCloseButton: PropTypes.bool,
   transparent: PropTypes.bool,
   backgroundFade: PropTypes.bool,
+  backgroundFadeColor: PropTypes.string,
 };
 
 Modal.defaultProps = {
@@ -65,6 +66,7 @@ Modal.defaultProps = {
   hasCloseButton: false,
   transparent: false,
   backgroundFade: false,
+  backgroundFadeColor: colors.cardInfoBackGroundGrey,
 };
 
 export default Modal;
