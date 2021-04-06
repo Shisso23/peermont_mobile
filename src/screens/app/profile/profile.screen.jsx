@@ -1,25 +1,33 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Button } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-import { UserInfoForm } from '../../../components/forms';
-import { userService } from '../../../services';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { ProfileForm } from '../../../components/forms';
+import { ScrollContainer } from '../../../components/containers';
+import { userUpdateProfileAction } from '../../../reducers/user-reducer/user.actions';
+import { flashService } from '../../../services';
 
 const ProfileScreen = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((reducers) => reducers.userReducer);
-  const navigation = useNavigation();
-  const _onFormSuccess = () => {};
+  const { signInFormData } = useSelector((reducers) => reducers.userAuthReducer);
+
+  const _handleSubmission = (formData) => {
+    return dispatch(userUpdateProfileAction(formData));
+  };
+
+  const _handleFormSuccess = () => {
+    flashService.inbox('Profile Updated', 'Profile details successfully updated');
+  };
+
   return (
-    <View>
-      <UserInfoForm
-        edit
-        submitForm={userService.updateUser}
-        onSuccess={_onFormSuccess}
+    <ScrollContainer>
+      <ProfileForm
+        submitForm={_handleSubmission}
+        onSuccess={_handleFormSuccess}
         initialValues={user}
+        mobileValues={signInFormData}
       />
-      <Button title="Open Drawer" onPress={() => navigation.openDrawer()} />
-    </View>
+    </ScrollContainer>
   );
 };
 

@@ -1,6 +1,7 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
-import { userModel, userFirebaseTokenModal } from '../../../models';
+import { userModel, userUpdateProfileModel } from '../../../models';
 import userUrls from './user.urls';
+import { constructProofOfProfileDocumentsFormData } from './user.utils';
 
 const getUser = () => {
   const url = userUrls.userShowDetailsUrl();
@@ -18,14 +19,26 @@ const getUser = () => {
     });
 };
 
-const updateFirebaseToken = (firebaseToken) => {
+const updateUserProfile = (formData) => {
   const url = userUrls.updateDetailsUrl();
-  const fireBaseModel = userFirebaseTokenModal(firebaseToken);
+  const userModal = userUpdateProfileModel(formData);
+  return authNetworkService.patch(url, userModal);
+};
 
-  return authNetworkService.patch(url, fireBaseModel);
+const uploadUserProfileDocuments = (formData) => {
+  const url = userUrls.updateDetailsUrl();
+  const proofOfProfileDocumentsData = constructProofOfProfileDocumentsFormData(
+    formData.proofOfIdDocument,
+    formData.proofOfAddressDocument,
+  );
+  return authNetworkService.patch(url, proofOfProfileDocumentsData).catch((err) => {
+    err.error = userModel(err.error);
+    return Promise.reject(err);
+  });
 };
 
 export default {
   getUser,
-  updateFirebaseToken,
+  updateUserProfile,
+  uploadUserProfileDocuments,
 };

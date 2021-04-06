@@ -10,3 +10,5 @@ export { default as UploadDocumentForm } from './bank-account/upload-document.fo
 export { default as HealthSurveyForm } from './health-survey/health-survey.form';
 export { default as TopUpForm } from './top-up/top-up.form';
 export { default as PayOutForm } from './pay-out/pay-out.form';
+export { default as ProfileForm } from './profile-form/profile.form';
+export { default as UploadProfileDocumentsForm } from './profile-form/upload-profile-documents.form';

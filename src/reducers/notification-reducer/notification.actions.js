@@ -1,4 +1,9 @@
-import { setIsLoadingAction, setNotificationAction } from './notification.reducer';
+import _ from 'lodash';
+import {
+  setIsLoadingAction,
+  setNotificationAction,
+  setHasUnseenAction,
+} from './notification.reducer';
 import { notificationService } from '../../services';
 
 export const getNotification = () => {
@@ -11,6 +16,23 @@ export const getNotification = () => {
   };
 };
 
+export const hasIncomingNotification = () => {
+  return (dispatch) => {
+    return notificationService
+      .getHasUnseenNotification()
+      .then((hasUnseen) => dispatch(setHasUnseenAction(_.get(hasUnseen, 'has_unseen'))));
+  };
+};
+
+export const notificationSettingUpdateAction = (formData) => {
+  return () => {
+    return notificationService.updateNotificationSettings(formData);
+  };
+};
+
 export const seeNotification = (notificationLinkId) => {
-  return () => notificationService.seeNotification(notificationLinkId);
+  return (dispatch) =>
+    notificationService
+      .seeNotification(notificationLinkId)
+      .then(() => dispatch(hasIncomingNotification()));
 };

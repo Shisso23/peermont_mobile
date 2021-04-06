@@ -17,10 +17,29 @@ export const getUserAction = () => {
   };
 };
 
+export const userUpdateProfileAction = (formData) => {
+  return () => {
+    return userService.updateUserProfile(formData);
+  };
+};
+
 export const updateFirebaseToken = () => {
   return () => {
     return firebaseService.getAndSetToken().then((firebaseToken) => {
-      return userService.updateFirebaseToken(firebaseToken);
+      return userService.updateUserProfile({ firebaseToken });
     });
+  };
+};
+
+export const userUploadProfileDocumentsAction = (formData) => {
+  return (dispatch) => {
+    dispatch(setLoadingAction(true));
+
+    return userService
+      .uploadUserProfileDocuments(formData)
+      .then(() => {
+        dispatch(getUserAction());
+      })
+      .finally(() => dispatch(setLoadingAction(false)));
   };
 };

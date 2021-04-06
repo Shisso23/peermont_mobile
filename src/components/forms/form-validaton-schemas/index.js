@@ -3,7 +3,9 @@ import * as Yup from 'yup';
 const numberRegex = /^[0-9]+$/;
 
 export const emailSchema = Yup.string().email('Invalid Email').trim().required('Email is required');
-export const mobileNumberSchema = Yup.string().required('Mobile number is required');
+export const mobileNumberSchema = Yup.string()
+  .required('Mobile number is required')
+  .min(10, 'Mobile Number must be atleast 10 characters');
 export const passwordSchema = Yup.string().required('Password is required');
 
 export const registerPasswordSchema = (edit) => {
@@ -49,14 +51,22 @@ export const creditCardCvvSchema = Yup.string()
 
 export const bankAccountHolderSchema = Yup.string().required('Account holder is required');
 export const bankAccountAccountNumberSchema = Yup.string().required('Account number is required');
-export const bankAccountBankIdSchema = Yup.string()
-  .matches(numberRegex)
-  .required('Please select a bank');
+export const bankAccountBankIdSchema = Yup.string().matches(numberRegex).required('Select a bank');
 export const proofOfBankDocumentSchema = Yup.string().required('Select a document above');
+
+export const proofOfIdDocumentSchema = Yup.string().when('proofOfAddressDocument', {
+  is: undefined,
+  then: Yup.string().required('A document is required'),
+});
+
+export const proofOfAddressDocumentSchema = Yup.string().when('proofOfIdDocument', {
+  is: undefined,
+  then: Yup.string().required('A document is required'),
+});
 
 export const surveyAnswersSchema = Yup.array().of(
   Yup.object().shape({
-    answer: Yup.bool().required('Please select'),
+    answer: Yup.bool().required('Select answer'),
   }),
 );
 

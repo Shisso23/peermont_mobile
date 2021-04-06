@@ -44,6 +44,12 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
+          label="My Profile"
+          icon={() => <DrawerIcon name="user-circle" />}
+          onPress={() => navigation.navigate('MyProfile')}
+          labelStyle={styles.labelStyle}
+        />
+        <DrawerItem
           label="Mobile App Transactions"
           icon={() => <DrawerIcon name="history" />}
           onPress={() => navigation.navigate('Transactions')}

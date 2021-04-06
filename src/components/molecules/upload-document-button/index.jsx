@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
@@ -12,13 +12,12 @@ import {
 import { UploadDocumentSelectionItem } from '../../atoms';
 import { custom } from '../../../../theme/theme.styles';
 
-const actionSheetRef = createRef();
-
 const UploadDocumentButton = ({ updateFormData, errorMessage, title }) => {
   const [documentSelected, setDocumentSelected] = useState(false);
 
-  const openActionSheet = () => actionSheetRef.current.setModalVisible(true);
-  const closeActionSheet = () => actionSheetRef.current.setModalVisible(false);
+  const actionSheetRef = useRef();
+  const openActionSheet = () => actionSheetRef.current?.setModalVisible(true);
+  const closeActionSheet = () => actionSheetRef.current?.setModalVisible(false);
 
   const _updateFormData = (selectedImage) => {
     updateFormData(selectedImage);

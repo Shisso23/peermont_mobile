@@ -17,8 +17,13 @@ const messagingAllowed = async () => {
 
 const getAndSetToken = async () => {
   let fcmToken = await AsyncStorage.getItem(config.fcmTokenKey);
+  const fcmEnabled = await AsyncStorage.getItem(config.fcmEnabled);
+  if (!fcmEnabled) {
+    await AsyncStorage.setItem(config.fcmEnabled, 'true');
+  }
   const enabled = await messagingAllowed();
-  if (enabled) {
+
+  if (enabled && fcmEnabled === 'true') {
     if (!fcmToken) {
       try {
         fcmToken = await messaging().getToken();
@@ -30,7 +35,6 @@ const getAndSetToken = async () => {
       }
     }
   }
-
   return fcmToken;
 };
 
@@ -41,10 +45,13 @@ const saveMessage = async (remoteMessage) => {
   await AsyncStorage.setItem('data_notifications', JSON.stringify(messageArray));
 };
 
-const processMessage = (remoteMessage) => {
+const processMessage = async (remoteMessage) => {
+  const fcmEnabled = await AsyncStorage.getItem(config.fcmEnabled);
   const title = _.get(remoteMessage, 'notification.title', 'Peermont');
   const body = _.get(remoteMessage, 'notification.body', '');
-  FlashService.inbox(title, body);
+  if (fcmEnabled === 'true') {
+    FlashService.inbox(title, body);
+  }
 };
 
 export default {

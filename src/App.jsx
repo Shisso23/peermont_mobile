@@ -8,6 +8,7 @@ import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
 import { firebaseService, userAuthService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
+import { hasIncomingNotification } from './reducers/notification-reducer/notification.actions';
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
 import {
   loadAppDataAction,
@@ -66,6 +67,7 @@ const App = () => {
   const createNotificationListeners = async () => {
     messaging().onMessage((remoteMessage) => {
       firebaseService.processMessage(remoteMessage);
+      dispatch(hasIncomingNotification());
     });
   };
 
