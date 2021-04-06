@@ -12,6 +12,7 @@ import { ScrollContainer, PaddedContainer } from '../../../components/containers
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useMembershipCard, useBiometricRegister } from '../../../hooks';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
+import { hasIncomingNotification } from '../../../reducers/notification-reducer/notification.actions';
 import getCardType from '../../../helpers/getCardType';
 import { custom } from '../../../../theme/theme.styles';
 
@@ -35,6 +36,12 @@ const HomeScreen = () => {
   const _setActiveSlideIndex = (index) => {
     setActiveSlideIndex(index);
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(hasIncomingNotification());
+    }, []),
+  );
 
   useEffect(() => {
     biometricRegister();

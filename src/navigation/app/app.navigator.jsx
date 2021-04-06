@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../../screens/app/home/home.screen';
 import MyAccountScreen from '../../screens/app/my-account/my-account.screen';
+import MyProfileScreen from '../../screens/app/profile/profile.screen';
 
 import AddCreditCardScreen from '../../screens/app/my-account/add-account/add-credit-card/add-credit-card.screen';
 
@@ -11,6 +12,7 @@ import { drawerStyle, globalScreenOptions } from '../../../theme/theme.styles';
 
 import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
 import UploadBankAccountDocumentScreen from '../../screens/app/my-account/add-account/add-bank-account-document/upload-bank-account-document.screen';
+import UploadProfileDocumentsScreen from '../../screens/app/profile/add-profile-document/upload-profile-document.screen';
 import EditBankAccountScreen from '../../screens/app/my-account/edit-account/edit-bank-account/edit-bank-account.screen';
 
 import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
@@ -29,7 +31,7 @@ import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
 import NotificationsScreen from '../../screens/app/notification/notifications.screen';
 import TransactionsScreen from '../../screens/app/transactions/transactions.screen';
 
-import { BackHeader, BurgerHeader } from '../../components/headers';
+import { BackHeader, BurgerHeader, NotificationHeader } from '../../components/headers';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -81,6 +83,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="UploadBankAccountDocument"
       component={UploadBankAccountDocumentScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="UploadProfileDocument"
+      component={UploadProfileDocumentsScreen}
       options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
@@ -140,7 +147,10 @@ const AppNavigator = () => (
 function DrawerNavigation() {
   return (
     <Drawer.Navigator
-      screenOptions={{ ...globalScreenOptions, headerLeft: (props) => <BurgerHeader {...props} /> }}
+      screenOptions={{
+        ...globalScreenOptions,
+        headerLeft: (props) => <BurgerHeader {...props} />,
+      }}
       drawerStyle={drawerStyle}
       drawerContent={(props) => <DrawerComponent {...props} />}
     >
@@ -150,11 +160,20 @@ function DrawerNavigation() {
         options={{
           title: '',
           headerShown: true,
+          headerRight: () => <NotificationHeader />,
         }}
       />
       <Drawer.Screen
         name="MyAccount"
         component={MyAccountScreen}
+        options={{
+          title: '',
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen
+        name="MyProfile"
+        component={MyProfileScreen}
         options={{
           title: '',
           headerShown: true,

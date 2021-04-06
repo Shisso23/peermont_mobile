@@ -17,13 +17,13 @@
 		2DCD954D1E0B4F2C00145EB5 /* peermontTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* peermontTests.m */; };
 		2E588CD7F89142C5A888ABF6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E776623066174B41A6B5A1EA /* OpenSans-Regular.ttf */; };
 		303EF0D45BDB51145FA7640A /* libPods-peermont-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9465EDEDE33CD9A3605A842D /* libPods-peermont-tvOSTests.a */; };
-		3B8C2E782601FE5E00462A94 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C2E772601FE5D00462A94 /* GoogleService-Info.plist */; };
 		3C3DA986855D4EDBAA871CF1 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06D806D8C82045C4B98B78D5 /* OpenSans-Bold.ttf */; };
 		57E3CA65ADD0FBB2E24C0108 /* libPods-peermont-peermontTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC0EC0AC028F83449C5947E /* libPods-peermont-peermontTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		D69636F225826465009BA9BF /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D69636F125826465009BA9BF /* BootSplash.storyboard */; };
 		D85F9CEEFC1E926DD0DF416D /* libPods-peermont-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DAD303FC180646E607B705 /* libPods-peermont-tvOS.a */; };
 		EC5B36B0003B3DCB3C9A524F /* libPods-peermont.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D8DC743C133765BAAF15DB /* libPods-peermont.a */; };
+		FD6B69F52615F03F0077D1DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD6B69F42615F03F0077D1DF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,6 @@
 		2D02E47B1E0B4A5D006451C7 /* peermont-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peermont-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* peermont-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "peermont-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32417F5660DC4D74AD2F761E /* Pods-peermont-peermontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont-peermontTests.debug.xcconfig"; path = "Target Support Files/Pods-peermont-peermontTests/Pods-peermont-peermontTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3B8C2E772601FE5D00462A94 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "peermont/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40D4A94AF9A02047015D126A /* Pods-peermont.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont.debug.xcconfig"; path = "Target Support Files/Pods-peermont/Pods-peermont.debug.xcconfig"; sourceTree = "<group>"; };
 		7AC0EC0AC028F83449C5947E /* libPods-peermont-peermontTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-peermont-peermontTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = peermont/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F819BE6154988B67BF696636 /* Pods-peermont-peermontTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont-peermontTests.release.xcconfig"; path = "Target Support Files/Pods-peermont-peermontTests/Pods-peermont-peermontTests.release.xcconfig"; sourceTree = "<group>"; };
+		FD6B69F42615F03F0077D1DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD81586C25F903B300E2447D /* peermont.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = peermont.entitlements; path = peermont/peermont.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,7 +150,7 @@
 		13B07FAE1A68108700A75B9A /* peermont */ = {
 			isa = PBXGroup;
 			children = (
-				3B8C2E772601FE5D00462A94 /* GoogleService-Info.plist */,
+				FD6B69F42615F03F0077D1DF /* GoogleService-Info.plist */,
 				FD81586C25F903B300E2447D /* peermont.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -404,12 +404,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B8C2E782601FE5E00462A94 /* GoogleService-Info.plist in Resources */,
 				D69636F225826465009BA9BF /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3C3DA986855D4EDBAA871CF1 /* OpenSans-Bold.ttf in Resources */,
 				2E588CD7F89142C5A888ABF6 /* OpenSans-Regular.ttf in Resources */,
+				FD6B69F52615F03F0077D1DF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

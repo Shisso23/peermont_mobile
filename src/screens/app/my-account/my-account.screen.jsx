@@ -12,6 +12,8 @@ import {
   CreditCard,
   BankAccount,
   BiometricSettings,
+  PushNotificationSettings,
+  SmsSettings,
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { AddButton, Watermark } from '../../../components/atoms';
@@ -130,6 +132,18 @@ const MyAccountScreen = () => {
           <View style={styles.rowAlign}>
             <Text h4>Biometrics Login</Text>
             <BiometricSettings />
+          </View>
+        </PaddedContainer>
+        <PaddedContainer>
+          <View style={styles.rowAlign}>
+            <Text h4>Push Notifications</Text>
+            <PushNotificationSettings />
+          </View>
+        </PaddedContainer>
+        <PaddedContainer>
+          <View style={styles.rowAlign}>
+            <Text h4>SMS Service</Text>
+            <SmsSettings />
           </View>
         </PaddedContainer>
       </ScrollContainer>

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>506320111286-h2gubmljfu2dgaf9q95l4gea6f0mfqju.apps.googleusercontent.com</string>
+	<string>506320111286-40mn800ts9r9dafsbh7l0gqcv9n9mru1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.506320111286-h2gubmljfu2dgaf9q95l4gea6f0mfqju</string>
+	<string>com.googleusercontent.apps.506320111286-40mn800ts9r9dafsbh7l0gqcv9n9mru1</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>506320111286-ge1cvr5uqaa1haqnm23kf5ueikn463rc.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.peermont</string>
+	<string>com.codehesion.peermontmobile</string>
 	<key>PROJECT_ID</key>
 	<string>peermont-winners-circle-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:506320111286:ios:1fbad74c47d0dc247e0817</string>
+	<string>1:506320111286:ios:35545c9772ba7d377e0817</string>
 </dict>
 </plist>
