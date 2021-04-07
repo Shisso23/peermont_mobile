@@ -56,7 +56,7 @@ const DrawerComponent = (props) => {
         />
         <DrawerItem
           label="Notifications"
-          icon={() => <DrawerIcon name="inbox" />}
+          icon={() => <DrawerIcon name="bell" />}
           onPress={() => navigation.navigate('Notifications')}
           labelStyle={styles.labelStyle}
         />

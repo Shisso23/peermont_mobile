@@ -4,9 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import _ from 'lodash';
 
 import { ProfileForm } from '../../../components/forms';
-import { ScrollContainer } from '../../../components/containers';
+import { KeyboardScrollContainer } from '../../../components/containers';
 import { userUpdateProfileAction } from '../../../reducers/user-reducer/user.actions';
-import { flashService } from '../../../services';
+// import { flashService } from '../../../services';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const ProfileScreen = () => {
   };
 
   const _handleFormSuccess = (data) => {
-    flashService.inbox('Profile Updated', 'Profile details successfully updated');
+    // flashService.inbox('Profile Updated', 'Profile details successfully updated');
     const unconfirmedMobileNumber = _.get(data, 'unconfirmed_mobile_number', null);
 
     if (!_.isNull(unconfirmedMobileNumber)) {
@@ -37,13 +37,13 @@ const ProfileScreen = () => {
   ]);
 
   return (
-    <ScrollContainer>
+    <KeyboardScrollContainer>
       <ProfileForm
         submitForm={_handleSubmission}
         onSuccess={_handleFormSuccess}
         initialValues={initialValues}
       />
-    </ScrollContainer>
+    </KeyboardScrollContainer>
   );
 };
 
