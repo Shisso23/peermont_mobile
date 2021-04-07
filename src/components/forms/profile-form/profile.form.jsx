@@ -19,9 +19,8 @@ import { infoPopUpService } from '../../../services';
 import { PaddedContainer } from '../../containers';
 import { custom } from '../../../../theme/theme.styles';
 
-const ProfileForm = ({ submitForm, onSuccess, initialValues, mobileValues }) => {
+const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
   const emailRef = useRef(null);
-  const mobileValue = { ...mobileValues };
   const { loading } = useSelector((reducers) => reducers.userReducer);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -43,10 +42,10 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues, mobileValues }) => 
 
   const _handleSubmission = (formData, actions) => {
     submitForm(formData)
-      .then(() => {
+      .then((resp) => {
         Keyboard.dismiss();
         actions.setSubmitting(false);
-        onSuccess();
+        onSuccess(_.get(resp, 'data'));
       })
       .catch((error) => _handleFormSubmitError(error, actions, formData));
   };
@@ -147,7 +146,7 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues, mobileValues }) => 
                 maxLength={10}
                 leftIcon={() => (
                   <CountrySelect
-                    initialCountry={mobileValue.country}
+                    initialCountry={values.country}
                     onChange={(country) => {
                       setFieldValue('country', country.abbreviation);
                       setFieldValue('callingCode', country.callingCode);
@@ -203,7 +202,6 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues, mobileValues }) => 
 ProfileForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
-  mobileValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
 };
 

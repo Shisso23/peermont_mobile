@@ -45,7 +45,6 @@ export const submitHealthSurveyAction = (formData) => {
 
 const getHealthSurveyQuestionsAction = () => {
   return (dispatch) => {
-    console.log('_getAndStoreQuestions');
     return healthSurveyService
       .getHealthSurveyQuestions()
       .then((questions) => {

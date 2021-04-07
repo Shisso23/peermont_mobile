@@ -6,4 +6,6 @@ export default {
   userUrl: (userId) => `${apiUrl}/users/${userId}`,
   userShowDetailsUrl: () => `${apiUrl}/users/show_details`,
   updateDetailsUrl: () => `${apiUrl}/users/update_details`,
+  verifyUpdateMobileOtp: () => `${apiUrl}/users/verify_update_mobile_otp`,
+  resendUpdateMobileOtp: () => `${apiUrl}/users/resend_update_mobile_otp`,
 };

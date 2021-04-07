@@ -20,3 +20,7 @@ export const userUpdateSettingModel = (_model = {}) => ({
     opt_in_push_notifications: _.get(_model, 'opt_in_push_notifications', undefined),
   },
 });
+
+export const userUpdateMobileOtpModel = (_model) => ({
+  otp: _.get(_model, 'numeric', ''),
+});

@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 const numberRegex = /^[0-9]+$/;
 
-export const emailSchema = Yup.string().email('Invalid Email').trim().required('Email is required');
+export const emailSchema = Yup.string().email('Invalid Email').trim();
 export const mobileNumberSchema = Yup.string()
   .required('Mobile number is required')
   .min(10, 'Mobile Number must be atleast 10 characters');

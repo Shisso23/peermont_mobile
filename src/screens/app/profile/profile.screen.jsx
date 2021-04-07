@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import _ from 'lodash';
 
 import { ProfileForm } from '../../../components/forms';
 import { ScrollContainer } from '../../../components/containers';
@@ -8,24 +10,38 @@ import { flashService } from '../../../services';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const { user } = useSelector((reducers) => reducers.userReducer);
-  const { signInFormData } = useSelector((reducers) => reducers.userAuthReducer);
 
   const _handleSubmission = (formData) => {
     return dispatch(userUpdateProfileAction(formData));
   };
 
-  const _handleFormSuccess = () => {
+  const _handleFormSuccess = (data) => {
     flashService.inbox('Profile Updated', 'Profile details successfully updated');
+    const unconfirmedMobileNumber = _.get(data, 'unconfirmed_mobile_number', null);
+
+    if (!_.isNull(unconfirmedMobileNumber)) {
+      navigation.navigate('UpdateMobileOtp');
+    }
   };
+
+  const initialValues = _.pick(user, [
+    'mobileNumber',
+    'email',
+    'proofOfId',
+    'proofOfAddress',
+    'callingCode',
+    'country',
+  ]);
 
   return (
     <ScrollContainer>
       <ProfileForm
         submitForm={_handleSubmission}
         onSuccess={_handleFormSuccess}
-        initialValues={user}
-        mobileValues={signInFormData}
+        initialValues={initialValues}
       />
     </ScrollContainer>
   );
