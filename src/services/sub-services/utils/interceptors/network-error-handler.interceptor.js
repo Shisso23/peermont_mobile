@@ -32,9 +32,11 @@ const createNetworkErrorHandlerInterceptor = (axiosInstance) => {
           exception = new ClientNetworkError(statusCode, error.response.data);
         }
       } else if (_noResponseFromServer(error)) {
-        exception = new ServerNotFoundError('Network error, check your internet connection.');
+        exception = new ServerNotFoundError(
+          'Network error, please check your internet connection.',
+        );
       } else {
-        exception = new Error('Server Error Occurred');
+        exception = new Error('Server Error');
       }
 
       // eslint-disable-next-line no-console
