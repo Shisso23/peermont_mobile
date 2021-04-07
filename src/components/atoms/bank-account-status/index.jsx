@@ -12,10 +12,12 @@ const BankAccountStatus = ({ status }) => {
     icon = 'hourglass';
     color = colors.warning;
     textStyle = { color };
+    status = 'Pending';
   } else if (status === 'verified') {
     icon = 'check-circle';
     color = colors.success;
     textStyle = { color };
+    status = 'Verified';
   } else if (status === 'approval_required') {
     icon = 'clock';
     color = colors.warning;

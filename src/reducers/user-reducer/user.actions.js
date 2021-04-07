@@ -29,7 +29,7 @@ export const userUpdateProfileAction = (formData) => {
     );
 
     formData = {
-      mobileNumber: mobileNumber === unconfirmedMobileNumber ? undefined : unconfirmedMobileNumber,
+      mobileNumber: mobileNumber === unconfirmedMobileNumber ? null : unconfirmedMobileNumber,
       email: _.get(formData, 'email'),
     };
 
