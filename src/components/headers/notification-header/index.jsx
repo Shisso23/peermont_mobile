@@ -15,7 +15,7 @@ const NotificationHeader = () => {
       <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
         <Icon
           type="font-awesome-5"
-          name="inbox"
+          name="bell"
           size={20}
           color={colors.white}
           containerStyle={styles.iconContainerStyle}
