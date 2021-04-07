@@ -21,4 +21,6 @@ export const userModel = (_userModel = {}) => ({
   proofOfAddressStatus: _.get(_userModel, 'proof_of_address_status', ''),
   optInSms: _.get(_userModel, 'opt_in_sms', undefined),
   optInNotifications: _.get(_userModel, 'opt_in_push_notifications', undefined),
+  callingCode: _.get(_userModel, 'callingCode', '27'),
+  country: _.get(_userModel, 'country', 'ZA'),
 });

@@ -12,8 +12,10 @@ import { drawerStyle, globalScreenOptions } from '../../../theme/theme.styles';
 
 import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
 import UploadBankAccountDocumentScreen from '../../screens/app/my-account/add-account/add-bank-account-document/upload-bank-account-document.screen';
-import UploadProfileDocumentsScreen from '../../screens/app/profile/add-profile-document/upload-profile-document.screen';
 import EditBankAccountScreen from '../../screens/app/my-account/edit-account/edit-bank-account/edit-bank-account.screen';
+
+import UploadProfileDocumentsScreen from '../../screens/app/profile/add-profile-document/upload-profile-document.screen';
+import UpdateMobileOtpScreen from '../../screens/app/profile/update-mobile-otp/update-mobile-otp.screen';
 
 import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
 
@@ -88,6 +90,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="UploadProfileDocument"
       component={UploadProfileDocumentsScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="UpdateMobileOtp"
+      component={UpdateMobileOtpScreen}
       options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen

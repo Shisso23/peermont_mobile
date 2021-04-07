@@ -1,8 +1,11 @@
+import _ from 'lodash';
+
 import { setUserAction, setLoadingAction } from './user.reducer';
 import { firebaseService, userService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
 import { setBankAccountsAction } from '../bank-account-reducer/bank-account.reducer';
+import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const getUserAction = () => {
   return (dispatch) => {
@@ -18,7 +21,18 @@ export const getUserAction = () => {
 };
 
 export const userUpdateProfileAction = (formData) => {
-  return () => {
+  return (_dispute, getState) => {
+    const { mobileNumber } = getState().userReducer.user;
+    const unconfirmedMobileNumber = parseMobile(
+      _.get(formData, 'mobileNumber'),
+      _.get(formData, 'callingCode'),
+    );
+
+    formData = {
+      mobileNumber: mobileNumber === unconfirmedMobileNumber ? undefined : unconfirmedMobileNumber,
+      email: _.get(formData, 'email'),
+    };
+
     return userService.updateUserProfile(formData);
   };
 };
@@ -41,5 +55,20 @@ export const userUploadProfileDocumentsAction = (formData) => {
         dispatch(getUserAction());
       })
       .finally(() => dispatch(setLoadingAction(false)));
+  };
+};
+
+export const verifyUpdateMobileOtpAction = (formData) => {
+  return (dispatch) => {
+    dispatch(setLoadingAction(true));
+    return userService
+      .verifyUpdateMobileOtpAction(formData)
+      .finally(() => dispatch(setLoadingAction(false)));
+  };
+};
+
+export const resendUpdateMobileOtpAction = () => {
+  return () => {
+    return userService.resendUpdateMobileOtpAction();
   };
 };

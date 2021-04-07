@@ -1,5 +1,5 @@
 import authNetworkService from '../auth-network-service/auth-network.service';
-import { userModel, userUpdateProfileModel } from '../../../models';
+import { userModel, userUpdateMobileOtpModel, userUpdateProfileModel } from '../../../models';
 import userUrls from './user.urls';
 import { constructProofOfProfileDocumentsFormData } from './user.utils';
 
@@ -37,8 +37,21 @@ const uploadUserProfileDocuments = (formData) => {
   });
 };
 
+const verifyUpdateMobileOtpAction = (formData) => {
+  const verifyUpdateMobileOtpUrl = userUrls.verifyUpdateMobileOtp();
+  const verifyUpdateMobileOtpModel = userUpdateMobileOtpModel(formData);
+  return authNetworkService.post(verifyUpdateMobileOtpUrl, verifyUpdateMobileOtpModel);
+};
+
+const resendUpdateMobileOtpAction = () => {
+  const resendUpdateMobileOtpUrl = userUrls.resendUpdateMobileOtp();
+  return authNetworkService.get(resendUpdateMobileOtpUrl);
+};
+
 export default {
   getUser,
   updateUserProfile,
   uploadUserProfileDocuments,
+  verifyUpdateMobileOtpAction,
+  resendUpdateMobileOtpAction,
 };
