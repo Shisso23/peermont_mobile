@@ -69,13 +69,19 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
     const documents = [];
     if (initialValues.proofOfId) {
       documents.push(
-        <ProfileDocument name="Proof of ID" status={initialValues.proofOfIdStatus} disabled />,
+        <ProfileDocument
+          key="poid"
+          name="Proof of ID"
+          status={initialValues.proofOfIdStatus}
+          disabled
+        />,
       );
     }
 
     if (initialValues.proofOfAddress) {
       documents.push(
         <ProfileDocument
+          key="poa"
           name="Proof of Address"
           status={initialValues.proofOfAddressStatus}
           disabled
