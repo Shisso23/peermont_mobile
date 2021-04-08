@@ -39,8 +39,7 @@ const HealthSurveyScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Health Survey</Text>
         <Text style={custom.centerSubtitle}>
-          Please answer the following general health questionnaire up to{' '}
-          <Text style={custom.bold}>8 hours</Text> before you plan on visiting us.
+          Please answer the following general health questionnaire before visiting us.
         </Text>
       </PaddedContainer>
       <HealthSurveyForm

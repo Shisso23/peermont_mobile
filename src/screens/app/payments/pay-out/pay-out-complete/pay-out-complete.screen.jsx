@@ -19,11 +19,12 @@ const PayOutCompleteScreen = () => {
 
   return (
     <View>
+      ß
       <PaddedContainer>
         <Text style={custom.centerTitle}>Success!</Text>
         <Text style={custom.centerSubtitle}>
           Your payout has been submitted for approval, it may take up to 48 hours (excl. public
-          holidays and weekends) to appear in your bank account processed
+          holidays and weekends) to appear in your bank account.
         </Text>
       </PaddedContainer>
     </View>

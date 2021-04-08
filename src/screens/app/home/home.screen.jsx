@@ -73,7 +73,9 @@ const HomeScreen = () => {
             <Icon name="cube" size={20} />
             <View style={custom.surveyText}>
               <Text style={custom.surveyTitle}>Planning on visiting?</Text>
-              <Text style={custom.surveySubText}>Take our health survey to grant access.</Text>
+              <Text style={custom.surveySubText}>
+                Save time and take our health survey for quick access
+              </Text>
             </View>
           </TouchableOpacity>
         </View>

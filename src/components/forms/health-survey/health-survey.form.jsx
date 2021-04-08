@@ -77,7 +77,7 @@ const HealthSurveyForm = ({ submitForm, initialValues, questions }) => {
               );
             })}
             <Divider />
-            <Button title="Set all to no" onPress={_setAllCheckboxesToNo} />
+            <Button title="None of the above" onPress={_setAllCheckboxesToNo} />
             <Divider />
             <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
           </>
