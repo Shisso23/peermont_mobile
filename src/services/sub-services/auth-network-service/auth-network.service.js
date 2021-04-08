@@ -12,7 +12,6 @@ import {
 import storageService from '../storage-service/storage.service';
 
 const authNetworkService = axios.create({
-  timeout: 5000,
   headers: {
     Accept: 'application/json',
     'content-type': 'application/json',
