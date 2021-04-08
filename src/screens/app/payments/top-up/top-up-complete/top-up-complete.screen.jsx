@@ -25,7 +25,11 @@ const TopUpCompleteScreen = () => {
   }, []);
 
   return (
-    <WebView startInLoadingState renderLoading={LoadingComponent} source={{ uri: paymentUri }} />
+    <WebView
+      startInLoadingState
+      renderLoading={() => <LoadingComponent />}
+      source={{ uri: paymentUri }}
+    />
   );
 };
 
