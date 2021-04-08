@@ -39,7 +39,8 @@ const PaymentOtpScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>One Time Pin</Text>
         <Text style={custom.centerSubtitle}>
-          We have sent a SMS with a One Time Pin(OTP) to your mobile number for validation.
+          To proceed, Enter your One Time Pin to confirm payment. We have sent a SMS with a One Time
+          Pin(OTP) to your mobile number for validation.
         </Text>
       </PaddedContainer>
       <PaddedContainer>

@@ -36,8 +36,8 @@ const RegisterOtpScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>One Time Pin</Text>
         <Text style={custom.centerSubtitle}>
-          Enter your One Time Pin to register. We have sent a SMS with a One Time Pin(OTP) to your
-          mobile number for validation.
+          To proceed, Enter your One Time Pin to register. We have sent a SMS with a One Time
+          Pin(OTP) to your mobile number for validation.
         </Text>
       </PaddedContainer>
       <PaddedContainer>

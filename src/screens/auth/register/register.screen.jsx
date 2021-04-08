@@ -30,8 +30,8 @@ const RegisterScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Register</Text>
         <Text style={custom.centerSubtitle}>
-          Enter your Winners Circle Card details. You will receive a SMS with a One Time Pin(OTP) on
-          your mobile number for validation.
+          Enter your Winners Circle Card details (The number on the front of your card). You will
+          receive a SMS with a One Time Pin(OTP) on your mobile number for validation.
         </Text>
       </PaddedContainer>
       <PaddedContainer>

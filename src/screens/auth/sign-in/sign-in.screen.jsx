@@ -88,7 +88,6 @@ const SignInScreen = () => {
       </Modal>
       <PaddedContainer>
         <Image source={imageUri} resizeMode="contain" style={styles.imageStyle} />
-        <Text style={custom.centerTitle}>Log In</Text>
         <Text style={custom.centerSubtitle}>Enter your details below to log in.</Text>
       </PaddedContainer>
       <PaddedContainer>
