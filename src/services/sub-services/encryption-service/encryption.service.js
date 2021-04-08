@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import networkService from '../network-service/network.service';
 import encryptionUrls from './encryption.urls';
-import { rsaEncryption } from './encryption.utils';
+import { rsaEncryption, generateRsaKeyPair } from './encryption.utils';
 
-const exstractAndReturnCertificate = (apiResponse) => _.get(apiResponse, 'data.certificate');
+const extractAndReturnCertificate = (apiResponse) => _.get(apiResponse, 'data.certificate');
 
 const encryptPin = (pin) => {
   return getCertificate().then((certificate) => rsaEncryption(pin, certificate));
@@ -11,9 +11,14 @@ const encryptPin = (pin) => {
 
 const getCertificate = () => {
   const certificateUrl = encryptionUrls.certificateUrl();
-  return networkService.get(certificateUrl).then(exstractAndReturnCertificate);
+  return networkService.get(certificateUrl).then(extractAndReturnCertificate);
+};
+
+const getRsaKeyPair = () => {
+  return generateRsaKeyPair();
 };
 
 export default {
   encryptPin,
+  getRsaKeyPair,
 };
