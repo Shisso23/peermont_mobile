@@ -57,7 +57,7 @@ export const custom = {
   surveyTitle: {
     fontSize: 18,
     fontFamily: 'OpenSans-Bold',
-    color: colors.greyBlack,
+    color: colors.black,
   },
   surveySubText: {
     fontSize: 13,

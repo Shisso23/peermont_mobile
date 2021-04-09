@@ -51,7 +51,7 @@ const theme = {
     backgroundColor: 'transparent',
   },
   Input: {
-    placeholderTextColor: colors.gray,
+    placeholderTextColor: colors.grey,
     labelStyle: {
       color: colors.black,
       marginBottom: 3,
