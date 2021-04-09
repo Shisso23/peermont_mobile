@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { API_LOCATION, CLIENT_ID, CLIENT_SECRET, HOST_URL } from '@env';
+import { API_LOCATION, CLIENT_ID, CLIENT_SECRET, HOST_URL, CALLPAY_URL } from '@env';
 
 export default {
   accessTokenKey: 'access_token',
@@ -14,4 +14,5 @@ export default {
   fcmTokenKey: 'fcmToken',
   fcmEnabled: 'fcmEnabled',
   biometricOtpOut: 'biometric_opt_out',
+  callpayUrl: CALLPAY_URL,
 };
