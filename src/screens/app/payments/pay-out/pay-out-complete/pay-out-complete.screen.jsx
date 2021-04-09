@@ -19,7 +19,6 @@ const PayOutCompleteScreen = () => {
 
   return (
     <View>
-      ß
       <PaddedContainer>
         <Text style={custom.centerTitle}>Success!</Text>
         <Text style={custom.centerSubtitle}>
