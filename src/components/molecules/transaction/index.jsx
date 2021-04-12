@@ -16,11 +16,11 @@ const Transaction = ({ transaction }) => {
     return creditCard;
   };
 
-  const payableType = _.get(transaction, 'payable_type');
+  const payableType = _.startCase(_.get(transaction, 'payable_type'));
   const updatedAt = Moment(_.get(transaction, 'updated_at')).format('YYYY/MM/DD, hh:mm');
   const payable = getPayableNumber(transaction);
   const amount = (_.get(transaction, 'total.cents') / 100).toFixed(2);
-  const status = _.get(transaction, 'status');
+  const status = _.capitalize(_.get(transaction, 'status'));
 
   return (
     <ListItem key={_.get(transaction, 'id')} bottomDivider>

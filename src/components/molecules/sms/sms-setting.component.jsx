@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Switch, View } from 'react-native';
-import { Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { notificationSettingUpdateAction } from '../../../reducers/notification-reducer/notification.actions';
@@ -51,7 +50,6 @@ const SmsSettings = () => {
   return (
     <View style={styles.settingsContainer}>
       <>
-        <Text>{hasEnabledSms ? 'Enabled' : 'Disabled'}</Text>
         <Switch onValueChange={toggleSwitch} value={hasEnabledSms} />
       </>
     </View>

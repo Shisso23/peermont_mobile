@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Switch, View } from 'react-native';
-import { Text } from 'react-native-elements';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
@@ -60,7 +59,6 @@ const PushNotificationSettings = () => {
   return (
     <View style={styles.settingsContainer}>
       <>
-        <Text>{hasEnabledPushNotifications ? 'Enabled' : 'Disabled'}</Text>
         <Switch onValueChange={toggleSwitch} value={hasEnabledPushNotifications} />
       </>
     </View>

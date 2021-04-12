@@ -14,4 +14,5 @@ export default {
   fcmTokenKey: 'fcmToken',
   fcmEnabled: 'fcmEnabled',
   biometricOtpOut: 'biometric_opt_out',
+  palaceBetLink: 'https://media.palacepartners.com/redirect.aspx?pid=2163&bid=1506',
 };

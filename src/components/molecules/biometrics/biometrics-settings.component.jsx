@@ -69,7 +69,6 @@ const BiometricSettings = () => {
     <View style={styles.settingsContainer}>
       {isAvailable && (
         <>
-          <Text>{hasRegisteredForBiometrics ? 'Enabled' : 'Disabled'}</Text>
           <Switch onValueChange={toggleSwitch} value={hasRegisteredForBiometrics} />
         </>
       )}
