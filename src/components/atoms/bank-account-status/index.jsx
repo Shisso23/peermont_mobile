@@ -8,11 +8,11 @@ const BankAccountStatus = ({ status }) => {
   let icon;
   let color;
   let textStyle;
-  if (status === 'pending') {
+  if (status === 'document_required') {
     icon = 'hourglass';
     color = colors.warning;
     textStyle = { color };
-    status = 'Pending';
+    status = 'Document Required';
   } else if (status === 'verified') {
     icon = 'check-circle';
     color = colors.success;
