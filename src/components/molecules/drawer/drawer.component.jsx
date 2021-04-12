@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,6 +11,8 @@ import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.act
 import DrawerIcon from './drawer-icon';
 import colors from '../../../../theme/theme.colors';
 import variables from '../../../../theme/theme.variables';
+
+const palaceBetIcon = require('../../../assets/images/palace-bet.png');
 
 const DrawerComponent = (props) => {
   const insets = useSafeAreaInsets();
@@ -62,7 +64,9 @@ const DrawerComponent = (props) => {
         />
         <DrawerItem
           label="Visit PalaceBet"
-          icon={() => <DrawerIcon name="link" />}
+          icon={() => (
+            <Image source={palaceBetIcon} style={styles.palaceBetSize} width={22} height={21} />
+          )}
           onPress={() => navigation.navigate('PalaceBet')}
           labelStyle={styles.labelStyle}
         />
@@ -109,6 +113,10 @@ const styles = StyleSheet.create({
   labelStyle: {
     color: colors.white,
     fontFamily: variables.fontFamily,
+  },
+  palaceBetSize: {
+    height: 23,
+    width: 24,
   },
   smallText: {
     color: colors.white,
