@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View, Linking } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,6 +9,7 @@ import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 
 import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import DrawerIcon from './drawer-icon';
+import appConfig from '../../../config';
 import colors from '../../../../theme/theme.colors';
 import variables from '../../../../theme/theme.variables';
 
@@ -67,7 +68,7 @@ const DrawerComponent = (props) => {
           icon={() => (
             <Image source={palaceBetIcon} style={styles.palaceBetSize} width={22} height={21} />
           )}
-          onPress={() => navigation.navigate('PalaceBet')}
+          onPress={() => Linking.openURL(appConfig.palaceBetLink)}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
