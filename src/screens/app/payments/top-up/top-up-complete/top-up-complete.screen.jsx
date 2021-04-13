@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import { LoadingComponent } from '../../../../../components/molecules';
 import { useBackButtonLoader } from '../../../../../hooks';
 import { getLastPaymentUriAction } from '../../../../../reducers/payments-reducer/payments.actions';
-import { reloadCurrentMembershipCardBalanceAction } from '../../../../../reducers/membership-card-reducer/membership-card.actions';
 
 const TopUpCompleteScreen = () => {
   const dispatch = useDispatch();
@@ -15,9 +14,7 @@ const TopUpCompleteScreen = () => {
   const { paymentUri } = useSelector((reducers) => reducers.paymentReducer);
 
   useBackButtonLoader(() => {
-    dispatch(reloadCurrentMembershipCardBalanceAction()).then(() => {
-      navigation.pop();
-    });
+    navigation.pop(2);
   });
 
   useEffect(() => {

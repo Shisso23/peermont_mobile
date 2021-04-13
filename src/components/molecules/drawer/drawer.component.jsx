@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   labelStyle: {
     color: colors.white,
     fontFamily: variables.fontFamily,
+    fontWeight: 'normal',
   },
   palaceBetSize: {
     height: 23,

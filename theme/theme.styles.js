@@ -81,6 +81,10 @@ export const custom = {
     justifyContent: 'space-around',
     marginHorizontal: 10,
   },
+  resendOtpStyle: {
+    color: colors.textGrey,
+    textAlign: 'center',
+  },
 };
 
 export const globalScreenOptions = {
