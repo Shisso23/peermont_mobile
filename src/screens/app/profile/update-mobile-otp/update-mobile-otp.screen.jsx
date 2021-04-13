@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
-import { Button, Text, Divider } from 'react-native-elements';
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { Text, Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -51,7 +51,9 @@ const UpdateMobileOtpScreen = () => {
       </PaddedContainer>
       <Divider />
       <PaddedContainer>
-        <Button title="Resend OTP" onPress={_handleResendOtp} />
+        <TouchableOpacity onPress={_handleResendOtp}>
+          <Text style={custom.resendOtpStyle}>Resend OTP</Text>
+        </TouchableOpacity>
       </PaddedContainer>
       <Modal
         visible={loading}
