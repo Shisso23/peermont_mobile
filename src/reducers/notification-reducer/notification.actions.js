@@ -36,3 +36,8 @@ export const seeNotification = (notificationLinkId) => {
       .seeNotification(notificationLinkId)
       .then(() => dispatch(hasIncomingNotification()));
 };
+
+export const deleteNotification = (notificationId) => {
+  return (dispatch) =>
+    notificationService.deleteNotification(notificationId).then(() => dispatch(getNotification()));
+};

@@ -7,7 +7,10 @@ import Moment from 'moment';
 import _ from 'lodash';
 
 import PropTypes from 'prop-types';
-import { seeNotification } from '../../../reducers/notification-reducer/notification.actions';
+import {
+  seeNotification,
+  deleteNotification,
+} from '../../../reducers/notification-reducer/notification.actions';
 
 const Notification = ({ notification }) => {
   const dispatch = useDispatch();
@@ -35,6 +38,10 @@ const Notification = ({ notification }) => {
     }
   };
 
+  const _deleteNotification = () => {
+    dispatch(deleteNotification(notificationLinkId));
+  };
+
   const _renderCollapseText = () => (
     <>
       <Collapsible collapsed={isCollapsed} collapsedHeight={20}>
@@ -60,6 +67,13 @@ const Notification = ({ notification }) => {
         />
       )}
       {!isSeen && <Badge status="error" />}
+      <Icon
+        name="trash"
+        type="font-awesome-5"
+        size={21}
+        containerStyle={styles.deleteContainer}
+        onPress={_deleteNotification}
+      />
     </ListItem>
   );
 };
@@ -68,6 +82,9 @@ const styles = StyleSheet.create({
   chevronContainer: {
     alignSelf: 'flex-start',
     marginTop: 10,
+  },
+  deleteContainer: {
+    alignSelf: 'flex-start',
   },
 });
 
