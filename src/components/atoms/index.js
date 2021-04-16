@@ -15,3 +15,4 @@ export { default as RegisterCardModal } from './register-card-modal';
 export { default as Contact } from './contact';
 export { default as Modal } from './modal';
 export { default as Watermark } from './watermark';
+export { default as PressableOpacity } from './pressable-opacity';

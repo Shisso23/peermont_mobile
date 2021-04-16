@@ -11,6 +11,7 @@ import {
   seeNotification,
   deleteNotification,
 } from '../../../reducers/notification-reducer/notification.actions';
+import { PressableOpacity } from '../../atoms';
 
 const Notification = ({ notification }) => {
   const dispatch = useDispatch();
@@ -67,13 +68,14 @@ const Notification = ({ notification }) => {
         />
       )}
       {!isSeen && <Badge status="error" />}
-      <Icon
-        name="trash"
-        type="font-awesome-5"
-        size={21}
-        containerStyle={styles.deleteContainer}
-        onPress={_deleteNotification}
-      />
+      <PressableOpacity
+        onPress={() => {
+          _deleteNotification();
+        }}
+        style={styles.pressableContainer}
+      >
+        <Icon name="trash" type="font-awesome-5" size={21} />
+      </PressableOpacity>
     </ListItem>
   );
 };
@@ -83,8 +85,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginTop: 10,
   },
-  deleteContainer: {
-    alignSelf: 'flex-start',
+  pressableContainer: {
+    height: 50,
+    justifyContent: 'center',
+    width: 40,
   },
 });
 
