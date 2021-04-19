@@ -7,6 +7,5 @@ export default {
   seeNotificationUrl: (notificationLinkId) =>
     `${apiUrl}/notifications/see?notification_link_id=${notificationLinkId}`,
   hasUnseenUrl: () => `${apiUrl}/notifications/has_unseen`,
-  deleteNotificationUrl: (notificationId) =>
-    `${apiUrl}/notifications/destroy?notification_id=${notificationId}`,
+  deleteNotificationUrl: (notificationId) => `${apiUrl}/notifications/${notificationId}`,
 };

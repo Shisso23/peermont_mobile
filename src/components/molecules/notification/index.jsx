@@ -68,12 +68,7 @@ const Notification = ({ notification }) => {
         />
       )}
       {!isSeen && <Badge status="error" />}
-      <PressableOpacity
-        onPress={() => {
-          _deleteNotification();
-        }}
-        style={styles.pressableContainer}
-      >
+      <PressableOpacity onPress={_deleteNotification} style={styles.pressableContainer}>
         <Icon name="trash" type="font-awesome-5" size={21} />
       </PressableOpacity>
     </ListItem>
