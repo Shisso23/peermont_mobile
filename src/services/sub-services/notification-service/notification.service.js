@@ -28,9 +28,15 @@ const updateNotificationSettings = (formData) => {
   return authNetworkService.patch(userUpdateSettingUrl, notificationUpdateModel);
 };
 
+const deleteNotification = (notificationId) => {
+  const deleteNotificationUrl = notificationUrls.deleteNotificationUrl(notificationId);
+  return authNetworkService.delete(deleteNotificationUrl);
+};
+
 export default {
   getNotification,
   seeNotification,
   getHasUnseenNotification,
   updateNotificationSettings,
+  deleteNotification,
 };
