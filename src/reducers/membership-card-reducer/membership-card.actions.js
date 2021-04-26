@@ -49,6 +49,21 @@ export const getMembershipCardBalanceAction = (formData) => {
   };
 };
 
+export const refreshMembershipCardBalanceAction = () => {
+  return (dispatch, getState) => {
+    const { currentMembershipCard, currentMembershipCardPin } = getState().membershipCardReducer;
+
+    dispatch(setMembershipCardIsLoading(true));
+
+    return membershipCardService
+      .getMembershipCardBalance(currentMembershipCard.id, {
+        encryptedPin: currentMembershipCardPin,
+        cardNumber: currentMembershipCard.cardNumber,
+      })
+      .finally(() => dispatch(setMembershipCardIsLoading(false)));
+  };
+};
+
 export const reloadCurrentMembershipCardBalanceAction = () => {
   return (dispatch, getState) => {
     const { currentMembershipCardPin, currentMembershipCard } = getState().membershipCardReducer;

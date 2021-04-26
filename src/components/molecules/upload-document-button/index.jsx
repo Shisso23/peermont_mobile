@@ -1,37 +1,42 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
-import { Button, Text } from 'react-native-elements';
-import ActionSheet from 'react-native-actions-sheet';
+import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import ActionSheet from 'react-native-actions-sheet';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import {
   openUserGallery,
   openUserCamera,
   openDocumentPicker,
 } from './upload-document-button.utils';
-import { UploadDocumentSelectionItem } from '../../atoms';
+import { PressableOpacity, UploadDocumentSelectionItem } from '../../atoms';
 import { custom } from '../../../../theme/theme.styles';
+import colors from '../../../../theme/theme.colors';
+import { limitFileName } from '../../../helpers';
 
 const UploadDocumentButton = ({ updateFormData, errorMessage, title }) => {
   const [documentSelected, setDocumentSelected] = useState(false);
+  const [documentName, setDocumentName] = useState('No file selected');
 
   const actionSheetRef = useRef();
   const openActionSheet = () => actionSheetRef.current?.setModalVisible(true);
   const closeActionSheet = () => actionSheetRef.current?.setModalVisible(false);
 
-  const _updateFormData = (selectedImage) => {
-    updateFormData(selectedImage);
+  const _updateFormData = (selectedFile) => {
+    const fileName = _.get(selectedFile, 'name', 'image');
+    const format = _.get(selectedFile, 'type');
+
+    updateFormData(selectedFile);
     setDocumentSelected(true);
+    setDocumentName(limitFileName(fileName, format));
+
     closeActionSheet();
   };
 
   const _handleDocument = () => {
-    openDocumentPicker()
-      .then(_updateFormData)
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.warn(err);
-      });
+    openDocumentPicker().then(_updateFormData);
   };
 
   const _handlePhotoLibrary = () => {
@@ -44,17 +49,17 @@ const UploadDocumentButton = ({ updateFormData, errorMessage, title }) => {
 
   return (
     <>
-      <Button
-        title={title}
-        onPress={openActionSheet}
-        icon={
+      <View style={styles.buttonContainerStyle}>
+        <PressableOpacity onPress={openActionSheet} style={styles.buttonStyle}>
           <Icon
-            name={!documentSelected ? 'upload' : 'check'}
-            color="white"
+            name={documentSelected ? 'check' : 'upload'}
+            color={colors.black}
             style={styles.iconStyle}
           />
-        }
-      />
+          <Text>{title}</Text>
+        </PressableOpacity>
+        <Text style={styles.fileNameStyle}>{documentName}</Text>
+      </View>
       <Text style={[custom.errorStyle, custom.centerSubtitle]}>{errorMessage}</Text>
       <ActionSheet ref={actionSheetRef} gestureEnabled>
         <View>
@@ -82,6 +87,24 @@ UploadDocumentButton.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+  buttonContainerStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonStyle: {
+    alignItems: 'center',
+    backgroundColor: colors.lightGrey,
+    borderRadius: 25,
+    color: colors.black,
+    flexDirection: 'row',
+    padding: 10,
+  },
+  fileNameStyle: {
+    marginLeft: 10,
+    width: 150,
+  },
   iconStyle: {
     marginRight: 8,
     marginTop: 3,

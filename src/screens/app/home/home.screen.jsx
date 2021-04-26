@@ -11,6 +11,7 @@ import { ScrollContainer, PaddedContainer } from '../../../components/containers
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useMembershipCard, useBiometricRegister } from '../../../hooks';
 import { hasIncomingNotification } from '../../../reducers/notification-reducer/notification.actions';
+import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import getCardType from '../../../helpers/getCardType';
 import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
@@ -22,7 +23,7 @@ const HomeScreen = () => {
   const { viewMembershipCard } = useMembershipCard();
 
   const { user } = useSelector((reducers) => reducers.userReducer);
-  const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
+  const { membershipCards } = useSelector(membershipCardSelector);
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 

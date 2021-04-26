@@ -35,6 +35,8 @@ const initialState = {
   currentMembershipCardPin: null,
 };
 
+export const membershipCardSelector = (reducers) => reducers.membershipCardReducer;
+
 export default function membershipCardReducer(state = initialState, action) {
   switch (action.type) {
     case setIsLoading.actionType:

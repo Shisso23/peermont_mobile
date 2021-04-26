@@ -16,13 +16,14 @@ import {
   SmsSettings,
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
+import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import { AddButton, Watermark } from '../../../components/atoms';
 import { useRefreshHeaderButton } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
 
 const MyAccountScreen = () => {
   const { loading } = useSelector((reducers) => reducers.userReducer);
-  const { membershipCards } = useSelector((reducers) => reducers.membershipCardReducer);
+  const { membershipCards } = useSelector(membershipCardSelector);
   const { creditCards } = useSelector((reducers) => reducers.creditCardReducer);
   const { bankAccounts } = useSelector((reducers) => reducers.bankAccountReducer);
   const dispatch = useDispatch();

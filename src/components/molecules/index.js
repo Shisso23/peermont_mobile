@@ -11,3 +11,4 @@ export { default as BiometricSettings } from './biometrics/biometrics-settings.c
 export { default as ProfileDocument } from './profile-document';
 export { default as PushNotificationSettings } from './push-notifications/push-notification-settings.component';
 export { default as SmsSettings } from './sms/sms-setting.component';
+export { default as MembershipCardBalance } from './membership-card/balance';
