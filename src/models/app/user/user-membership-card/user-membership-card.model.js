@@ -18,9 +18,9 @@ export const userMembershipCardModel = ({
   balanceFormat: balance_format || '',
   status: status || '',
   tierName: tier_name || '',
-  pointsBalance: points_balance || 'N/A',
-  bonusPointsBalance: bonus_points_balance || 'N/A',
-  freePlayBalance: free_play_balance || 'N/A',
+  pointsBalance: points_balance || 0,
+  bonusPointsBalance: bonus_points_balance || 0,
+  freePlayBalance: free_play_balance || 0,
 });
 
 export const constructUserMembershipCardModels = (membershipCards) => {

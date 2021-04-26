@@ -7,7 +7,7 @@ import { KeyboardScrollContainer, PaddedContainer } from '../../../../../compone
 import { MembershipCardForm } from '../../../../../components/forms';
 import { membershipCardModel } from '../../../../../models';
 import { createMembershipCardAction } from '../../../../../reducers/membership-card-reducer/membership-card.actions';
-import { useDisableBackButtonWhileLoading } from '../../../../../hooks/disable-back-button-while-loading/use-disable-back-button-while-loading';
+import { useDisableBackButtonWhileLoading } from '../../../../../hooks';
 import { custom } from '../../../../../../theme/theme.styles';
 
 const AddMembershipCardScreen = () => {

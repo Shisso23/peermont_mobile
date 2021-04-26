@@ -133,7 +133,7 @@ android {
         applicationId "com.codehesion.peermont_mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 52
+        versionCode 55
         versionName "1.2.1"
         multiDexEnabled true
     }
