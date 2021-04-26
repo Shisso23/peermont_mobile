@@ -11,7 +11,8 @@ import {
   seeNotification,
   deleteNotification,
 } from '../../../reducers/notification-reducer/notification.actions';
-import { PressableOpacity } from '../../atoms';
+import { TrashButton } from '../../atoms';
+import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 
 const Notification = ({ notification }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Notification = ({ notification }) => {
   const [needsCollapse, setNeedsCollapse] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isSeen, setIsSeen] = useState(seen);
+  const [isDeleting, setDeleting] = useState(false);
 
   const _handleCollapse = () => {
     if (!isSeen) {
@@ -39,8 +41,11 @@ const Notification = ({ notification }) => {
     }
   };
 
-  const _deleteNotification = () => {
-    dispatch(deleteNotification(notificationLinkId));
+  const _handleDelete = () => {
+    promptConfirmDelete('Are you sure you want to delete this item?', () => {
+      setDeleting(true);
+      dispatch(deleteNotification(notificationLinkId));
+    });
   };
 
   const _renderCollapseText = () => (
@@ -68,9 +73,7 @@ const Notification = ({ notification }) => {
         />
       )}
       {!isSeen && <Badge status="error" />}
-      <PressableOpacity onPress={_deleteNotification} style={styles.pressableContainer}>
-        <Icon name="trash" type="font-awesome-5" size={21} />
-      </PressableOpacity>
+      <TrashButton onPress={_handleDelete} loading={isDeleting} />
     </ListItem>
   );
 };
@@ -79,11 +82,6 @@ const styles = StyleSheet.create({
   chevronContainer: {
     alignSelf: 'flex-start',
     marginTop: 10,
-  },
-  pressableContainer: {
-    height: 50,
-    justifyContent: 'center',
-    width: 40,
   },
 });
 

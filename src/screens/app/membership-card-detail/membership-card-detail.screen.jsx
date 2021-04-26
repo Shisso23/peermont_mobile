@@ -54,14 +54,6 @@ const MembershipCardDetailScreen = () => {
         name="Leisure Points"
         value={_.get(currentMembershipCard, 'pointsBalance', 0)}
       />
-      <MembershipCardBalance
-        name="Bonus Points"
-        value={_.get(currentMembershipCard, 'bonusPointsBalance', 0)}
-      />
-      <MembershipCardBalance
-        name="FreePlay"
-        value={_.get(currentMembershipCard, 'freePlayBalance', 0)}
-      />
     </>
   );
 

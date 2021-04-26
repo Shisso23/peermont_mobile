@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { Button, Input, Divider } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
@@ -13,7 +12,6 @@ import { infoPopUpService } from '../../../services';
 import { RegisterCardModal } from '../../atoms';
 
 const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
-  const navigation = useNavigation();
   const pinRef = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -28,7 +26,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
     } else {
-      navigation.push('RegisterError', { errorMessage: _.get(error, 'message') });
+      actions.setFieldError('pin', error.message);
     }
   };
 
