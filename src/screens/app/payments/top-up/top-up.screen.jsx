@@ -43,7 +43,6 @@ const TopUpScreen = () => {
           Your balance is {_.get(route, 'params.balance')}
         </Text>
       </PaddedContainer>
-
       <TopUpForm
         initialValues={topUpModel()}
         onSuccess={_handleFormSuccess}

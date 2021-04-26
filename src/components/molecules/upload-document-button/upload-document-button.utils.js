@@ -1,5 +1,6 @@
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
+import _ from 'lodash';
 
 const successfullySelectedImage = (res) => !res.didCancel;
 const errorOccurred = (res) => res.errorCode;
@@ -7,6 +8,7 @@ const errorOccurred = (res) => res.errorCode;
 const constructFormData = (res) => ({
   uri: res.uri,
   type: res.type,
+  name: _.get(res, 'name', _.get(res, 'fileName')),
 });
 
 const imageOptions = {

@@ -1,15 +1,69 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Button, Divider, ListItem, Text, Avatar } from 'react-native-elements';
+import { TouchableOpacity, View, Alert, StyleSheet, ActivityIndicator } from 'react-native';
+import { Button, Divider, ListItem, Text, Avatar, Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
+
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { getMembershipCardImage } from '../../../components/molecules/membership-card/utils';
+import { MembershipCardBalance, Modal } from '../../../components';
+import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
+import { refreshMembershipCardBalanceAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
+import { useRefreshHeaderButton } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
+import colors from '../../../../theme/theme.colors';
 
 const MembershipCardDetailScreen = () => {
-  const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { currentMembershipCard, isLoading } = useSelector(membershipCardSelector);
   const membershipCardImage = getMembershipCardImage(currentMembershipCard.tierName);
+  const balance = { balance: currentMembershipCard.balanceFormat };
+
+  const showDisclaimerAlert = () =>
+    Alert.alert(
+      'Disclaimer',
+      'This is your daily point balance, and is subject to change based on amounts already spent on the day.',
+    );
+
+  const _navigateToTopUp = () => navigation.navigate('TopUp', balance);
+  const _navigateToPayOut = () => navigation.navigate('PayOut', balance);
+
+  useRefreshHeaderButton(() => {
+    dispatch(refreshMembershipCardBalanceAction());
+  }, isLoading);
+
+  const PointsBalance = () => (
+    <>
+      <PaddedContainer>
+        <View style={styles.pointsBalanceContainer}>
+          <Text h4>Points Balances</Text>
+          <TouchableOpacity onPress={showDisclaimerAlert}>
+            <Icon
+              name="info"
+              type="font-awesome-5"
+              size={8}
+              color={colors.white}
+              style={styles.iconStyle}
+            />
+          </TouchableOpacity>
+        </View>
+      </PaddedContainer>
+      <MembershipCardBalance
+        name="Leisure Points"
+        value={_.get(currentMembershipCard, 'pointsBalance', 0)}
+      />
+      <MembershipCardBalance
+        name="Bonus Points"
+        value={_.get(currentMembershipCard, 'bonusPointsBalance', 0)}
+      />
+      <MembershipCardBalance
+        name="FreePlay"
+        value={_.get(currentMembershipCard, 'freePlayBalance', 0)}
+      />
+    </>
+  );
 
   return (
     <ScrollContainer>
@@ -23,40 +77,45 @@ const MembershipCardDetailScreen = () => {
           <ListItem.Subtitle>{currentMembershipCard.tierName}</ListItem.Subtitle>
         </ListItem.Content>
       </ListItem>
-      <ListItem bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title h4>Player Balance</ListItem.Title>
-        </ListItem.Content>
-        <Text h4>{currentMembershipCard.balanceFormat}</Text>
-      </ListItem>
+      <MembershipCardBalance
+        name="Player Balance"
+        value={_.get(currentMembershipCard, 'balanceFormat', 'R0.00')}
+      />
       <PaddedContainer>
-        <Button
-          title="Top Up"
-          onPress={() =>
-            navigation.navigate('TopUp', { balance: currentMembershipCard.balanceFormat })
-          }
-        />
+        <Button title="Top Up" onPress={_navigateToTopUp} />
         <Divider />
-        <Button
-          title="Pay Out"
-          onPress={() =>
-            navigation.navigate('PayOut', { balance: currentMembershipCard.balanceFormat })
-          }
-        />
+        <Button title="Pay Out" onPress={_navigateToPayOut} />
       </PaddedContainer>
-      <Divider />
-      <PaddedContainer>
-        <Text h4>Points Balances</Text>
-      </PaddedContainer>
-      <ListItem bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Leisure Points Balance</ListItem.Title>
-        </ListItem.Content>
-        <Text h4>{currentMembershipCard.pointsBalance}</Text>
-      </ListItem>
+      <PointsBalance />
+      <Modal
+        visible={isLoading}
+        transparent
+        backgroundFade
+        backgroundFadeColor={colors.whiteTransparent}
+      >
+        <View>
+          <ActivityIndicator animating size="large" color={colors.gold} />
+        </View>
+      </Modal>
     </ScrollContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  iconStyle: {
+    backgroundColor: colors.black,
+    borderRadius: 40,
+    flex: 1,
+    height: 15,
+    justifyContent: 'center',
+    marginLeft: 5,
+    width: 15,
+  },
+  pointsBalanceContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+});
 
 MembershipCardDetailScreen.propTypes = {};
 

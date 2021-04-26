@@ -14,12 +14,13 @@ import { PaddedContainer } from '../../containers';
 import { BankAccount, LoadingComponent } from '../../molecules';
 import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schemas';
 import { AddButton, CurrencyIcon } from '../../atoms';
+import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 
 const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
   const navigation = useNavigation();
 
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
-  const { currentMembershipCard } = useSelector((reducers) => reducers.membershipCardReducer);
+  const { currentMembershipCard } = useSelector(membershipCardSelector);
 
   const validationSchema = Yup.object().shape({
     amount: paymentAmountSchema(currentMembershipCard.balance),

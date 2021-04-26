@@ -106,13 +106,6 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                       />
                     );
                   })}
-                  <ListItem bottomDivider onPress={() => setFieldValue('isEft', true)}>
-                    <Icon name="money-bill" size={40} color={colors.primary} />
-                    <ListItem.Content>
-                      <ListItem.Title>Instant EFT</ListItem.Title>
-                    </ListItem.Content>
-                    <CheckBox checked={values.isEft} disabled />
-                  </ListItem>
                 </>
               ) : (
                 <ListItem>
@@ -127,6 +120,13 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
             ) : (
               <LoadingComponent />
             )}
+            <ListItem bottomDivider onPress={() => setFieldValue('isEft', true)}>
+              <Icon name="money-bill" size={40} color={colors.primary} />
+              <ListItem.Content>
+                <ListItem.Title>Instant EFT</ListItem.Title>
+              </ListItem.Content>
+              <CheckBox checked={values.isEft} disabled />
+            </ListItem>
             <Text style={[custom.errorStyle, styles.errorStyle]}> {error('creditCardId')}</Text>
             <PaddedContainer>
               <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />
