@@ -7,14 +7,13 @@ import ReactNativeBiometrics from 'react-native-biometrics';
 import RNBootSplash from 'react-native-bootsplash';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
-import { Footer, Contact, Modal, LoadingComponent } from '../../../components';
+import { Footer, Contact, ModalLoader } from '../../../components';
 import { SignInForm } from '../../../components/forms';
 import { setIsAuthenticatedAction } from '../../../reducers/user-auth-reducer/user-auth.reducer';
 import { signInAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { loadAppDataForSignedInUserAction } from '../../../reducers/app-reducer/app.actions';
 import { useBiometricLogin, useAuthentication } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
-import colors from '../../../../theme/theme.colors';
 
 const imageUri = require('../../../assets/images/header-alt.png');
 
@@ -78,14 +77,7 @@ const SignInScreen = () => {
 
   return (
     <KeyboardScrollContainer>
-      <Modal
-        visible={isLoading}
-        transparent
-        backgroundFade
-        backgroundFadeColor={colors.whiteTransparent}
-      >
-        <LoadingComponent hasBackground={false} />
-      </Modal>
+      <ModalLoader isLoading={isLoading} />
       <PaddedContainer>
         <Image source={imageUri} resizeMode="contain" style={styles.imageStyle} />
         <Text style={custom.centerSubtitle}>Enter your details below to log in.</Text>

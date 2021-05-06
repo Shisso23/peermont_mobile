@@ -18,3 +18,4 @@ export * from './app/payment/payment.model';
 export * from './app/payment-otp/payment-otp.model';
 export * from './app/topup/topup.model';
 export * from './app/pay-out/pay-out.model';
+export * from './app/advert/advert.model';

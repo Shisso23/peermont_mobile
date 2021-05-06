@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Text, Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,9 +11,8 @@ import {
 } from '../../../../reducers/user-reducer/user.actions';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
-import { Modal } from '../../../../components';
+import { ModalLoader } from '../../../../components';
 import { custom } from '../../../../../theme/theme.styles';
-import colors from '../../../../../theme/theme.colors';
 
 const UpdateMobileOtpScreen = () => {
   const dispatch = useDispatch();
@@ -55,16 +54,7 @@ const UpdateMobileOtpScreen = () => {
           <Text style={custom.resendOtpStyle}>Resend OTP</Text>
         </TouchableOpacity>
       </PaddedContainer>
-      <Modal
-        visible={loading}
-        transparent
-        backgroundFade
-        backgroundFadeColor={colors.whiteTransparent}
-      >
-        <View>
-          <ActivityIndicator animating size="large" color={colors.gold} />
-        </View>
-      </Modal>
+      <ModalLoader isLoading={loading} />
     </KeyboardScrollContainer>
   );
 };
