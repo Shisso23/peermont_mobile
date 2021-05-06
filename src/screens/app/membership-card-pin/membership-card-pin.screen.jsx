@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Text } from 'react-native-elements';
-import { ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import _ from 'lodash';
@@ -12,11 +11,10 @@ import {
   rememberCardPin,
 } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
+import { ModalLoader } from '../../../components';
 import { membershipCardPinModel } from '../../../models';
 import HealthSurveyScreen from '../health-survey/health-survey.screen';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
-import { Modal } from '../../../components/atoms';
-import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCardPinScreen = () => {
@@ -65,16 +63,7 @@ const MembershipCardPinScreen = () => {
           ref={formRef}
         />
       </PaddedContainer>
-      <Modal
-        visible={isLoading}
-        transparent
-        backgroundFade
-        backgroundFadeColor={colors.whiteTransparent}
-      >
-        <View>
-          <ActivityIndicator animating size="large" color={colors.gold} />
-        </View>
-      </Modal>
+      <ModalLoader isLoading={isLoading} />
     </KeyboardScrollContainer>
   );
 };

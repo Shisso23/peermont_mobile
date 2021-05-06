@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Text, Divider } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -12,8 +12,7 @@ import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
-import colors from '../../../../../theme/theme.colors';
-import { Modal } from '../../../../components';
+import { ModalLoader } from '../../../../components';
 
 const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
@@ -56,16 +55,7 @@ const PaymentOtpScreen = () => {
           <Text style={custom.resendOtpStyle}>Resend OTP</Text>
         </TouchableOpacity>
       </PaddedContainer>
-      <Modal
-        visible={isLoading}
-        transparent
-        backgroundFade
-        backgroundFadeColor={colors.whiteTransparent}
-      >
-        <View>
-          <ActivityIndicator animating size="large" color={colors.gold} />
-        </View>
-      </Modal>
+      <ModalLoader isLoading={isLoading} />
     </KeyboardScrollContainer>
   );
 };

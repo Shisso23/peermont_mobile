@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,20 +7,20 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import _ from 'lodash';
 
+import { MembershipCardCarouselItem, SplashAd } from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
-import { useMembershipCard, useBiometricRegister } from '../../../hooks';
+import { useBiometricRegister } from '../../../hooks';
 import { hasIncomingNotification } from '../../../reducers/notification-reducer/notification.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
-import getCardType from '../../../helpers/getCardType';
 import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
+import { getSplashAdvertAction } from '../../../reducers/advert-reducer/advert.actions';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const biometricRegister = useBiometricRegister();
-  const { viewMembershipCard } = useMembershipCard();
 
   const { user } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector(membershipCardSelector);
@@ -42,29 +42,16 @@ const HomeScreen = () => {
   );
 
   useEffect(() => {
-    biometricRegister();
+    biometricRegister().then();
+    dispatch(getSplashAdvertAction());
   }, []);
 
   useFocusEffect(exitAppOnHardwarePressListener);
-
-  // eslint-disable-next-line react/prop-types
-  const _renderMembershipCardItem = ({ item, index }) => {
-    return (
-      <TouchableOpacity onPress={() => viewMembershipCard(_.get(item, 'id'), index)}>
-        <Image
-          resizeMode="contain"
-          style={styles.carouselImage}
-          source={getCardType(_.get(item, 'tierName'))}
-        />
-        <Text style={styles.carouselCardNumber}>{_.get(item, 'cardNumber')}</Text>
-      </TouchableOpacity>
-    );
-  };
-
   const _keyExtractor = (item) => _.get(item, 'id', '').toString();
 
   return (
     <ScrollContainer>
+      <SplashAd />
       <PaddedContainer>
         <Text style={custom.centerTitleSmall}>{user.firstName}</Text>
       </PaddedContainer>
@@ -92,7 +79,9 @@ const HomeScreen = () => {
           <Carousel
             data={membershipCards}
             extraData={membershipCards}
-            renderItem={_renderMembershipCardItem}
+            renderItem={({ item, index }) => (
+              <MembershipCardCarouselItem item={item} index={index} />
+            )}
             sliderWidth={500}
             itemWidth={250}
             onSnapToItem={_setActiveSlideIndex}
@@ -128,23 +117,12 @@ const styles = StyleSheet.create({
     height: 10,
     width: 10,
   },
-  carouselCardNumber: {
-    alignSelf: 'center',
-    bottom: 15,
-    color: colors.darkGrey,
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 20,
-  },
   carouselContainer: {
     alignItems: 'center',
     backgroundColor: colors.white,
     borderBottomWidth: 0.28,
     borderColor: colors.inputBorderColor,
     paddingBottom: 10,
-  },
-  carouselImage: {
-    height: 200,
-    width: 250,
   },
   containerStyle: {
     paddingBottom: 10,
