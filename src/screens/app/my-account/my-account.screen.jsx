@@ -1,8 +1,8 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Text, Divider, ListItem } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
 import _ from 'lodash';
 
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';

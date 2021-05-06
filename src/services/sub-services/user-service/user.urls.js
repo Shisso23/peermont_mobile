@@ -8,4 +8,5 @@ export default {
   updateDetailsUrl: () => `${apiUrl}/users/update_details`,
   verifyUpdateMobileOtp: () => `${apiUrl}/users/verify_update_mobile_otp`,
   resendUpdateMobileOtp: () => `${apiUrl}/users/resend_update_mobile_otp`,
+  updateDailyTopUpLimit: () => `${apiUrl}/users/update_daily_top_up_limit`,
 };
