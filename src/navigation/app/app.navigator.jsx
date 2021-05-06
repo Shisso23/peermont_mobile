@@ -1,39 +1,34 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from '../../screens/app/home/home.screen';
-import MyAccountScreen from '../../screens/app/my-account/my-account.screen';
-import MyProfileScreen from '../../screens/app/profile/profile.screen';
-
-import AddCreditCardScreen from '../../screens/app/my-account/add-account/add-credit-card/add-credit-card.screen';
 
 import { DrawerComponent } from '../../components/molecules';
+import { BackHeader, BurgerHeader, NotificationHeader } from '../../components/headers';
 import { drawerStyle, globalScreenOptions } from '../../../theme/theme.styles';
 
-import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
-import UploadBankAccountDocumentScreen from '../../screens/app/my-account/add-account/add-bank-account-document/upload-bank-account-document.screen';
-import EditBankAccountScreen from '../../screens/app/my-account/edit-account/edit-bank-account/edit-bank-account.screen';
-
-import UploadProfileDocumentsScreen from '../../screens/app/profile/add-profile-document/upload-profile-document.screen';
-import UpdateMobileOtpScreen from '../../screens/app/profile/update-mobile-otp/update-mobile-otp.screen';
-
-import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
-
+import HomeScreen from '../../screens/app/home/home.screen';
 import HealthSurveyScreen from '../../screens/app/health-survey/health-survey.screen';
-import MembershipCardPinScreen from '../../screens/app/membership-card-pin/membership-card-pin.screen';
-import MembershipCardDetailScreen from '../../screens/app/membership-card-detail/membership-card-detail.screen';
+import MembershipCardPinScreen from '../../screens/app/membership-card/membership-card-pin/membership-card-pin.screen';
+import MembershipCardDetailScreen from '../../screens/app/membership-card/membership-card-detail/membership-card-detail.screen';
 import TopUpScreen from '../../screens/app/payments/top-up/top-up.screen';
 import PayOutScreen from '../../screens/app/payments/pay-out/pay-out.screen';
 import PaymentOtpScreen from '../../screens/app/payments/payment-otp/payment-otp.screen';
 import TopUpCompleteScreen from '../../screens/app/payments/top-up/top-up-complete/top-up-complete.screen';
 import PayOutCompleteScreen from '../../screens/app/payments/pay-out/pay-out-complete/pay-out-complete.screen';
+import MyAccountScreen from '../../screens/app/my-account/my-account.screen';
+import AddCreditCardScreen from '../../screens/app/my-account/add-account/add-credit-card/add-credit-card.screen';
+import AddBankAccountScreen from '../../screens/app/my-account/add-account/add-bank-account/add-bank-account.screen';
+import UploadBankAccountDocumentScreen from '../../screens/app/my-account/add-account/add-bank-account-document/upload-bank-account-document.screen';
+import AddMembershipCardScreen from '../../screens/app/my-account/add-account/add-membership-card/add-membership-card.screen';
+import DailyTopUpLimitScreen from '../../screens/app/my-account/daily-top-up-limit/daily-top-up-limit.screen';
+import MyProfileScreen from '../../screens/app/profile/profile.screen';
+import UploadProfileDocumentsScreen from '../../screens/app/profile/add-profile-document/upload-profile-document.screen';
+import UpdateMobileOtpScreen from '../../screens/app/profile/update-mobile-otp/update-mobile-otp.screen';
 import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
 import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
 import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
 import NotificationsScreen from '../../screens/app/notification/notifications.screen';
 import TransactionsScreen from '../../screens/app/transactions/transactions.screen';
-
-import { BackHeader, BurgerHeader, NotificationHeader } from '../../components/headers';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -88,6 +83,11 @@ const AppNavigator = () => (
       options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen
+      name="DailyTopUpLimit"
+      component={DailyTopUpLimitScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
       name="UploadProfileDocument"
       component={UploadProfileDocumentsScreen}
       options={{ headerShown: true, title: '' }}
@@ -95,11 +95,6 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="UpdateMobileOtp"
       component={UpdateMobileOtpScreen}
-      options={{ headerShown: true, title: '' }}
-    />
-    <AppStack.Screen
-      name="EditBankAccount"
-      component={EditBankAccountScreen}
       options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen

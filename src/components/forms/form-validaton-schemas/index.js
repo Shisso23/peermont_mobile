@@ -82,3 +82,8 @@ export const topupCreditCardIdSchema = Yup.string().when('isEft', {
 });
 
 export const payOutBankIdSchema = Yup.string().required('Approved bank account required');
+
+export const dailyTopUpLimitSchema = Yup.number()
+  .max('1000000', 'Daily top up limit cannot exceed 1000000')
+  .required('Limit is required')
+  .typeError('Limit can only be a number');

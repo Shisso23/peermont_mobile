@@ -5,14 +5,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
-import { ScrollContainer, PaddedContainer } from '../../../components/containers';
-import { getMembershipCardImage } from '../../../components/molecules/membership-card/utils';
-import { MembershipCardBalance, Modal } from '../../../components';
-import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
-import { refreshMembershipCardBalanceAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
-import { useRefreshHeaderButton } from '../../../hooks';
-import { custom } from '../../../../theme/theme.styles';
-import colors from '../../../../theme/theme.colors';
+import { ScrollContainer, PaddedContainer } from '../../../../components/containers';
+import { getMembershipCardImage } from '../../../../components/molecules/membership-card/utils';
+import { MembershipCardBalance, Modal } from '../../../../components';
+import { membershipCardSelector } from '../../../../reducers/membership-card-reducer/membership-card.reducer';
+import { refreshMembershipCardBalanceAction } from '../../../../reducers/membership-card-reducer/membership-card.actions';
+import { useRefreshHeaderButton } from '../../../../hooks';
+import { custom } from '../../../../../theme/theme.styles';
+import colors from '../../../../../theme/theme.colors';
 
 const MembershipCardDetailScreen = () => {
   const navigation = useNavigation();
@@ -34,28 +34,41 @@ const MembershipCardDetailScreen = () => {
     dispatch(refreshMembershipCardBalanceAction());
   }, isLoading);
 
-  const PointsBalance = () => (
-    <>
-      <PaddedContainer>
-        <View style={styles.pointsBalanceContainer}>
-          <Text h4>Points Balances</Text>
-          <TouchableOpacity onPress={showDisclaimerAlert}>
-            <Icon
-              name="info"
-              type="font-awesome-5"
-              size={8}
-              color={colors.white}
-              style={styles.iconStyle}
-            />
-          </TouchableOpacity>
-        </View>
-      </PaddedContainer>
-      <MembershipCardBalance
-        name="Leisure Points"
-        value={_.get(currentMembershipCard, 'pointsBalance', 0)}
-      />
-    </>
-  );
+  const PointsBalance = () => {
+    const pointsBalance = _.get(currentMembershipCard, 'pointsBalance', 0);
+    const bonusPointsBalance = _.get(currentMembershipCard, 'bonusPointsBalance', 0);
+    const freePlayBalance = _.get(currentMembershipCard, 'freePlayBalance', 0);
+
+    const pointsNil = _.isNil(pointsBalance);
+    const bonusPointsNil = _.isNil(bonusPointsBalance);
+    const freePlayNil = _.isNil(freePlayBalance);
+    const allBalancesNil = _.isNil(pointsNil && bonusPointsNil && freePlayBalance);
+
+    return (
+      <>
+        <PaddedContainer>
+          <View style={styles.pointsBalanceContainer}>
+            <Text h4>Points Balances</Text>
+            <TouchableOpacity onPress={showDisclaimerAlert}>
+              <Icon
+                name="info"
+                type="font-awesome-5"
+                size={8}
+                color={colors.white}
+                style={styles.iconStyle}
+              />
+            </TouchableOpacity>
+          </View>
+        </PaddedContainer>
+        {!pointsNil && <MembershipCardBalance name="Leisure Points" value={pointsBalance} />}
+        {!bonusPointsNil && (
+          <MembershipCardBalance name="Bonus Points" value={bonusPointsBalance} />
+        )}
+        {!freePlayNil && <MembershipCardBalance name="FreePlay" value={freePlayBalance} />}
+        {allBalancesNil && <Text style={custom.centerSubtitle}>No points to show</Text>}
+      </>
+    );
+  };
 
   return (
     <ScrollContainer>
