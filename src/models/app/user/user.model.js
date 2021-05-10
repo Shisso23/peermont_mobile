@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import _ from 'lodash';
 import { constructUserMembershipCardModels } from './user-membership-card/user-membership-card.model';
 import { constructUserBankAccountModels } from './user-bank-account/user-bank-account.model';

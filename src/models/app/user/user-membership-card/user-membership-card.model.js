@@ -1,26 +1,16 @@
-/* eslint-disable camelcase */
-export const userMembershipCardModel = ({
-  id,
-  card_number,
-  card_valid,
-  balance,
-  balance_format,
-  status,
-  tier_name,
-  points_balance,
-  bonus_points_balance,
-  free_play_balance,
-} = {}) => ({
-  id: id || '',
-  cardNumber: card_number || '',
-  cardValid: card_valid || false,
-  balance: balance || 0,
-  balanceFormat: balance_format || '',
-  status: status || '',
-  tierName: tier_name || '',
-  pointsBalance: points_balance,
-  bonusPointsBalance: bonus_points_balance,
-  freePlayBalance: free_play_balance,
+import _ from 'lodash';
+
+export const userMembershipCardModel = (_model = {}) => ({
+  id: _.get(_model, 'id'),
+  cardNumber: _.get(_model, 'card_number'),
+  cardValid: _.get(_model, 'card_valid', false),
+  balance: _.get(_model, 'balance', 0),
+  balanceFormat: _.get(_model, 'balance_format'),
+  status: _.get(_model, 'status'),
+  tierName: _.get(_model, 'tier_name'),
+  pointsBalance: _.get(_model, 'points_balance'),
+  bonusPointsBalance: _.get(_model, 'bonus_points_balance'),
+  freePlayBalance: _.get(_model, 'free_play_balance'),
 });
 
 export const constructUserMembershipCardModels = (membershipCards) => {

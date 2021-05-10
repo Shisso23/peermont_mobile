@@ -1,9 +1,10 @@
-/* eslint-disable camelcase */
-export const bankModel = ({ id, name, branch_code, icon_url } = {}) => ({
-  id: id || '',
-  name: name || '',
-  branchCode: branch_code || '',
-  iconUrl: icon_url || '',
+import _ from 'lodash';
+
+export const bankModel = (_model = {}) => ({
+  id: _.get(_model, 'id'),
+  name: _.get(_model, 'name'),
+  branchCode: _.get(_model, 'branch_code'),
+  iconUrl: _.get(_model, 'icon_url'),
 });
 
 export const constructBankModels = (banks) => {

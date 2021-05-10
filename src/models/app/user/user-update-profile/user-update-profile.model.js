@@ -1,5 +1,4 @@
 import _ from 'lodash';
-/* eslint-disable camelcase */
 
 export const userUpdateProfileModel = (_profileUpdateModel = {}) => ({
   user: {

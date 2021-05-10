@@ -26,7 +26,7 @@ const createPayment = (input) => {
 
 export const sendPaymentOtp = (paymentId, sendTo) => {
   const url = paymentUrls.sendOtp(paymentId);
-  const apiModel = apiSendPaymentOtpModel(sendTo);
+  const apiModel = apiSendPaymentOtpModel({ sendTo });
 
   return authNetworkService.post(url, apiModel);
 };
