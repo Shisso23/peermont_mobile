@@ -35,3 +35,8 @@ export const formatCardExpiryDate = (newText, currentExpiryDate) => {
   }
   return newText;
 };
+
+export const fastFormatCardExpiryDate = (newText) => {
+  const formattedText = `${newText.substr(0, 2)}/${newText.substr(2, 2)}`;
+  return formattedText;
+};

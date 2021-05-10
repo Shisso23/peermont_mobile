@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import _ from 'lodash';
 
-import { MembershipCardCarouselItem, SplashAd } from '../../../components';
+import { MembershipCardCarouselItem, SplashAd, HealthSurvey } from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useBiometricRegister } from '../../../hooks';
@@ -26,10 +25,6 @@ const HomeScreen = () => {
   const { membershipCards } = useSelector(membershipCardSelector);
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-
-  const _handleHealthSurveyPress = () => {
-    navigation.navigate('HealthSurvey');
-  };
 
   const _setActiveSlideIndex = (index) => {
     setActiveSlideIndex(index);
@@ -56,17 +51,7 @@ const HomeScreen = () => {
         <Text style={custom.centerTitleSmall}>{user.firstName}</Text>
       </PaddedContainer>
       <PaddedContainer>
-        <View style={custom.surveyContainer}>
-          <TouchableOpacity style={custom.surveyButton} onPress={_handleHealthSurveyPress}>
-            <Icon name="cube" size={20} />
-            <View style={custom.surveyText}>
-              <Text style={custom.surveyTitle}>Planning on visiting?</Text>
-              <Text style={custom.surveySubText}>
-                Save time and take our health survey for quick access
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <HealthSurvey />
         <Text style={custom.centerTitle}>Select Card</Text>
         {_.isEmpty(membershipCards) && (
           <Text style={custom.centerSubtitle}>

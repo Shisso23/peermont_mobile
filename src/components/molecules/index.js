@@ -14,3 +14,4 @@ export { default as SmsSettings } from './sms/sms-setting.component';
 export { default as SplashAd } from './splash-ad';
 export { default as MembershipCardCarouselItem } from './membership-card-carousel-item';
 export { default as MembershipCardBalance } from './membership-card/balance';
+export { default as HealthSurvey } from './health-survey';
