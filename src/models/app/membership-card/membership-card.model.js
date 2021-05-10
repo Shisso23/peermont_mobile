@@ -1,16 +1,17 @@
-/* eslint-disable camelcase */
-export const membershipCardModel = ({ card_number, card_pin } = {}) => ({
-  cardNumber: card_number || '',
-  pin: card_pin || '',
+import _ from 'lodash';
+
+export const membershipCardModel = (_model = {}) => ({
+  cardNumber: _.get(_model, 'card_number'),
+  pin: _.get(_model, 'card_pin'),
 });
 
-export const membershipCardPinModel = ({ card_pin } = {}) => ({
-  numeric: card_pin || '',
+export const membershipCardPinModel = (_model = {}) => ({
+  numeric: _.get(_model, 'card_pin'),
 });
 
-export const apiMembershipCardModel = ({ cardNumber, encryptedPin } = {}) => ({
+export const apiMembershipCardModel = (_model = {}) => ({
   membership_card: {
-    card_number: cardNumber || '',
-    card_pin: encryptedPin || '',
+    card_number: _.get(_model, 'cardNumber'),
+    card_pin: _.get(_model, 'encryptedPin'),
   },
 });

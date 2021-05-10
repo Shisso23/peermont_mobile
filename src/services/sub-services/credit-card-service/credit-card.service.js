@@ -2,7 +2,7 @@ import authNetworkService from '../auth-network-service/auth-network.service';
 import creditCardUrls from './credit-card.urls';
 import {
   userCreditCardModel,
-  apiCreditCardCardModel,
+  apiCreditCardModel,
   creditCardModel,
   constructUserCreditCardModels,
 } from '../../../models';
@@ -25,7 +25,7 @@ const getCreditCards = () => {
 
 const createCreditCard = (formData) => {
   const createCreditCardUrl = creditCardUrls.creditCardsUrl();
-  const apiModel = apiCreditCardCardModel(formData);
+  const apiModel = apiCreditCardModel(formData);
   return authNetworkService
     .post(createCreditCardUrl, apiModel)
     .then(_createAndReturnUserCreditCardModel)

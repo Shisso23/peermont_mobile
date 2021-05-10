@@ -1,10 +1,10 @@
-/* eslint-disable camelcase */
+import _ from 'lodash';
 
-export const apiPaymentOtpModel = ({ numeric } = {}, membershipCardPin) => ({
+export const apiPaymentOtpModel = (_model = {}, membershipCardPin) => ({
   pin: membershipCardPin || '',
-  otp: numeric || '',
+  otp: _.get(_model, 'numeric'),
 });
 
-export const apiSendPaymentOtpModel = (send_to) => ({
-  to: send_to || '',
+export const apiSendPaymentOtpModel = (_model) => ({
+  to: _.get(_model, 'sendTo'),
 });

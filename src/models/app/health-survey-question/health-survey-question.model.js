@@ -1,7 +1,8 @@
-/* eslint-disable camelcase */
-export const healthSurveyQuestionModel = ({ question_id, text } = {}) => ({
-  id: question_id || '',
-  text: text || '',
+import _ from 'lodash';
+
+export const healthSurveyQuestionModel = (_model = {}) => ({
+  id: _.get(_model, 'question_id'),
+  text: _.get(_model, 'text'),
 });
 
 export const constructHealthSurveyQuestionModels = (healthSurveyQuestions) => {

@@ -1,13 +1,14 @@
-/* eslint-disable camelcase */
-const healthSurveyAnswerModel = ({ id } = {}) => ({
-  id: id || '',
+import _ from 'lodash';
+
+const healthSurveyAnswerModel = (_model = {}) => ({
+  id: _.get(_model, 'id'),
   answer: '',
 });
 
-const apiHealthSurveyAnswerModel = ({ id, answer } = {}) => {
+const apiHealthSurveyAnswerModel = (_model = {}) => {
   return {
-    question_id: id || '',
-    answer,
+    question_id: _.get(_model, 'id'),
+    answer: _.get(_model, 'answer'),
   };
 };
 
