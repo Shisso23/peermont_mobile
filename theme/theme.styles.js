@@ -52,7 +52,7 @@ export const custom = {
     paddingBottom: 20,
   },
   surveyText: {
-    marginLeft: 10,
+    marginLeft: 30,
   },
   surveyTitle: {
     fontSize: 18,
