@@ -22,12 +22,12 @@ import { useRefreshHeaderButton } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
 
 const MyAccountScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const { loading } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector(membershipCardSelector);
   const { creditCards } = useSelector((reducers) => reducers.creditCardReducer);
   const { bankAccounts } = useSelector((reducers) => reducers.bankAccountReducer);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const _handleBankUpdateNav = (bankAccount) => {
     navigation.navigate('UploadBankAccountDocument', {

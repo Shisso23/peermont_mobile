@@ -11,6 +11,7 @@ export const userMembershipCardModel = (_model = {}) => ({
   pointsBalance: _.get(_model, 'points_balance'),
   bonusPointsBalance: _.get(_model, 'bonus_points_balance'),
   freePlayBalance: _.get(_model, 'free_play_balance'),
+  dailyTopUpLimitLeft: _.get(_model, 'daily_top_up_limit_left'),
 });
 
 export const constructUserMembershipCardModels = (membershipCards) => {

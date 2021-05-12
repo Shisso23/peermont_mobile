@@ -17,6 +17,7 @@ const TopUpScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { isLoading } = useSelector((reducer) => reducer.paymentReducer);
+  const dailyTopUpLimitLeft = _.get(route, 'params.dailyTopUpLimitLeft');
 
   const _handleFormSuccess = () => {
     navigation.replace('PaymentOtp', {
@@ -42,6 +43,11 @@ const TopUpScreen = () => {
         <Text h4 style={custom.centerSubtitle}>
           Your balance is {_.get(route, 'params.balance')}
         </Text>
+        {!_.isNil(dailyTopUpLimitLeft) && (
+          <Text h4 style={custom.centerSubtitle}>
+            Remaining daily top up limit is {dailyTopUpLimitLeft}
+          </Text>
+        )}
       </PaddedContainer>
       <TopUpForm
         initialValues={topUpModel()}
