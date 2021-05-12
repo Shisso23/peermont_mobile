@@ -21,6 +21,8 @@ const initialState = {
   isLoading: false,
 };
 
+export const paymentSelector = (reducer) => reducer.paymentReducer;
+
 export default function paymentReducer(state = initialState, action) {
   switch (action.type) {
     case setPendingPaymentId.actionType:

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -8,19 +9,17 @@ import { PayOutForm } from '../../../../components/forms';
 import { payOutModel } from '../../../../models';
 import { performPayoutAction } from '../../../../reducers/payments-reducer/payments.actions';
 import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
-import { custom } from '../../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading, useRefreshHeaderButton } from '../../../../hooks';
 import { getBankAccountsAction } from '../../../../reducers/bank-account-reducer/bank-account.actions';
+import { paymentSelector } from '../../../../reducers/payments-reducer/payments.reducer';
+import { custom } from '../../../../../theme/theme.styles';
 
 const PayOutScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-
+  const { isLoading } = useSelector(paymentSelector);
   const [initialBankAccountId, setInitialBankAccountId] = useState();
-
-  const { isLoading } = useSelector((reducer) => reducer.paymentReducer);
-
   const initialBankAccountValues = payOutModel({ bankAccountId: initialBankAccountId });
 
   const _handleSubmission = (formData) => {
@@ -53,6 +52,10 @@ const PayOutScreen = () => {
 
   useEffect(() => {
     _getBankAccountsAndAutoSelectFirst();
+    Alert.alert(
+      'Payouts',
+      'Payouts may take up to 48 hours to process, not including weekends and public holidays.',
+    );
   }, []);
 
   return (
