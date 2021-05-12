@@ -51,12 +51,13 @@ const DailyTopUpLimitForm = ({ submitForm, onSuccess, initialValues }) => {
         touched,
         status,
       }) => {
+        const dailyLimit = _.get(values, 'dailyTopUpLimit', '0');
         const error = (name) => getFormError(name, { touched, status, errors });
         return (
           <>
             <PaddedContainer>
               <Input
-                value={_.get(values, 'dailyTopUpLimit').toString()}
+                value={_.isNull(dailyLimit) ? dailyLimit : dailyLimit.toString()}
                 onChangeText={handleChange('dailyTopUpLimit')}
                 label="Limit"
                 onBlur={handleBlur('dailyTopUpLimit')}

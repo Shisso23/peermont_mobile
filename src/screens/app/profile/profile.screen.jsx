@@ -41,7 +41,6 @@ const ProfileScreen = () => {
   };
 
   const _handleUploadProfileDocument = () => navigation.navigate('UploadProfileDocument');
-  const _handleDailyTopUpLimit = () => navigation.navigate('DailyTopUpLimit');
 
   useEffect(() => {
     dispatch(getUserAction());
@@ -109,12 +108,6 @@ const ProfileScreen = () => {
           <AddButton onPress={_handleUploadProfileDocument} />
         </View>
         <RenderDocuments />
-        <ListItem onPress={_handleDailyTopUpLimit}>
-          <ListItem.Content>
-            <ListItem.Subtitle>Modify Daily Top-Up Limit</ListItem.Subtitle>
-          </ListItem.Content>
-          <ListItem.Chevron />
-        </ListItem>
       </PaddedContainer>
     </KeyboardScrollContainer>
   ) : (

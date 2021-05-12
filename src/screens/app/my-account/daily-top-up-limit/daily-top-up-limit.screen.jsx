@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native-elements';
+import { Divider, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
@@ -13,7 +13,9 @@ import { custom } from '../../../../../theme/theme.styles';
 const DailyTopUpLimitScreen = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
-  const initialValues = { dailyTopUpLimit: _.get(user, 'dailyTopUpLimit') };
+  const dailyTopUpLimit = _.get(user, 'dailyTopUpLimit', 0);
+  const unconfirmedTopUpLimit = _.get(user, 'unconfirmedDailyTopUpLimit');
+  const pendingChange = dailyTopUpLimit !== unconfirmedTopUpLimit;
 
   const _handleFormSubmit = (formData) => dispatch(updateDailyTopUpLimitAction(formData));
   const _handleFormSuccess = (resp) => {
@@ -24,16 +26,22 @@ const DailyTopUpLimitScreen = () => {
     <KeyboardScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>Daily Top Up Limit</Text>
-        <Text style={custom.centerSubtitle}>
-          You can change your daily top up limit. A maximum limit of R1,000,000.00 has been set.
-        </Text>
+        <Text style={custom.centerSubtitle}>You can change your daily top up limit.</Text>
         <Text style={custom.centerSubtitle}>You can only change this amount once a day.</Text>
+        {!_.isNil(unconfirmedTopUpLimit) && pendingChange && (
+          <>
+            <Divider />
+            <Text style={custom.centerSubtitle}>
+              Change to R{unconfirmedTopUpLimit} is pending for tomorrow
+            </Text>
+          </>
+        )}
       </PaddedContainer>
       <PaddedContainer>
         <DailyTopUpLimitForm
           submitForm={_handleFormSubmit}
           onSuccess={_handleFormSuccess}
-          initialValues={initialValues}
+          initialValues={{ dailyTopUpLimit }}
         />
       </PaddedContainer>
     </KeyboardScrollContainer>
