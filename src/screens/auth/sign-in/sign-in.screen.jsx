@@ -75,6 +75,12 @@ const SignInScreen = () => {
     _checkForBiometrics().then();
   }, []);
 
+  const _handleNumberReset = (resetNumber) => {
+    if (resetNumber) {
+      ReactNativeBiometrics.deleteKeys().then(setBiometricIsAvailable(false));
+    }
+  };
+
   return (
     <KeyboardScrollContainer>
       <ModalLoader isLoading={isLoading} />
@@ -88,6 +94,7 @@ const SignInScreen = () => {
           onSuccess={_onSignInSuccess}
           onFailure={_onSignInFailure}
           initialValues={signInFormData}
+          onMobileNumberClear={_handleNumberReset}
         />
       </PaddedContainer>
       {biometricIsAvailable && (
@@ -124,7 +131,7 @@ const SignInScreen = () => {
   );
 };
 const styles = StyleSheet.create({
-  imageStyle: { alignSelf: 'center', height: 120, marginTop: 20, marginBottom: 10 },
+  imageStyle: { alignSelf: 'center', height: 120, marginBottom: 10, marginTop: 20 },
 });
 
 export default SignInScreen;
