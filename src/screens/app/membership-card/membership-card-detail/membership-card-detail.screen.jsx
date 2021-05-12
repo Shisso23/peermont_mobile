@@ -19,7 +19,8 @@ const MembershipCardDetailScreen = () => {
   const dispatch = useDispatch();
   const { currentMembershipCard, isLoading } = useSelector(membershipCardSelector);
   const membershipCardImage = getMembershipCardImage(currentMembershipCard.tierName);
-  const balance = { balance: currentMembershipCard.balanceFormat };
+  const balance = currentMembershipCard.balanceFormat;
+  const dailyTopUpLimitLeft = _.get(currentMembershipCard, 'dailyTopUpLimitLeft');
 
   const showDisclaimerAlert = () =>
     Alert.alert(
@@ -27,7 +28,7 @@ const MembershipCardDetailScreen = () => {
       'This is your daily point balance, and is subject to change based on amounts already spent on the day.',
     );
 
-  const _navigateToTopUp = () => navigation.navigate('TopUp', balance);
+  const _navigateToTopUp = () => navigation.navigate('TopUp', { balance, dailyTopUpLimitLeft });
   const _navigateToPayOut = () => navigation.navigate('PayOut', balance);
 
   useRefreshHeaderButton(() => {
