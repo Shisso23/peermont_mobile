@@ -8,6 +8,7 @@ import {
   sendPaymentOtpAction,
   verifyPaymentOtpAction,
 } from '../../../../reducers/payments-reducer/payments.actions';
+import { paymentSelector } from '../../../../reducers/payments-reducer/payments.reducer';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
@@ -18,7 +19,7 @@ const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const { isLoading } = useSelector((reducer) => reducer.paymentReducer);
+  const { isLoading } = useSelector(paymentSelector);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyPaymentOtpAction(formData));
