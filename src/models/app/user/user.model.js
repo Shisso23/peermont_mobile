@@ -22,5 +22,6 @@ export const userModel = (_userModel = {}) => ({
   optInNotifications: _.get(_userModel, 'opt_in_push_notifications', undefined),
   callingCode: _.get(_userModel, 'callingCode', '27'),
   country: _.get(_userModel, 'country', 'ZA'),
-  dailyTopUpLimit: _.get(_userModel, 'daily_top_up_limit'),
+  dailyTopUpLimit: _.get(_userModel, 'daily_top_up_limit', 0),
+  unconfirmedDailyTopUpLimit: _.get(_userModel, 'unconfirmed_daily_top_up_limit', 0),
 });

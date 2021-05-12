@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { Text, Divider, ListItem } from 'react-native-elements';
+import { Text, ListItem, Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
@@ -34,6 +34,8 @@ const MyAccountScreen = () => {
       bankAccountId: _.get(bankAccount, 'id'),
     });
   };
+
+  const _handleDailyTopUpLimit = () => navigation.navigate('DailyTopUpLimit');
 
   useFocusEffect(
     React.useCallback(() => {
@@ -168,7 +170,14 @@ const MyAccountScreen = () => {
         <RenderMembershipCards />
         <RenderCreditCards />
         <RenderBankCards />
-        <Divider />
+        <ListItem onPress={_handleDailyTopUpLimit} bottomDivider>
+          <ListItem.Content>
+            <ListItem.Title h4 style={custom.bold}>
+              Responsible Gaming Settings
+            </ListItem.Title>
+          </ListItem.Content>
+          <Icon name="cog" type="font-awesome-5" />
+        </ListItem>
         <RenderSettings />
       </ScrollContainer>
     </>
