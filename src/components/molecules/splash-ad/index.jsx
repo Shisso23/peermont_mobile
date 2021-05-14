@@ -19,6 +19,14 @@ const SplashAdvert = () => {
     setHasSplashAdvert(hasImage);
   };
 
+  const _startSplashAdHasTimeout = () => {
+    if (splashAdvert.advertAutoTimeOut !== 0) {
+      setTimeout(() => {
+        setHasSplashAdvert(false);
+      }, splashAdvert.advertAutoTimeOut);
+    }
+  };
+
   const _toggleSplash = () => setHasSplashAdvert(!hasSplashAdvert);
 
   const Loader = () => (
@@ -29,6 +37,7 @@ const SplashAdvert = () => {
 
   useEffect(() => {
     _checkIfSplashAdIsAvailable();
+    _startSplashAdHasTimeout();
   }, [splashAdvert]);
 
   return (
