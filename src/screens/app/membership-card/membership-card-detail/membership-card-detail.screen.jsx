@@ -17,7 +17,9 @@ import colors from '../../../../../theme/theme.colors';
 const MembershipCardDetailScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { currentMembershipCard, isLoading } = useSelector(membershipCardSelector);
+  const { currentMembershipCard, isLoading, isLoadingPoints, pointsBalances } = useSelector(
+    membershipCardSelector,
+  );
   const membershipCardImage = getMembershipCardImage(currentMembershipCard.tierName);
   const balance = currentMembershipCard.balanceFormat;
   const dailyTopUpLimitLeft = _.get(currentMembershipCard, 'dailyTopUpLimitLeft');
@@ -36,9 +38,9 @@ const MembershipCardDetailScreen = () => {
   }, isLoading);
 
   const PointsBalance = () => {
-    const pointsBalance = _.get(currentMembershipCard, 'pointsBalance', 0);
-    const bonusPointsBalance = _.get(currentMembershipCard, 'bonusPointsBalance', 0);
-    const freePlayBalance = _.get(currentMembershipCard, 'freePlayBalance', 0);
+    const pointsBalance = _.get(pointsBalances, 'pointsBalance', 0);
+    const bonusPointsBalance = _.get(pointsBalances, 'bonusPointsBalance', 0);
+    const freePlayBalance = _.get(pointsBalances, 'freePlayBalance', 0);
 
     const pointsNil = _.isNil(pointsBalance);
     const bonusPointsNil = _.isNil(bonusPointsBalance);
@@ -61,12 +63,18 @@ const MembershipCardDetailScreen = () => {
             </TouchableOpacity>
           </View>
         </PaddedContainer>
-        {!pointsNil && <MembershipCardBalance name="Leisure Points" value={pointsBalance} />}
-        {!bonusPointsNil && (
-          <MembershipCardBalance name="Bonus Points" value={bonusPointsBalance} />
+        {isLoadingPoints ? (
+          <ActivityIndicator animating size="large" color={colors.gold} />
+        ) : (
+          <>
+            {!pointsNil && <MembershipCardBalance name="Leisure Points" value={pointsBalance} />}
+            {!bonusPointsNil && (
+              <MembershipCardBalance name="Bonus Points" value={bonusPointsBalance} />
+            )}
+            {!freePlayNil && <MembershipCardBalance name="FreePlay" value={freePlayBalance} />}
+            {allBalancesNil && <Text style={custom.centerSubtitle}>No points to show</Text>}
+          </>
         )}
-        {!freePlayNil && <MembershipCardBalance name="FreePlay" value={freePlayBalance} />}
-        {allBalancesNil && <Text style={custom.centerSubtitle}>No points to show</Text>}
       </>
     );
   };
