@@ -60,6 +60,7 @@
 		2D02E4901E0B4A5D006451C7 /* peermont-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "peermont-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32417F5660DC4D74AD2F761E /* Pods-peermont-peermontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont-peermontTests.debug.xcconfig"; path = "Target Support Files/Pods-peermont-peermontTests/Pods-peermont-peermontTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3B2CF3AC261DFA920078850F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "peermont/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B891410265CE386006FFCDD /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "peermont/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		40D4A94AF9A02047015D126A /* Pods-peermont.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peermont.debug.xcconfig"; path = "Target Support Files/Pods-peermont/Pods-peermont.debug.xcconfig"; sourceTree = "<group>"; };
 		7AC0EC0AC028F83449C5947E /* libPods-peermont-peermontTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-peermont-peermontTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = peermont/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		13B07FAE1A68108700A75B9A /* peermont */ = {
 			isa = PBXGroup;
 			children = (
+				3B891410265CE386006FFCDD /* AppCenter-Config.plist */,
 				3B2CF3AC261DFA920078850F /* GoogleService-Info.plist */,
 				FD81586C25F903B300E2447D /* peermont.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -579,6 +581,9 @@
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			name = "[CP-User] [RNFB] Core Configuration";
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { StatusBar, LogBox, Platform } from 'react-native';
+import { StatusBar, LogBox, Platform, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import RNBootSplash from 'react-native-bootsplash';
 import messaging from '@react-native-firebase/messaging';
+import codePush from 'react-native-code-push';
 
 import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
@@ -13,6 +14,7 @@ import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
 import { loadAppDataAction } from './reducers/app-reducer/app.actions';
 import { AutoSignOut } from './components/atoms';
 import { useBiometricLogin, useAuthentication } from './hooks';
+import config from './config';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,15 +65,46 @@ const App = () => {
     });
   };
 
+  const loadAppCenter = () => {
+    const deploymentKey =
+      Platform.OS === 'ios'
+        ? config.appEnvironment === 'production'
+          ? config.appCenterIos
+          : config.appCenterIosStaging
+        : config.appEnvironment === 'production'
+        ? config.appCenterAndroid
+        : config.appCenterAndroidStaging;
+
+    codePush
+      .sync(
+        {
+          deploymentKey,
+          updateDialog: true,
+          installMode: codePush.InstallMode.IMMEDIATE,
+        },
+        (status) => {
+          switch (status) {
+            case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+              Alert.alert('Downloading new update');
+              break;
+            default:
+              break;
+          }
+        },
+      )
+      .then();
+  };
+
   useEffect(() => {
-    LogBox.ignoreLogs(['Require cycle: ']);
+    LogBox.ignoreLogs(['Require cycle: ', 'Usage of ']);
+    loadAppCenter();
     messaging()
       .registerDeviceForRemoteMessages()
       .then(() => {
         checkPermission().then(() => {
           createNotificationListeners().then(() => {
             messaging().setBackgroundMessageHandler((remoteMessage) => {
-              firebaseService.processMessage(remoteMessage);
+              firebaseService.processMessage(remoteMessage).then();
             });
           });
         });
