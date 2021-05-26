@@ -15,3 +15,4 @@ export { default as notificationService } from './sub-services/notification-serv
 export { default as firebaseService } from './sub-services/firebase-service/firebase.service';
 export { default as storageService } from './sub-services/storage-service/storage.service';
 export { default as advertService } from './sub-services/advert-service/advert.service';
+export { default as appService } from './sub-services/app-service/app.service';

@@ -32,4 +32,7 @@ export default {
   ...refreshTokenOperations,
   ...signInFormOperations,
   ...biometricOperations,
+  saveItem,
+  getItem,
+  removeItem,
 };
