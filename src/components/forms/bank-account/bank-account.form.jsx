@@ -70,7 +70,7 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
               onChangeText={handleChange('accountHolder')}
               placeholder="Account Holder"
               onBlur={handleBlur('accountHolder')}
-              errorMessage={error('accountHolder')}
+              errorMessage={error('account_holder')}
               onEndEditing={() => accountNumberRef.current.focus()}
             />
             <Input
@@ -80,7 +80,7 @@ const BankAccountForm = ({ submitForm, onSuccess, initialValues, edit, initialEr
               onChangeText={handleChange('accountNumber')}
               placeholder="Account Number"
               onBlur={handleBlur('accountNumber')}
-              errorMessage={error('accountNumber')}
+              errorMessage={error('account_number')}
             />
             <Picker
               onValueChange={(value) => setFieldValue('bankId', value)}
