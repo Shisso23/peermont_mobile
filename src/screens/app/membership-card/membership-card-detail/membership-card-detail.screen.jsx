@@ -17,9 +17,8 @@ import colors from '../../../../../theme/theme.colors';
 const MembershipCardDetailScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { currentMembershipCard, isLoading, isLoadingPoints, pointsBalances } = useSelector(
-    membershipCardSelector,
-  );
+  const { currentMembershipCard, isLoading, isLoadingPoints, pointsBalances } =
+    useSelector(membershipCardSelector);
   const membershipCardImage = getMembershipCardImage(currentMembershipCard.tierName);
   const balance = currentMembershipCard.balanceFormat;
   const dailyTopUpLimitLeft = _.get(currentMembershipCard, 'dailyTopUpLimitLeft');
@@ -31,7 +30,7 @@ const MembershipCardDetailScreen = () => {
     );
 
   const _navigateToTopUp = () => navigation.navigate('TopUp', { balance, dailyTopUpLimitLeft });
-  const _navigateToPayOut = () => navigation.navigate('PayOut', balance);
+  const _navigateToPayOut = () => navigation.navigate('PayOut', { balance });
 
   useRefreshHeaderButton(() => {
     dispatch(refreshMembershipCardBalanceAction());

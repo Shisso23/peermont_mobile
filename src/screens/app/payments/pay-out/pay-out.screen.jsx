@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Alert } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,8 +19,7 @@ const PayOutScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { isLoading } = useSelector(paymentSelector);
-  const [initialBankAccountId, setInitialBankAccountId] = useState();
-  const initialBankAccountValues = payOutModel({ bankAccountId: initialBankAccountId });
+  const initialBankAccountValues = payOutModel();
 
   const _handleSubmission = (formData) => {
     return dispatch(performPayoutAction(formData));
@@ -34,24 +33,16 @@ const PayOutScreen = () => {
 
   useDisableBackButtonWhileLoading(isLoading);
 
-  const _getBankAccountsAndAutoSelectFirst = () => {
-    dispatch(getBankAccountsAction()).then((resp) => {
-      const bankAccount = _.nth(resp, 0);
-      const status = _.get(bankAccount, 'status');
-
-      if (status === 'verified') {
-        const id = _.get(bankAccount, 'id');
-        setInitialBankAccountId(id);
-      }
-    });
+  const _getBankAccounts = () => {
+    dispatch(getBankAccountsAction());
   };
 
   useRefreshHeaderButton(() => {
-    _getBankAccountsAndAutoSelectFirst();
+    _getBankAccounts();
   }, isLoading);
 
   useEffect(() => {
-    _getBankAccountsAndAutoSelectFirst();
+    _getBankAccounts();
     Alert.alert(
       'Payouts',
       'Payouts may take up to 48 hours to process, not including weekends and public holidays.',
