@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Platform } from 'react-native';
 import { Divider, Button, ListItem, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -57,13 +57,13 @@ const SignInScreen = () => {
 
   const _onSignInSuccess = () => {
     setIsLoading(false);
-    RNBootSplash.show();
+    if (Platform.OS === 'android') RNBootSplash.show();
     dispatch(loadAppDataForSignedInUserAction())
       .then(() => {
         return dispatch(setIsAuthenticatedAction(true));
       })
       .finally(() => {
-        RNBootSplash.hide({ fade: true });
+        if (Platform.OS === 'android') RNBootSplash.hide({ fade: true });
       });
   };
 

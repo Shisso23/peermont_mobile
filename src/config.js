@@ -35,4 +35,6 @@ export default {
   appCenterIosStaging: APPCENTER_IOS_STAGING,
   appCenterIosDevelopment: APPCENTER_IOS_DEVELOPMENT,
   appEnvironment: ENVIRONMENT,
+  iosStoreUrl: 'https://apps.apple.com/za/app/peermont-winners-circle/id1532408526',
+  androidStoreUrl: 'https://play.google.com/store/apps/details?id=com.codehesion.peermont_mobile',
 };
