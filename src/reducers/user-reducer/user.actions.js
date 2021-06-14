@@ -5,6 +5,7 @@ import { firebaseService, userService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
 import { setBankAccountsAction } from '../bank-account-reducer/bank-account.reducer';
+import { apiDailyTopUpLimitModel } from '../../models';
 import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const getUserAction = () => {
@@ -70,5 +71,15 @@ export const verifyUpdateMobileOtpAction = (formData) => {
 export const resendUpdateMobileOtpAction = () => {
   return () => {
     return userService.resendUpdateMobileOtpAction();
+  };
+};
+
+export const updateDailyTopUpLimitAction = (formData) => {
+  return (dispatch) => {
+    const model = apiDailyTopUpLimitModel(formData);
+
+    return userService.updateDailyTopUpLimit(model).then((resp) => {
+      return dispatch(getUserAction()).then(() => resp);
+    });
   };
 };

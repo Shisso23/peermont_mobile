@@ -15,7 +15,12 @@ import {
   creditCardExpiryDateSchema,
 } from '../form-validaton-schemas';
 import { infoPopUpService } from '../../../services';
-import { isMasterCard, isVisa, formatCardExpiryDate } from './credit-card.utils';
+import {
+  isMasterCard,
+  isVisa,
+  formatCardExpiryDate,
+  fastFormatCardExpiryDate,
+} from './credit-card.utils';
 
 const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
   const cardHolderRef = useRef(null);
@@ -106,9 +111,20 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 value={values.expiryDate}
                 onChangeText={(value) => {
                   const formatted = formatCardExpiryDate(value, values.expiryDate);
-                  setFieldValue('expiryMonth', formatted.substr(0, 2));
-                  setFieldValue('expiryYear', formatted.substr(3, 2));
-                  handleChange('expiryDate')(formatted);
+                  if (formatted.length === 5) {
+                    if (/[0-9]{2}[/][0-9]{2}/.test(formatted)) {
+                      setFieldValue('expiryMonth', formatted.substr(0, 2));
+                      setFieldValue('expiryYear', formatted.substr(3, 2));
+                      handleChange('expiryDate')(formatted);
+                    } else if (/[0-9]{5}/.test(formatted)) {
+                      const fastFormatted = fastFormatCardExpiryDate(value.substr(0, 4));
+                      setFieldValue('expiryMonth', fastFormatted.substr(0, 2));
+                      setFieldValue('expiryYear', fastFormatted.substr(3, 2));
+                      handleChange('expiryDate')(fastFormatted);
+                    }
+                  } else if (formatted.length >= 0) {
+                    handleChange('expiryDate')(formatted);
+                  }
                 }}
                 keyboardType="phone-pad"
                 label="Expiry Date"
@@ -116,6 +132,8 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 onBlur={handleBlur('expiryDate')}
                 errorMessage={error('expiryDate')}
                 onSubmitEditing={() => cvvRef.current.focus()}
+                maxLength={5}
+                rightIcon
               />
               <Input
                 ref={cvvRef}
@@ -128,6 +146,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 onBlur={handleBlur('cvv')}
                 errorMessage={error('cvv')}
                 onSubmitEditing={handleSubmit}
+                maxLength={4}
                 rightIcon={() => (
                   <Icon
                     name="info-circle"

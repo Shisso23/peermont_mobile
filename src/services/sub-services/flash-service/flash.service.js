@@ -1,7 +1,7 @@
 import Toast from 'react-native-toast-message';
 
-const success = (message = '') => {
-  Toast.show({ text1: 'Success', text2: message, type: 'success' });
+const success = (message = '', visibilityTime = '4000') => {
+  Toast.show({ text1: 'Success', text2: message, type: 'success', visibilityTime });
 };
 
 const error = (message) => {

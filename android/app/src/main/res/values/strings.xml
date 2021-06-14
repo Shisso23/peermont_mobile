@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Peermont Winners Circle</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">5IKU4s2XVwvmmAT2pHKrJSqmU_6M7jk8lSSaV</string>
 </resources>

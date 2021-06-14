@@ -1,10 +1,10 @@
 import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { Button } from 'react-native-elements';
 import { useRoute } from '@react-navigation/native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import { proofOfBankDocumentSchema } from '../form-validaton-schemas';
 import { UploadDocumentButton } from '../../molecules';
@@ -47,7 +47,7 @@ const UploadDocumentForm = ({ submitForm, onSuccess, initialValues, initialError
         return (
           <>
             <UploadDocumentButton
-              title="Select Document"
+              title="Select a document"
               updateFormData={(newDocument) => setFieldValue('proofOfBankDocument', newDocument)}
               errorMessage={errors.proofOfBankDocument}
             />

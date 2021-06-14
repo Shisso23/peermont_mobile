@@ -57,7 +57,7 @@ export const custom = {
   surveyTitle: {
     fontSize: 18,
     fontFamily: 'OpenSans-Bold',
-    color: colors.greyBlack,
+    color: colors.black,
   },
   surveySubText: {
     fontSize: 13,
@@ -80,6 +80,10 @@ export const custom = {
     alignItems: 'center',
     justifyContent: 'space-around',
     marginHorizontal: 10,
+  },
+  resendOtpStyle: {
+    color: colors.textGrey,
+    textAlign: 'center',
   },
 };
 

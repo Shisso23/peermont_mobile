@@ -35,7 +35,6 @@ const UploadProfileDocumentsForm = (props) => {
         onSuccess();
       })
       .catch((error) => _handleFormSubmitError(error, actions, formData));
-    submitForm(formData);
   };
 
   return (

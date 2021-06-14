@@ -1,18 +1,19 @@
-import React, { useRef } from 'react';
-import _ from 'lodash';
+import React, { useEffect, useRef, useState } from 'react';
+import { Keyboard } from 'react-native';
+import { Button, Input, Divider } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
-import { Button, Input, Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Keyboard } from 'react-native';
+import _ from 'lodash';
+
+import { CountrySelect } from '../../atoms';
 import { mobileNumberSchema, passwordSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
-import { CountrySelect } from '../../atoms';
 import { infoPopUpService } from '../../../services';
 
-const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues }) => {
+const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues, onMobileNumberClear }) => {
+  const [numberDeleted, setNumberDeleted] = useState(false);
   const passwordRef = useRef(null);
   const validationSchema = Yup.object().shape({
     mobileNumber: mobileNumberSchema,
@@ -44,6 +45,14 @@ const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues }) => {
       });
   };
 
+  const checkNumberChange = (mobileNumber) => {
+    if (numberDeleted && _.isEmpty(mobileNumber)) {
+      onMobileNumberClear(true);
+    } else if (_.toLength(mobileNumber) > 0) {
+      setNumberDeleted(true);
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -63,6 +72,11 @@ const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues }) => {
         setFieldValue,
       }) => {
         const error = (name) => getFormError(name, { touched, status, errors });
+
+        useEffect(() => {
+          checkNumberChange(_.get(values, 'mobileNumber'));
+        }, [_.get(values, 'mobileNumber')]);
+
         return (
           <>
             <Input
@@ -119,11 +133,13 @@ SignInForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
   onFailure: PropTypes.func,
+  onMobileNumberClear: PropTypes.func,
 };
 
 SignInForm.defaultProps = {
   onSuccess: () => null,
   onFailure: () => null,
+  onMobileNumberClear: () => false,
 };
 
 export default SignInForm;

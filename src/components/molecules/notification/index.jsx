@@ -7,7 +7,12 @@ import Moment from 'moment';
 import _ from 'lodash';
 
 import PropTypes from 'prop-types';
-import { seeNotification } from '../../../reducers/notification-reducer/notification.actions';
+import {
+  seeNotification,
+  deleteNotification,
+} from '../../../reducers/notification-reducer/notification.actions';
+import { TrashButton } from '../../atoms';
+import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 
 const Notification = ({ notification }) => {
   const dispatch = useDispatch();
@@ -20,6 +25,7 @@ const Notification = ({ notification }) => {
   const [needsCollapse, setNeedsCollapse] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isSeen, setIsSeen] = useState(seen);
+  const [isDeleting, setDeleting] = useState(false);
 
   const _handleCollapse = () => {
     if (!isSeen) {
@@ -33,6 +39,13 @@ const Notification = ({ notification }) => {
     if (lines.length > 1) {
       setNeedsCollapse(true);
     }
+  };
+
+  const _handleDelete = () => {
+    promptConfirmDelete('Are you sure you want to delete this item?', () => {
+      setDeleting(true);
+      dispatch(deleteNotification(notificationLinkId));
+    });
   };
 
   const _renderCollapseText = () => (
@@ -60,6 +73,7 @@ const Notification = ({ notification }) => {
         />
       )}
       {!isSeen && <Badge status="error" />}
+      <TrashButton onPress={_handleDelete} loading={isDeleting} />
     </ListItem>
   );
 };

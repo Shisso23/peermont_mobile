@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import authNetworkService from '../auth-network-service/auth-network.service';
 import { userModel, userUpdateMobileOtpModel, userUpdateProfileModel } from '../../../models';
 import userUrls from './user.urls';
@@ -47,6 +49,11 @@ const resendUpdateMobileOtpAction = () => {
   const resendUpdateMobileOtpUrl = userUrls.resendUpdateMobileOtp();
   return authNetworkService.get(resendUpdateMobileOtpUrl);
 };
+const updateDailyTopUpLimit = (model) => {
+  const url = userUrls.updateDailyTopUpLimit();
+
+  return authNetworkService.patch(url, model).then((resp) => _.get(resp, 'data'));
+};
 
 export default {
   getUser,
@@ -54,4 +61,5 @@ export default {
   uploadUserProfileDocuments,
   verifyUpdateMobileOtpAction,
   resendUpdateMobileOtpAction,
+  updateDailyTopUpLimit,
 };

@@ -1,22 +1,14 @@
-/* eslint-disable camelcase */
-export const userBankAccountModel = ({
-  id,
-  user_id,
-  bank_id,
-  account_holder,
-  account_number,
-  account_type,
-  status,
-  proof_of_banking_status,
-} = {}) => ({
-  id: id || '',
-  userId: user_id || '',
-  bankId: bank_id || '',
-  accountHolder: account_holder || '',
-  accountNumber: account_number || '',
-  accountType: account_type || '',
-  status: status || '',
-  proofOfBankingStatus: proof_of_banking_status || '',
+import _ from 'lodash';
+
+export const userBankAccountModel = (_model = {}) => ({
+  id: _.get(_model, 'id'),
+  userId: _.get(_model, 'user_id'),
+  bankId: _.get(_model, 'bank_id'),
+  accountHolder: _.get(_model, 'account_holder'),
+  accountNumber: _.get(_model, 'account_number'),
+  accountType: _.get(_model, 'account_type'),
+  status: _.get(_model, 'status'),
+  proofOfBankingStatus: _.get(_model, 'proof_of_banking_status'),
 });
 
 export const constructUserBankAccountModels = (bankAccounts) => {

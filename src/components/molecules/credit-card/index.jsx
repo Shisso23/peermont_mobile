@@ -31,6 +31,7 @@ const CreditCard = ({
       dispatch(deleteCreditCardAction(card.id));
     });
   };
+
   const _handleIsCheckBoxSelected = () => setIsChecked(isCheckBoxSelected);
 
   useEffect(() => {

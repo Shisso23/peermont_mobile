@@ -1,21 +1,13 @@
 import _ from 'lodash';
 import { obfuscateCardNumber } from '../../../helpers/credit-card.helper';
 
-/* eslint-disable camelcase */
-export const creditCardModel = ({
-  card_holder,
-  pan,
-  card_type,
-  expiry_month,
-  expiry_year,
-  cvv,
-} = {}) => ({
-  cardHolder: card_holder || '',
-  cardNumber: pan || '',
-  cardType: card_type || '',
-  expiryMonth: expiry_month || '',
-  expiryYear: expiry_year || '',
-  cvv: cvv || '',
+export const creditCardModel = (_model = {}) => ({
+  cardHolder: _.get(_model, 'card_holder'),
+  cardNumber: _.get(_model, 'pan'),
+  cardType: _.get(_model, 'card_type'),
+  expiryMonth: _.get(_model, 'expiry_month'),
+  expiryYear: _.get(_model, 'expiry_year'),
+  cvv: _.get(_model, 'cvv'),
   expiryDate: '',
 });
 

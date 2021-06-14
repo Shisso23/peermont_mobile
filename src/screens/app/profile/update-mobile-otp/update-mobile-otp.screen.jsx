@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
-import { Button, Text, Divider } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
+import { Text, Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,9 +11,8 @@ import {
 } from '../../../../reducers/user-reducer/user.actions';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
-import { Modal } from '../../../../components';
+import { ModalLoader } from '../../../../components';
 import { custom } from '../../../../../theme/theme.styles';
-import colors from '../../../../../theme/theme.colors';
 
 const UpdateMobileOtpScreen = () => {
   const dispatch = useDispatch();
@@ -38,8 +37,8 @@ const UpdateMobileOtpScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>One Time Pin</Text>
         <Text style={custom.centerSubtitle}>
-          Enter your One Time Pin to confirm your mobile number change. We have sent a SMS with a
-          One Time Pin(OTP) to your new mobile number for validation.
+          To proceed, Enter your One Time Pin to confirm your mobile number change. We have sent a
+          SMS with a One Time Pin(OTP) to your new mobile number for validation.
         </Text>
       </PaddedContainer>
       <PaddedContainer>
@@ -51,18 +50,11 @@ const UpdateMobileOtpScreen = () => {
       </PaddedContainer>
       <Divider />
       <PaddedContainer>
-        <Button title="Resend OTP" onPress={_handleResendOtp} />
+        <TouchableOpacity onPress={_handleResendOtp}>
+          <Text style={custom.resendOtpStyle}>Resend OTP</Text>
+        </TouchableOpacity>
       </PaddedContainer>
-      <Modal
-        visible={loading}
-        transparent
-        backgroundFade
-        backgroundFadeColor={colors.whiteTransparent}
-      >
-        <View>
-          <ActivityIndicator animating size="large" color={colors.gold} />
-        </View>
-      </Modal>
+      <ModalLoader isLoading={loading} />
     </KeyboardScrollContainer>
   );
 };

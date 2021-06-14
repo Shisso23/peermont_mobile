@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Text, Divider } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
+import { Text, Divider } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -7,17 +8,18 @@ import {
   sendPaymentOtpAction,
   verifyPaymentOtpAction,
 } from '../../../../reducers/payments-reducer/payments.actions';
+import { paymentSelector } from '../../../../reducers/payments-reducer/payments.reducer';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
-import { useDisableBackButtonWhileLoading } from '../../../../hooks';
+import { ModalLoader } from '../../../../components';
 
 const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const { isLoading } = useSelector((reducer) => reducer.paymentReducer);
+  const { isLoading } = useSelector(paymentSelector);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyPaymentOtpAction(formData));
@@ -32,14 +34,13 @@ const PaymentOtpScreen = () => {
     return dispatch(sendPaymentOtpAction(''));
   };
 
-  useDisableBackButtonWhileLoading(isLoading);
-
   return (
     <KeyboardScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>One Time Pin</Text>
         <Text style={custom.centerSubtitle}>
-          We have sent a SMS with a One Time Pin(OTP) to your mobile number for validation.
+          To proceed, Enter your One Time Pin to confirm payment. We have sent a SMS with a One Time
+          Pin(OTP) to your mobile number for validation.
         </Text>
       </PaddedContainer>
       <PaddedContainer>
@@ -51,8 +52,11 @@ const PaymentOtpScreen = () => {
       </PaddedContainer>
       <Divider />
       <PaddedContainer>
-        <Button title="Resend OTP" onPress={_handleResendOtp} />
+        <TouchableOpacity onPress={_handleResendOtp}>
+          <Text style={custom.resendOtpStyle}>Resend OTP</Text>
+        </TouchableOpacity>
       </PaddedContainer>
+      <ModalLoader isLoading={isLoading} />
     </KeyboardScrollContainer>
   );
 };

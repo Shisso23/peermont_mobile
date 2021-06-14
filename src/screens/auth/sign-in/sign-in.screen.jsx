@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Platform } from 'react-native';
 import { Divider, Button, ListItem, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -7,14 +7,13 @@ import ReactNativeBiometrics from 'react-native-biometrics';
 import RNBootSplash from 'react-native-bootsplash';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
-import { Footer, Contact, Modal, LoadingComponent } from '../../../components';
+import { Footer, Contact, ModalLoader } from '../../../components';
 import { SignInForm } from '../../../components/forms';
 import { setIsAuthenticatedAction } from '../../../reducers/user-auth-reducer/user-auth.reducer';
 import { signInAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { loadAppDataForSignedInUserAction } from '../../../reducers/app-reducer/app.actions';
 import { useBiometricLogin, useAuthentication } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
-import colors from '../../../../theme/theme.colors';
 
 const imageUri = require('../../../assets/images/header-alt.png');
 
@@ -58,13 +57,13 @@ const SignInScreen = () => {
 
   const _onSignInSuccess = () => {
     setIsLoading(false);
-    RNBootSplash.show();
+    if (Platform.OS === 'android') RNBootSplash.show();
     dispatch(loadAppDataForSignedInUserAction())
       .then(() => {
         return dispatch(setIsAuthenticatedAction(true));
       })
       .finally(() => {
-        RNBootSplash.hide({ fade: true });
+        if (Platform.OS === 'android') RNBootSplash.hide({ fade: true });
       });
   };
 
@@ -76,19 +75,17 @@ const SignInScreen = () => {
     _checkForBiometrics().then();
   }, []);
 
+  const _handleNumberReset = (resetNumber) => {
+    if (resetNumber) {
+      ReactNativeBiometrics.deleteKeys().then(setBiometricIsAvailable(false));
+    }
+  };
+
   return (
     <KeyboardScrollContainer>
-      <Modal
-        visible={isLoading}
-        transparent
-        backgroundFade
-        backgroundFadeColor={colors.whiteTransparent}
-      >
-        <LoadingComponent hasBackground={false} />
-      </Modal>
+      <ModalLoader isLoading={isLoading} />
       <PaddedContainer>
         <Image source={imageUri} resizeMode="contain" style={styles.imageStyle} />
-        <Text style={custom.centerTitle}>Log In</Text>
         <Text style={custom.centerSubtitle}>Enter your details below to log in.</Text>
       </PaddedContainer>
       <PaddedContainer>
@@ -97,6 +94,7 @@ const SignInScreen = () => {
           onSuccess={_onSignInSuccess}
           onFailure={_onSignInFailure}
           initialValues={signInFormData}
+          onMobileNumberClear={_handleNumberReset}
         />
       </PaddedContainer>
       {biometricIsAvailable && (
@@ -133,7 +131,7 @@ const SignInScreen = () => {
   );
 };
 const styles = StyleSheet.create({
-  imageStyle: { alignSelf: 'center', height: 120, marginTop: 20, marginBottom: 10 },
+  imageStyle: { alignSelf: 'center', height: 120, marginBottom: 10, marginTop: 20 },
 });
 
 export default SignInScreen;

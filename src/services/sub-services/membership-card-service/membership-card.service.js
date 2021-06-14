@@ -13,6 +13,20 @@ const _createAndReturnUserMembershipCardModel = (apiResponse) => {
 const getMembershipCardBalance = (id, formData) => {
   const url = membershipCardUrls.membershipCardBalanceUrl(id);
   const apiModel = apiMembershipCardModel(formData);
+
+  return authNetworkService
+    .post(url, apiModel)
+    .then(_createAndReturnUserMembershipCardModel)
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      return Promise.reject(err);
+    });
+};
+
+const getMembershipCardPoints = (id, formData) => {
+  const url = membershipCardUrls.membershipCardPointsUrl(id);
+  const apiModel = apiMembershipCardModel(formData);
+
   return authNetworkService
     .post(url, apiModel)
     .then(_createAndReturnUserMembershipCardModel)
@@ -60,4 +74,5 @@ export default {
   createMembershipCard,
   deleteMembershipCard,
   getMembershipCardBalance,
+  getMembershipCardPoints,
 };

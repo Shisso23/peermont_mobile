@@ -7,7 +7,7 @@ const TermsAndConditionsScreen = () => {
   return (
     <WebView
       startInLoadingState
-      renderLoading={LoadingComponent}
+      renderLoading={() => <LoadingComponent />}
       source={{ uri: `${config.hostUrl}/terms_and_conditions` }}
     />
   );

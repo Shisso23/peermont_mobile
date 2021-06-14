@@ -7,7 +7,7 @@ const PrivacyPolicyScreen = () => {
   return (
     <WebView
       startInLoadingState
-      renderLoading={LoadingComponent}
+      renderLoading={() => <LoadingComponent />}
       source={{ uri: `${config.hostUrl}/privacy_policy` }}
     />
   );

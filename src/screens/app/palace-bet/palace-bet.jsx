@@ -6,7 +6,7 @@ const PalaceBetScreen = () => {
   return (
     <WebView
       startInLoadingState
-      renderLoading={LoadingComponent}
+      renderLoading={() => <LoadingComponent />}
       source={{ uri: `https://media.palacepartners.com/redirect.aspx?pid=2163&bid=1506` }}
     />
   );

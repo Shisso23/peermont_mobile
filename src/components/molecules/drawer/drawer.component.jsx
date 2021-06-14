@@ -1,18 +1,24 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, View, Linking } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
+import codePush from 'react-native-code-push';
+import _ from 'lodash';
 
 import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import DrawerIcon from './drawer-icon';
+import appConfig from '../../../config';
 import colors from '../../../../theme/theme.colors';
 import variables from '../../../../theme/theme.variables';
 
+const palaceBetIcon = require('../../../assets/images/palace-bet.png');
+
 const DrawerComponent = (props) => {
+  const [codePushVersion, setCodePushVersion] = useState();
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -25,6 +31,16 @@ const DrawerComponent = (props) => {
   const _handleSignOut = () => {
     dispatch(signOutAction());
   };
+
+  const getAppCenterCodeVersion = () => {
+    codePush.getCurrentPackage().then((update) => {
+      setCodePushVersion(_.get(update, 'label', 'v0'));
+    });
+  };
+
+  useEffect(() => {
+    getAppCenterCodeVersion();
+  }, []);
 
   return (
     <View style={styles.wrapper}>
@@ -62,8 +78,10 @@ const DrawerComponent = (props) => {
         />
         <DrawerItem
           label="Visit PalaceBet"
-          icon={() => <DrawerIcon name="link" />}
-          onPress={() => navigation.navigate('PalaceBet')}
+          icon={() => (
+            <Image source={palaceBetIcon} style={styles.palaceBetSize} width={22} height={21} />
+          )}
+          onPress={() => Linking.openURL(appConfig.palaceBetLink)}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
@@ -89,6 +107,7 @@ const DrawerComponent = (props) => {
         <View style={styles.alignRow}>
           <Text style={styles.smallText}>{`Version ${getVersion()}`}</Text>
           <Text style={styles.smallText}>{`Build Number ${getBuildNumber()}`}</Text>
+          <Text style={styles.smallText}>{`Code Version ${codePushVersion}`}</Text>
         </View>
       </View>
     </View>
@@ -109,6 +128,11 @@ const styles = StyleSheet.create({
   labelStyle: {
     color: colors.white,
     fontFamily: variables.fontFamily,
+    fontWeight: 'normal',
+  },
+  palaceBetSize: {
+    height: 23,
+    width: 24,
   },
   smallText: {
     color: colors.white,

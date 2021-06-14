@@ -13,7 +13,7 @@ import {
 
 import colors from '../../../../theme/theme.colors';
 
-const NumericInput = ({ value, onChange, cellCount, handleSubmit, ...rest }) => {
+const NumericInput = ({ value, onChange, cellCount, handleSubmit, onlyMask, ...rest }) => {
   const ref = useBlurOnFulfill({ value, cellCount });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -34,7 +34,9 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, ...rest }) => 
           let textChild = null;
 
           if (symbol) {
-            textChild = (
+            textChild = onlyMask ? (
+              '*'
+            ) : (
               <MaskSymbol maskSymbol="*" isLastFilledCell={isLastFilledCell({ index, value })}>
                 {symbol}
               </MaskSymbol>
@@ -86,6 +88,11 @@ NumericInput.propTypes = {
   cellCount: PropTypes.number.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
+  onlyMask: PropTypes.bool,
+};
+
+NumericInput.defaultProps = {
+  onlyMask: false,
 };
 
 export default NumericInput;

@@ -1,17 +1,11 @@
-/* eslint-disable camelcase */
+import _ from 'lodash';
 
-export const apiPaymentModel = ({
-  amount,
-  membershipCardId,
-  payableId,
-  paymentType,
-  payableType,
-} = {}) => ({
+export const apiPaymentModel = (_model = {}) => ({
   payment: {
-    subtotal: Number(amount) || '',
-    payment_type: paymentType || '',
-    payable_id: payableId || '',
-    payable_type: payableType || '',
-    membership_card_id: membershipCardId || '',
+    subtotal: Number(_.get(_model, 'amount')),
+    payment_type: _.get(_model, 'paymentType'),
+    payable_id: _.get(_model, 'payableId'),
+    payable_type: _.get(_model, 'payableType'),
+    membership_card_id: _.get(_model, 'membershipCardId'),
   },
 });
