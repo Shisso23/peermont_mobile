@@ -7,4 +7,5 @@ export default {
   creditCardUrl: (id) => `${apiUrl}/credit_cards/${id}`,
   getCallpayCredentials: () => `${apiUrl}/credit_cards/get_callpay_credentials`,
   createTokenizedCreditCard: () => `${callpayUrl}/customer-token/direct`,
+  createCreditCardsUrl: () => `${apiUrl}/credit_cards/create_credit_card`,
 };

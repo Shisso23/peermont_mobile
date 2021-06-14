@@ -31,7 +31,7 @@ const getCreditCards = () => {
 };
 
 const createCreditCard = (formData) => {
-  const createCreditCardUrl = creditCardUrls.creditCardsUrl();
+  const createCreditCardUrl = creditCardUrls.createCreditCardsUrl();
   const apiModel = apiCreditCardModel(formData);
   return authNetworkService
     .post(createCreditCardUrl, apiModel)
