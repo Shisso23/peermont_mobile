@@ -14,3 +14,12 @@ const parsePublicKeyFromCertificate = (certificate) => {
   const inCert = forge.pki.certificateFromPem(certificate);
   return inCert.publicKey;
 };
+
+export const generateRsaKeyPair = () => {
+  return new Promise((f, r) =>
+    forge.pki.rsa.generateKeyPair(512, (err, pair) => (err ? r(err) : f(pair))),
+  );
+};
+
+export const { encode64, decode64 } = forge.util;
+export const { publicKeyToPem } = forge.pki;

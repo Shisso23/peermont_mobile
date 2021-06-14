@@ -12,6 +12,7 @@ const {
   APPCENTER_ANDROID_DEVELOPMENT,
   APPCENTER_IOS_DEVELOPMENT,
   ENVIRONMENT,
+  CALLPAY_URL,
 } = Config;
 
 export default {
@@ -37,4 +38,5 @@ export default {
   appEnvironment: ENVIRONMENT,
   iosStoreUrl: 'https://apps.apple.com/za/app/peermont-winners-circle/id1532408526',
   androidStoreUrl: 'https://play.google.com/store/apps/details?id=com.codehesion.peermont_mobile',
+  callpayUrl: CALLPAY_URL,
 };

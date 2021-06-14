@@ -9,15 +9,15 @@ export const setCreditCardsAction = setCreditCards.action;
 const removeCreditCard = CreateAction(reducerName, 'REMOVE_CREDIT_CARD');
 export const removeCreditCardAction = removeCreditCard.action;
 
-const appendCreditCard = CreateAction(reducerName, 'APPEND_CREDIT_CARD');
-export const appendCreditCardAction = appendCreditCard.action;
-
 const setLoading = CreateAction(reducerName, 'SET_LOADING');
 export const setLoadingAction = setLoading.action;
 
+const setPrivateKey = CreateAction(reducerName, 'SET_PRIVATE_KEY');
+export const setPrivateKeyAction = setPrivateKey.action;
 const initialState = {
   creditCards: [],
   isLoading: false,
+  privateKey: null,
 };
 
 export default function creditCardReducer(state = initialState, action) {
@@ -32,15 +32,15 @@ export default function creditCardReducer(state = initialState, action) {
       return {
         ...state,
       };
-    case appendCreditCard.actionType:
-      return {
-        ...state,
-        creditCards: _.concat(state.creditCards, [action.payload]),
-      };
     case setLoading.actionType:
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case setPrivateKey.actionType:
+      return {
+        ...state,
+        privateKey: action.payload,
       };
     default:
       return state;
