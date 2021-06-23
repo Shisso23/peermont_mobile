@@ -6,32 +6,19 @@ import _ from 'lodash';
 
 import colors from '../../../../theme/theme.colors';
 
-const BankAccountStatus = ({ status }) => {
+const CreditCardStatus = ({ status }) => {
   let icon;
   let color;
   let textStyle;
-  if (status === 'document_required') {
-    icon = 'hourglass';
-    color = colors.warning;
-    textStyle = { color };
-    status = 'Document Required';
-  } else if (status === 'verified') {
-    icon = 'check-circle';
-    color = colors.success;
-    textStyle = { color };
-    status = 'Verified';
-  } else if (status === 'approval_required') {
-    icon = 'clock';
-    color = colors.warning;
-    textStyle = { color };
-    status = 'Awaiting approval';
-  } else {
+  if (status === 'expired') {
     icon = 'times';
     color = colors.danger;
     textStyle = { color };
-    status = _.capitalize(status);
+    status = 'Expired';
+  } else {
+    status = null;
   }
-  return (
+  return _.isNull(status) ? null : (
     <View style={styles.rowAlign}>
       <Icon name={icon} backgroundColor="transparent" color={color} style={styles.icon} />
       <Text style={textStyle}>{status}</Text>
@@ -51,10 +38,10 @@ const styles = StyleSheet.create({
   },
 });
 
-BankAccountStatus.propTypes = {
+CreditCardStatus.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-BankAccountStatus.defaultProps = {};
+CreditCardStatus.defaultProps = {};
 
-export default BankAccountStatus;
+export default CreditCardStatus;

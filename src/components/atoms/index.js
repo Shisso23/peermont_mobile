@@ -17,3 +17,4 @@ export { default as Watermark } from './watermark';
 export { default as PressableOpacity } from './pressable-opacity';
 export { default as Modal } from './modal';
 export { default as ModalLoader } from './modal-loader';
+export { default as CreditCardStatus } from './credit-card-status';
