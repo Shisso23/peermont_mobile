@@ -6,7 +6,9 @@ export const emailSchema = Yup.string().email('Invalid Email').trim();
 export const mobileNumberSchema = Yup.string()
   .required('Mobile number is required')
   .min(10, 'Mobile Number must be atleast 10 characters');
-export const passwordSchema = Yup.string().required('Password is required');
+export const passwordSchema = Yup.string()
+  .required('Password is required')
+  .min(4, 'Minimum of 4 characters needed for password');
 
 export const registerPasswordSchema = (edit) => {
   return !edit
