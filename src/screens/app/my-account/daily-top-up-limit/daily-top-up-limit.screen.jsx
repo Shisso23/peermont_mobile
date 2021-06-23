@@ -27,13 +27,26 @@ const DailyTopUpLimitScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Daily Top Up Limit</Text>
         <Text style={custom.centerSubtitle}>You can change your daily top up limit.</Text>
-        <Text style={custom.centerSubtitle}>You can only change this amount once a day.</Text>
+        <Text style={custom.centerSubtitle}>Increases only go into effect next trading day</Text>
+        <Text style={custom.centerSubtitle}>Decreases are immediate</Text>
+        {_.isNull(dailyTopUpLimit) && (
+          <>
+            <Divider />
+            <Text style={custom.centerSubtitle}>No limit set</Text>
+          </>
+        )}
+        {!_.isNull(dailyTopUpLimit) && (
+          <>
+            <Divider />
+            <Text style={custom.centerSubtitle}>Your current limit:</Text>
+            <Text style={custom.centerSubtitle}>R {dailyTopUpLimit}</Text>
+          </>
+        )}
         {!_.isNil(unconfirmedTopUpLimit) && pendingChange && (
           <>
             <Divider />
-            <Text style={custom.centerSubtitle}>
-              Change to R{unconfirmedTopUpLimit} is pending for tomorrow
-            </Text>
+            <Text style={custom.centerSubtitle}>Pending change:</Text>
+            <Text style={custom.centerSubtitle}>R {unconfirmedTopUpLimit}</Text>
           </>
         )}
       </PaddedContainer>
