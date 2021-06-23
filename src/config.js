@@ -24,7 +24,7 @@ export default {
   clientSecret: CLIENT_SECRET,
   callCentreNumber: '0119281000',
   customerCareEmail: 'customercare@peermont.com',
-  autoSignOutTimeout: 120,
+  autoSignOutTimeout: 300,
   fcmTokenKey: 'fcmToken',
   fcmEnabled: 'fcmEnabled',
   biometricOtpOut: 'biometric_opt_out',
