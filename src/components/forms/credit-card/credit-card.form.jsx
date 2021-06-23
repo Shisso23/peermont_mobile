@@ -93,7 +93,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
               }}
               errorMessage={error('cardNumber')}
               onSubmitEditing={() => cardHolderRef.current.focus()}
-              maxLength={16}
+              maxLength={19}
             />
             <Input
               ref={cardHolderRef}
