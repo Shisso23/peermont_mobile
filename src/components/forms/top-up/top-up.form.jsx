@@ -101,6 +101,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                           setFieldValue('creditCardId', creditCard.id);
                           setFieldValue('isEft', false);
                         }}
+                        disabled={_.get(creditCard, 'status') !== 'verified'}
                         hasCheckBox
                         isCheckBoxSelected={isSelected}
                       />
