@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { luhnChecksum } from '../../../helpers/credit-card.helper';
 
 const numberRegex = /^[0-9]+$/;
 
@@ -38,9 +39,13 @@ export const pinSchema = Yup.string()
   .required('Card PIN is required')
   .matches(numberRegex, 'Card PIN can only contain digits');
 
-export const creditCardNumberSchema = Yup.string()
-  .matches(numberRegex, 'Card number can only contain digits')
-  .required('Card number is required');
+export const creditCardNumberSchema = Yup.mixed()
+  .required('Card number is required')
+  .test({
+    name: 'luhnAlgorithm',
+    message: 'Invalid credit card',
+    test: (value) => luhnChecksum(value),
+  });
 
 export const creditCardExpiryDateSchema = Yup.string().required('Expiry date is required');
 export const creditCardTypeSchema = Yup.string().required('Card type is required');

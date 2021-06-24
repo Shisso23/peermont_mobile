@@ -20,3 +20,22 @@ export const decryptCallpayCredentials = (credentials, privateKey) => {
     password: privateKey.decrypt(decodedPassword),
   };
 };
+
+export const luhnChecksum = (cardNumber) => {
+  const cardString = cardNumber.toString();
+  const { length } = cardString;
+  const parity = length % 2;
+  let sum = 0;
+
+  for (let i = 0; i <= length - 1; i++) {
+    let digit = parseInt(cardString[i], 10);
+    if (i % 2 === parity) {
+      digit *= 2;
+    }
+    if (digit > 9) {
+      digit -= 9;
+    }
+    sum += digit;
+  }
+  return sum % 10 === 0;
+};
