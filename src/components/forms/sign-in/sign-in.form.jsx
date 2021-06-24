@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 import { Button, Input, Divider } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import * as Yup from 'yup';
 import _ from 'lodash';
 
 import { CountrySelect } from '../../atoms';
@@ -26,7 +26,11 @@ const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues, onMobileN
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
     } else if (error.statusCode === 400) {
-      actions.setFieldError('mobileNumber', 'Invalid mobile number or password');
+      if (error.message === 'invalid_grant') {
+        actions.setFieldError('mobileNumber', 'Invalid mobile number or password');
+      } else {
+        actions.setFieldError('mobileNumber', error.message);
+      }
     } else {
       actions.setFieldError('mobileNumber', error.message);
     }
@@ -87,6 +91,7 @@ const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues, onMobileN
               onBlur={handleBlur('mobileNumber')}
               onSubmitEditing={() => passwordRef.current.focus()}
               errorMessage={error('mobileNumber')}
+              errorStyle={styles.autoHeight}
               leftIcon={() => (
                 <CountrySelect
                   initialCountry={values.country}
@@ -127,6 +132,12 @@ const SignInForm = ({ submitForm, onSuccess, onFailure, initialValues, onMobileN
     </Formik>
   );
 };
+
+const styles = StyleSheet.create({
+  autoHeight: {
+    height: 'auto',
+  },
+});
 
 SignInForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
