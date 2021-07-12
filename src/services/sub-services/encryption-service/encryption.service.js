@@ -5,8 +5,11 @@ import { rsaEncryption, generateRsaKeyPair } from './encryption.utils';
 
 const extractAndReturnCertificate = (apiResponse) => _.get(apiResponse, 'data.certificate');
 
-const encryptPin = (pin) => {
-  return getCertificate().then((certificate) => rsaEncryption(pin, certificate));
+const encryptPin = (cardNumber, pin) => {
+  return getCertificate().then((certificate) => {
+    const data = `${cardNumber}|${pin}`;
+    return rsaEncryption(data, certificate);
+  });
 };
 
 const getCertificate = () => {
