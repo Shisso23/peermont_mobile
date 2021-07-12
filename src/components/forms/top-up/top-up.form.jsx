@@ -102,7 +102,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                           setFieldValue('isEft', false);
                         }}
                         disabled={_.get(creditCard, 'status') !== 'verified'}
-                        hasCheckBox
+                        hasCheckBox={_.get(creditCard, 'status') === 'verified'}
                         isCheckBoxSelected={isSelected}
                       />
                     );

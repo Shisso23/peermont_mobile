@@ -29,8 +29,8 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
           actions.setFieldValue('numeric', '', false);
           actions.setFieldError('numeric', _.get(apiErrors, 'numeric'), false);
         } else {
-          actions.setFieldValue('numeric', '');
-          actions.setFieldError('numeric', apiErrors);
+          actions.setFieldValue('numeric', '', false);
+          actions.setFieldError('numeric', apiErrors, false);
         }
       });
   };

@@ -35,7 +35,7 @@ export const getMembershipCardBalanceAction = (formData) => {
     dispatch(setMembershipCardIsLoading(true));
 
     return Promise.resolve(clearTextPin)
-      .then(encryptionService.encryptPin)
+      .then((pin) => encryptionService.encryptPin(_.get(currentMembershipCard, 'cardNumber'), pin))
       .then((encryptedPin) => {
         tempEncryptedPin = encryptedPin;
         return membershipCardService.getMembershipCardBalance(currentMembershipCard.id, {
