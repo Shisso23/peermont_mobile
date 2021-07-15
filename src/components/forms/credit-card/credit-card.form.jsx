@@ -40,6 +40,13 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
     if (_.get(error, 'statusCode') === 422) {
       const apiErrors = error.errors;
       actions.resetForm({ values: formData, status: { apiErrors } });
+    } else if (_.get(error, 'statusCode') >= 500) {
+      const message = _.get(
+        error,
+        'errors',
+        'Could not validate your card, please try again later',
+      );
+      actions.setFieldError('cardNumber', message);
     } else {
       actions.setFieldError('cardNumber', error.message);
     }
