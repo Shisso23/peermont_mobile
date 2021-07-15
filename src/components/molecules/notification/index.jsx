@@ -20,7 +20,7 @@ const Notification = ({ notification }) => {
   const notificationLinkId = _.get(notification, 'id');
   const message = _.get(notification, 'message');
   const seen = _.get(notification, 'seen');
-  const sentAt = Moment(_.get(notification, 'sent_at')).format('YYYY/MM/DD, hh:mm');
+  const sentAt = Moment(_.get(notification, 'sent_at')).format('YYYY/MM/DD, HH:MM');
 
   const [needsCollapse, setNeedsCollapse] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
