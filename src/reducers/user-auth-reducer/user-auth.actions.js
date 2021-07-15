@@ -83,7 +83,7 @@ export const registerAction = ({ formData }) => {
       userAuthService.register({ encryptedPin, cardNumber: formData.cardNumber });
 
     return Promise.resolve(formData.pin)
-      .then(encryptionService.encryptPin)
+      .then((pin) => encryptionService.encryptPin(formData.cardNumber, pin))
       .then(_getTemporaryToken)
       .then(_storeTemporaryToken)
       .finally(() => dispatch(setIsLoadingAction(false)));
