@@ -14,6 +14,7 @@ import { signInAction } from '../../../reducers/user-auth-reducer/user-auth.acti
 import { loadAppDataForSignedInUserAction } from '../../../reducers/app-reducer/app.actions';
 import { useBiometricLogin, useAuthentication } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
+import { flashService } from '../../../services';
 
 const imageUri = require('../../../assets/images/header-alt.png');
 
@@ -45,8 +46,14 @@ const SignInScreen = () => {
 
   const _handleBiometricLogin = () => {
     setIsLoading(true);
-    return biometricLogin().then(() => {
-      authenticate(_continueToApp, _handleAuthFinally);
+    return biometricLogin().then((success) => {
+      if (success) {
+        authenticate(_continueToApp, _handleAuthFinally);
+      } else {
+        flashService.error('Biometric failed, please login with your password', 4000, false);
+        _handleNumberReset(true);
+        _handleAuthFinally();
+      }
     });
   };
 
@@ -73,7 +80,7 @@ const SignInScreen = () => {
 
   useEffect(() => {
     _checkForBiometrics().then();
-  }, []);
+  }, [ReactNativeBiometrics.biometricKeysExist()]);
 
   const _handleNumberReset = (resetNumber) => {
     if (resetNumber) {

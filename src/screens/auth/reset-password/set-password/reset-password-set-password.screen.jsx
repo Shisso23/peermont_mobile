@@ -2,6 +2,7 @@ import React from 'react';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 import { SetPasswordForm } from '../../../../components/forms';
 import { setPasswordModel } from '../../../../models';
@@ -20,7 +21,7 @@ const ResetPasswordSetPasswordScreen = () => {
   };
 
   const _handleFormSuccess = () => {
-    navigation.pop();
+    ReactNativeBiometrics.deleteKeys().then(() => navigation.pop());
   };
 
   useDisableBackButtonWhileLoading(isLoading);
