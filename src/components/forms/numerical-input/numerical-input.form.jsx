@@ -25,7 +25,7 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
         actions.setSubmitting(false);
         const apiErrors = _.get(error, 'errors');
 
-        if (_.get(error, 'statusCode') === 422) {
+        if (_.get(error, 'statusCode') === 422 || _.get(error, 'statusCode') === 404) {
           actions.setFieldValue('numeric', '', false);
           actions.setFieldError('numeric', _.get(apiErrors, 'numeric'), false);
         } else {

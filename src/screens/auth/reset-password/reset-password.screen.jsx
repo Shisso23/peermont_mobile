@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +16,7 @@ const ResetPasswordScreen = () => {
   const { signInFormData, isLoading } = useSelector((reducers) => reducers.userAuthReducer);
 
   const _handleFormSubmission = (formData) => {
+    Alert.alert('If your account exists you will get a One Time Pin(OTP).', '', [{ text: 'Ok' }]);
     return dispatch(requestResetPasswordOtpAction(formData));
   };
 
