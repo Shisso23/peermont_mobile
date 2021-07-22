@@ -137,6 +137,7 @@ android {
         versionCode 55
         versionName "1.2.3"
         multiDexEnabled true
+        resValue 'string', "CODE_PUSH_APK_BUILD_TIME", String.format("\"%d\"", System.currentTimeMillis())
     }
     splits {
         abi {
