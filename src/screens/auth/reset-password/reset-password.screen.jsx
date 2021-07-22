@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +15,6 @@ const ResetPasswordScreen = () => {
   const { signInFormData, isLoading } = useSelector((reducers) => reducers.userAuthReducer);
 
   const _handleFormSubmission = (formData) => {
-    Alert.alert('If your account exists you will get a One Time Pin(OTP).', '', [{ text: 'Ok' }]);
     return dispatch(requestResetPasswordOtpAction(formData));
   };
 
@@ -34,6 +32,7 @@ const ResetPasswordScreen = () => {
           Enter your mobile number to reset your password. You will receive a SMS with a One Time
           Pin(OTP) on your mobile number for validation.
         </Text>
+        <Text style={custom.centerSubtitle}>If your account exists you will get an OTP.</Text>
       </PaddedContainer>
       <PaddedContainer>
         <MobileNumberForm
