@@ -4,10 +4,12 @@ import { useDispatch } from 'react-redux';
 import RNBootSplash from 'react-native-bootsplash';
 import messaging from '@react-native-firebase/messaging';
 import codePush from 'react-native-code-push';
+import DeviceInfo from 'react-native-device-info';
+import { HmsPushEvent } from '@hmscore/react-native-hms-push';
 
 import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
-import { firebaseService } from './services';
+import { firebaseService, pushKitService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import { hasIncomingNotification } from './reducers/notification-reducer/notification.actions';
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
@@ -50,18 +52,36 @@ const App = () => {
   };
 
   const checkPermission = async () => {
-    const enabled = await messaging().hasPermission();
-    if (enabled === 1) {
-      await firebaseService.getAndSetToken();
-    } else {
-      requestPermission();
-    }
+    DeviceInfo.hasHms().then(async (hasHms) => {
+      if (hasHms) {
+        await pushKitService.getAndSetToken();
+      } else {
+        messaging()
+          .hasPermission()
+          .then(async (enabled) => {
+            if (enabled === 1) {
+              await firebaseService.getAndSetToken();
+            } else {
+              requestPermission();
+            }
+          });
+      }
+    });
   };
 
   const createNotificationListeners = async () => {
     messaging().onMessage((remoteMessage) => {
       firebaseService.processMessage(remoteMessage);
       dispatch(hasIncomingNotification());
+    });
+
+    DeviceInfo.hasHms().then((hasHms) => {
+      if (hasHms) {
+        HmsPushEvent.onRemoteMessageReceived((remoteMessageHuawei) => {
+          pushKitService.processMessage(remoteMessageHuawei.msg.data);
+          dispatch(hasIncomingNotification());
+        });
+      }
     });
   };
 
