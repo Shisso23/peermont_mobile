@@ -128,6 +128,11 @@ def releaseStorePassword = System.getenv('BITRISEIO_ANDROID_KEYSTORE_PASSWORD')
 def releaseKeyAlias = System.getenv('BITRISEIO_ANDROID_KEYSTORE_ALIAS')
 def releaseKeyPassword = System.getenv('BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD')
 
+releaseStoreFile = releaseStoreFile ? file(releaseStoreFile) : file('debug.keystore')
+releaseStorePassword = releaseStorePassword ? releaseStorePassword : ''
+releaseKeyAlias = releaseKeyAlias ? releaseKeyAlias : ''
+releaseKeyPassword = releaseKeyPassword ? releaseKeyPassword : ''
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
