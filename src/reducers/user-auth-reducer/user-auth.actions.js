@@ -14,13 +14,13 @@ import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const signInAction = (formData) => {
   return (dispatch) => {
-    return DeviceInfo.hasHms().then((hasHms) => {
-      return userAuthService
-        .signIn(formData)
-        .then(() => storageService.storeSignInForm(formData))
-        .then(() => dispatch(setSignInFormDataAction(formData)))
-        .then(() => (hasHms ? dispatch(updatePushKitToken()) : dispatch(updateFirebaseToken())));
-    });
+    return userAuthService
+      .signIn(formData)
+      .then(() => storageService.storeSignInForm(formData))
+      .then(() => dispatch(setSignInFormDataAction(formData)))
+      .then(() =>
+        DeviceInfo.hasHms() ? dispatch(updatePushKitToken()) : dispatch(updateFirebaseToken()),
+      );
   };
 };
 
