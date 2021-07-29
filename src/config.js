@@ -40,5 +40,6 @@ export default {
   appEnvironment: ENVIRONMENT,
   iosStoreUrl: 'https://apps.apple.com/za/app/peermont-winners-circle/id1532408526',
   androidStoreUrl: 'https://play.google.com/store/apps/details?id=com.codehesion.peermont_mobile',
+  huaweiAppGalleryUrl: 'https://peermontwinnerscircle.dre.agconnect.link/6kME',
   callpayUrl: CALLPAY_URL,
 };

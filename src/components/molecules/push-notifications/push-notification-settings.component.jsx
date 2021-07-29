@@ -50,31 +50,27 @@ const PushNotificationSettings = () => {
     togglePushNotifications(enabled);
   };
 
-  const onEnablePushNotifications = () => {
-    DeviceInfo.hasHms().then(async (hasHms) => {
-      setPushNotificationAction(true);
-      if (hasHms) {
-        await AsyncStorage.setItem(config.pushKitEnabled, 'true');
-        dispatch(updatePushKitToken());
-      } else {
-        await messaging().requestPermission();
-        await AsyncStorage.setItem(config.fcmEnabled, 'true');
-        dispatch(updateFirebaseToken());
-      }
-    });
+  const onEnablePushNotifications = async () => {
+    setPushNotificationAction(true);
+    if (DeviceInfo.hasHms()) {
+      await AsyncStorage.setItem(config.pushKitEnabled, 'true');
+      dispatch(updatePushKitToken());
+    } else {
+      await messaging().requestPermission();
+      await AsyncStorage.setItem(config.fcmEnabled, 'true');
+      dispatch(updateFirebaseToken());
+    }
   };
 
-  const onDisablePushNotifications = () => {
-    DeviceInfo.hasHms().then(async (hasHms) => {
-      setPushNotificationAction(false);
-      if (hasHms) {
-        await AsyncStorage.setItem(config.pushKitEnabled, 'false');
-        await AsyncStorage.removeItem(config.pushKitTokenKey);
-      } else {
-        await AsyncStorage.setItem(config.fcmEnabled, 'false');
-        await AsyncStorage.removeItem(config.fcmTokenKey);
-      }
-    });
+  const onDisablePushNotifications = async () => {
+    setPushNotificationAction(false);
+    if (DeviceInfo.hasHms()) {
+      await AsyncStorage.setItem(config.pushKitEnabled, 'false');
+      await AsyncStorage.removeItem(config.pushKitTokenKey);
+    } else {
+      await AsyncStorage.setItem(config.fcmEnabled, 'false');
+      await AsyncStorage.removeItem(config.fcmTokenKey);
+    }
   };
 
   return (

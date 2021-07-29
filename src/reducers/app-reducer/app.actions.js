@@ -1,5 +1,5 @@
 import { Alert, Linking, Platform } from 'react-native';
-import { getVersion } from 'react-native-device-info';
+import DeviceInfo, { getVersion } from 'react-native-device-info';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -16,7 +16,11 @@ export const loadAppDataAction = () => {
 };
 
 const openStore = () => {
-  const storeUrl = Platform.OS === 'ios' ? config.iosStoreUrl : config.androidStoreUrl;
+  const storeUrl = DeviceInfo.hasHms()
+    ? config.huaweiAppGalleryUrl
+    : Platform.OS === 'ios'
+    ? config.iosStoreUrl
+    : config.androidStoreUrl;
   Linking.openURL(storeUrl).then();
 };
 
