@@ -17,6 +17,7 @@ import {
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
+import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { AddButton, Watermark } from '../../../components/atoms';
 import { useRefreshHeaderButton } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
@@ -40,6 +41,7 @@ const MyAccountScreen = () => {
   useFocusEffect(
     React.useCallback(() => {
       dispatch(getUserAction());
+      dispatch(getCreditCardsAction());
     }, []),
   );
 
