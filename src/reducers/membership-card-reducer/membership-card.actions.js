@@ -109,7 +109,7 @@ export const createMembershipCardAction = (formData) => {
       dispatch(appendMembershipCardAction(newCard));
 
     return Promise.resolve(formData.pin)
-      .then(encryptionService.encryptPin)
+      .then((pin) => encryptionService.encryptPin(_.get(formData, 'cardNumber'), pin))
       .then(_createNewCard)
       .then(_storeNewlyCreatedMembershipCard)
       .finally(() => dispatch(setMembershipCardIsLoading(false)));
