@@ -52,33 +52,37 @@ const App = () => {
   };
 
   const checkPermission = async () => {
-    if (DeviceInfo.hasHms()) {
-      await pushKitService.getAndSetToken();
-    } else {
-      messaging()
-        .hasPermission()
-        .then(async (enabled) => {
-          if (enabled === 1) {
-            await firebaseService.getAndSetToken();
-          } else {
-            requestPermission();
-          }
-        });
-    }
+    DeviceInfo.hasHms().then(async (hasHms) => {
+      if (hasHms) {
+        await pushKitService.getAndSetToken();
+      } else {
+        messaging()
+          .hasPermission()
+          .then(async (enabled) => {
+            if (enabled === 1) {
+              await firebaseService.getAndSetToken();
+            } else {
+              requestPermission();
+            }
+          });
+      }
+    });
   };
 
   const createNotificationListeners = async () => {
-    if (DeviceInfo.hasHms()) {
-      HmsPushEvent.onRemoteMessageReceived((remoteMessageHuawei) => {
-        pushKitService.processMessage(remoteMessageHuawei.msg.data);
-        dispatch(hasIncomingNotification());
-      });
-    } else {
-      messaging().onMessage((remoteMessage) => {
-        firebaseService.processMessage(remoteMessage);
-        dispatch(hasIncomingNotification());
-      });
-    }
+    DeviceInfo.hasHms().then((hasHms) => {
+      if (hasHms) {
+        HmsPushEvent.onRemoteMessageReceived((remoteMessageHuawei) => {
+          pushKitService.processMessage(remoteMessageHuawei.msg.data);
+          dispatch(hasIncomingNotification());
+        });
+      } else {
+        messaging().onMessage((remoteMessage) => {
+          firebaseService.processMessage(remoteMessage);
+          dispatch(hasIncomingNotification());
+        });
+      }
+    });
   };
 
   const loadAppCenter = () => {
@@ -114,34 +118,36 @@ const App = () => {
   useEffect(() => {
     LogBox.ignoreLogs(['Require cycle: ', 'Usage of ']);
     loadAppCenter();
-    if (DeviceInfo.hasHms()) {
-      checkPermission()
-        .then(() => {
-          createNotificationListeners();
-        })
-        .finally(() => {
-          _loadAppData();
-        });
-    } else {
-      messaging()
-        .registerDeviceForRemoteMessages()
-        .then(() => {
-          checkPermission().then(() => {
-            createNotificationListeners().then(() => {
-              messaging().setBackgroundMessageHandler((remoteMessage) => {
-                firebaseService.processMessage(remoteMessage).then();
+    DeviceInfo.hasHms().then((hasHms) => {
+      if (hasHms) {
+        checkPermission()
+          .then(() => {
+            createNotificationListeners();
+          })
+          .finally(() => {
+            _loadAppData();
+          });
+      } else {
+        messaging()
+          .registerDeviceForRemoteMessages()
+          .then(() => {
+            checkPermission().then(() => {
+              createNotificationListeners().then(() => {
+                messaging().setBackgroundMessageHandler((remoteMessage) => {
+                  firebaseService.processMessage(remoteMessage).then();
+                });
               });
             });
+          })
+          .finally(() => {
+            if (!__DEV__) {
+              dispatch(signOutAction()).then(_loadAppData);
+            } else {
+              _loadAppData();
+            }
           });
-        })
-        .finally(() => {
-          if (!__DEV__) {
-            dispatch(signOutAction()).then(_loadAppData);
-          } else {
-            _loadAppData();
-          }
-        });
-    }
+      }
+    });
   }, []);
 
   return (

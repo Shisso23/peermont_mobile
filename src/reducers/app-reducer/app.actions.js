@@ -16,12 +16,14 @@ export const loadAppDataAction = () => {
 };
 
 const openStore = () => {
-  const storeUrl = DeviceInfo.hasHms()
-    ? config.huaweiAppGalleryUrl
-    : Platform.OS === 'ios'
-    ? config.iosStoreUrl
-    : config.androidStoreUrl;
-  Linking.openURL(storeUrl).then();
+  DeviceInfo.hasHms().then((hasHms) => {
+    const storeUrl = hasHms
+      ? config.huaweiAppGalleryUrl
+      : Platform.OS === 'ios'
+      ? config.iosStoreUrl
+      : config.androidStoreUrl;
+    Linking.openURL(storeUrl).then();
+  });
 };
 
 const convertVersionToNumber = (version) => Number(_.join(_.split(version, '.'), ''));
