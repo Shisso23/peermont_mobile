@@ -4,6 +4,10 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#if RCT_DEV
+#import <React/RCTDevLoadingView.h>
+#endif
+
 #import <Firebase.h>
 #import "RNBootSplash.h"
 #import <AppCenterReactNative.h>
@@ -59,6 +63,10 @@ static void InitializeFlipper(UIApplication *application) {
   }
   
   [AppCenterReactNative register];
+  
+  #if RCT_DEV
+  [bridge moduleForClass:[RCTDevLoadingView class]];
+  #endif
 
   return YES;
 }
