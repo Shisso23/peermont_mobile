@@ -36,7 +36,7 @@ const ProfileScreen = () => {
     const unconfirmedMobileNumber = _.get(data, 'unconfirmed_mobile_number', null);
 
     if (!_.isNull(unconfirmedMobileNumber)) {
-      navigation.navigate('UpdateMobileOtp');
+      navigation.navigate('UpdateMobileOtp', { unconfirmedMobileNumber });
     }
   };
 
