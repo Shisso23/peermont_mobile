@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { MembershipCardCarouselItem, SplashAd, HealthSurvey } from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
-import { useBiometricRegister } from '../../../hooks';
+import { useBiometricRegister, handleNotificationOpenedBackGround } from '../../../hooks';
 import { hasIncomingNotification } from '../../../reducers/notification-reducer/notification.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import { custom } from '../../../../theme/theme.styles';
@@ -20,6 +20,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const biometricRegister = useBiometricRegister();
+  const notificationOpenedBackGround = handleNotificationOpenedBackGround();
 
   const { user } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector(membershipCardSelector);
@@ -37,6 +38,7 @@ const HomeScreen = () => {
   );
 
   useEffect(() => {
+    notificationOpenedBackGround();
     biometricRegister().then();
     dispatch(getSplashAdvertAction());
   }, []);

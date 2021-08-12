@@ -6,3 +6,4 @@ export * from './refresh/use-refresh-header-button';
 export * from './biometrics/use-biometrics-login';
 export * from './biometrics/use-biometrics-register';
 export * from './authenticate/use-authentication';
+export * from './notification-background/notification-background';
