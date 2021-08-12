@@ -24,6 +24,16 @@ export const signInAction = (formData) => {
   };
 };
 
+export const updateSignInMobileNumberAction = (mobileNumber) => {
+  return (dispatch) => {
+    return storageService.getSignInForm().then((formData) => {
+      formData.mobileNumber = mobileNumber;
+      storageService.storeSignInForm(formData);
+      dispatch(setSignInFormDataAction(formData));
+    });
+  };
+};
+
 export const signOutAction = () => {
   return (dispatch) => {
     return userAuthService.signOut().then(() => {
