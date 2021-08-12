@@ -107,7 +107,6 @@ const MyAccountScreen = () => {
           <AddButton
             onPress={() => navigation.navigate('AddBankAccount')}
             containerStyle={styles.addPadding}
-            disabled={!_.isEmpty(bankAccounts)}
           />
         </View>
       </PaddedContainer>

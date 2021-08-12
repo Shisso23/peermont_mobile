@@ -9,6 +9,8 @@ import {
   setCurrentMembershipCardPinAction,
   setMembershipCardPinsAction,
   setIsLoadingAction as setMembershipCardIsLoading,
+  setIsLoadingPointsAction,
+  setPointsBalancesAction,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
 
@@ -33,7 +35,7 @@ export const getMembershipCardBalanceAction = (formData) => {
     dispatch(setMembershipCardIsLoading(true));
 
     return Promise.resolve(clearTextPin)
-      .then(encryptionService.encryptPin)
+      .then((pin) => encryptionService.encryptPin(_.get(currentMembershipCard, 'cardNumber'), pin))
       .then((encryptedPin) => {
         tempEncryptedPin = encryptedPin;
         return membershipCardService.getMembershipCardBalance(currentMembershipCard.id, {
@@ -44,9 +46,25 @@ export const getMembershipCardBalanceAction = (formData) => {
       .then((membershipCard) => {
         dispatch(replaceCurrentMembershipCardAction(membershipCard));
         dispatch(setCurrentMembershipCardPinAction(tempEncryptedPin));
+        dispatch(getMembershipCardPointsAction());
       })
       .finally(() => dispatch(setMembershipCardIsLoading(false)));
   };
+};
+
+export const getMembershipCardPointsAction = () => (dispatch, getState) => {
+  const { currentMembershipCard, currentMembershipCardPin } = getState().membershipCardReducer;
+  dispatch(setIsLoadingPointsAction(true));
+
+  return membershipCardService
+    .getMembershipCardPoints(currentMembershipCard.id, {
+      encryptedPin: currentMembershipCardPin,
+      cardNumber: currentMembershipCard.cardNumber,
+    })
+    .then((data) => {
+      dispatch(setPointsBalancesAction(data));
+    })
+    .finally(() => dispatch(setIsLoadingPointsAction(false)));
 };
 
 export const refreshMembershipCardBalanceAction = () => {
@@ -59,6 +77,9 @@ export const refreshMembershipCardBalanceAction = () => {
       .getMembershipCardBalance(currentMembershipCard.id, {
         encryptedPin: currentMembershipCardPin,
         cardNumber: currentMembershipCard.cardNumber,
+      })
+      .then(() => {
+        dispatch(getMembershipCardPointsAction());
       })
       .finally(() => dispatch(setMembershipCardIsLoading(false)));
   };
@@ -88,7 +109,7 @@ export const createMembershipCardAction = (formData) => {
       dispatch(appendMembershipCardAction(newCard));
 
     return Promise.resolve(formData.pin)
-      .then(encryptionService.encryptPin)
+      .then((pin) => encryptionService.encryptPin(_.get(formData, 'cardNumber'), pin))
       .then(_createNewCard)
       .then(_storeNewlyCreatedMembershipCard)
       .finally(() => dispatch(setMembershipCardIsLoading(false)));

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import DeviceInfo from 'react-native-device-info';
 
 import { userAuthService, encryptionService, storageService } from '../../services';
 import {
@@ -8,16 +9,28 @@ import {
   setSignInFormDataAction,
   setIsLoadingAction,
 } from './user-auth.reducer';
-import { updateFirebaseToken } from '../user-reducer/user.actions';
+import { updateFirebaseToken, updatePushKitToken } from '../user-reducer/user.actions';
 import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const signInAction = (formData) => {
   return (dispatch) => {
-    return userAuthService
-      .signIn(formData)
-      .then(() => storageService.storeSignInForm(formData))
-      .then(() => dispatch(setSignInFormDataAction(formData)))
-      .then(() => dispatch(updateFirebaseToken()));
+    return DeviceInfo.hasHms().then((hasHms) => {
+      return userAuthService
+        .signIn(formData)
+        .then(() => storageService.storeSignInForm(formData))
+        .then(() => dispatch(setSignInFormDataAction(formData)))
+        .then(() => (hasHms ? dispatch(updatePushKitToken()) : dispatch(updateFirebaseToken())));
+    });
+  };
+};
+
+export const updateSignInMobileNumberAction = (mobileNumber) => {
+  return (dispatch) => {
+    return storageService.getSignInForm().then((formData) => {
+      formData.mobileNumber = mobileNumber;
+      storageService.storeSignInForm(formData);
+      dispatch(setSignInFormDataAction(formData));
+    });
   };
 };
 
@@ -83,7 +96,7 @@ export const registerAction = ({ formData }) => {
       userAuthService.register({ encryptedPin, cardNumber: formData.cardNumber });
 
     return Promise.resolve(formData.pin)
-      .then(encryptionService.encryptPin)
+      .then((pin) => encryptionService.encryptPin(formData.cardNumber, pin))
       .then(_getTemporaryToken)
       .then(_storeTemporaryToken)
       .finally(() => dispatch(setIsLoadingAction(false)));

@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.huawei.agconnect"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -121,6 +123,16 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+def releaseStoreFile = System.getenv('BITRISEIO_ANDROID_KEYSTORE')
+def releaseStorePassword = System.getenv('BITRISEIO_ANDROID_KEYSTORE_PASSWORD')
+def releaseKeyAlias = System.getenv('BITRISEIO_ANDROID_KEYSTORE_ALIAS')
+def releaseKeyPassword = System.getenv('BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD')
+
+releaseStoreFile = releaseStoreFile ? file(releaseStoreFile) : file('debug.keystore')
+releaseStorePassword = releaseStorePassword ? releaseStorePassword : ''
+releaseKeyAlias = releaseKeyAlias ? releaseKeyAlias : ''
+releaseKeyPassword = releaseKeyPassword ? releaseKeyPassword : ''
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -134,8 +146,9 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 55
-        versionName "1.2.2"
+        versionName "1.2.4"
         multiDexEnabled true
+        resValue 'string', "CODE_PUSH_APK_BUILD_TIME", String.format("\"%d\"", System.currentTimeMillis())
     }
     splits {
         abi {
@@ -152,6 +165,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile releaseStoreFile
+            storePassword releaseStorePassword
+            keyAlias releaseKeyAlias
+            keyPassword releaseKeyPassword
+        }
     }
     buildTypes {
         debug {
@@ -160,7 +179,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -223,3 +242,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

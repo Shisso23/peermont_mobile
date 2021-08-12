@@ -4,8 +4,8 @@ const success = (message = '', visibilityTime = '4000') => {
   Toast.show({ text1: 'Success', text2: message, type: 'success', visibilityTime });
 };
 
-const error = (message) => {
-  Toast.show({ text1: 'Error', text2: message, type: 'error' });
+const error = (message, visibilityTime = '4000', autoHide = true) => {
+  Toast.show({ text1: 'Error', text2: message, type: 'error', visibilityTime, autoHide });
 };
 
 const info = (message) => {

@@ -17,7 +17,7 @@ const Transaction = ({ transaction }) => {
   };
 
   const payableType = _.startCase(_.get(transaction, 'payable_type'));
-  const updatedAt = Moment(_.get(transaction, 'updated_at')).format('YYYY/MM/DD, hh:mm');
+  const updatedAt = Moment(_.get(transaction, 'updated_at')).format('YYYY/MM/DD, HH:MM');
   const payable = getPayableNumber(transaction);
   const amount = (_.get(transaction, 'total.cents') / 100).toFixed(2);
   const status = _.capitalize(_.get(transaction, 'status'));

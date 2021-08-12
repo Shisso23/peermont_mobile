@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 import colors from '../../../../theme/theme.colors';
 
 const BankAccountStatus = ({ status }) => {
@@ -27,6 +29,7 @@ const BankAccountStatus = ({ status }) => {
     icon = 'times';
     color = colors.danger;
     textStyle = { color };
+    status = _.capitalize(status);
   }
   return (
     <View style={styles.rowAlign}>

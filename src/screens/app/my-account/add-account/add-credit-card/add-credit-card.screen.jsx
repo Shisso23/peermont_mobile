@@ -6,8 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import { CreditCardForm } from '../../../../../components/forms';
 import { creditCardModel } from '../../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../../components/containers';
-import { createCreditCardAction } from '../../../../../reducers/credit-card-reducer/credit-card.actions';
-import { useDisableBackButtonWhileLoading } from '../../../../../hooks/disable-back-button-while-loading/use-disable-back-button-while-loading';
+import {
+  createCreditCardAction,
+  getCreditCardsAction,
+} from '../../../../../reducers/credit-card-reducer/credit-card.actions';
+import { useDisableBackButtonWhileLoading } from '../../../../../hooks';
 import { custom } from '../../../../../../theme/theme.styles';
 
 const AddCreditCardScreen = () => {
@@ -20,6 +23,7 @@ const AddCreditCardScreen = () => {
 
   const _handleFormSuccess = () => {
     navigation.pop();
+    dispatch(getCreditCardsAction());
   };
 
   const { isLoading } = useSelector((reducer) => reducer.creditCardReducer);

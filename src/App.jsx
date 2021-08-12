@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
-import { StatusBar, LogBox, Platform } from 'react-native';
+import { StatusBar, LogBox, Platform, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import RNBootSplash from 'react-native-bootsplash';
 import messaging from '@react-native-firebase/messaging';
+import codePush from 'react-native-code-push';
+import DeviceInfo from 'react-native-device-info';
+import { HmsPushEvent } from '@hmscore/react-native-hms-push';
 
 import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
-import { firebaseService } from './services';
+import { firebaseService, pushKitService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import { hasIncomingNotification } from './reducers/notification-reducer/notification.actions';
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
 import { loadAppDataAction } from './reducers/app-reducer/app.actions';
 import { AutoSignOut } from './components/atoms';
 import { useBiometricLogin, useAuthentication } from './hooks';
+import config from './config';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,41 +52,102 @@ const App = () => {
   };
 
   const checkPermission = async () => {
-    const enabled = await messaging().hasPermission();
-    if (enabled === 1) {
-      await firebaseService.getAndSetToken();
-    } else {
-      requestPermission();
-    }
-  };
-
-  const createNotificationListeners = async () => {
-    messaging().onMessage((remoteMessage) => {
-      firebaseService.processMessage(remoteMessage);
-      dispatch(hasIncomingNotification());
+    DeviceInfo.hasHms().then(async (hasHms) => {
+      if (hasHms) {
+        await pushKitService.getAndSetToken();
+      } else {
+        messaging()
+          .hasPermission()
+          .then(async (enabled) => {
+            if (enabled === 1) {
+              await firebaseService.getAndSetToken();
+            } else {
+              requestPermission();
+            }
+          });
+      }
     });
   };
 
-  useEffect(() => {
-    LogBox.ignoreLogs(['Require cycle: ']);
-    messaging()
-      .registerDeviceForRemoteMessages()
-      .then(() => {
-        checkPermission().then(() => {
-          createNotificationListeners().then(() => {
-            messaging().setBackgroundMessageHandler((remoteMessage) => {
-              firebaseService.processMessage(remoteMessage);
-            });
-          });
+  const createNotificationListeners = async () => {
+    DeviceInfo.hasHms().then((hasHms) => {
+      if (hasHms) {
+        HmsPushEvent.onRemoteMessageReceived((remoteMessageHuawei) => {
+          pushKitService.processMessage(remoteMessageHuawei.msg.data);
+          dispatch(hasIncomingNotification());
         });
-      })
-      .finally(() => {
-        if (!__DEV__) {
-          dispatch(signOutAction()).then(_loadAppData);
-        } else {
-          _loadAppData();
-        }
-      });
+      } else {
+        messaging().onMessage((remoteMessage) => {
+          firebaseService.processMessage(remoteMessage);
+          dispatch(hasIncomingNotification());
+        });
+      }
+    });
+  };
+
+  const loadAppCenter = () => {
+    const deploymentKey =
+      Platform.OS === 'ios'
+        ? config.appEnvironment === 'production'
+          ? config.appCenterIos
+          : config.appCenterIosStaging
+        : config.appEnvironment === 'production'
+        ? config.appCenterAndroid
+        : config.appCenterAndroidStaging;
+
+    codePush
+      .sync(
+        {
+          deploymentKey,
+          updateDialog: true,
+          installMode: codePush.InstallMode.IMMEDIATE,
+        },
+        (status) => {
+          switch (status) {
+            case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+              Alert.alert('Downloading new update');
+              break;
+            default:
+              break;
+          }
+        },
+      )
+      .then();
+  };
+
+  useEffect(() => {
+    LogBox.ignoreLogs(['Require cycle: ', 'Usage of ']);
+    loadAppCenter();
+    DeviceInfo.hasHms().then((hasHms) => {
+      if (hasHms) {
+        checkPermission()
+          .then(() => {
+            createNotificationListeners();
+          })
+          .finally(() => {
+            _loadAppData();
+          });
+      } else {
+        messaging()
+          .registerDeviceForRemoteMessages()
+          .then(() => {
+            checkPermission().then(() => {
+              createNotificationListeners().then(() => {
+                messaging().setBackgroundMessageHandler((remoteMessage) => {
+                  firebaseService.processMessage(remoteMessage).then();
+                });
+              });
+            });
+          })
+          .finally(() => {
+            if (!__DEV__) {
+              dispatch(signOutAction()).then(_loadAppData);
+            } else {
+              _loadAppData();
+            }
+          });
+      }
+    });
   }, []);
 
   return (

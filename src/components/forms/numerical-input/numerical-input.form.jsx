@@ -25,11 +25,12 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
         actions.setSubmitting(false);
         const apiErrors = _.get(error, 'errors');
 
-        if (_.get(error, 'statusCode') === 422) {
-          actions.resetForm({ status: { apiErrors } });
+        if (_.get(error, 'statusCode') === 422 || _.get(error, 'statusCode') === 404) {
+          actions.setFieldValue('numeric', '', false);
+          actions.setFieldError('numeric', _.get(apiErrors, 'numeric'), false);
         } else {
-          actions.setFieldValue('numeric', '');
-          actions.setFieldError('numeric', apiErrors);
+          actions.setFieldValue('numeric', '', false);
+          actions.setFieldError('numeric', apiErrors, false);
         }
       });
   };
@@ -41,9 +42,8 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
   return (
     <Formik
       initialValues={initialValues}
-      initialStatus={{ apiErrors: {} }}
-      onSubmit={_handleSubmission}
       validationSchema={validationSchema}
+      onSubmit={_handleSubmission}
       enableReinitialize
       innerRef={ref}
     >
@@ -56,6 +56,10 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
               cellCount={4}
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}
+              onlyMask={
+                !_.isEmpty(_.get(initialValues, 'numeric')) &&
+                _.get(values, 'numeric') === _.get(initialValues, 'numeric')
+              }
             />
             <Divider />
             <View style={styles.messageStyle}>

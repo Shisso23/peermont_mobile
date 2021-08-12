@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
-import { TrashButton } from '../../atoms';
+import { CreditCardStatus, TrashButton } from '../../atoms';
 import { custom } from '../../../../theme/theme.styles';
 
 const creditCardPath = require('../../../assets/images/credit-card.png');
@@ -52,6 +52,7 @@ const CreditCard = ({
         <ListItem.Title>{card.obfuscatedCardNumber}</ListItem.Title>
         <ListItem.Subtitle>{card.cardType}</ListItem.Subtitle>
       </ListItem.Content>
+      {card && (!hasCheckBox || disabled) && <CreditCardStatus status={card.status} />}
       {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}
       {hasCheckBox && <CheckBox checked={isChecked} disabled />}
     </ListItem>

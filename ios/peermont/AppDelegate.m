@@ -4,8 +4,14 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#if RCT_DEV
+#import <React/RCTDevLoadingView.h>
+#endif
+
 #import <Firebase.h>
 #import "RNBootSplash.h"
+#import <AppCenterReactNative.h>
+#import <CodePush/CodePush.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -31,10 +37,6 @@ static void InitializeFlipper(UIApplication *application) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-  if ([FIRApp defaultApp] == nil) {
-    [FIRApp configure];
-  }
-
   
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
@@ -53,7 +55,18 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-//  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
+
+  //  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
+  
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
+  
+  [AppCenterReactNative register];
+  
+  #if RCT_DEV
+  [bridge moduleForClass:[RCTDevLoadingView class]];
+  #endif
 
   return YES;
 }
@@ -63,7 +76,7 @@ static void InitializeFlipper(UIApplication *application) {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  return [CodePush bundleURL];
 #endif
 }
 

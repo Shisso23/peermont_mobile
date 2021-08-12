@@ -4,9 +4,13 @@ import { StyleSheet, Switch, View } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
+import DeviceInfo from 'react-native-device-info';
 
 import { notificationSettingUpdateAction } from '../../../reducers/notification-reducer/notification.actions';
-import { updateFirebaseToken } from '../../../reducers/user-reducer/user.actions';
+import {
+  updateFirebaseToken,
+  updatePushKitToken,
+} from '../../../reducers/user-reducer/user.actions';
 import config from '../../../config';
 
 const PushNotificationSettings = () => {
@@ -41,19 +45,36 @@ const PushNotificationSettings = () => {
     dispatch(notificationSettingUpdateAction(pushNotificationSettingData));
   };
 
+  const setPushNotificationAction = (enabled) => {
+    setHasEnabledPushNotifications(enabled);
+    togglePushNotifications(enabled);
+  };
+
   const onEnablePushNotifications = async () => {
-    await messaging().requestPermission();
-    await AsyncStorage.setItem(config.fcmEnabled, 'true');
-    setHasEnabledPushNotifications(true);
-    togglePushNotifications(true);
-    dispatch(updateFirebaseToken());
+    setPushNotificationAction(true);
+    DeviceInfo.hasHms().then(async (hasHms) => {
+      if (hasHms) {
+        await AsyncStorage.setItem(config.pushKitEnabled, 'true');
+        dispatch(updatePushKitToken());
+      } else {
+        await messaging().requestPermission();
+        await AsyncStorage.setItem(config.fcmEnabled, 'true');
+        dispatch(updateFirebaseToken());
+      }
+    });
   };
 
   const onDisablePushNotifications = async () => {
-    await AsyncStorage.setItem(config.fcmEnabled, 'false');
-    await AsyncStorage.removeItem(config.fcmTokenKey);
-    setHasEnabledPushNotifications(false);
-    togglePushNotifications(false);
+    setPushNotificationAction(false);
+    DeviceInfo.hasHms().then(async (hasHms) => {
+      if (hasHms) {
+        await AsyncStorage.setItem(config.pushKitEnabled, 'false');
+        await AsyncStorage.removeItem(config.pushKitTokenKey);
+      } else {
+        await AsyncStorage.setItem(config.fcmEnabled, 'false');
+        await AsyncStorage.removeItem(config.fcmTokenKey);
+      }
+    });
   };
 
   return (

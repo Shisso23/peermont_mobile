@@ -19,7 +19,7 @@ const AddBankAccountScreen = () => {
   };
 
   const _handleFormSuccess = (bankAccountId) => {
-    navigation.push('UploadBankAccountDocument', {
+    navigation.navigate('UploadBankAccountDocument', {
       bankAccountId,
     });
   };

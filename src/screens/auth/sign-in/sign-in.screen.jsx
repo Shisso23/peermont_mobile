@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Platform } from 'react-native';
 import { Divider, Button, ListItem, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +14,7 @@ import { signInAction } from '../../../reducers/user-auth-reducer/user-auth.acti
 import { loadAppDataForSignedInUserAction } from '../../../reducers/app-reducer/app.actions';
 import { useBiometricLogin, useAuthentication } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
+import { flashService } from '../../../services';
 
 const imageUri = require('../../../assets/images/header-alt.png');
 
@@ -45,8 +46,14 @@ const SignInScreen = () => {
 
   const _handleBiometricLogin = () => {
     setIsLoading(true);
-    return biometricLogin().then(() => {
-      authenticate(_continueToApp, _handleAuthFinally);
+    return biometricLogin().then((success) => {
+      if (success) {
+        authenticate(_continueToApp, _handleAuthFinally);
+      } else {
+        flashService.error('Biometric failed, please login with your password', 4000, false);
+        _handleNumberReset(true);
+        _handleAuthFinally();
+      }
     });
   };
 
@@ -57,13 +64,13 @@ const SignInScreen = () => {
 
   const _onSignInSuccess = () => {
     setIsLoading(false);
-    RNBootSplash.show();
+    if (Platform.OS === 'android') RNBootSplash.show();
     dispatch(loadAppDataForSignedInUserAction())
       .then(() => {
         return dispatch(setIsAuthenticatedAction(true));
       })
       .finally(() => {
-        RNBootSplash.hide({ fade: true });
+        if (Platform.OS === 'android') RNBootSplash.hide({ fade: true });
       });
   };
 
@@ -73,7 +80,7 @@ const SignInScreen = () => {
 
   useEffect(() => {
     _checkForBiometrics().then();
-  }, []);
+  }, [ReactNativeBiometrics.biometricKeysExist()]);
 
   const _handleNumberReset = (resetNumber) => {
     if (resetNumber) {

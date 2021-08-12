@@ -32,6 +32,7 @@ const ResetPasswordScreen = () => {
           Enter your mobile number to reset your password. You will receive a SMS with a One Time
           Pin(OTP) on your mobile number for validation.
         </Text>
+        <Text style={custom.centerSubtitle}>If your account exists you will get an OTP.</Text>
       </PaddedContainer>
       <PaddedContainer>
         <MobileNumberForm

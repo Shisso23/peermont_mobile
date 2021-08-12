@@ -6,6 +6,9 @@ const reducerName = 'membershipCard';
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
+const setIsLoadingPoints = CreateAction(reducerName, 'SET_IS_LOADING_POINTS');
+export const setIsLoadingPointsAction = setIsLoadingPoints.action;
+
 const setMembershipCards = CreateAction(reducerName, 'SET_MEMBERSHIP_CARDS');
 export const setMembershipCardsAction = setMembershipCards.action;
 
@@ -27,12 +30,17 @@ export const replaceCurrentMembershipCardAction = replaceCurrentMembershipCard.a
 const setCurrentMembershipCardPin = CreateAction(reducerName, 'SET_CURRENT_MEMBERSHIP_CARD_PIN');
 export const setCurrentMembershipCardPinAction = setCurrentMembershipCardPin.action;
 
+const setPointsBalances = CreateAction(reducerName, 'SET_POINTS_BALANCES');
+export const setPointsBalancesAction = setPointsBalances.action;
+
 const initialState = {
   isLoading: false,
+  isLoadingPoints: false,
   membershipCards: [],
   membershipCardPins: [],
   currentMembershipCard: null,
   currentMembershipCardPin: null,
+  pointsBalances: {},
 };
 
 export const membershipCardSelector = (reducers) => reducers.membershipCardReducer;
@@ -43,6 +51,11 @@ export default function membershipCardReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case setIsLoadingPoints.actionType:
+      return {
+        ...state,
+        isLoadingPoints: action.payload,
       };
     case setMembershipCards.actionType:
       return {
@@ -78,6 +91,11 @@ export default function membershipCardReducer(state = initialState, action) {
       return {
         ...state,
         currentMembershipCardPin: action.payload,
+      };
+    case setPointsBalances.actionType:
+      return {
+        ...state,
+        pointsBalances: action.payload,
       };
     default:
       return state;

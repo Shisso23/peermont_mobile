@@ -14,10 +14,10 @@ const PressableOpacity = (props) => {
     },
     [disabled, disabledOpacity],
   );
-  const _style = useCallback(({ pressed }) => [style, { opacity: getOpacity(pressed) }], [
-    getOpacity,
-    style,
-  ]);
+  const _style = useCallback(
+    ({ pressed }) => [style, { opacity: getOpacity(pressed) }],
+    [getOpacity, style],
+  );
 
   return <Pressable style={_style} disabled={disabled} {...passThroughProps} />;
 };
