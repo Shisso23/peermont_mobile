@@ -42,17 +42,15 @@ const HealthSurvey = () => {
 
   const SurveyViewContainer = ({ children }) => {
     return (
-      <View style={custom.surveyContainer}>
-        <TouchableOpacity style={custom.surveyButton} onPress={_handleHealthSurveyPress}>
-          {isLoading ? (
-            <View style={styles.loadingContainer}>
-              <LoadingComponent hasBackground={false} />
-            </View>
-          ) : (
-            children
-          )}
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={custom.headerButton} onPress={_handleHealthSurveyPress}>
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingComponent hasBackground={false} />
+          </View>
+        ) : (
+          children
+        )}
+      </TouchableOpacity>
     );
   };
 
@@ -62,9 +60,9 @@ const HealthSurvey = () => {
 
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
-      <Icon name="cube" size={25} />
+      <Icon style={custom.iconCenter} name="file-medical" size={33} color={colors.primary} />
       <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>Planning on visiting?</Text>
+        <Text style={custom.surveyTitle}>Visiting?</Text>
         <Text style={custom.surveySubText}>
           Save time and take our health survey for quick access
         </Text>
@@ -73,9 +71,9 @@ const HealthSurvey = () => {
   ) : (
     <SurveyViewContainer>
       {success ? (
-        <Icon type="font-awesome-5" name="check" color={colors.success} size={30} />
+        <Icon type="font-awesome-5" name="check" color={colors.success} size={33} />
       ) : (
-        <Icon type="font-awesome-5" name="times" color={colors.danger} size={30} />
+        <Icon type="font-awesome-5" name="times" color={colors.danger} size={33} />
       )}
       <View style={custom.surveyText}>
         <Text style={custom.surveyTitle}>{success ? successTextTitle : failedTextTitle}</Text>

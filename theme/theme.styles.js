@@ -20,7 +20,7 @@ export const custom = {
     fontFamily: variables.fontFamilySecondary,
     fontSize: 22,
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 10,
     textAlign: 'center',
   },
   errorStyle: {
@@ -46,25 +46,32 @@ export const custom = {
   disabledTouchable: {
     backgroundColor: colors.transparent,
   },
-  surveyContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.veryLightGrey,
-    paddingBottom: 20,
-  },
   surveyText: {
-    marginLeft: 30,
+    marginLeft: 24,
   },
   surveyTitle: {
     fontSize: 18,
     fontFamily: 'OpenSans-Bold',
-    color: colors.black,
+    color: colors.primary,
   },
   surveySubText: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: 'OpenSans-Regular',
     color: colors.darkGrey,
   },
-  surveyButton: {
+  headerButton: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderBottomColor: colors.primary,
+    borderColor: colors.primary,
+    borderRadius: 15,
+    borderWidth: 1,
+    elevation: 5,
+    flexDirection: 'row',
+    height: 90,
+    justifyContent: 'space-evenly',
+    marginHorizontal: 3,
+    padding: 13,
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
@@ -72,18 +79,32 @@ export const custom = {
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
-    flexDirection: 'row',
-    backgroundColor: colors.veryLightGrey,
-    borderRadius: 35,
-    padding: 13,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    marginHorizontal: 10,
+    width: 180,
   },
   resendOtpStyle: {
     color: colors.textGrey,
     textAlign: 'center',
+  },
+  nameContainer: {
+    borderBottomWidth: 0.28,
+    borderColor: colors.inputBorderColor,
+    paddingBottom: 15,
+  },
+  headerContainer: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  palaceBetIconSize: {
+    height: 32,
+    marginLeft: 10,
+    marginRight: -10,
+    width: 34,
+  },
+  healthIconSize: {
+    height: 36,
+    marginLeft: 10,
+    width: 34,
   },
 };
 
