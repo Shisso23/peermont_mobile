@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,8 +12,6 @@ import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import LoadingComponent from '../loading/loading.component';
-
-const healthSurveyIcon = require('../../../assets/images/health-survey.png');
 
 const HealthSurvey = () => {
   const navigation = useNavigation();
@@ -62,7 +60,7 @@ const HealthSurvey = () => {
 
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
-      <Image source={healthSurveyIcon} style={custom.healthIconSize} />
+      <Icon style={custom.iconCenter} name="file-medical" size={33} color={colors.primary} />
       <View style={custom.surveyText}>
         <Text style={custom.surveyTitle}>Visiting?</Text>
         <Text style={custom.surveySubText}>
