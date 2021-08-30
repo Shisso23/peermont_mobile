@@ -20,7 +20,7 @@ export const custom = {
     fontFamily: variables.fontFamilySecondary,
     fontSize: 22,
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 10,
     textAlign: 'center',
   },
   errorStyle: {
@@ -46,13 +46,8 @@ export const custom = {
   disabledTouchable: {
     backgroundColor: colors.transparent,
   },
-  surveyContainer: {
-    borderBottomWidth: 0.28,
-    borderColor: colors.inputBorderColor,
-    paddingBottom: 20,
-  },
   surveyText: {
-    marginLeft: 30,
+    marginLeft: 24,
   },
   surveyTitle: {
     fontSize: 18,
@@ -93,12 +88,23 @@ export const custom = {
   nameContainer: {
     borderBottomWidth: 0.28,
     borderColor: colors.inputBorderColor,
-    paddingBottom: 20,
+    paddingBottom: 15,
   },
   headerContainer: {
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  palaceBetIconSize: {
+    height: 32,
+    marginLeft: 10,
+    marginRight: -10,
+    width: 34,
+  },
+  healthIconSize: {
+    height: 36,
+    marginLeft: 10,
+    width: 34,
   },
 };
 

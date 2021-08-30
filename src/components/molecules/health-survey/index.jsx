@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,8 @@ import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
 import { initiateHealthSurveyAction } from '../../../reducers/health-survey-reducer/health-survey.actions';
 import LoadingComponent from '../loading/loading.component';
+
+const healthSurveyIcon = require('../../../assets/images/health-survey.png');
 
 const HealthSurvey = () => {
   const navigation = useNavigation();
@@ -42,17 +44,15 @@ const HealthSurvey = () => {
 
   const SurveyViewContainer = ({ children }) => {
     return (
-      <View style={custom.surveyContainer}>
-        <TouchableOpacity style={custom.headerButton} onPress={_handleHealthSurveyPress}>
-          {isLoading ? (
-            <View style={styles.loadingContainer}>
-              <LoadingComponent hasBackground={false} />
-            </View>
-          ) : (
-            children
-          )}
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={custom.headerButton} onPress={_handleHealthSurveyPress}>
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingComponent hasBackground={false} />
+          </View>
+        ) : (
+          children
+        )}
+      </TouchableOpacity>
     );
   };
 
@@ -62,7 +62,7 @@ const HealthSurvey = () => {
 
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
-      <Icon name="file-medical" size={30} color={colors.primary} />
+      <Image source={healthSurveyIcon} style={custom.healthIconSize} />
       <View style={custom.surveyText}>
         <Text style={custom.surveyTitle}>Visiting?</Text>
         <Text style={custom.surveySubText}>
@@ -73,9 +73,9 @@ const HealthSurvey = () => {
   ) : (
     <SurveyViewContainer>
       {success ? (
-        <Icon type="font-awesome-5" name="check" color={colors.success} size={30} />
+        <Icon type="font-awesome-5" name="check" color={colors.success} size={33} />
       ) : (
-        <Icon type="font-awesome-5" name="times" color={colors.danger} size={30} />
+        <Icon type="font-awesome-5" name="times" color={colors.danger} size={33} />
       )}
       <View style={custom.surveyText}>
         <Text style={custom.surveyTitle}>{success ? successTextTitle : failedTextTitle}</Text>
