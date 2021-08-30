@@ -43,7 +43,7 @@ const HealthSurvey = () => {
   const SurveyViewContainer = ({ children }) => {
     return (
       <View style={custom.surveyContainer}>
-        <TouchableOpacity style={custom.surveyButton} onPress={_handleHealthSurveyPress}>
+        <TouchableOpacity style={custom.headerButton} onPress={_handleHealthSurveyPress}>
           {isLoading ? (
             <View style={styles.loadingContainer}>
               <LoadingComponent hasBackground={false} />
@@ -62,9 +62,9 @@ const HealthSurvey = () => {
 
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
-      <Icon name="cube" size={25} />
+      <Icon name="file-medical" size={30} color={colors.primary} />
       <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>Planning on visiting?</Text>
+        <Text style={custom.surveyTitle}>Visiting?</Text>
         <Text style={custom.surveySubText}>
           Save time and take our health survey for quick access
         </Text>

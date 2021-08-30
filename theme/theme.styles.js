@@ -47,8 +47,8 @@ export const custom = {
     backgroundColor: colors.transparent,
   },
   surveyContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.veryLightGrey,
+    borderBottomWidth: 0.28,
+    borderColor: colors.inputBorderColor,
     paddingBottom: 20,
   },
   surveyText: {
@@ -57,14 +57,26 @@ export const custom = {
   surveyTitle: {
     fontSize: 18,
     fontFamily: 'OpenSans-Bold',
-    color: colors.black,
+    color: colors.primary,
   },
   surveySubText: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: 'OpenSans-Regular',
     color: colors.darkGrey,
   },
-  surveyButton: {
+  headerButton: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderBottomColor: colors.primary,
+    borderColor: colors.primary,
+    borderRadius: 15,
+    borderWidth: 1,
+    elevation: 5,
+    flexDirection: 'row',
+    height: 90,
+    justifyContent: 'space-evenly',
+    marginHorizontal: 3,
+    padding: 13,
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
@@ -72,18 +84,21 @@ export const custom = {
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
-    flexDirection: 'row',
-    backgroundColor: colors.veryLightGrey,
-    borderRadius: 35,
-    padding: 13,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    marginHorizontal: 10,
+    width: 180,
   },
   resendOtpStyle: {
     color: colors.textGrey,
     textAlign: 'center',
+  },
+  nameContainer: {
+    borderBottomWidth: 0.28,
+    borderColor: colors.inputBorderColor,
+    paddingBottom: 20,
+  },
+  headerContainer: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 };
 
