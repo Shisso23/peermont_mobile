@@ -19,6 +19,7 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { user, loading } = useSelector((reducers) => reducers.userReducer);
+
   const initialValues = _.pick(user, [
     'mobileNumber',
     'email',
@@ -36,7 +37,7 @@ const ProfileScreen = () => {
     const unconfirmedMobileNumber = _.get(data, 'unconfirmed_mobile_number', null);
 
     if (!_.isNull(unconfirmedMobileNumber)) {
-      navigation.navigate('UpdateMobileOtp', { unconfirmedMobileNumber });
+      navigation.navigate('UpdateMobileSelectCard', { unconfirmedMobileNumber });
     }
   };
 

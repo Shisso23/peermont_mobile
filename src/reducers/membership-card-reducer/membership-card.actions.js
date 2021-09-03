@@ -143,3 +143,21 @@ export const rememberCardPin = (pin) => {
     dispatch(setMembershipCardPinsAction(membershipCardPins));
   };
 };
+
+export const queryPatronEnquiryAction = (formData) => {
+  return (dispatch) => {
+    dispatch(setMembershipCardIsLoading(true));
+
+    const _instanciateCard = (encryptedPin) =>
+      membershipCardService.queryPatronEnquiry({
+        encryptedPin,
+        cardNumber: formData.cardNumber,
+        unconfirmedMobileNumberForQuery: formData.unconfirmedMobileNumberForQuery,
+      });
+
+    return Promise.resolve(formData.pin)
+      .then((pin) => encryptionService.encryptPin(_.get(formData, 'cardNumber'), pin))
+      .then(_instanciateCard)
+      .finally(() => dispatch(setMembershipCardIsLoading(false)));
+  };
+};

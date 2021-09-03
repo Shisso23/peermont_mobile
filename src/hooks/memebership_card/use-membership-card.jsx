@@ -12,10 +12,11 @@ export const useMembershipCard = () => {
   const dispatch = useDispatch();
   const { membershipCardPins } = useSelector(membershipCardSelector);
 
-  const viewMembershipCard = (id, index) => {
+  const viewMembershipCard = (id, index, unconfirmedMobileNumber) => {
     dispatch(setCurrentMembershipCardAction(id));
     navigation.navigate('EnterMembershipCardPin', {
       cardPin: _.get(membershipCardPins[index], 'card_pin'),
+      unconfirmedMobileNumberForQuery: unconfirmedMobileNumber,
     });
   };
 
