@@ -15,3 +15,11 @@ export const apiMembershipCardModel = (_model = {}) => ({
     card_pin: _.get(_model, 'encryptedPin'),
   },
 });
+
+export const apiMembershipCardModelPatronEnquiry = (_model = {}) => ({
+  membership_card: {
+    card_number: _.get(_model, 'cardNumber'),
+    card_pin: _.get(_model, 'encryptedPin'),
+    unconfirmed_mobile_number: _.get(_model, 'unconfirmedMobileNumberForQuery'),
+  },
+});
