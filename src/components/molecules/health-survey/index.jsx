@@ -60,20 +60,30 @@ const HealthSurvey = () => {
 
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
-      <Icon style={custom.iconCenter} name="file-medical" size={33} color={colors.primary} />
+      <Icon style={custom.healthIcon} name="file-medical" size={35} color={colors.primary} />
       <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>Visiting?</Text>
-        <Text style={custom.surveySubText}>
-          Save time and take our health survey for quick access
-        </Text>
+        <Text style={custom.surveyTitle}>Health Survey</Text>
+        <Text style={custom.surveySubText}>Submit Online</Text>
       </View>
     </SurveyViewContainer>
   ) : (
     <SurveyViewContainer>
       {success ? (
-        <Icon type="font-awesome-5" name="check" color={colors.success} size={33} />
+        <Icon
+          style={custom.statusIcon}
+          type="font-awesome-5"
+          name="check"
+          color={colors.success}
+          size={35}
+        />
       ) : (
-        <Icon type="font-awesome-5" name="times" color={colors.danger} size={33} />
+        <Icon
+          style={custom.statusIcon}
+          type="font-awesome-5"
+          name="times"
+          color={colors.danger}
+          size={40}
+        />
       )}
       <View style={custom.surveyText}>
         <Text style={custom.surveyTitle}>{success ? successTextTitle : failedTextTitle}</Text>

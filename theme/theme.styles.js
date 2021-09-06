@@ -95,16 +95,20 @@ export const custom = {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  palaceBetIconSize: {
+  palaceBetIcon: {
     height: 32,
     marginLeft: 10,
     marginRight: -10,
     width: 34,
   },
-  healthIconSize: {
-    height: 36,
+  healthIcon: {
     marginLeft: 10,
+    marginRight: -18,
     width: 34,
+  },
+  statusIcon: {
+    marginLeft: 10,
+    marginRight: -10,
   },
 };
 
