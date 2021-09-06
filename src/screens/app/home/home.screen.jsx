@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
 
-import { MembershipCardCarouselItem, SplashAd, HealthSurvey } from '../../../components';
+import { MembershipCardCarouselItem, SplashAd, HealthSurvey, PalaceBet } from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useBiometricRegister, handleNotificationOpenedBackGround } from '../../../hooks';
@@ -50,10 +50,15 @@ const HomeScreen = () => {
     <ScrollContainer>
       <SplashAd />
       <PaddedContainer>
-        <Text style={custom.centerTitleSmall}>{user.firstName}</Text>
+        <View style={custom.headerContainer}>
+          <HealthSurvey />
+          <PalaceBet />
+        </View>
       </PaddedContainer>
+      <View style={custom.nameContainer}>
+        <Text style={custom.centerTitleSmall}>{user.firstName}</Text>
+      </View>
       <PaddedContainer>
-        <HealthSurvey />
         <Text style={custom.centerTitle}>Select Card</Text>
         {_.isEmpty(membershipCards) && (
           <Text style={custom.centerSubtitle}>

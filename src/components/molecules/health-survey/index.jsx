@@ -42,17 +42,15 @@ const HealthSurvey = () => {
 
   const SurveyViewContainer = ({ children }) => {
     return (
-      <View style={custom.surveyContainer}>
-        <TouchableOpacity style={custom.surveyButton} onPress={_handleHealthSurveyPress}>
-          {isLoading ? (
-            <View style={styles.loadingContainer}>
-              <LoadingComponent hasBackground={false} />
-            </View>
-          ) : (
-            children
-          )}
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={custom.headerButton} onPress={_handleHealthSurveyPress}>
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <LoadingComponent hasBackground={false} />
+          </View>
+        ) : (
+          children
+        )}
+      </TouchableOpacity>
     );
   };
 
@@ -62,24 +60,36 @@ const HealthSurvey = () => {
 
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
-      <Icon name="cube" size={25} />
-      <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>Planning on visiting?</Text>
-        <Text style={custom.surveySubText}>
-          Save time and take our health survey for quick access
-        </Text>
+      <Icon style={custom.healthIcon} name="file-medical" size={35} color={colors.primary} />
+      <View style={custom.headerContainerText}>
+        <Text style={custom.headerContainerTitle}>Health Survey</Text>
+        <Text style={custom.headerContainerSubTextHealth}>Submit online</Text>
       </View>
     </SurveyViewContainer>
   ) : (
     <SurveyViewContainer>
       {success ? (
-        <Icon type="font-awesome-5" name="check" color={colors.success} size={30} />
+        <Icon
+          style={custom.statusIcon}
+          type="font-awesome-5"
+          name="check"
+          color={colors.success}
+          size={35}
+        />
       ) : (
-        <Icon type="font-awesome-5" name="times" color={colors.danger} size={30} />
+        <Icon
+          style={custom.statusIcon}
+          type="font-awesome-5"
+          name="times"
+          color={colors.danger}
+          size={40}
+        />
       )}
-      <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>{success ? successTextTitle : failedTextTitle}</Text>
-        <Text style={custom.surveySubText}>
+      <View style={custom.headerContainerText}>
+        <Text style={custom.headerContainerTitle}>
+          {success ? successTextTitle : failedTextTitle}
+        </Text>
+        <Text style={custom.headerContainerSubText}>
           {success ? successTextSubTitle : failedTextSubTitle}
         </Text>
       </View>
