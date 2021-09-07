@@ -28,9 +28,9 @@ const PalaceBet = () => {
   return (
     <PalaceBetViewContainer>
       <Image source={palaceBetIcon} style={custom.palaceBetIcon} />
-      <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>PalaceBet</Text>
-        <Text style={custom.surveySubText}>Place your bets Online</Text>
+      <View style={custom.headerContainerText}>
+        <Text style={custom.headerContainerTitle}>PalaceBet</Text>
+        <Text style={custom.headerContainerSubText}>Place your bets online</Text>
       </View>
     </PalaceBetViewContainer>
   );

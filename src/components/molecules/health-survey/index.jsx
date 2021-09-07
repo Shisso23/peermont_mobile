@@ -61,9 +61,9 @@ const HealthSurvey = () => {
   return defaultHealthSurveyCard ? (
     <SurveyViewContainer>
       <Icon style={custom.healthIcon} name="file-medical" size={35} color={colors.primary} />
-      <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>Health Survey</Text>
-        <Text style={custom.surveySubText}>Submit Online</Text>
+      <View style={custom.headerContainerText}>
+        <Text style={custom.headerContainerTitle}>Health Survey</Text>
+        <Text style={custom.headerContainerSubTextHealth}>Submit online</Text>
       </View>
     </SurveyViewContainer>
   ) : (
@@ -85,9 +85,11 @@ const HealthSurvey = () => {
           size={40}
         />
       )}
-      <View style={custom.surveyText}>
-        <Text style={custom.surveyTitle}>{success ? successTextTitle : failedTextTitle}</Text>
-        <Text style={custom.surveySubText}>
+      <View style={custom.headerContainerText}>
+        <Text style={custom.headerContainerTitle}>
+          {success ? successTextTitle : failedTextTitle}
+        </Text>
+        <Text style={custom.headerContainerSubText}>
           {success ? successTextSubTitle : failedTextSubTitle}
         </Text>
       </View>
