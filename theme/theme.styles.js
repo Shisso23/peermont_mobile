@@ -46,18 +46,24 @@ export const custom = {
   disabledTouchable: {
     backgroundColor: colors.transparent,
   },
-  surveyText: {
+  headerContainerText: {
     marginLeft: 24,
   },
-  surveyTitle: {
+  headerContainerTitle: {
     fontSize: 18,
     fontFamily: 'OpenSans-Bold',
     color: colors.primary,
   },
-  surveySubText: {
+  headerContainerSubText: {
     fontSize: 12,
     fontFamily: 'OpenSans-Regular',
     color: colors.darkGrey,
+  },
+  headerContainerSubTextHealth: {
+    alignSelf: 'center',
+    color: colors.darkGrey,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 12,
   },
   headerButton: {
     alignItems: 'center',
@@ -97,13 +103,13 @@ export const custom = {
   },
   palaceBetIcon: {
     height: 32,
-    marginLeft: 10,
+    marginLeft: 5,
     marginRight: -10,
     width: 34,
   },
   healthIcon: {
-    marginLeft: 10,
-    marginRight: -18,
+    marginLeft: 5,
+    marginRight: -15,
     width: 34,
   },
   statusIcon: {
