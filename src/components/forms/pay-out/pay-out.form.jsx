@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { Button, Input, ListItem, Text } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +18,7 @@ import { membershipCardSelector } from '../../../reducers/membership-card-reduce
 
 const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
   const navigation = useNavigation();
-
+  const { hasQueuedPayouts } = useSelector((reducers) => reducers.paymentReducer);
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
   const { currentMembershipCard } = useSelector(membershipCardSelector);
 
@@ -47,11 +47,33 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
       .catch((error) => _handleFormSubmitError(error, actions, formData));
   };
 
+  const _payoutNotify = (formData, actions) => {
+    if (hasQueuedPayouts) {
+      Alert.alert(
+        'Payouts',
+        'You currently have one or more payouts queued, would you like to proceed',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => navigation.navigate('MembershipCardDetail'),
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => _handleSubmission(formData, actions),
+          },
+        ],
+      );
+    } else {
+      _handleSubmission();
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       initialStatus={{ apiErrors: {} }}
-      onSubmit={_handleSubmission}
+      onSubmit={_payoutNotify}
       validationSchema={validationSchema}
       enableReinitialize
     >
