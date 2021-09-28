@@ -8,4 +8,5 @@ export default {
   verifyOtp: (id) => `${apiUrl}/payments/${id}/verify_otp`,
   eftPaymentUrl: () => `${apiUrl}/instant_efts`,
   transactions: () => `${apiUrl}/payments/transaction_statements`,
+  hasQueuedPayoutsUrl: () => `${apiUrl}/payments/has_queued_payouts`,
 };

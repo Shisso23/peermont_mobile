@@ -24,6 +24,7 @@ import DailyTopUpLimitScreen from '../../screens/app/my-account/daily-top-up-lim
 import MyProfileScreen from '../../screens/app/profile/profile.screen';
 import UploadProfileDocumentsScreen from '../../screens/app/profile/add-profile-document/upload-profile-document.screen';
 import UpdateMobileOtpScreen from '../../screens/app/profile/update-mobile-otp/update-mobile-otp.screen';
+import UpdateMobileSelectCardScreen from '../../screens/app/profile/update-mobile-otp/update-mobile-select-card.screen';
 import TermsAndConditionsScreen from '../../screens/global/terms-and-conditions/terms-and-conditions.screen';
 import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-policy.screen';
 import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
@@ -95,6 +96,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="UpdateMobileOtp"
       component={UpdateMobileOtpScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="UpdateMobileSelectCard"
+      component={UpdateMobileSelectCardScreen}
       options={{ headerShown: true, title: '' }}
     />
     <AppStack.Screen

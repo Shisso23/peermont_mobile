@@ -4,6 +4,7 @@ import {
   userMembershipCardModel,
   membershipCardModel,
   apiMembershipCardModel,
+  apiMembershipCardModelPatronEnquiry,
 } from '../../../models';
 
 const _createAndReturnUserMembershipCardModel = (apiResponse) => {
@@ -69,10 +70,19 @@ const deleteMembershipCard = (id) => {
   });
 };
 
+const queryPatronEnquiry = (formData) => {
+  const membershipCardPatronEnquiryUrl = membershipCardUrls.membershipCardPatronEnquiryUrl();
+  const apiModel = apiMembershipCardModelPatronEnquiry(formData);
+  return authNetworkService.post(membershipCardPatronEnquiryUrl, apiModel).catch((error) => {
+    return Promise.reject(error);
+  });
+};
+
 export default {
   getMembershipCards,
   createMembershipCard,
   deleteMembershipCard,
   getMembershipCardBalance,
   getMembershipCardPoints,
+  queryPatronEnquiry,
 };

@@ -1,9 +1,11 @@
+import _ from 'lodash';
 import { paymentService } from '../../services';
 import {
   setPendingPaymentIdAction,
   setPaymentUriActionAction,
   setTransactionsAction,
   setIsLoadingAction,
+  setHasQueuedPayoutsAction,
 } from './payments.reducer';
 
 export const initiateTopUpAction = (topUpFormData) => {
@@ -117,5 +119,15 @@ export const getTransactions = () => {
       .getTransactions()
       .then((transactions) => dispatch(setTransactionsAction(transactions)))
       .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
+export const hasQueuedPayouts = (membershipCardId) => {
+  return (dispatch) => {
+    return paymentService
+      .getHasQueuedPayouts(membershipCardId)
+      .then((hasQueued) =>
+        dispatch(setHasQueuedPayoutsAction(_.get(hasQueued, 'has_queued_payouts'))),
+      );
   };
 };

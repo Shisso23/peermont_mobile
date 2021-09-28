@@ -14,7 +14,7 @@ import {
 import { updateSignInMobileNumberAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
-import { ModalLoader } from '../../../../components';
+import { LoadingComponent } from '../../../../components';
 import { custom } from '../../../../../theme/theme.styles';
 
 const UpdateMobileOtpScreen = () => {
@@ -22,7 +22,7 @@ const UpdateMobileOtpScreen = () => {
   const navigation = useNavigation();
   const { loading } = useSelector((reducer) => reducer.userReducer);
   const { params } = useRoute();
-  const unConfirmedMobileNumber = _.get(params, 'unconfirmedMobileNumber');
+  const unconfirmedMobileNumber = _.get(params, 'unconfirmedMobileNumberFromQuery');
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyUpdateMobileOtpAction(formData));
@@ -34,13 +34,13 @@ const UpdateMobileOtpScreen = () => {
 
   const _handleFormSuccess = () => {
     dispatch(getUserAction()).then(
-      dispatch(updateSignInMobileNumberAction(unConfirmedMobileNumber)).then(
+      dispatch(updateSignInMobileNumberAction(unconfirmedMobileNumber)).then(
         navigation.navigate('MyProfile'),
       ),
     );
   };
 
-  return (
+  return !loading ? (
     <KeyboardScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>One Time Pin</Text>
@@ -62,8 +62,9 @@ const UpdateMobileOtpScreen = () => {
           <Text style={custom.resendOtpStyle}>Resend OTP</Text>
         </TouchableOpacity>
       </PaddedContainer>
-      <ModalLoader isLoading={loading} />
     </KeyboardScrollContainer>
+  ) : (
+    <LoadingComponent />
   );
 };
 

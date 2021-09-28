@@ -9,6 +9,9 @@ const CountrySelect = ({ onChange, initialCountry }) => {
       withFlag
       withCallingCode
       withFilter
+      filterProps={{
+        placeholder: 'Enter country/region name',
+      }}
       countryCode={country}
       preferredCountries={['ZA']}
       onSelect={(c) => {
