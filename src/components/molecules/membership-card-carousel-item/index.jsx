@@ -8,11 +8,12 @@ import getCardType from '../../../helpers/getCardType';
 import { useMembershipCard } from '../../../hooks';
 import colors from '../../../../theme/theme.colors';
 
-const MembershipCardCarouselItem = ({ item, index }) => {
+const MembershipCardCarouselItem = ({ item, index, unconfirmedMobileNumber }) => {
   const { viewMembershipCard } = useMembershipCard();
-
   return (
-    <TouchableOpacity onPress={() => viewMembershipCard(_.get(item, 'id'), index)}>
+    <TouchableOpacity
+      onPress={() => viewMembershipCard(_.get(item, 'id'), index, unconfirmedMobileNumber)}
+    >
       <Image
         resizeMode="contain"
         style={styles.carouselImage}
@@ -40,6 +41,11 @@ const styles = StyleSheet.create({
 MembershipCardCarouselItem.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
+  unconfirmedMobileNumber: PropTypes.string,
+};
+
+MembershipCardCarouselItem.defaultProps = {
+  unconfirmedMobileNumber: '',
 };
 
 export default MembershipCardCarouselItem;

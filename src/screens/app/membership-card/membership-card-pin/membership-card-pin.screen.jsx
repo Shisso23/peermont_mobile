@@ -10,10 +10,10 @@ import { KeyboardScrollContainer, PaddedContainer } from '../../../../components
 import {
   getMembershipCardBalanceAction,
   rememberCardPin,
+  queryPatronEnquiryAction,
 } from '../../../../reducers/membership-card-reducer/membership-card.actions';
 import { membershipCardSelector } from '../../../../reducers/membership-card-reducer/membership-card.reducer';
 import { membershipCardPinModel } from '../../../../models';
-import HealthSurveyScreen from '../../health-survey/health-survey.screen';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 import { Modal } from '../../../../components/atoms';
 import colors from '../../../../../theme/theme.colors';
@@ -26,17 +26,36 @@ const MembershipCardPinScreen = () => {
   const formRef = useRef(null);
   const { currentMembershipCard, isLoading } = useSelector(membershipCardSelector);
 
+  const unconfirmedMobileNumber = _.get(route.params, 'unconfirmedMobileNumberForQuery');
+
   const _handleFormSubmission = (formData) => {
+    if (!_.isEmpty(unconfirmedMobileNumber)) {
+      return dispatch(
+        queryPatronEnquiryAction({
+          cardNumber: currentMembershipCard.cardNumber,
+          pin: formData.numeric,
+          unconfirmedMobileNumberForQuery: unconfirmedMobileNumber,
+        }),
+      );
+    }
+
     return dispatch(getMembershipCardBalanceAction(formData)).then(() => {});
   };
 
   const _handleFormSuccess = (formData) => {
-    const pin = _.get(formData, 'numeric');
-    dispatch(rememberCardPin(pin));
-    navigation.replace('MembershipCardDetail');
+    if (!_.isEmpty(unconfirmedMobileNumber)) {
+      navigation.navigate('UpdateMobileOtp', {
+        unconfirmedMobileNumberFromQuery: unconfirmedMobileNumber,
+      });
+    } else {
+      const pin = _.get(formData, 'numeric');
+      dispatch(rememberCardPin(pin));
+      navigation.replace('MembershipCardDetail');
+    }
   };
 
   const { cardPin = '' } = route.params;
+
   const initialValues = membershipCardPinModel({ card_pin: cardPin });
 
   useDisableBackButtonWhileLoading(isLoading);
@@ -79,8 +98,8 @@ const MembershipCardPinScreen = () => {
   );
 };
 
-HealthSurveyScreen.propTypes = {};
+MembershipCardPinScreen.propTypes = {};
 
-HealthSurveyScreen.defaultProps = {};
+MembershipCardPinScreen.defaultProps = {};
 
 export default MembershipCardPinScreen;

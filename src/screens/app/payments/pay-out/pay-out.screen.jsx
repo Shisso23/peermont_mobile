@@ -7,11 +7,15 @@ import _ from 'lodash';
 
 import { PayOutForm } from '../../../../components/forms';
 import { payOutModel } from '../../../../models';
-import { performPayoutAction } from '../../../../reducers/payments-reducer/payments.actions';
+import {
+  performPayoutAction,
+  hasQueuedPayouts,
+} from '../../../../reducers/payments-reducer/payments.actions';
 import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
 import { useDisableBackButtonWhileLoading, useRefreshHeaderButton } from '../../../../hooks';
 import { getBankAccountsAction } from '../../../../reducers/bank-account-reducer/bank-account.actions';
 import { paymentSelector } from '../../../../reducers/payments-reducer/payments.reducer';
+import { membershipCardSelector } from '../../../../reducers/membership-card-reducer/membership-card.reducer';
 import { custom } from '../../../../../theme/theme.styles';
 
 const PayOutScreen = () => {
@@ -19,6 +23,7 @@ const PayOutScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { isLoading } = useSelector(paymentSelector);
+  const { currentMembershipCard } = useSelector(membershipCardSelector);
   const initialBankAccountValues = payOutModel();
 
   const _handleSubmission = (formData) => {
@@ -43,6 +48,7 @@ const PayOutScreen = () => {
 
   useEffect(() => {
     _getBankAccounts();
+    dispatch(hasQueuedPayouts({ membership_card_id: currentMembershipCard.id }));
     Alert.alert(
       'Payouts',
       'Payouts may take up to 48 hours to process, not including weekends and public holidays.',

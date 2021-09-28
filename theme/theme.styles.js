@@ -34,6 +34,17 @@ export const custom = {
     marginTop: 0,
     marginBottom: 0,
   },
+  errorStyleCardPin: {
+    fontFamily: variables.fontFamily,
+    color: colors.danger,
+    fontSize: 15,
+    height: 100,
+    marginLeft: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    marginTop: 0,
+    marginBottom: 0,
+  },
   selectedItemStyle: {
     backgroundColor: colors.transparent,
   },

@@ -36,7 +36,7 @@ const NumericalInputForm = React.forwardRef(({ submitForm, onSuccess, initialVal
   };
 
   const _renderErrorMessage = (message) => (
-    <Text style={[custom.errorStyle, styles.errorStyle]}>{message}</Text>
+    <Text style={[custom.errorStyleCardPin, styles.errorStyle]}>{message}</Text>
   );
 
   return (
