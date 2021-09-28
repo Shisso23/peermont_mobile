@@ -92,7 +92,6 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
             />
             <Input
               ref={emailRef}
-              disabled
               value={values.mobileNumber}
               onChangeText={handleChange('mobileNumber')}
               keyboardType="phone-pad"
