@@ -63,8 +63,8 @@ export const getTransactions = () => {
 
 export const getHasQueuedPayouts = (membershipCardId) => {
   const HasQueuedPayoutsUrl = paymentUrls.hasQueuedPayoutsUrl();
-  const returnHasUnseen = (apiResponse) => _.get(apiResponse, 'data');
-  return authNetworkService.post(HasQueuedPayoutsUrl, membershipCardId).then(returnHasUnseen);
+  const returnHasQueued = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.post(HasQueuedPayoutsUrl, membershipCardId).then(returnHasQueued);
 };
 
 export default {

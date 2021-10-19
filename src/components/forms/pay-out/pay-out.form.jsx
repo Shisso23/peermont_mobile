@@ -65,7 +65,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
         ],
       );
     } else {
-      _handleSubmission();
+      _handleSubmission(formData, actions);
     }
   };
 
