@@ -37,8 +37,8 @@ export const custom = {
   errorStyleCardPin: {
     fontFamily: variables.fontFamily,
     color: colors.danger,
-    fontSize: 15,
-    height: 100,
+    fontSize: 16,
+    height: 150,
     marginLeft: 0,
     paddingTop: 0,
     paddingBottom: 0,
