@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   messageStyle: {
-    height: 20,
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 
