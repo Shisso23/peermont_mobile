@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { StatusBar, LogBox, Platform, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StatusBar, LogBox, Platform, ImageBackground, StyleSheet, Text } from 'react-native';
+import ProgressBar from 'react-native-progress/Bar';
 import { useDispatch } from 'react-redux';
 import RNBootSplash from 'react-native-bootsplash';
 import messaging from '@react-native-firebase/messaging';
@@ -18,10 +19,14 @@ import { AutoSignOut } from './components/atoms';
 import { useBiometricLogin, useAuthentication } from './hooks';
 import config from './config';
 
+const splashScreen = require('./assets/bootsplash_logo.png');
+
 const App = () => {
   const dispatch = useDispatch();
   const biometricLogin = useBiometricLogin();
   const { authenticate } = useAuthentication();
+  const [showCodePushDownload, setShowCodePushDownload] = useState(true);
+  const [showCodePushStatus, setShowCodePushStatus] = useState('');
 
   const _continueToApp = () => {
     dispatch(setIsAuthenticatedAction(true));
@@ -96,22 +101,26 @@ const App = () => {
         : config.appCenterAndroidStaging;
 
     codePush
-      .sync(
-        {
-          deploymentKey,
-          updateDialog: true,
-          installMode: codePush.InstallMode.IMMEDIATE,
-        },
-        (status) => {
-          switch (status) {
-            case codePush.SyncStatus.DOWNLOADING_PACKAGE:
-              Alert.alert('Downloading new update');
-              break;
-            default:
-              break;
-          }
-        },
-      )
+      .sync({ deploymentKey, installMode: codePush.InstallMode.IMMEDIATE }, (status) => {
+        switch (status) {
+          case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+            setShowCodePushDownload(true);
+            setShowCodePushStatus('Checking for update...');
+            break;
+          case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+            setShowCodePushStatus('Downloading update');
+            break;
+          case codePush.SyncStatus.INSTALLING_UPDATE:
+            setShowCodePushStatus('Installing update');
+            break;
+          case codePush.SyncStatus.UP_TO_DATE:
+            setShowCodePushStatus('App is up to date');
+            setShowCodePushDownload(false);
+            break;
+          default:
+            break;
+        }
+      })
       .then();
   };
 
@@ -150,6 +159,19 @@ const App = () => {
     });
   }, []);
 
+  if (showCodePushDownload) {
+    return (
+      <ImageBackground
+        resizeMode="contain"
+        source={splashScreen}
+        style={styles.backgroundImageSplashScreen}
+      >
+        <ProgressBar indeterminate style={styles.barProgressSplashScreen} color={colors.gold} />
+        <Text style={styles.textProgressSplashScreen}>{showCodePushStatus}</Text>
+      </ImageBackground>
+    );
+  }
+
   return (
     <>
       <AutoSignOut />
@@ -160,3 +182,22 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  backgroundImageSplashScreen: {
+    bottom: 5,
+    flex: 1,
+    margin: 35,
+  },
+  barProgressSplashScreen: {
+    alignSelf: 'center',
+    bottom: '20%',
+    position: 'absolute',
+    width: '60%',
+  },
+  textProgressSplashScreen: {
+    alignSelf: 'center',
+    bottom: '17%',
+    position: 'absolute',
+  },
+});
