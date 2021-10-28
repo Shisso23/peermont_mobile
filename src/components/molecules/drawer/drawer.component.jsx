@@ -65,7 +65,7 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
-          label="Mobile App Transactions"
+          label="Transactions"
           icon={() => <DrawerIcon name="history" />}
           onPress={() => navigation.navigate('Transactions')}
           labelStyle={styles.labelStyle}
@@ -77,7 +77,7 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
-          label="Visit PalaceBet"
+          label="PalaceBet"
           icon={() => (
             <Image source={palaceBetIcon} style={styles.palaceBetSize} width={22} height={21} />
           )}
@@ -85,7 +85,7 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
-          label="Terms And Conditions"
+          label="T&C’s"
           icon={() => <DrawerIcon name="file" />}
           onPress={() => navigation.navigate('TermsAndConditions')}
           labelStyle={styles.labelStyle}

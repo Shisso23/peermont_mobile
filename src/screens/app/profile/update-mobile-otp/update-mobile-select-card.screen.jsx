@@ -56,7 +56,6 @@ const UpdateMobileSelectCardScreen = () => {
             inactiveDotOpacity={0.4}
             inactiveDotScale={1}
           />
-          <Text style={custom.centerTitleSmall}>Select The Card You Changed Your Number On</Text>
         </View>
       </PaddedContainer>
     )
