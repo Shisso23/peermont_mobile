@@ -25,7 +25,7 @@ const App = () => {
   const dispatch = useDispatch();
   const biometricLogin = useBiometricLogin();
   const { authenticate } = useAuthentication();
-  const [showCodePushDownload, setShowCodePushDownload] = useState(true);
+  const [showCodePushDownload, setShowCodePushDownload] = useState(false);
   const [showCodePushStatus, setShowCodePushStatus] = useState('');
 
   const _continueToApp = () => {
@@ -100,28 +100,22 @@ const App = () => {
         ? config.appCenterAndroid
         : config.appCenterAndroidStaging;
 
-    codePush
-      .sync({ deploymentKey, installMode: codePush.InstallMode.IMMEDIATE }, (status) => {
-        switch (status) {
-          case codePush.SyncStatus.CHECKING_FOR_UPDATE:
-            setShowCodePushDownload(true);
-            setShowCodePushStatus('Checking for update...');
-            break;
-          case codePush.SyncStatus.DOWNLOADING_PACKAGE:
-            setShowCodePushStatus('Downloading update');
-            break;
-          case codePush.SyncStatus.INSTALLING_UPDATE:
-            setShowCodePushStatus('Installing update');
-            break;
-          case codePush.SyncStatus.UP_TO_DATE:
-            setShowCodePushStatus('App is up to date');
-            setShowCodePushDownload(false);
-            break;
-          default:
-            break;
-        }
-      })
-      .then();
+    codePush.sync({ deploymentKey, installMode: codePush.InstallMode.IMMEDIATE }, (status) => {
+      switch (status) {
+        case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+          setShowCodePushStatus('Downloading update');
+          setShowCodePushDownload(true);
+          break;
+        case codePush.SyncStatus.INSTALLING_UPDATE:
+          setShowCodePushStatus('Installing update');
+          break;
+        case codePush.SyncStatus.UP_TO_DATE:
+          setShowCodePushDownload(false);
+          break;
+        default:
+          break;
+      }
+    });
   };
 
   useEffect(() => {
@@ -159,20 +153,16 @@ const App = () => {
     });
   }, []);
 
-  if (showCodePushDownload) {
-    return (
-      <ImageBackground
-        resizeMode="contain"
-        source={splashScreen}
-        style={styles.backgroundImageSplashScreen}
-      >
-        <ProgressBar indeterminate style={styles.barProgressSplashScreen} color={colors.gold} />
-        <Text style={styles.textProgressSplashScreen}>{showCodePushStatus}</Text>
-      </ImageBackground>
-    );
-  }
-
-  return (
+  return showCodePushDownload ? (
+    <ImageBackground
+      resizeMode="contain"
+      source={splashScreen}
+      style={styles.backgroundImageSplashScreen}
+    >
+      <ProgressBar indeterminate style={styles.barProgressSplashScreen} color={colors.gold} />
+      <Text style={styles.textProgressSplashScreen}>{showCodePushStatus}</Text>
+    </ImageBackground>
+  ) : (
     <>
       <AutoSignOut />
       <StatusBar backgroundColor={colors.primary} />
