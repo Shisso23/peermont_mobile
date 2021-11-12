@@ -4,9 +4,11 @@ import { luhnChecksum } from '../../../helpers/credit-card.helper';
 const numberRegex = /^[0-9]+$/;
 
 export const emailSchema = Yup.string().email('Invalid Email').trim();
+
 export const mobileNumberSchema = Yup.string()
   .required('Mobile number is required')
   .min(10, 'Mobile Number must be atleast 10 characters');
+
 export const passwordSchema = Yup.string()
   .required('Password is required')
   .min(4, 'Minimum of 4 characters needed for password');
@@ -83,8 +85,8 @@ export const paymentAmountSchema = (availableBalance) =>
     .required('Amount is required')
     .typeError('Amount can only be a number');
 
-export const topupCreditCardIdSchema = Yup.string().when('isEft', {
-  is: false,
+export const topupCreditCardIdSchema = Yup.string().when(['isEft', 'isOzowEft'], {
+  is: (isEft, isOzowEft) => !isEft && !isOzowEft,
   then: Yup.string().required('Payment method required'),
 });
 

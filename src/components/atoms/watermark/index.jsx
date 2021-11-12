@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 
-const watermarkSource = require('../../../assets/images/watermark.png');
+import { watermarkSource } from '../../../assets';
 
 const Watermark = () => {
   return <Image source={watermarkSource} style={styles.watermark} />;

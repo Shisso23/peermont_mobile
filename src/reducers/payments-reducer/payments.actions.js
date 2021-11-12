@@ -13,7 +13,34 @@ export const initiateTopUpAction = (topUpFormData) => {
     if (topUpFormData.isEft) {
       return dispatch(eftTopUpAction(topUpFormData));
     }
+    if (topUpFormData.isOzowEft) {
+      return dispatch(ozowEftTopUpAction(topUpFormData));
+    }
     return dispatch(creditCardTopUpAction(topUpFormData));
+  };
+};
+
+const ozowEftTopUpAction = (topUpForm) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
+    const { currentMembershipCard } = getState().membershipCardReducer;
+    return paymentService
+      .createEft()
+      .then((eftPayableId) =>
+        paymentService.createPayment({
+          amount: topUpForm.amount,
+          membershipCardId: currentMembershipCard.id,
+          payableId: eftPayableId,
+          paymentType: 'eft_topup',
+          paymentProvider: 'Ozow',
+          payableType: 'InstantEft',
+        }),
+      )
+      .then((paymentId) => {
+        dispatch(setPendingPaymentIdAction(paymentId));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 
@@ -30,6 +57,7 @@ const eftTopUpAction = (topUpForm) => {
           membershipCardId: currentMembershipCard.id,
           payableId: eftPayableId,
           paymentType: 'eft_topup',
+          paymentProvider: 'Callpay',
           payableType: 'InstantEft',
         }),
       )
@@ -51,6 +79,7 @@ const creditCardTopUpAction = (topUpForm) => {
         membershipCardId: currentMembershipCard.id,
         payableId: topUpForm.creditCardId,
         paymentType: 'credit_card_topup',
+        paymentProvider: 'Callpay',
         payableType: 'CreditCard',
       })
       .then((paymentId) => {
