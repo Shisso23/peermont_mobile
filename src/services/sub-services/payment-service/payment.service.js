@@ -8,7 +8,9 @@ import {
   otpModel,
 } from '../../../models';
 
-const _extractAndReturnPaymentId = (apiResponse) => _.get(apiResponse, 'data.id');
+const _extractAndReturnPaymentId = (apiResponse) => {
+  return _.get(apiResponse, 'data.id');
+};
 
 const createPayment = (input) => {
   const url = paymentUrls.paymentUrl();

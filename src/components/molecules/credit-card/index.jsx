@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';
 import { deleteCreditCardAction } from '../../../reducers/credit-card-reducer/credit-card.actions';
 import { CreditCardStatus, TrashButton } from '../../atoms';
+import { creditCardPath } from '../../../assets';
 import { custom } from '../../../../theme/theme.styles';
-
-const creditCardPath = require('../../../assets/images/credit-card.png');
 
 const CreditCard = ({
   hasDelete,
@@ -19,6 +18,7 @@ const CreditCard = ({
   style,
   hasCheckBox,
   isCheckBoxSelected,
+  isTopupForm,
 }) => {
   const dispatch = useDispatch();
 
@@ -47,10 +47,19 @@ const CreditCard = ({
       disabled={disabled}
       disabledStyle={custom.disabledTouchable}
     >
-      <Avatar source={creditCardPath} imageProps={{ resizeMode: 'contain' }} size="medium" />
+      <Avatar
+        containerStyle={isTopupForm ? custom.avatarStyleCreditCard : null}
+        source={creditCardPath}
+        imageProps={{ resizeMode: 'contain' }}
+        size="medium"
+      />
       <ListItem.Content>
-        <ListItem.Title>{card.obfuscatedCardNumber}</ListItem.Title>
-        <ListItem.Subtitle>{card.cardType}</ListItem.Subtitle>
+        <ListItem.Title style={isTopupForm ? custom.textStyleCreditCard : null}>
+          {card.obfuscatedCardNumber}
+        </ListItem.Title>
+        <ListItem.Subtitle style={isTopupForm ? custom.textStyleCreditCard : null}>
+          {card.cardType}
+        </ListItem.Subtitle>
       </ListItem.Content>
       {card && (!hasCheckBox || disabled) && <CreditCardStatus status={card.status} />}
       {hasDelete && <TrashButton onPress={_handleDelete} loading={isDeleting} />}
@@ -67,6 +76,7 @@ CreditCard.propTypes = {
   style: ViewPropTypes.style,
   hasCheckBox: PropTypes.bool,
   isCheckBoxSelected: PropTypes.bool,
+  isTopupForm: PropTypes.bool,
 };
 
 CreditCard.defaultProps = {
@@ -76,6 +86,7 @@ CreditCard.defaultProps = {
   style: {},
   hasCheckBox: false,
   isCheckBoxSelected: false,
+  isTopupForm: false,
 };
 
 export default CreditCard;

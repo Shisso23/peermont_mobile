@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Input, Text, ListItem, CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import _ from 'lodash';
@@ -15,13 +14,14 @@ import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/cred
 import { LoadingComponent, CreditCard } from '../../molecules';
 import { CurrencyIcon, AddButton } from '../../atoms';
 import { getFormError } from '../form-utils';
+import { callPayLogo, ozowLogo } from '../../../assets';
 import { custom } from '../../../../theme/theme.styles';
-import colors from '../../../../theme/theme.colors';
 
 const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
   const { creditCards, isLoading } = useSelector((reducers) => reducers.creditCardReducer);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const validationSchema = Yup.object().shape({
     amount: paymentAmountSchema(Number.MAX_VALUE),
     creditCardId: topupCreditCardIdSchema,
@@ -91,7 +91,8 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
               !_.isEmpty(creditCards) ? (
                 <>
                   {creditCards.map((creditCard) => {
-                    const isSelected = values.creditCardId === creditCard.id && !values.isEft;
+                    const isSelected =
+                      values.creditCardId === creditCard.id && !values.isEft && !values.isOzowEft;
 
                     return (
                       <CreditCard
@@ -100,10 +101,12 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                         onPress={() => {
                           setFieldValue('creditCardId', creditCard.id);
                           setFieldValue('isEft', false);
+                          setFieldValue('isOzowEft', false);
                         }}
                         disabled={_.get(creditCard, 'status') !== 'verified'}
                         hasCheckBox={_.get(creditCard, 'status') === 'verified'}
                         isCheckBoxSelected={isSelected}
+                        isTopupForm
                       />
                     );
                   })}
@@ -121,13 +124,37 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
             ) : (
               <LoadingComponent />
             )}
-            <ListItem bottomDivider onPress={() => setFieldValue('isEft', true)}>
-              <Icon name="money-bill" size={40} color={colors.primary} />
+
+            <ListItem
+              bottomDivider
+              onPress={() => {
+                setFieldValue('isOzowEft', false);
+                setFieldValue('isEft', true);
+                setFieldValue('creditCardId', undefined);
+              }}
+            >
+              <Image source={callPayLogo} style={custom.paymentProviderIcon} />
               <ListItem.Content>
                 <ListItem.Title>Instant EFT</ListItem.Title>
               </ListItem.Content>
               <CheckBox checked={values.isEft} disabled />
             </ListItem>
+
+            <ListItem
+              bottomDivider
+              onPress={() => {
+                setFieldValue('isOzowEft', true);
+                setFieldValue('isEft', false);
+                setFieldValue('creditCardId', undefined);
+              }}
+            >
+              <Image source={ozowLogo} style={custom.paymentProviderIcon} />
+              <ListItem.Content>
+                <ListItem.Title>Instant EFT</ListItem.Title>
+              </ListItem.Content>
+              <CheckBox checked={values.isOzowEft} disabled />
+            </ListItem>
+
             <Text style={[custom.errorStyle, styles.errorStyle]}> {error('creditCardId')}</Text>
             <PaddedContainer>
               <Button title="Next" onPress={handleSubmit} loading={isSubmitting} />

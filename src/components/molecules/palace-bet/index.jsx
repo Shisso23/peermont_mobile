@@ -4,9 +4,8 @@ import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 import appConfig from '../../../config';
+import { palaceBetIconBlue } from '../../../assets';
 import { custom } from '../../../../theme/theme.styles';
-
-const palaceBetIcon = require('../../../assets/images/palace-bet-blue.png');
 
 const PalaceBet = () => {
   const onPalaceBetPress = () => {
@@ -27,7 +26,7 @@ const PalaceBet = () => {
 
   return (
     <PalaceBetViewContainer>
-      <Image source={palaceBetIcon} style={custom.palaceBetIcon} />
+      <Image source={palaceBetIconBlue} style={custom.palaceBetIcon} />
       <View style={custom.headerContainerText}>
         <Text style={custom.headerContainerTitle}>PalaceBet</Text>
         <Text style={custom.headerContainerSubText}>Place your bets online</Text>

@@ -127,6 +127,17 @@ export const custom = {
     marginLeft: 10,
     marginRight: -10,
   },
+  paymentProviderIcon: {
+    height: 25,
+    width: 90,
+  },
+  avatarStyleCreditCard: {
+    marginLeft: 20,
+  },
+  textStyleCreditCard: {
+    fontSize: 16,
+    paddingLeft: 20,
+  },
 };
 
 export const globalScreenOptions = {

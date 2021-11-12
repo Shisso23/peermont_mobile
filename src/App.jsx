@@ -16,10 +16,9 @@ import { hasIncomingNotification } from './reducers/notification-reducer/notific
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
 import { loadAppDataAction } from './reducers/app-reducer/app.actions';
 import { AutoSignOut } from './components/atoms';
+import { splashScreen } from './assets';
 import { useBiometricLogin, useAuthentication } from './hooks';
 import config from './config';
-
-const splashScreen = require('./assets/bootsplash_logo.png');
 
 const App = () => {
   const dispatch = useDispatch();

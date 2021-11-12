@@ -13,9 +13,8 @@ import { signOutAction } from '../../../reducers/user-auth-reducer/user-auth.act
 import DrawerIcon from './drawer-icon';
 import appConfig from '../../../config';
 import colors from '../../../../theme/theme.colors';
+import { palaceBetIcon } from '../../../assets';
 import variables from '../../../../theme/theme.variables';
-
-const palaceBetIcon = require('../../../assets/images/palace-bet.png');
 
 const DrawerComponent = (props) => {
   const [codePushVersion, setCodePushVersion] = useState();

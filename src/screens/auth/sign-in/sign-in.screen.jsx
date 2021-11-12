@@ -13,10 +13,9 @@ import { setIsAuthenticatedAction } from '../../../reducers/user-auth-reducer/us
 import { signInAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { loadAppDataForSignedInUserAction } from '../../../reducers/app-reducer/app.actions';
 import { useBiometricLogin, useAuthentication } from '../../../hooks';
+import { imageUri } from '../../../assets';
 import { custom } from '../../../../theme/theme.styles';
 import { flashService } from '../../../services';
-
-const imageUri = require('../../../assets/images/header-alt.png');
 
 const SignInScreen = () => {
   const dispatch = useDispatch();
