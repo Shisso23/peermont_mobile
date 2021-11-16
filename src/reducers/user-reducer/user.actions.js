@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { setUserAction, setLoadingAction } from './user.reducer';
-import { firebaseService, userService, pushKitService } from '../../services';
+import { firebaseService, userService, pushKitService, appService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
 import { setBankAccountsAction } from '../bank-account-reducer/bank-account.reducer';
@@ -38,18 +38,44 @@ export const userUpdateProfileAction = (formData) => {
   };
 };
 
-export const updateFirebaseToken = () => {
-  return () => {
-    return firebaseService.getAndSetToken().then((firebaseToken) => {
-      return userService.updateUserProfile({ firebaseToken, pushKitToken: null });
+export const updateAppDetails = () => {
+  return async () => {
+    const firebaseToken = await firebaseService.getAndSetToken();
+    const currentAppVersion = await appService.getAppVersion();
+    const currentCodePushAppVersion = await appService.getCodePushAppVersion();
+
+    return userService.updateUserProfile({
+      firebaseToken,
+      pushKitToken: null,
+      appVersion: currentAppVersion,
+      codePushAppVersion: currentCodePushAppVersion,
     });
   };
 };
 
-export const updatePushKitToken = () => {
-  return () => {
-    return pushKitService.getAndSetToken().then((pushKitToken) => {
-      return userService.updateUserProfile({ pushKitToken, firebaseToken: null });
+export const updateAppDetailsHuawei = () => {
+  return async () => {
+    const pushKitToken = await pushKitService.getAndSetToken();
+    const currentAppVersion = await appService.getAppVersion();
+    const currentCodePushAppVersion = await appService.getCodePushAppVersion();
+
+    return userService.updateUserProfile({
+      firebaseToken: null,
+      pushKitToken,
+      appVersion: currentAppVersion,
+      codePushAppVersion: currentCodePushAppVersion,
+    });
+  };
+};
+
+export const updateAppVersion = () => {
+  return async () => {
+    const currentAppVersion = await appService.getAppVersion();
+    const currentCodePushAppVersion = await appService.getCodePushAppVersion();
+
+    return userService.updateUserProfile({
+      appVersion: currentAppVersion,
+      codePushAppVersion: currentCodePushAppVersion,
     });
   };
 };
