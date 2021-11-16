@@ -9,7 +9,11 @@ import {
   setSignInFormDataAction,
   setIsLoadingAction,
 } from './user-auth.reducer';
-import { updateFirebaseToken, updatePushKitToken } from '../user-reducer/user.actions';
+import {
+  updateAppDetails,
+  updateAppDetailsHuawei,
+  updateAppVersion,
+} from '../user-reducer/user.actions';
 import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const signInAction = (formData) => {
@@ -19,7 +23,7 @@ export const signInAction = (formData) => {
         .signIn(formData)
         .then(() => storageService.storeSignInForm(formData))
         .then(() => dispatch(setSignInFormDataAction(formData)))
-        .then(() => (hasHms ? dispatch(updatePushKitToken()) : dispatch(updateFirebaseToken())));
+        .then(() => (hasHms ? dispatch(updateAppDetailsHuawei()) : dispatch(updateAppDetails())));
     });
   };
 };
@@ -47,6 +51,7 @@ export const loadSignInFormFromStorage = () => {
     return storageService.getSignInForm().then((signInForm) => {
       if (signInForm) {
         dispatch(setSignInFormDataAction(signInForm));
+        dispatch(updateAppVersion());
       }
     });
   };
@@ -65,7 +70,8 @@ export const signInWithBiometricsAction = (signature) => {
     return userAuthService
       .signIn(formData)
       .then(() => storageService.storeSignInForm(formData))
-      .then(() => dispatch(setSignInFormDataAction(formData)));
+      .then(() => dispatch(setSignInFormDataAction(formData)))
+      .then(() => dispatch(updateAppVersion()));
   };
 };
 
