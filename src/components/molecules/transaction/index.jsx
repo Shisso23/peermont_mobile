@@ -16,6 +16,7 @@ const Transaction = ({ transaction }) => {
     return creditCard;
   };
 
+  const paymentProvider = _.get(transaction, 'payment_provider');
   const payableType = _.startCase(_.get(transaction, 'payable_type'));
   const updatedAt = Moment(_.get(transaction, 'updated_at')).format('YYYY/MM/DD, HH:MM');
   const payable = getPayableNumber(transaction);
@@ -25,7 +26,7 @@ const Transaction = ({ transaction }) => {
   return (
     <ListItem key={_.get(transaction, 'id')} bottomDivider>
       <ListItem.Content>
-        <ListItem.Title>{payableType}</ListItem.Title>
+        <ListItem.Title>{`${paymentProvider} ${payableType}`}</ListItem.Title>
         <ListItem.Subtitle>{updatedAt}</ListItem.Subtitle>
         {payable && <ListItem.Subtitle>{payable}</ListItem.Subtitle>}
       </ListItem.Content>
