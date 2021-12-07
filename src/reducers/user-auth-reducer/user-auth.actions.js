@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import DeviceInfo from 'react-native-device-info';
 
-import { userAuthService, encryptionService, storageService } from '../../services';
+import { userAuthService, encryptionService, storageService, appService } from '../../services';
 import {
   setIsAuthenticatedAction,
   setTemporaryTokenAction,
@@ -94,12 +94,20 @@ export const createUserBiometricKey = (publicKey) => {
 // Register
 // ==========================================================
 export const registerAction = ({ formData }) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(setIsLoadingAction(true));
+    const deviceInfo = await appService.getDeviceInfo();
 
     const _storeTemporaryToken = (token) => dispatch(setTemporaryTokenAction(token));
     const _getTemporaryToken = (encryptedPin) =>
-      userAuthService.register({ encryptedPin, cardNumber: formData.cardNumber });
+      userAuthService.register({
+        encryptedPin,
+        cardNumber: formData.cardNumber,
+        manufacturer: deviceInfo.manufacturer,
+        device_os: deviceInfo.device_os,
+        os_version: deviceInfo.os_version,
+        device_model: deviceInfo.device_model,
+      });
 
     return Promise.resolve(formData.pin)
       .then((pin) => encryptionService.encryptPin(formData.cardNumber, pin))
