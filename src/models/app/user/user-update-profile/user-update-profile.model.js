@@ -8,6 +8,10 @@ export const userUpdateProfileModel = (_profileUpdateModel = {}) => ({
     pushkit_registration_token: _.get(_profileUpdateModel, 'pushKitToken', undefined),
     app_version: _.get(_profileUpdateModel, 'appVersion', undefined),
     code_push_version: _.get(_profileUpdateModel, 'codePushAppVersion', undefined),
+    manufacturer: _.get(_profileUpdateModel, 'manufacturer', undefined),
+    device_os: _.get(_profileUpdateModel, 'device_os', undefined),
+    os_version: _.get(_profileUpdateModel, 'os_version', undefined),
+    device_model: _.get(_profileUpdateModel, 'device_model', undefined),
   },
 });
 
