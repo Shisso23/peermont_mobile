@@ -1,5 +1,5 @@
 import codePush from 'react-native-code-push';
-import { getVersion } from 'react-native-device-info';
+import DeviceInfo, { getVersion } from 'react-native-device-info';
 import _ from 'lodash';
 
 import authNetworkService from '../auth-network-service/auth-network.service';
@@ -53,9 +53,28 @@ const getAppVersion = async () => {
   return appVersion;
 };
 
+const getDeviceInfo = async () => {
+  const deviceInfo = {};
+
+  await DeviceInfo.hasHms()
+    .then((hasHms) => {
+      deviceInfo.device_os = hasHms ? 'Harmony' : DeviceInfo.getSystemName();
+    })
+    .then(
+      DeviceInfo.getManufacturer().then((manufacturer) => {
+        deviceInfo.manufacturer = manufacturer;
+        deviceInfo.os_version = DeviceInfo.getSystemVersion();
+        deviceInfo.device_model = DeviceInfo.getModel();
+      }),
+    );
+
+  return deviceInfo;
+};
+
 export default {
   getAndroidVersion,
   getIOSVersion,
   getCodePushAppVersion,
   getAppVersion,
+  getDeviceInfo,
 };

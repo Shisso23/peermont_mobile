@@ -43,12 +43,17 @@ export const updateAppDetails = () => {
     const firebaseToken = await firebaseService.getAndSetToken();
     const currentAppVersion = await appService.getAppVersion();
     const currentCodePushAppVersion = await appService.getCodePushAppVersion();
+    const deviceInfo = await appService.getDeviceInfo();
 
     return userService.updateUserProfile({
       firebaseToken,
       pushKitToken: null,
       appVersion: currentAppVersion,
       codePushAppVersion: currentCodePushAppVersion,
+      manufacturer: deviceInfo.manufacturer,
+      device_os: deviceInfo.device_os,
+      os_version: deviceInfo.os_version,
+      device_model: deviceInfo.device_model,
     });
   };
 };
@@ -58,12 +63,17 @@ export const updateAppDetailsHuawei = () => {
     const pushKitToken = await pushKitService.getAndSetToken();
     const currentAppVersion = await appService.getAppVersion();
     const currentCodePushAppVersion = await appService.getCodePushAppVersion();
+    const deviceInfo = await appService.getDeviceInfo();
 
     return userService.updateUserProfile({
       firebaseToken: null,
       pushKitToken,
       appVersion: currentAppVersion,
       codePushAppVersion: currentCodePushAppVersion,
+      manufacturer: deviceInfo.manufacturer,
+      device_os: deviceInfo.device_os,
+      os_version: deviceInfo.os_version,
+      device_model: deviceInfo.device_model,
     });
   };
 };
@@ -72,10 +82,15 @@ export const updateAppVersion = () => {
   return async () => {
     const currentAppVersion = await appService.getAppVersion();
     const currentCodePushAppVersion = await appService.getCodePushAppVersion();
+    const deviceInfo = await appService.getDeviceInfo();
 
     return userService.updateUserProfile({
       appVersion: currentAppVersion,
       codePushAppVersion: currentCodePushAppVersion,
+      manufacturer: deviceInfo.manufacturer,
+      device_os: deviceInfo.device_os,
+      os_version: deviceInfo.os_version,
+      device_model: deviceInfo.device_model,
     });
   };
 };
