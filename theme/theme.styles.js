@@ -138,6 +138,62 @@ export const custom = {
     fontSize: 16,
     paddingLeft: 20,
   },
+  bottomRegistration: {
+    bottom: -400,
+  },
+  hitSlop: {
+    top: 10,
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+  modalCenterSubtitle: {
+    fontSize: 16,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  modalCenterTitle: {
+    color: colors.gold,
+    fontFamily: variables.fontFamilySecondary,
+    fontSize: 20,
+    marginBottom: 5,
+    marginTop: -10,
+    textAlign: 'center',
+  },
+  centeredView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 22,
+  },
+  closeIconContainer: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderRadius: 30,
+    height: 30,
+    justifyContent: 'center',
+    margin: 20,
+    marginHorizontal: 10,
+    position: 'absolute',
+    right: 0,
+    top: -10,
+    width: 30,
+    zIndex: 1,
+  },
+  modalButton: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderColor: colors.gold,
+    borderRadius: 10,
+    borderWidth: 1.5,
+    height: 50,
+    justifyContent: 'center',
+    width: 280,
+  },
+  modalButtonText: {
+    fontFamily: variables.fontFamilyPrimary,
+    fontSize: 20,
+  },
 };
 
 export const globalScreenOptions = {

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ListItem, Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import _ from 'lodash';
 
+import { OtpNumericInput } from '../../../components/molecules';
 import { ProfileForm } from '../../../components/forms';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
 import {
@@ -19,6 +20,8 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { user, loading } = useSelector((reducers) => reducers.userReducer);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const initialValues = _.pick(user, [
     'mobileNumber',
@@ -38,7 +41,14 @@ const ProfileScreen = () => {
 
     if (!_.isNull(unconfirmedMobileNumber)) {
       navigation.navigate('UpdateMobileSelectCard', { unconfirmedMobileNumber });
+    } else {
+      setUserData(data);
+      setShowOtpModal(true);
     }
+  };
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
   };
 
   const _handleUploadProfileDocument = () => navigation.navigate('UploadProfileDocument');
@@ -110,6 +120,12 @@ const ProfileScreen = () => {
         </View>
         <RenderDocuments />
       </PaddedContainer>
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        userData={userData}
+        verificationType="UPDATE_MOBILE_NUMBER"
+      />
     </KeyboardScrollContainer>
   ) : (
     <LoadingComponent />

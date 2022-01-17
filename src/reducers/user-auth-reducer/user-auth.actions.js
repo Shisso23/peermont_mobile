@@ -8,6 +8,7 @@ import {
   setResetPasswordFormDataAction,
   setSignInFormDataAction,
   setIsLoadingAction,
+  setUnconfirmedEmailAction,
 } from './user-auth.reducer';
 import {
   updateAppDetails,
@@ -141,10 +142,24 @@ export const verifyRegisterOtpAction = (formData) => {
 export const setPasswordAction = (formData) => {
   return (dispatch, getState) => {
     dispatch(setIsLoadingAction(true));
+    const _storeTemporaryToken = (token) => dispatch(setTemporaryTokenAction(token));
 
     const { token } = getState().userAuthReducer;
     return userAuthService
       .setPassword(formData, token)
+      .then(_storeTemporaryToken)
+      .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
+export const registerEmailAction = (formData) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
+    const { token } = getState().userAuthReducer;
+    return userAuthService
+      .setEmail(formData, token)
+      .then(dispatch(setUnconfirmedEmailAction(formData.unconfirmed_email)))
       .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };

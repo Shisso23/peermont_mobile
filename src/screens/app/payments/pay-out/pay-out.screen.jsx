@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import _ from 'lodash';
 
+import { OtpNumericInput } from '../../../../components/molecules';
 import { PayOutForm } from '../../../../components/forms';
 import { payOutModel } from '../../../../models';
 import {
@@ -20,20 +21,18 @@ import { custom } from '../../../../../theme/theme.styles';
 
 const PayOutScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const route = useRoute();
   const { isLoading } = useSelector(paymentSelector);
   const { currentMembershipCard } = useSelector(membershipCardSelector);
   const initialBankAccountValues = payOutModel();
+  const [showOtpModal, setShowOtpModal] = useState(false);
 
   const _handleSubmission = (formData) => {
     return dispatch(performPayoutAction(formData));
   };
 
   const _handleSuccess = () => {
-    navigation.replace('PaymentOtp', {
-      afterOtpRoute: 'PayOutComplete',
-    });
+    setShowOtpModal(true);
   };
 
   useDisableBackButtonWhileLoading(isLoading);
@@ -45,6 +44,10 @@ const PayOutScreen = () => {
   useRefreshHeaderButton(() => {
     _getBankAccounts();
   }, isLoading);
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
+  };
 
   useEffect(() => {
     _getBankAccounts();
@@ -71,6 +74,12 @@ const PayOutScreen = () => {
         initialValues={initialBankAccountValues}
         submitForm={_handleSubmission}
         onSuccess={_handleSuccess}
+      />
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        afterOtpRoute="PayOutComplete"
+        verificationType="PAYMENT"
       />
     </KeyboardScrollContainer>
   );

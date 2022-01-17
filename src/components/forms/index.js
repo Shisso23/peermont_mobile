@@ -12,3 +12,4 @@ export { default as TopUpForm } from './top-up/top-up.form';
 export { default as PayOutForm } from './pay-out/pay-out.form';
 export { default as ProfileForm } from './profile-form/profile.form';
 export { default as UploadProfileDocumentsForm } from './profile-form/upload-profile-documents.form';
+export { default as RegisterEmailForm } from './register-email/register-email.form';

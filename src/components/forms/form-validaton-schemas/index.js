@@ -5,6 +5,11 @@ const numberRegex = /^[0-9]+$/;
 
 export const emailSchema = Yup.string().email('Invalid Email').trim();
 
+export const registerEmailSchema = Yup.string()
+  .required('Email is required')
+  .email('Invalid Email')
+  .trim();
+
 export const mobileNumberSchema = Yup.string()
   .required('Mobile number is required')
   .min(10, 'Mobile Number must be atleast 10 characters');

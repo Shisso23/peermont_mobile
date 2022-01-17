@@ -117,9 +117,22 @@ export const verifyUpdateMobileOtpAction = (formData) => {
   };
 };
 
+export const verifyUpdateEmailOtpAction = (formData) => {
+  return (dispatch) => {
+    dispatch(setLoadingAction(true));
+    return userService.verifyUpdateEmail(formData).finally(() => dispatch(setLoadingAction(false)));
+  };
+};
+
 export const resendUpdateMobileOtpAction = () => {
   return () => {
     return userService.resendUpdateMobileOtpAction();
+  };
+};
+
+export const sendUserEmailOtpAction = () => {
+  return () => {
+    return userService.sendEmailOtpAction();
   };
 };
 
