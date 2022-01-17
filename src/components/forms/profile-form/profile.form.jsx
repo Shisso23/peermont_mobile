@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Keyboard } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -13,7 +13,8 @@ import { CountrySelect } from '../../atoms';
 import { infoPopUpService } from '../../../services';
 
 const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
-  const emailRef = useRef(null);
+  const [disableMobileEdit, setDisableMobileEdit] = useState(false);
+  const [disableEmailEdit, setDisableEmailEdit] = useState(false);
 
   const validationSchema = Yup.object().shape({
     mobileNumber: mobileNumberSchema,
@@ -44,6 +45,14 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
     const mobileNumFormated = initialValues.mobileNumber.toString().replace(/[0-9]{2}/, '0');
     initialValues.mobileNumber = mobileNumFormated;
   }
+
+  const _disableMobileEdit = () => {
+    setDisableMobileEdit(true);
+  };
+
+  const _disableEmailEdit = () => {
+    setDisableEmailEdit(true);
+  };
 
   return (
     <Formik
@@ -76,7 +85,9 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
               label="Email"
               errorMessage={error('email')}
               autoCapitalize="none"
-              onSubmitEditing={() => emailRef.current.focus()}
+              onSubmitEditing={handleSubmit}
+              onEndEditing={_disableMobileEdit}
+              disabled={disableEmailEdit}
               leftIcon={() => <Icon name="email" size={30} color="black" />}
               rightIcon={() => (
                 <Icon
@@ -91,7 +102,6 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
               )}
             />
             <Input
-              ref={emailRef}
               value={values.mobileNumber}
               onChangeText={handleChange('mobileNumber')}
               keyboardType="phone-pad"
@@ -100,6 +110,8 @@ const ProfileForm = ({ submitForm, onSuccess, initialValues }) => {
               errorMessage={error('mobileNumber')}
               onSubmitEditing={handleSubmit}
               maxLength={10}
+              onEndEditing={_disableEmailEdit}
+              disabled={disableMobileEdit}
               leftIcon={() => (
                 <CountrySelect
                   initialCountry={values.country}

@@ -3,7 +3,7 @@ import _ from 'lodash';
 export const userUpdateProfileModel = (_profileUpdateModel = {}) => ({
   user: {
     unconfirmed_mobile_number: _.get(_profileUpdateModel, 'mobileNumber', undefined),
-    email: _.get(_profileUpdateModel, 'email', undefined),
+    unconfirmed_email: _.get(_profileUpdateModel, 'email', undefined),
     fcm_registration_token: _.get(_profileUpdateModel, 'firebaseToken', undefined),
     pushkit_registration_token: _.get(_profileUpdateModel, 'pushKitToken', undefined),
     app_version: _.get(_profileUpdateModel, 'appVersion', undefined),

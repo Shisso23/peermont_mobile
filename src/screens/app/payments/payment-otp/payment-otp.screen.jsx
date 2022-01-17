@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Text, Divider } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import {
-  sendPaymentOtpAction,
-  verifyPaymentOtpAction,
-} from '../../../../reducers/payments-reducer/payments.actions';
+import { verifyPaymentOtpAction } from '../../../../reducers/payments-reducer/payments.actions';
 import { paymentSelector } from '../../../../reducers/payments-reducer/payments.reducer';
 import { NumericalInputForm } from '../../../../components/forms';
 import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
 import { ModalLoader } from '../../../../components';
+import { OtpMethodModal } from '../../../../components/atoms';
 
 const PaymentOtpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   const { isLoading } = useSelector(paymentSelector);
+  const [showOtpMethodsModal, setShowOtpMethodsModal] = useState(false);
 
   const _handleFormSubmission = (formData) => {
     return dispatch(verifyPaymentOtpAction(formData));
@@ -31,7 +30,11 @@ const PaymentOtpScreen = () => {
   };
 
   const _handleResendOtp = () => {
-    return dispatch(sendPaymentOtpAction(''));
+    setShowOtpMethodsModal(true);
+  };
+
+  const _closeModal = (value) => {
+    setShowOtpMethodsModal(value);
   };
 
   return (
@@ -56,6 +59,7 @@ const PaymentOtpScreen = () => {
           <Text style={custom.resendOtpStyle}>Resend OTP</Text>
         </TouchableOpacity>
       </PaddedContainer>
+      <OtpMethodModal visible={showOtpMethodsModal} setModalVisible={_closeModal} />
       <ModalLoader isLoading={isLoading} />
     </KeyboardScrollContainer>
   );

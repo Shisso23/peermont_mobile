@@ -24,4 +24,5 @@ export const userModel = (_userModel = {}) => ({
   country: _.get(_userModel, 'country', 'ZA'),
   dailyTopUpLimit: _.get(_userModel, 'daily_top_up_limit', 0),
   unconfirmedDailyTopUpLimit: _.get(_userModel, 'unconfirmed_daily_top_up_limit', 0),
+  emailConfirmed: _.get(_userModel, 'email_confirmed', false),
 });

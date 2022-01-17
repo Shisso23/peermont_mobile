@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import _ from 'lodash';
 
+import { OtpNumericInput } from '../../../../components/molecules';
 import { TopUpForm } from '../../../../components/forms';
 import { PaddedContainer, KeyboardScrollContainer } from '../../../../components/containers';
 import { getCreditCardsAction } from '../../../../reducers/credit-card-reducer/credit-card.actions';
@@ -15,15 +16,13 @@ import { custom } from '../../../../../theme/theme.styles';
 
 const TopUpScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const route = useRoute();
   const { isLoading } = useSelector(paymentSelector);
   const dailyTopUpLimitLeft = _.get(route, 'params.dailyTopUpLimitLeft');
+  const [showOtpModal, setShowOtpModal] = useState(false);
 
   const _handleFormSuccess = () => {
-    navigation.replace('PaymentOtp', {
-      afterOtpRoute: 'TopUpComplete',
-    });
+    setShowOtpModal(true);
   };
 
   const _handleFormSubmit = (formData) => {
@@ -35,6 +34,10 @@ const TopUpScreen = () => {
   useRefreshHeaderButton(() => {
     dispatch(getCreditCardsAction());
   }, isLoading);
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
+  };
 
   return (
     <KeyboardScrollContainer>
@@ -54,6 +57,12 @@ const TopUpScreen = () => {
         initialValues={topUpModel()}
         onSuccess={_handleFormSuccess}
         submitForm={_handleFormSubmit}
+      />
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        afterOtpRoute="TopUpComplete"
+        verificationType="PAYMENT"
       />
     </KeyboardScrollContainer>
   );

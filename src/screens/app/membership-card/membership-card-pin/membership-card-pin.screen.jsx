@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native-elements';
 import { ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import { membershipCardSelector } from '../../../../reducers/membership-card-red
 import { membershipCardPinModel } from '../../../../models';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
 import { Modal } from '../../../../components/atoms';
+import { OtpNumericInput } from '../../../../components/molecules';
 import colors from '../../../../../theme/theme.colors';
 import { custom } from '../../../../../theme/theme.styles';
 
@@ -25,6 +26,11 @@ const MembershipCardPinScreen = () => {
   const route = useRoute();
   const formRef = useRef(null);
   const { currentMembershipCard, isLoading } = useSelector(membershipCardSelector);
+
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const userData = {
+    unconfirmed_mobile_number: _.get(route.params, 'unconfirmedMobileNumberForQuery'),
+  };
 
   const unconfirmedMobileNumber = _.get(route.params, 'unconfirmedMobileNumberForQuery');
 
@@ -44,9 +50,7 @@ const MembershipCardPinScreen = () => {
 
   const _handleFormSuccess = (formData) => {
     if (!_.isEmpty(unconfirmedMobileNumber)) {
-      navigation.navigate('UpdateMobileOtp', {
-        unconfirmedMobileNumberFromQuery: unconfirmedMobileNumber,
-      });
+      setShowOtpModal(true);
     } else {
       const pin = _.get(formData, 'numeric');
       dispatch(rememberCardPin(pin));
@@ -59,6 +63,10 @@ const MembershipCardPinScreen = () => {
   const initialValues = membershipCardPinModel({ card_pin: cardPin });
 
   useDisableBackButtonWhileLoading(isLoading);
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
+  };
 
   useEffect(() => {
     const { current } = formRef;
@@ -94,6 +102,12 @@ const MembershipCardPinScreen = () => {
           <ActivityIndicator animating size="large" color={colors.gold} />
         </View>
       </Modal>
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        userData={userData}
+        verificationType="UPDATE_MOBILE_NUMBER"
+      />
     </KeyboardScrollContainer>
   );
 };
