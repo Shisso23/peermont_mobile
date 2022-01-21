@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Text, ListItem, Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ import {
   BiometricSettings,
   PushNotificationSettings,
   SmsSettings,
+  OtpAutofillSetting,
 } from '../../../components/molecules';
 import { getUserAction } from '../../../reducers/user-reducer/user.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
@@ -138,24 +139,10 @@ const MyAccountScreen = () => {
 
   const RenderSettings = () => (
     <>
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h4>Biometric Login</Text>
-          <BiometricSettings />
-        </View>
-      </PaddedContainer>
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h4>Push Notifications</Text>
-          <PushNotificationSettings />
-        </View>
-      </PaddedContainer>
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h4>SMS Notifications</Text>
-          <SmsSettings />
-        </View>
-      </PaddedContainer>
+      <BiometricSettings />
+      <PushNotificationSettings />
+      <SmsSettings />
+      {Platform.OS === 'android' ? <OtpAutofillSetting /> : null}
     </>
   );
 

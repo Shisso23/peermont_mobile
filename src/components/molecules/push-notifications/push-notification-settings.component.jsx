@@ -1,17 +1,16 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
 
 import { notificationSettingUpdateAction } from '../../../reducers/notification-reducer/notification.actions';
-import {
-  updateFirebaseToken,
-  updatePushKitToken,
-} from '../../../reducers/user-reducer/user.actions';
+import { PaddedContainer } from '../../containers';
 import config from '../../../config';
+import { custom } from '../../../../theme/theme.styles';
 
 const PushNotificationSettings = () => {
   const [hasEnabledPushNotifications, setHasEnabledPushNotifications] = useState();
@@ -55,11 +54,9 @@ const PushNotificationSettings = () => {
     DeviceInfo.hasHms().then(async (hasHms) => {
       if (hasHms) {
         await AsyncStorage.setItem(config.pushKitEnabled, 'true');
-        dispatch(updatePushKitToken());
       } else {
         await messaging().requestPermission();
         await AsyncStorage.setItem(config.fcmEnabled, 'true');
-        dispatch(updateFirebaseToken());
       }
     });
   };
@@ -78,22 +75,15 @@ const PushNotificationSettings = () => {
   };
 
   return (
-    <View style={styles.settingsContainer}>
-      <>
-        <Switch onValueChange={toggleSwitch} value={hasEnabledPushNotifications} />
-      </>
-    </View>
+    <PaddedContainer>
+      <View style={custom.rowAlign}>
+        <Text h4>Push Notifications</Text>
+        <View style={custom.settingsContainer}>
+          <Switch onValueChange={toggleSwitch} value={hasEnabledPushNotifications} />
+        </View>
+      </View>
+    </PaddedContainer>
   );
 };
 
 export default PushNotificationSettings;
-
-PushNotificationSettings.propTypes = {};
-
-const styles = StyleSheet.create({
-  settingsContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-});
