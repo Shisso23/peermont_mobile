@@ -8,6 +8,7 @@ import {
   apiSignInModel,
   apiRegistrationMembershipCardModel,
   registrationMembershipCardModel,
+  apiResetPasswordModelOtp,
   apiResetPasswordModel,
   apiOtpModel,
   otpModel,
@@ -94,7 +95,7 @@ const setPassword = (formData, token) => {
 // ==========================================================
 const requestResetPasswordOtp = (formData) => {
   const requestResetPasswordOtpUrl = authUrls.requestResetPasswordOtpUrl();
-  const apiModel = apiResetPasswordModel(formData);
+  const apiModel = apiResetPasswordModelOtp(formData);
   return networkService
     .post(requestResetPasswordOtpUrl, apiModel)
     .then(_extractAndReturnTokenFromApiResponse)
@@ -118,7 +119,7 @@ const verifyResetPasswordOtp = (formData, otpToken) => {
 
 const resetPassword = (formData, token) => {
   const resetPasswordUrl = authUrls.resetPasswordUrl();
-  const apiModel = apiSetPasswordModel(formData, token);
+  const apiModel = apiResetPasswordModel(formData, token);
   return networkService.post(resetPasswordUrl, apiModel).catch((err) => {
     err.errors = setPasswordModel(err.errors);
     return Promise.reject(err);
