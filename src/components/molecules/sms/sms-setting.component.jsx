@@ -1,9 +1,12 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { notificationSettingUpdateAction } from '../../../reducers/notification-reducer/notification.actions';
+import { PaddedContainer } from '../../containers';
+import { custom } from '../../../../theme/theme.styles';
 
 const SmsSettings = () => {
   const [hasEnabledSms, sethasEnabledSms] = useState(false);
@@ -48,22 +51,15 @@ const SmsSettings = () => {
   };
 
   return (
-    <View style={styles.settingsContainer}>
-      <>
-        <Switch onValueChange={toggleSwitch} value={hasEnabledSms} />
-      </>
-    </View>
+    <PaddedContainer>
+      <View style={custom.rowAlign}>
+        <Text h4>SMS Notifications</Text>
+        <View style={custom.settingsContainer}>
+          <Switch onValueChange={toggleSwitch} value={hasEnabledSms} />
+        </View>
+      </View>
+    </PaddedContainer>
   );
 };
 
 export default SmsSettings;
-
-SmsSettings.propTypes = {};
-
-const styles = StyleSheet.create({
-  settingsContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-});

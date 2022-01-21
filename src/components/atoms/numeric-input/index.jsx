@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -10,15 +10,30 @@ import {
   isLastFilledCell,
   MaskSymbol,
 } from 'react-native-confirmation-code-field';
+import { useFormikContext } from 'formik';
 
 import colors from '../../../../theme/theme.colors';
 
-const NumericInput = ({ value, onChange, cellCount, handleSubmit, onlyMask, ...rest }) => {
+const NumericInput = ({
+  value,
+  onChange,
+  cellCount,
+  handleSubmit,
+  onlyMask,
+  otpOption,
+  ...rest
+}) => {
   const ref = useBlurOnFulfill({ value, cellCount });
+  const { submitForm } = useFormikContext();
+  const [triggerOtpSend, setTriggerOtpSend] = useState(true);
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue: onChange,
   });
+
+  const verifyOtp = () => {
+    submitForm();
+  };
 
   return (
     <>
@@ -32,6 +47,10 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, onlyMask, ...r
         keyboardType="number-pad"
         renderCell={({ index, symbol, isFocused }) => {
           let textChild = null;
+          if (isLastFilledCell({ index, value }) && triggerOtpSend && otpOption) {
+            setTriggerOtpSend(false);
+            verifyOtp();
+          }
 
           if (symbol) {
             textChild = onlyMask ? (
@@ -89,10 +108,12 @@ NumericInput.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   onlyMask: PropTypes.bool,
+  otpOption: PropTypes.bool,
 };
 
 NumericInput.defaultProps = {
   onlyMask: false,
+  otpOption: false,
 };
 
 export default NumericInput;

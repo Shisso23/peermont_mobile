@@ -194,6 +194,18 @@ export const custom = {
     fontFamily: variables.fontFamilyPrimary,
     fontSize: 20,
   },
+  rowAlign: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  settingsContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  settingsText: {
+    marginHorizontal: 10,
+  },
 };
 
 export const globalScreenOptions = {

@@ -7,6 +7,7 @@ import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { ModalLoader, OtpMethodModal } from '../../atoms';
 import { otpModel } from '../../../models';
@@ -28,10 +29,10 @@ import {
   verifyUpdateEmailOtpAction,
   getUserAction,
 } from '../../../reducers/user-reducer/user.actions';
-import { paymentSelector } from '../../../reducers/payments-reducer/payments.reducer';
 import { otpMessage } from '../../../helpers/otp-message.helper';
 import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
+import config from '../../../config';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -44,19 +45,25 @@ const OtpNumericInput = ({
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { isLoading } = useSelector(paymentSelector);
   const { user } = useSelector((reducers) => reducers.userReducer);
   const [showOtpMethodModal, setShowOtpMethodModal] = useState(false);
   const [otpMethod, setOtpMethod] = useState('SMS');
   const [unconfirmedMobileNumber, setUnconfirmedMobileNumber] = useState('');
   const [unconfirmedEmail, setUnconfirmedEmaill] = useState('');
+  const [otpSetting, setOtpSetting] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    loadOtpSetting();
     if (userData) {
       setUnconfirmedMobileNumber(_.get(userData, 'unconfirmed_mobile_number'));
       setUnconfirmedEmaill(_.get(userData, 'unconfirmed_email'));
     }
   }, []);
+
+  const loadOtpSetting = async () => {
+    setOtpSetting(_.isEqual(await AsyncStorage.getItem(config.otpAutofill), 'true'));
+  };
 
   const _handleFormSubmission = (formData) => {
     switch (verificationType) {
@@ -142,6 +149,10 @@ const OtpNumericInput = ({
     setOtpMethod(method);
   };
 
+  const triggerIsLoading = (loading) => {
+    setIsLoading(loading);
+  };
+
   return showOtpMethodModal ? (
     <OtpMethodModal
       closeModal={_closeModal}
@@ -175,6 +186,8 @@ const OtpNumericInput = ({
             submitForm={_handleFormSubmission}
             initialValues={otpModel()}
             onSuccess={_handleFormSuccess}
+            otpOption={otpSetting}
+            isLoading={triggerIsLoading}
           />
           <TouchableOpacity onPress={_handleResendOtp}>
             <Text style={custom.resendOtpStyle}>Resend OTP</Text>
