@@ -9,6 +9,7 @@ const ModalLoader = ({ isLoading }) => {
   return (
     <Modal
       isVisible={isLoading}
+      avoidKeyboard
       hasBackdrop
       backdropOpacity={0.7}
       backdropColor={colors.whiteTransparent}
