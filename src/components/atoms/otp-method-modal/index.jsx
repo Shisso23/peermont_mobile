@@ -55,6 +55,7 @@ const OtpMethodModal = ({ closeModal, switchBackToNumericModal, verificationType
     <ModalLoader isLoading={isLoading} />
   ) : (
     <Modal
+      avoidKeyboard
       hasBackdrop
       backdropOpacity={0.7}
       backdropColor={colors.primary}

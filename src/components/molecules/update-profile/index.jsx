@@ -45,6 +45,7 @@ const UpdateOptions = ({ currentStep, setStep, visible, setModalVisible, updateT
 
   return (
     <Modal
+      avoidKeyboard
       isVisible={visible}
       hasBackdrop
       backdropOpacity={0.7}
@@ -137,6 +138,7 @@ const UpdateInput = ({ currentStep, setStep, visible, setModalVisible, updateTyp
     <ModalLoader isLoading={isLoading} />
   ) : (
     <Modal
+      avoidKeyboard
       isVisible={visible}
       hasBackdrop
       backdropOpacity={0.7}
@@ -280,6 +282,7 @@ const CardSelect = ({ currentStep, setStep, visible, setModalVisible, userData, 
 
   return (
     <Modal
+      avoidKeyboard
       isVisible={visible}
       hasBackdrop
       backdropOpacity={0.7}

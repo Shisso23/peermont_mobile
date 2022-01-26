@@ -80,6 +80,7 @@ const MembershipCardInput = ({
   ) : (
     <>
       <Modal
+        avoidKeyboard
         isVisible={visible}
         hasBackdrop
         backdropOpacity={0.7}
