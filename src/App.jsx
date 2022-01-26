@@ -63,7 +63,7 @@ const App = () => {
         if (hasHms) {
           await AsyncStorage.setItem(config.otpAutofill, 'false');
         } else if (Platform.OS === 'android') {
-          await AsyncStorage.setItem(config.otpAutofill, 'true');
+          await AsyncStorage.setItem(config.otpAutofill, 'false');
         } else if (Platform.OS === 'ios') {
           await AsyncStorage.setItem(config.otpAutofill, 'false');
         }
