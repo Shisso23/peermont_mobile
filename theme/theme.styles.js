@@ -35,15 +35,15 @@ export const custom = {
     marginBottom: 0,
   },
   errorStyleCardPin: {
-    fontFamily: variables.fontFamily,
     color: colors.danger,
+    fontFamily: variables.fontFamily,
     fontSize: 16,
-    height: 150,
-    marginLeft: 0,
-    paddingTop: 0,
-    paddingBottom: 0,
-    marginTop: 0,
+    height: 45,
     marginBottom: 0,
+    marginLeft: 0,
+    marginTop: 0,
+    paddingBottom: 0,
+    paddingTop: 0,
   },
   selectedItemStyle: {
     backgroundColor: colors.transparent,
@@ -206,8 +206,26 @@ export const custom = {
   settingsText: {
     marginHorizontal: 10,
   },
+  errorStyleProfileForm: {
+    fontSize: 12,
+  },
+  addPadding: {
+    fontSize: 14,
+    paddingLeft: 10,
+  },
+  carouselCardNumber: {
+    alignSelf: 'center',
+    backgroundColor: colors.white,
+    bottom: 15,
+    color: colors.darkGrey,
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 20,
+  },
+  carouselImage: {
+    height: 200,
+    width: 250,
+  },
 };
-
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
   headerBackTitleVisible: false,
