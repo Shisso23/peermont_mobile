@@ -50,7 +50,7 @@ const OtpNumericInput = ({
   const [otpMethod, setOtpMethod] = useState('SMS');
   const [unconfirmedMobileNumber, setUnconfirmedMobileNumber] = useState('');
   const [unconfirmedEmail, setUnconfirmedEmaill] = useState('');
-  const [otpSetting, setOtpSetting] = useState(true);
+  const [otpSetting, setOtpSetting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -71,8 +71,8 @@ const OtpNumericInput = ({
         return dispatch(verifyPaymentOtpAction(formData));
       case 'REGISTER':
         return dispatch(verifyRegisterOtpAction(formData));
-      case 'UPDATE_MOBILE_NUMBER':
-        if (!_.isUndefined(unconfirmedEmail)) {
+      case 'UPDATE_PROFILE':
+        if (!_.isEmpty(unconfirmedEmail)) {
           return dispatch(verifyUpdateEmailOtpAction(formData));
         }
         return dispatch(verifyUpdateMobileOtpAction(formData));
@@ -91,14 +91,15 @@ const OtpNumericInput = ({
       case 'REGISTER':
         navigation.replace('RegisterSetPassword');
         break;
-      case 'UPDATE_MOBILE_NUMBER':
+      case 'UPDATE_PROFILE':
         if (!_.isUndefined(unconfirmedEmail)) {
           _closeModal();
         }
+        _closeModal();
         return dispatch(getUserAction()).then(
-          dispatch(updateSignInMobileNumberAction(unconfirmedMobileNumber))
-            .then(_closeModal())
-            .then(navigation.navigate('MyProfile')),
+          dispatch(updateSignInMobileNumberAction(unconfirmedMobileNumber)).then(
+            navigation.navigate('MyProfile'),
+          ),
         );
       case 'RESET_PASSWORD':
         navigation.replace('ResetPasswordSetPassword');
@@ -118,7 +119,7 @@ const OtpNumericInput = ({
       case 'REGISTER':
         dispatch(registerResendOtpAction());
         break;
-      case 'UPDATE_MOBILE_NUMBER':
+      case 'UPDATE_PROFILE':
         return user.emailConfirmed
           ? setShowOtpMethodModal(true)
           : dispatch(resendUpdateMobileOtpAction());
@@ -133,7 +134,7 @@ const OtpNumericInput = ({
 
   const _closeModal = () => {
     switch (verificationType) {
-      case 'UPDATE_MOBILE_NUMBER':
+      case 'UPDATE_PROFILE':
         navigation.navigate('MyProfile');
         setModalVisible(false);
         setShowOtpMethodModal(false);

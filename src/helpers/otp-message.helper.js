@@ -21,7 +21,7 @@ export function otpMessage(otpMethod, verificationType, unconfirmedEmail) {
         otpMethod,
       )} with a One Time
       Pin(OTP) to your mobile number for validation.`;
-    case 'UPDATE_MOBILE_NUMBER':
+    case 'UPDATE_PROFILE':
       return unconfirmedEmail
         ? `To proceed, Enter your One Time Pin to confirm your mobile number change. We have sent a
       ${_.lowerCase(otpMethod)} with a One Time Pin(OTP) to your new mobile number for validation.`

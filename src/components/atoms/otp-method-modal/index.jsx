@@ -33,7 +33,7 @@ const OtpMethodModal = ({ closeModal, switchBackToNumericModal, verificationType
     switch (verificationType) {
       case 'PAYMENT':
         return dispatch(sendPaymentEmailOtpAction('')).then(switchBackToNumericModal('EMAIL'));
-      case 'UPDATE_MOBILE_NUMBER':
+      case 'UPDATE_PROFILE':
         return dispatch(sendUserEmailOtpAction('')).then(switchBackToNumericModal('EMAIL'));
       default:
         return null;
@@ -44,7 +44,7 @@ const OtpMethodModal = ({ closeModal, switchBackToNumericModal, verificationType
     switch (verificationType) {
       case 'PAYMENT':
         return dispatch(sendPaymentOtpAction('')).then(switchBackToNumericModal('SMS'));
-      case 'UPDATE_MOBILE_NUMBER':
+      case 'UPDATE_PROFILE':
         return dispatch(resendUpdateMobileOtpAction()).then(switchBackToNumericModal('SMS'));
       default:
         return null;
@@ -73,7 +73,7 @@ const OtpMethodModal = ({ closeModal, switchBackToNumericModal, verificationType
           </TouchableOpacity>
           <Text style={custom.modalCenterTitle}>OTP METHOD</Text>
           <Text style={custom.modalCenterSubtitle}>
-            Please select one of the following, to recieve your OTP
+            Please select one of the following, to receive your OTP:
           </Text>
           <Divider />
           <TouchableOpacity style={custom.modalButton} onPress={_switchModalEmail}>

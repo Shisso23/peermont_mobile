@@ -49,33 +49,33 @@ const NumericalInputForm = React.forwardRef(
       setAutoFillTry(false);
     };
 
-    if (otpOption) {
-      const startListeningForOtp = () => {
-        OtpAutocomplete.getOtp()
-          .then(() => OtpAutocomplete.addListener(otpHandler))
-          .catch(() => {
-            OtpAutocomplete.removeListener();
-            turnOffOtpAutoFill();
-          });
-      };
+    const startListeningForOtp = () => {
+      OtpAutocomplete.getOtp()
+        .then(() => OtpAutocomplete.addListener(otpHandler))
+        .catch(() => {
+          OtpAutocomplete.removeListener();
+          turnOffOtpAutoFill();
+        });
+    };
 
-      const otpHandler = (message) => {
-        if (!_.isNull(message) && autoFillTry) {
-          try {
-            setOtp(/(\d{4})/.exec(message)[1]);
-            setFormOtpData({ numeric: /(\d{4})/.exec(message)[1] });
-            OtpAutocomplete.removeListener();
-          } catch {
-            startListeningForOtp();
-          }
+    const otpHandler = (message) => {
+      if (!_.isNull(message) && autoFillTry) {
+        try {
+          setOtp(/(\d{4})/.exec(message)[1]);
+          setFormOtpData({ numeric: /(\d{4})/.exec(message)[1] });
+          OtpAutocomplete.removeListener();
+        } catch {
+          startListeningForOtp();
         }
-      };
+      }
+    };
 
-      useEffect(() => {
+    useEffect(() => {
+      if (otpOption) {
         startListeningForOtp();
-        return () => OtpAutocomplete.removeListener();
-      }, [startListeningForOtp]);
-    }
+      }
+      return () => (otpOption ? OtpAutocomplete.removeListener() : null);
+    }, [startListeningForOtp]);
 
     const _renderErrorMessage = (message) => (
       <Text style={[custom.errorStyleCardPin, styles.errorStyle]}>{message}</Text>
@@ -118,12 +118,12 @@ const NumericalInputForm = React.forwardRef(
 
 const styles = StyleSheet.create({
   errorStyle: {
+    height: 'auto',
     marginTop: 10,
     textAlign: 'center',
   },
   messageStyle: {
     alignItems: 'center',
-    flex: 1,
     justifyContent: 'center',
   },
 });

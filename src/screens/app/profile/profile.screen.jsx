@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ListItem, Text } from 'react-native-elements';
+import { StyleSheet } from 'react-native';
+import { Text, Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import _ from 'lodash';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { OtpNumericInput } from '../../../components/molecules';
-import { ProfileForm } from '../../../components/forms';
+import { infoPopUpService } from '../../../services';
+import { UpdateProfile } from '../../../components/molecules';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
-import {
-  getUserAction,
-  userUpdateProfileAction,
-} from '../../../reducers/user-reducer/user.actions';
-import { AddButton, LoadingComponent, ProfileDocument } from '../../../components';
+import { getUserAction } from '../../../reducers/user-reducer/user.actions';
+import { CountrySelect } from '../../../components/atoms';
+import { LoadingComponent } from '../../../components';
 import { useRefreshHeaderButton } from '../../../hooks';
 import { custom } from '../../../../theme/theme.styles';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const { user, loading } = useSelector((reducers) => reducers.userReducer);
   const [showOtpModal, setShowOtpModal] = useState(false);
-  const [userData, setUserData] = useState({});
 
   const initialValues = _.pick(user, [
     'mobileNumber',
@@ -32,100 +28,65 @@ const ProfileScreen = () => {
     'country',
   ]);
 
-  const _handleSubmission = (formData) => {
-    return dispatch(userUpdateProfileAction(formData));
-  };
-
-  const _handleFormSuccess = (data) => {
-    const unconfirmedMobileNumber = _.get(data, 'unconfirmed_mobile_number', null);
-
-    if (!_.isNull(unconfirmedMobileNumber)) {
-      navigation.navigate('UpdateMobileSelectCard', { unconfirmedMobileNumber });
-    } else {
-      setUserData(data);
-      setShowOtpModal(true);
-    }
-  };
-
   const _closeModal = (close) => {
     setShowOtpModal(close);
   };
 
-  const _handleUploadProfileDocument = () => navigation.navigate('UploadProfileDocument');
+  const _openModal = () => {
+    setShowOtpModal(true);
+  };
 
   useEffect(() => {
     dispatch(getUserAction());
+    setShowOtpModal(false);
   }, []);
 
   useRefreshHeaderButton(() => {
     dispatch(getUserAction());
   }, loading);
 
-  const renderUserDocuments = () => {
-    const documents = [];
-
-    if (_.get(user, 'proofOfId')) {
-      documents.push(
-        <ProfileDocument
-          key="poid"
-          name="Proof of ID"
-          status={_.get(user, 'proofOfIdStatus')}
-          disabled
-        />,
-      );
-    }
-    if (_.get(user, 'proofOfAddress')) {
-      documents.push(
-        <ProfileDocument
-          key="poa"
-          name="Proof of Address"
-          status={_.get(user, 'proofOfAddressStatus')}
-          disabled
-        />,
-      );
-    }
-
-    return documents;
-  };
-
-  const RenderDocuments = () => {
-    return _.isEmpty(renderUserDocuments()) ? (
-      <ListItem>
-        <ListItem.Content>
-          <ListItem.Title>Document upload</ListItem.Title>
-          <ListItem.Subtitle>
-            Click the plus button above to add your profile documents.
-          </ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-    ) : (
-      renderUserDocuments()
-    );
-  };
-
   return !loading ? (
     <KeyboardScrollContainer>
       <Text style={custom.centerTitle}>My Profile</Text>
       <PaddedContainer>
-        <ProfileForm
-          submitForm={_handleSubmission}
-          onSuccess={_handleFormSuccess}
-          initialValues={initialValues}
+        <Input
+          style={styles.addPadding}
+          value={initialValues.email}
+          label="Email"
+          editable={false}
+          leftIcon={() => <Icon name="email" size={30} color="black" />}
+          rightIcon={() => (
+            <Icon
+              name="info"
+              size={20}
+              onPress={() => {
+                infoPopUpService.show(
+                  'This is your email linked to your account. To change, click update profile.',
+                );
+              }}
+            />
+          )}
         />
+        <Input
+          value={initialValues.mobileNumber}
+          label="Mobile Number"
+          editable={false}
+          leftIcon={() => <CountrySelect initialCountry={initialValues.country} />}
+          rightIcon={() => (
+            <Icon
+              name="info"
+              size={20}
+              onPress={() => {
+                infoPopUpService.show(
+                  'This is your mobile number linked to your account. To change, click update profile.',
+                );
+              }}
+            />
+          )}
+        />
+        <Button title="Update Profile" onPress={_openModal} />
       </PaddedContainer>
-      <PaddedContainer>
-        <View style={styles.rowAlign}>
-          <Text h4>Documents</Text>
-          <AddButton onPress={_handleUploadProfileDocument} />
-        </View>
-        <RenderDocuments />
-      </PaddedContainer>
-      <OtpNumericInput
-        visible={showOtpModal}
-        setModalVisible={_closeModal}
-        userData={userData}
-        verificationType="UPDATE_MOBILE_NUMBER"
-      />
+      <UpdateProfile visible={showOtpModal} setModalVisible={_closeModal} />
     </KeyboardScrollContainer>
   ) : (
     <LoadingComponent />
@@ -133,9 +94,8 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  rowAlign: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  addPadding: {
+    paddingLeft: 10,
   },
 });
 

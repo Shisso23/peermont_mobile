@@ -109,18 +109,14 @@ export const userUploadProfileDocumentsAction = (formData) => {
 };
 
 export const verifyUpdateMobileOtpAction = (formData) => {
-  return (dispatch) => {
-    dispatch(setLoadingAction(true));
-    return userService
-      .verifyUpdateMobileOtpAction(formData)
-      .finally(() => dispatch(setLoadingAction(false)));
+  return () => {
+    return userService.verifyUpdateMobileOtpAction(formData);
   };
 };
 
 export const verifyUpdateEmailOtpAction = (formData) => {
-  return (dispatch) => {
-    dispatch(setLoadingAction(true));
-    return userService.verifyUpdateEmail(formData).finally(() => dispatch(setLoadingAction(false)));
+  return () => {
+    return userService.verifyUpdateEmail(formData);
   };
 };
 
