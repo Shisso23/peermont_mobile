@@ -291,7 +291,7 @@ const CardSelect = ({ currentStep, setStep, visible, setModalVisible, userData, 
       animationOut="pulse"
     >
       <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+        <View style={[styles.modalView, styles.addHeightCarousel]}>
           <TouchableOpacity
             onPress={_closeModal}
             style={custom.closeIconContainer}
@@ -413,6 +413,9 @@ const UpdateProfile = ({ visible, setModalVisible }) => {
 };
 
 const styles = StyleSheet.create({
+  addHeightCarousel: {
+    height: 370,
+  },
   carouselContainer: {
     alignItems: 'center',
     bottom: 20,
