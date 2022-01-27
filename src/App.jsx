@@ -57,18 +57,7 @@ const App = () => {
   };
 
   const setOtpAutoFill = async () => {
-    const otpAutoFillEnabled = await AsyncStorage.getItem(config.otpAutofill);
-    if (!otpAutoFillEnabled) {
-      DeviceInfo.hasHms().then(async (hasHms) => {
-        if (hasHms) {
-          await AsyncStorage.setItem(config.otpAutofill, 'false');
-        } else if (Platform.OS === 'android') {
-          await AsyncStorage.setItem(config.otpAutofill, 'false');
-        } else if (Platform.OS === 'ios') {
-          await AsyncStorage.setItem(config.otpAutofill, 'false');
-        }
-      });
-    }
+    await AsyncStorage.setItem(config.otpAutofill, 'false');
   };
 
   const checkPermission = async () => {
