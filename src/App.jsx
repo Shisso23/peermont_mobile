@@ -15,6 +15,7 @@ import { firebaseService, pushKitService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import { hasIncomingNotification } from './reducers/notification-reducer/notification.actions';
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
+import { setOtpAutoFillSettingAction } from './reducers/user-reducer/user.actions';
 import { loadAppDataAction } from './reducers/app-reducer/app.actions';
 import { AutoSignOut } from './components/atoms';
 import { splashScreen } from './assets';
@@ -57,7 +58,15 @@ const App = () => {
   };
 
   const setOtpAutoFill = async () => {
-    await AsyncStorage.setItem(config.otpAutofill, 'false');
+    const otpAutoFillEnabled = await AsyncStorage.getItem(config.otpAutofill);
+    if (!otpAutoFillEnabled) {
+      if (Platform.OS === 'android') {
+        await AsyncStorage.setItem(config.otpAutofill, 'true');
+      } else {
+        await AsyncStorage.setItem(config.otpAutofill, 'false');
+      }
+    }
+    dispatch(setOtpAutoFillSettingAction(await AsyncStorage.getItem(config.otpAutofill)));
   };
 
   const checkPermission = async () => {

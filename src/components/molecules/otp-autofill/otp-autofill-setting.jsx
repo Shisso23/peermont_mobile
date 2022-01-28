@@ -1,14 +1,17 @@
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Switch, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
-import _ from 'lodash';
+import { useDispatch } from 'react-redux';
 
+import { setOtpAutoFillSettingAction } from '../../../reducers/user-reducer/user.actions';
 import { PaddedContainer } from '../../containers';
 import config from '../../../config';
 import { custom } from '../../../../theme/theme.styles';
 
 const OtpAutofillSetting = () => {
+  const dispatch = useDispatch();
   const [hasEnabledOtpAutofill, setHasEnabledOtpAutofills] = useState(true);
 
   useEffect(() => {
@@ -29,11 +32,13 @@ const OtpAutofillSetting = () => {
 
   const onEnableOtpAutofill = async () => {
     await AsyncStorage.setItem(config.otpAutofill, 'true');
+    dispatch(setOtpAutoFillSettingAction('true'));
     setHasEnabledOtpAutofills(true);
   };
 
   const onDisableOtpAutofill = async () => {
     await AsyncStorage.setItem(config.otpAutofill, 'false');
+    dispatch(setOtpAutoFillSettingAction('false'));
     setHasEnabledOtpAutofills(false);
   };
 

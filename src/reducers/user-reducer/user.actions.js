@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { setUserAction, setLoadingAction } from './user.reducer';
+import { setUserAction, setLoadingAction, setOtpAutoFillAction } from './user.reducer';
 import { firebaseService, userService, pushKitService, appService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
@@ -18,6 +18,12 @@ export const getUserAction = () => {
       dispatch(setBankAccountsAction(_user.bankAccounts));
       dispatch(setLoadingAction(false));
     });
+  };
+};
+
+export const setOtpAutoFillSettingAction = (value) => {
+  return (dispatch) => {
+    dispatch(setOtpAutoFillAction(value));
   };
 };
 

@@ -27,6 +27,7 @@ const NumericalInputForm = React.forwardRef(
         .then(() => {
           isLoading(false);
           actions.setSubmitting(false);
+          OtpAutocomplete.removeListener();
           onSuccess(formData);
         })
         .catch((error) => {
@@ -74,8 +75,7 @@ const NumericalInputForm = React.forwardRef(
       if (otpOption) {
         startListeningForOtp();
       }
-      return () => (otpOption ? OtpAutocomplete.removeListener() : null);
-    }, [startListeningForOtp]);
+    }, []);
 
     const _renderErrorMessage = (message) => (
       <Text style={[custom.errorStyleCardPin, styles.errorStyle]}>{message}</Text>
@@ -93,12 +93,12 @@ const NumericalInputForm = React.forwardRef(
           return (
             <>
               <NumericInput
-                value={autoFillTry ? otp : values.numeric}
+                value={autoFillTry && _.isEmpty(values.numeric) ? otp : values.numeric}
                 onChange={(newNumeric) => setFieldValue('numeric', newNumeric)}
                 cellCount={4}
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
-                otpOption={autoFillTry}
+                otpOption={autoFillTry && _.isEmpty(values.numeric)}
                 onlyMask={
                   !_.isEmpty(_.get(initialValues, 'numeric')) &&
                   _.get(values, 'numeric') === _.get(initialValues, 'numeric')
