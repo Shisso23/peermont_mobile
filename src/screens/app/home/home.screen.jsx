@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
 
-import { MembershipCardCarouselItem, SplashAd, HealthSurvey, PalaceBet } from '../../../components';
+import { MembershipCardCarouselItem, SplashAd, PalaceBet } from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useBiometricRegister, handleNotificationOpenedBackGround } from '../../../hooks';
 import { hasIncomingNotification } from '../../../reducers/notification-reducer/notification.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import { custom } from '../../../../theme/theme.styles';
-import colors from '../../../../theme/theme.colors';
 import { getSplashAdvertAction } from '../../../reducers/advert-reducer/advert.actions';
 
 const HomeScreen = () => {
@@ -51,7 +50,6 @@ const HomeScreen = () => {
       <SplashAd />
       <PaddedContainer>
         <View style={custom.headerContainer}>
-          <HealthSurvey />
           <PalaceBet />
         </View>
       </PaddedContainer>
@@ -67,7 +65,7 @@ const HomeScreen = () => {
         )}
       </PaddedContainer>
       {!_.isEmpty(membershipCards) && (
-        <View style={styles.carouselContainer}>
+        <View style={custom.carouselContainer}>
           <Carousel
             data={membershipCards}
             extraData={membershipCards}
@@ -83,9 +81,9 @@ const HomeScreen = () => {
           <Pagination
             dotsLength={membershipCards.length}
             activeDotIndex={activeSlideIndex}
-            dotStyle={styles.activePagination}
-            inactiveDotStyle={styles.inactivePagination}
-            containerStyle={styles.containerStyle}
+            dotStyle={custom.activePagination}
+            inactiveDotStyle={custom.inactivePagination}
+            containerStyle={custom.containerStyle}
             inactiveDotOpacity={0.4}
             inactiveDotScale={1}
           />
@@ -101,34 +99,5 @@ const HomeScreen = () => {
 HomeScreen.propTypes = {};
 
 HomeScreen.defaultProps = {};
-
-const styles = StyleSheet.create({
-  activePagination: {
-    backgroundColor: colors.darkGrey,
-    borderRadius: 5,
-    height: 10,
-    width: 10,
-  },
-  carouselContainer: {
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    borderBottomWidth: 0.28,
-    borderColor: colors.inputBorderColor,
-    paddingBottom: 10,
-  },
-  containerStyle: {
-    paddingBottom: 10,
-    paddingTop: 10,
-  },
-  inactivePagination: {
-    backgroundColor: colors.white,
-    borderColor: colors.darkGrey,
-    borderRadius: 5,
-    borderWidth: 1,
-    height: 10,
-    marginHorizontal: -5,
-    width: 10,
-  },
-});
 
 export default HomeScreen;

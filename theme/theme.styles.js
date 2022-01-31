@@ -58,7 +58,7 @@ export const custom = {
     backgroundColor: colors.transparent,
   },
   headerContainerText: {
-    marginLeft: 24,
+    marginLeft: 25,
   },
   headerContainerTitle: {
     fontSize: 18,
@@ -81,12 +81,11 @@ export const custom = {
     backgroundColor: colors.white,
     borderBottomColor: colors.primary,
     borderColor: colors.primary,
-    borderRadius: 15,
+    borderRadius: 40,
     borderWidth: 1,
     elevation: 5,
     flexDirection: 'row',
-    height: 90,
-    justifyContent: 'space-evenly',
+    height: 70,
     marginHorizontal: 3,
     padding: 13,
     shadowColor: colors.black,
@@ -96,7 +95,6 @@ export const custom = {
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    width: 180,
   },
   resendOtpStyle: {
     color: colors.textGrey,
@@ -109,12 +107,10 @@ export const custom = {
   },
   headerContainer: {
     alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   palaceBetIcon: {
     height: 32,
-    marginLeft: 5,
+    marginLeft: 20,
     marginRight: -10,
     width: 34,
   },
@@ -224,6 +220,32 @@ export const custom = {
   carouselImage: {
     height: 200,
     width: 250,
+  },
+  activePagination: {
+    backgroundColor: colors.darkGrey,
+    borderRadius: 5,
+    height: 10,
+    width: 10,
+  },
+  carouselContainer: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderBottomWidth: 0.28,
+    borderColor: colors.inputBorderColor,
+    paddingBottom: 10,
+  },
+  containerStyle: {
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+  inactivePagination: {
+    backgroundColor: colors.white,
+    borderColor: colors.darkGrey,
+    borderRadius: 5,
+    borderWidth: 1,
+    height: 10,
+    marginHorizontal: -5,
+    width: 10,
   },
 };
 export const globalScreenOptions = {
