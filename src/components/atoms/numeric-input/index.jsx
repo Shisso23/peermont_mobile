@@ -8,7 +8,6 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
   isLastFilledCell,
-  MaskSymbol,
 } from 'react-native-confirmation-code-field';
 import { useFormikContext } from 'formik';
 
@@ -53,13 +52,7 @@ const NumericInput = ({
           }
 
           if (symbol) {
-            textChild = onlyMask ? (
-              '*'
-            ) : (
-              <MaskSymbol maskSymbol="*" isLastFilledCell={isLastFilledCell({ index, value })}>
-                {symbol}
-              </MaskSymbol>
-            );
+            textChild = '*';
           } else if (isFocused) {
             textChild = <Cursor />;
           }

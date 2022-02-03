@@ -15,6 +15,7 @@ import {
   updateAppDetailsHuawei,
   updateAppVersion,
 } from '../user-reducer/user.actions';
+import { forgetCardPin } from '../membership-card-reducer/membership-card.actions';
 import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const signInAction = (formData) => {
@@ -41,6 +42,8 @@ export const updateSignInMobileNumberAction = (mobileNumber) => {
 
 export const signOutAction = () => {
   return (dispatch) => {
+    dispatch(forgetCardPin());
+
     return userAuthService.signOut().then(() => {
       return dispatch(setIsAuthenticatedAction(false));
     });
