@@ -94,7 +94,9 @@ const NumericalInputForm = React.forwardRef(
             <>
               <NumericInput
                 value={autoFillTry && _.isEmpty(values.numeric) ? otp : values.numeric}
-                onChange={(newNumeric) => setFieldValue('numeric', newNumeric)}
+                onChange={(newNumeric) =>
+                  setFieldValue('numeric', newNumeric).then(setAutoFillTry(false))
+                }
                 cellCount={4}
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
