@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Divider, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import ModalLoader from '../modal-loader';
 import {
@@ -30,25 +31,17 @@ const OtpMethodModal = ({ closeModal, switchBackToNumericModal, verificationType
   };
 
   const _switchModalEmail = () => {
-    switch (verificationType) {
-      case 'PAYMENT':
-        return dispatch(sendPaymentEmailOtpAction('')).then(switchBackToNumericModal('EMAIL'));
-      case 'UPDATE_PROFILE':
-        return dispatch(sendUserEmailOtpAction('')).then(switchBackToNumericModal('EMAIL'));
-      default:
-        return null;
+    if (_.isEqual(verificationType, 'PAYMENT')) {
+      return dispatch(sendPaymentEmailOtpAction('')).then(switchBackToNumericModal('EMAIL'));
     }
+    return dispatch(sendUserEmailOtpAction('')).then(switchBackToNumericModal('EMAIL'));
   };
 
   const _switchModalSMS = () => {
-    switch (verificationType) {
-      case 'PAYMENT':
-        return dispatch(sendPaymentOtpAction('')).then(switchBackToNumericModal('SMS'));
-      case 'UPDATE_PROFILE':
-        return dispatch(resendUpdateMobileOtpAction()).then(switchBackToNumericModal('SMS'));
-      default:
-        return null;
+    if (_.isEqual(verificationType, 'PAYMENT')) {
+      return dispatch(sendPaymentOtpAction('')).then(switchBackToNumericModal('SMS'));
     }
+    return dispatch(resendUpdateMobileOtpAction()).then(switchBackToNumericModal('SMS'));
   };
 
   return isLoading ? (

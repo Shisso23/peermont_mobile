@@ -247,6 +247,14 @@ export const custom = {
     marginHorizontal: -5,
     width: 10,
   },
+  profileStatusContainer: {
+    bottom: 26,
+    marginBottom: -20,
+  },
+  profileStatus: {
+    fontSize: 14,
+    color: colors.grey,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

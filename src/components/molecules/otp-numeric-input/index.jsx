@@ -8,6 +8,7 @@ import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
+import { flashService } from '../../../services';
 import { ModalLoader, OtpMethodModal } from '../../atoms';
 import { otpModel } from '../../../models';
 import NumericalInputForm from '../../forms/numerical-input/numerical-input.form';
@@ -47,13 +48,11 @@ const OtpNumericInput = ({
   const [showOtpMethodModal, setShowOtpMethodModal] = useState(false);
   const [otpMethod, setOtpMethod] = useState('SMS');
   const [unconfirmedMobileNumber, setUnconfirmedMobileNumber] = useState('');
-  const [unconfirmedEmail, setUnconfirmedEmaill] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (userData) {
       setUnconfirmedMobileNumber(_.get(userData, 'unconfirmed_mobile_number'));
-      setUnconfirmedEmaill(_.get(userData, 'unconfirmed_email'));
     }
   }, []);
 
@@ -63,10 +62,9 @@ const OtpNumericInput = ({
         return dispatch(verifyPaymentOtpAction(formData));
       case 'REGISTER':
         return dispatch(verifyRegisterOtpAction(formData));
-      case 'UPDATE_PROFILE':
-        if (!_.isEmpty(unconfirmedEmail)) {
-          return dispatch(verifyUpdateEmailOtpAction(formData));
-        }
+      case 'UPDATE_PROFILE_EMAIL':
+        return dispatch(verifyUpdateEmailOtpAction(formData));
+      case 'UPDATE_PROFILE_NUMBER':
         return dispatch(verifyUpdateMobileOtpAction(formData));
       case 'RESET_PASSWORD':
         return dispatch(verifyResetPasswordOtpAction(formData));
@@ -83,16 +81,16 @@ const OtpNumericInput = ({
       case 'REGISTER':
         navigation.replace('RegisterSetPassword');
         break;
-      case 'UPDATE_PROFILE':
-        if (!_.isUndefined(unconfirmedEmail)) {
-          _closeModal();
-        }
+      case 'UPDATE_PROFILE_EMAIL':
+        flashService.success('Email updated', 5000);
         _closeModal();
-        return dispatch(getUserAction()).then(
-          dispatch(updateSignInMobileNumberAction(unconfirmedMobileNumber)).then(
-            navigation.navigate('MyProfile'),
-          ),
-        );
+        return dispatch(getUserAction()).then(navigation.navigate('MyProfile'));
+      case 'UPDATE_PROFILE_NUMBER':
+        flashService.success('Mobile number updated', 5000);
+        _closeModal();
+        return dispatch(getUserAction())
+          .then(dispatch(updateSignInMobileNumberAction(unconfirmedMobileNumber)))
+          .then(navigation.navigate('MyProfile'));
       case 'RESET_PASSWORD':
         navigation.replace('ResetPasswordSetPassword');
         break;
@@ -111,7 +109,7 @@ const OtpNumericInput = ({
       case 'REGISTER':
         dispatch(registerResendOtpAction());
         break;
-      case 'UPDATE_PROFILE':
+      case 'UPDATE_PROFILE_EMAIL':
         return user.emailConfirmed
           ? setShowOtpMethodModal(true)
           : dispatch(resendUpdateMobileOtpAction());
@@ -126,7 +124,7 @@ const OtpNumericInput = ({
 
   const _closeModal = () => {
     switch (verificationType) {
-      case 'UPDATE_PROFILE':
+      case 'UPDATE_PROFILE_EMAIL':
         navigation.navigate('MyProfile');
         setModalVisible(false);
         setShowOtpMethodModal(false);
@@ -172,9 +170,7 @@ const OtpNumericInput = ({
             <Icon name="times" color={colors.gold} size={22} />
           </TouchableOpacity>
           <Text style={custom.modalCenterTitle}>VERIFICATION CODE</Text>
-          <Text style={custom.modalCenterSubtitle}>
-            {otpMessage(otpMethod, verificationType, _.isNil(unconfirmedEmail))}
-          </Text>
+          <Text style={custom.modalCenterSubtitle}>{otpMessage(otpMethod, verificationType)}</Text>
           <NumericalInputForm
             submitForm={_handleFormSubmission}
             initialValues={otpModel()}

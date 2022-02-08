@@ -9,7 +9,7 @@ const methodText = (methodType) => {
   }
 };
 
-export function otpMessage(otpMethod, verificationType, unconfirmedEmail) {
+export function otpMessage(otpMethod, verificationType) {
   switch (verificationType) {
     case 'PAYMENT':
       return `We have sent a ${_.lowerCase(otpMethod)} with a One Time Pin (OTP) to ${methodText(
@@ -21,12 +21,14 @@ export function otpMessage(otpMethod, verificationType, unconfirmedEmail) {
         otpMethod,
       )} with a One Time
       Pin(OTP) to your mobile number for validation.`;
-    case 'UPDATE_PROFILE':
-      return unconfirmedEmail
-        ? `To proceed, Enter your One Time Pin to confirm your mobile number change. We have sent a
-      ${_.lowerCase(otpMethod)} with a One Time Pin(OTP) to your new mobile number for validation.`
-        : `To proceed, Enter your One Time Pin to confirm your email change. We have sent a
-        ${_.lowerCase(otpMethod)} with a One Time Pin(OTP) to your for validation.`;
+    case 'UPDATE_PROFILE_EMAIL':
+      return `To proceed, Enter your One Time Pin to confirm your email change. We have sent a
+      ${_.lowerCase(otpMethod)} with a One Time Pin(OTP) to your for validation.`;
+    case 'UPDATE_PROFILE_NUMBER':
+      return `To proceed, Enter your One Time Pin to confirm your mobile number change. We have sent a
+          ${_.lowerCase(
+            otpMethod,
+          )} with a One Time Pin(OTP) to your new mobile number for validation.`;
     case 'RESET_PASSWORD':
       return `To proceed, Enter your One Time Pin to reset your password. We have sent a ${_.lowerCase(
         otpMethod,
