@@ -41,6 +41,7 @@ const OtpNumericInput = ({
   afterOtpRoute,
   verificationType,
   userData,
+  topUp,
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -103,16 +104,15 @@ const OtpNumericInput = ({
   const _handleResendOtp = () => {
     switch (verificationType) {
       case 'PAYMENT':
-        return user.emailConfirmed
+        return user.emailConfirmed && topUp
           ? setShowOtpMethodModal(true)
           : dispatch(sendPaymentOtpAction(''));
       case 'REGISTER':
         dispatch(registerResendOtpAction());
         break;
       case 'UPDATE_PROFILE_EMAIL':
-        return user.emailConfirmed
-          ? setShowOtpMethodModal(true)
-          : dispatch(resendUpdateMobileOtpAction());
+        dispatch(resendUpdateMobileOtpAction());
+        break;
       case 'RESET_PASSWORD':
         dispatch(resetPasswordResendOtpAction());
         break;
@@ -213,11 +213,13 @@ OtpNumericInput.propTypes = {
   afterOtpRoute: PropTypes.string,
   verificationType: PropTypes.string.isRequired,
   userData: PropTypes.object,
+  topUp: PropTypes.bool,
 };
 
 OtpNumericInput.defaultProps = {
   userData: {},
   afterOtpRoute: '',
+  topUp: false,
 };
 
 export default OtpNumericInput;
