@@ -10,6 +10,7 @@ import {
   isLastFilledCell,
 } from 'react-native-confirmation-code-field';
 import { useFormikContext } from 'formik';
+import _ from 'lodash';
 
 import colors from '../../../../theme/theme.colors';
 
@@ -25,6 +26,7 @@ const NumericInput = ({
   const ref = useBlurOnFulfill({ value, cellCount });
   const { submitForm } = useFormikContext();
   const [triggerOtpSend, setTriggerOtpSend] = useState(true);
+  const [lastCellFilled, setLastCellFilled] = useState(false);
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue: onChange,
@@ -42,13 +44,17 @@ const NumericInput = ({
         {...rest}
         value={value}
         onChangeText={onChange}
-        onBlur={handleSubmit}
+        onBlur={lastCellFilled ? handleSubmit : null}
         keyboardType="number-pad"
         renderCell={({ index, symbol, isFocused }) => {
           let textChild = null;
           if (isLastFilledCell({ index, value }) && triggerOtpSend && otpOption) {
             setTriggerOtpSend(false);
             verifyOtp();
+          }
+
+          if (_.isEqual(value.length, 4)) {
+            setLastCellFilled(true);
           }
 
           if (symbol) {
