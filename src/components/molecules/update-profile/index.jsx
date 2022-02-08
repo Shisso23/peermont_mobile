@@ -127,12 +127,17 @@ const UpdateInput = ({ currentStep, setStep, visible, setModalVisible, updateTyp
     setStep(STEPS[0]);
   };
 
-  const initialValues = {
-    mobileNumber: '',
-    callingCode: _.get(user, 'callingCode'),
-    email: '',
-    country: _.get(user, 'country'),
-  };
+  const initialValues = _.isEqual(updateType, 'MOBILE_NUMBER')
+    ? {
+        mobileNumber: '',
+        callingCode: _.get(user, 'callingCode'),
+        country: _.get(user, 'country'),
+      }
+    : {
+        callingCode: _.get(user, 'callingCode'),
+        email: '',
+        country: _.get(user, 'country'),
+      };
 
   return isLoading ? (
     <ModalLoader isLoading={isLoading} />
@@ -186,7 +191,14 @@ UpdateInput.propTypes = {
   userData: PropTypes.func.isRequired,
 };
 
-const UpdateOtp = ({ currentStep, setStep, visible, setModalVisible, userData }) => {
+const UpdateOtp = ({
+  currentStep,
+  setStep,
+  visible,
+  setModalVisible,
+  userData,
+  updateMobileNumber,
+}) => {
   if (currentStep !== STEPS[2]) {
     return null;
   }
@@ -201,7 +213,7 @@ const UpdateOtp = ({ currentStep, setStep, visible, setModalVisible, userData })
       visible={visible}
       setModalVisible={_closeModal}
       userData={userData}
-      verificationType="UPDATE_PROFILE"
+      verificationType={updateMobileNumber ? 'UPDATE_PROFILE_NUMBER' : 'UPDATE_PROFILE_EMAIL'}
     />
   );
 };
@@ -212,6 +224,7 @@ UpdateOtp.propTypes = {
   setModalVisible: PropTypes.func.isRequired,
   setStep: PropTypes.func.isRequired,
   userData: PropTypes.object.isRequired,
+  updateMobileNumber: PropTypes.bool.isRequired,
 };
 
 const CardSelect = ({ currentStep, setStep, visible, setModalVisible, userData, setIndex }) => {
@@ -326,12 +339,14 @@ const UpdateMembershipInput = ({
   setModalVisible,
   userData,
   cardIndex,
+  updateMobileNumber,
 }) => {
   if (currentStep !== STEPS[4]) {
     return null;
   }
   const unconfirmedMobileNumber = _.get(userData, 'unconfirmed_mobile_number');
   const { membershipCardPins } = useSelector(membershipCardSelector);
+  updateMobileNumber(true);
 
   const _switchToOtp = () => {
     setStep(STEPS[2]);
@@ -360,6 +375,7 @@ UpdateMembershipInput.propTypes = {
   setStep: PropTypes.func.isRequired,
   userData: PropTypes.object.isRequired,
   cardIndex: PropTypes.number.isRequired,
+  updateMobileNumber: PropTypes.func.isRequired,
 };
 
 const UpdateProfile = ({ visible, setModalVisible }) => {
@@ -367,6 +383,7 @@ const UpdateProfile = ({ visible, setModalVisible }) => {
   const [updateType, setUpdateType] = useState('');
   const [userData, setUserData] = useState({});
   const [cardIndex, setCardIndex] = useState(0);
+  const [updateMobileNumber, setUpdateMobileNumber] = useState(false);
 
   return (
     <View>
@@ -391,6 +408,7 @@ const UpdateProfile = ({ visible, setModalVisible }) => {
         visible={visible}
         setModalVisible={setModalVisible}
         userData={userData}
+        updateMobileNumber={updateMobileNumber}
       />
       <CardSelect
         currentStep={step}
@@ -407,6 +425,7 @@ const UpdateProfile = ({ visible, setModalVisible }) => {
         setModalVisible={setModalVisible}
         cardIndex={cardIndex}
         userData={userData}
+        updateMobileNumber={setUpdateMobileNumber}
       />
     </View>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Text, Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
@@ -26,6 +26,7 @@ const ProfileScreen = () => {
     'proofOfAddress',
     'callingCode',
     'country',
+    'pendingEmail',
   ]);
 
   const _closeModal = (close) => {
@@ -51,7 +52,7 @@ const ProfileScreen = () => {
       <PaddedContainer>
         <Input
           style={styles.addPadding}
-          value={initialValues.email}
+          value={!_.isEmpty(initialValues.email) ? initialValues.email : initialValues.pendingEmail}
           label="Email"
           editable={false}
           leftIcon={() => <Icon name="email" size={30} color="black" />}
@@ -67,6 +68,13 @@ const ProfileScreen = () => {
             />
           )}
         />
+        {!_.isEmpty(initialValues.pendingEmail) && (
+          <View style={custom.profileStatusContainer}>
+            <Text style={custom.profileStatus}>
+              {initialValues.pendingEmail} pending verification
+            </Text>
+          </View>
+        )}
         <Input
           value={initialValues.mobileNumber}
           label="Mobile Number"

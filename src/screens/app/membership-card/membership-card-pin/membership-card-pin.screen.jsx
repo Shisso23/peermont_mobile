@@ -106,7 +106,7 @@ const MembershipCardPinScreen = () => {
         visible={showOtpModal}
         setModalVisible={_closeModal}
         userData={userData}
-        verificationType="UPDATE_PROFILE"
+        verificationType="UPDATE_PROFILE_NUMBER"
       />
     </KeyboardScrollContainer>
   );
