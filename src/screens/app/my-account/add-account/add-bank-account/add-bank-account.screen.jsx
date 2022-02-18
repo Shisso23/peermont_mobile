@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { OtpNumericInput } from '../../../../../components/molecules';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../../components/containers';
 import { BankAccountForm } from '../../../../../components/forms';
 import { bankAccountModel } from '../../../../../models';
@@ -11,21 +11,23 @@ import { useDisableBackButtonWhileLoading } from '../../../../../hooks';
 import { custom } from '../../../../../../theme/theme.styles';
 
 const AddBankAccountScreen = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [showOtpModal, setShowOtpModal] = useState(false);
 
   const _handleFormSubmit = (formData) => {
     return dispatch(createBankAccountAction(formData));
   };
 
-  const _handleFormSuccess = (bankAccountId) => {
-    navigation.navigate('UploadBankAccountDocument', {
-      bankAccountId,
-    });
+  const _handleFormSuccess = () => {
+    setShowOtpModal(true);
   };
 
   const { isLoading } = useSelector((reducer) => reducer.bankAccountReducer);
   useDisableBackButtonWhileLoading(isLoading);
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
+  };
 
   return (
     <KeyboardScrollContainer>
@@ -43,6 +45,11 @@ const AddBankAccountScreen = () => {
           onSuccess={_handleFormSuccess}
         />
       </PaddedContainer>
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        verificationType="BANK_ACCOUNT"
+      />
     </KeyboardScrollContainer>
   );
 };
