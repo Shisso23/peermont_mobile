@@ -34,6 +34,11 @@ export function otpMessage(otpMethod, verificationType) {
         otpMethod,
       )}  with a One
       Time Pin(OTP) to your mobile number for validation.`;
+    case 'BANK_ACCOUNT':
+      return `We have sent a ${_.lowerCase(otpMethod)} with a One Time Pin (OTP) to ${methodText(
+        otpMethod,
+      )}
+        for validation.`;
     default:
       return null;
   }

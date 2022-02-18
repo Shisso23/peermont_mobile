@@ -29,6 +29,10 @@ import {
   verifyUpdateEmailOtpAction,
   getUserAction,
 } from '../../../reducers/user-reducer/user.actions';
+import {
+  verifyBankAccountOtpAction,
+  BankAccountResendOtpAction,
+} from '../../../reducers/bank-account-reducer/bank-account.actions';
 import { otpMessage } from '../../../helpers/otp-message.helper';
 import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
@@ -69,12 +73,14 @@ const OtpNumericInput = ({
         return dispatch(verifyUpdateMobileOtpAction(formData));
       case 'RESET_PASSWORD':
         return dispatch(verifyResetPasswordOtpAction(formData));
+      case 'BANK_ACCOUNT':
+        return dispatch(verifyBankAccountOtpAction(formData));
       default:
         return null;
     }
   };
 
-  const _handleFormSuccess = () => {
+  const _handleFormSuccess = (bankAccountId = null) => {
     switch (verificationType) {
       case 'PAYMENT':
         navigation.replace(afterOtpRoute);
@@ -94,6 +100,12 @@ const OtpNumericInput = ({
           .then(navigation.navigate('MyProfile'));
       case 'RESET_PASSWORD':
         navigation.replace('ResetPasswordSetPassword');
+        break;
+      case 'BANK_ACCOUNT':
+        _closeModal();
+        navigation.navigate('UploadBankAccountDocument', {
+          bankAccountId,
+        });
         break;
       default:
         return null;
@@ -115,6 +127,9 @@ const OtpNumericInput = ({
         break;
       case 'RESET_PASSWORD':
         dispatch(resetPasswordResendOtpAction());
+        break;
+      case 'BANK_ACCOUNT':
+        dispatch(BankAccountResendOtpAction());
         break;
       default:
         return null;

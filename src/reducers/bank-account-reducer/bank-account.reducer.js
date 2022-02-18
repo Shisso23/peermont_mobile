@@ -15,9 +15,13 @@ export const appendBankAccountAction = appendBankAccount.action;
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
+const setTemporaryToken = CreateAction(reducerName, 'SET_TEMP_TOKEN');
+export const setTemporaryTokenAction = setTemporaryToken.action;
+
 const initialState = {
   bankAccounts: [],
   isLoading: false,
+  token: null,
 };
 
 export default function bankAccountReducer(state = initialState, action) {
@@ -41,6 +45,11 @@ export default function bankAccountReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case setTemporaryToken.actionType:
+      return {
+        ...state,
+        token: action.payload,
       };
     default:
       return state;
