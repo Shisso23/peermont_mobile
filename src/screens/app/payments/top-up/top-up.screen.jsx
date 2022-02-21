@@ -63,7 +63,6 @@ const TopUpScreen = () => {
         setModalVisible={_closeModal}
         afterOtpRoute="TopUpComplete"
         verificationType="PAYMENT"
-        topUp
       />
     </KeyboardScrollContainer>
   );

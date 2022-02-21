@@ -45,11 +45,10 @@ const OtpNumericInput = ({
   afterOtpRoute,
   verificationType,
   userData,
-  topUp,
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { user, otpAutoFill } = useSelector((reducers) => reducers.userReducer);
+  const { otpAutoFill } = useSelector((reducers) => reducers.userReducer);
   const [showOtpMethodModal, setShowOtpMethodModal] = useState(false);
   const [otpMethod, setOtpMethod] = useState('SMS');
   const [unconfirmedMobileNumber, setUnconfirmedMobileNumber] = useState('');
@@ -116,9 +115,8 @@ const OtpNumericInput = ({
   const _handleResendOtp = () => {
     switch (verificationType) {
       case 'PAYMENT':
-        return user.emailConfirmed && topUp
-          ? setShowOtpMethodModal(true)
-          : dispatch(sendPaymentOtpAction(''));
+        dispatch(sendPaymentOtpAction(''));
+        break;
       case 'REGISTER':
         dispatch(registerResendOtpAction());
         break;
@@ -228,13 +226,11 @@ OtpNumericInput.propTypes = {
   afterOtpRoute: PropTypes.string,
   verificationType: PropTypes.string.isRequired,
   userData: PropTypes.object,
-  topUp: PropTypes.bool,
 };
 
 OtpNumericInput.defaultProps = {
   userData: {},
   afterOtpRoute: '',
-  topUp: false,
 };
 
 export default OtpNumericInput;
