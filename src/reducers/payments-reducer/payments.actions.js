@@ -120,6 +120,17 @@ export const sendPaymentOtpAction = (sendTo) => {
   };
 };
 
+export const sendPaymentEmailOtpAction = (sendTo) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
+    const { pendingPaymentId } = getState().paymentReducer;
+    return paymentService
+      .sendPaymentOtpEmail(pendingPaymentId, sendTo)
+      .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
 export const verifyPaymentOtpAction = (paymentOtpForm) => {
   return (dispatch, getState) => {
     dispatch(setIsLoadingAction(true));

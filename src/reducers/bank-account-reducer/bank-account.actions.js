@@ -2,8 +2,8 @@ import _ from 'lodash';
 import {
   setBankAccountsAction,
   removeBankAccountAction,
-  appendBankAccountAction,
   setIsLoadingAction,
+  setTemporaryTokenAction,
 } from './bank-account.reducer';
 import { bankAccountService } from '../../services';
 
@@ -27,8 +27,32 @@ export const createBankAccountAction = (formData) => {
 
     return bankAccountService
       .createBankAccount(formData)
+      .then((token) => {
+        dispatch(setTemporaryTokenAction(_.get(token, 'token')));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
+export const BankAccountResendOtpAction = () => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+    const { token } = getState().bankAccountReducer;
+
+    return bankAccountService
+      .resendBankAccountOtp(token)
+      .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
+export const verifyBankAccountOtpAction = (formData) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+    const { token } = getState().bankAccountReducer;
+
+    return bankAccountService
+      .verifyBankAccountOtp(formData, token)
       .then((newBankAccount) => {
-        dispatch(appendBankAccountAction(newBankAccount));
         return _.get(newBankAccount, 'id');
       })
       .finally(() => dispatch(setIsLoadingAction(false)));

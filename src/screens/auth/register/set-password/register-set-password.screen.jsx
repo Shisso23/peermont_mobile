@@ -20,7 +20,7 @@ const RegisterSetPasswordScreen = () => {
   };
 
   const _handleFormSuccess = () => {
-    navigation.pop();
+    navigation.replace('RegisterEmail');
   };
 
   useDisableBackButtonWhileLoading(isLoading);

@@ -2,6 +2,7 @@ export * from './auth/reset-password/reset-password.model';
 export * from './auth/otp/otp.model';
 export * from './auth/set-password/set-password.model';
 export * from './auth/registration/registration-membership-card.model';
+export * from './auth/registration-email/registration-email.model';
 export * from './auth/sign-in/sign-in.model';
 export * from './app/user/user.model';
 export * from './app/user/user-update-profile/user-update-profile.model';

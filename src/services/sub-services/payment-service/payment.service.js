@@ -33,6 +33,13 @@ export const sendPaymentOtp = (paymentId, sendTo) => {
   return authNetworkService.post(url, apiModel);
 };
 
+export const sendPaymentOtpEmail = (paymentId, sendTo) => {
+  const url = paymentUrls.sendEmailOtp(paymentId);
+  const apiModel = apiSendPaymentOtpModel({ sendTo });
+
+  return authNetworkService.post(url, apiModel);
+};
+
 export const verifyPaymentOtp = (paymentOtpForm, pendingPaymentId, currentMembershipCardPin) => {
   const url = paymentUrls.verifyOtp(pendingPaymentId);
   const apiModel = apiPaymentOtpModel(paymentOtpForm, currentMembershipCardPin);
@@ -72,6 +79,7 @@ export const getHasQueuedPayouts = (membershipCardId) => {
 export default {
   createPayment,
   sendPaymentOtp,
+  sendPaymentOtpEmail,
   verifyPaymentOtp,
   getLastPaymentUri,
   createEft,

@@ -7,6 +7,7 @@ import messaging from '@react-native-firebase/messaging';
 import codePush from 'react-native-code-push';
 import DeviceInfo from 'react-native-device-info';
 import { HmsPushEvent } from '@hmscore/react-native-hms-push';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
@@ -14,6 +15,7 @@ import { firebaseService, pushKitService } from './services';
 import { setIsAuthenticatedAction } from './reducers/user-auth-reducer/user-auth.reducer';
 import { hasIncomingNotification } from './reducers/notification-reducer/notification.actions';
 import { signOutAction } from './reducers/user-auth-reducer/user-auth.actions';
+import { setOtpAutoFillSettingAction } from './reducers/user-reducer/user.actions';
 import { loadAppDataAction } from './reducers/app-reducer/app.actions';
 import { AutoSignOut } from './components/atoms';
 import { splashScreen } from './assets';
@@ -53,6 +55,18 @@ const App = () => {
   const requestPermission = async () => {
     await messaging().requestPermission();
     await firebaseService.getAndSetToken();
+  };
+
+  const setOtpAutoFill = async () => {
+    const otpAutoFillEnabled = await AsyncStorage.getItem(config.otpAutofill);
+    if (!otpAutoFillEnabled) {
+      if (Platform.OS === 'android') {
+        await AsyncStorage.setItem(config.otpAutofill, 'true');
+      } else {
+        await AsyncStorage.setItem(config.otpAutofill, 'false');
+      }
+    }
+    dispatch(setOtpAutoFillSettingAction(await AsyncStorage.getItem(config.otpAutofill)));
   };
 
   const checkPermission = async () => {
@@ -120,6 +134,7 @@ const App = () => {
   useEffect(() => {
     LogBox.ignoreLogs(['Require cycle: ', 'Usage of ']);
     loadAppCenter();
+    setOtpAutoFill();
     DeviceInfo.hasHms().then((hasHms) => {
       if (hasHms) {
         checkPermission()

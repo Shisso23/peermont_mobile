@@ -7,4 +7,5 @@ export const setPasswordModel = ({ password, password_confirmation } = {}) => ({
 export const apiSetPasswordModel = ({ password } = {}, token) => ({
   password: password || '',
   token: token || '',
+  registration: true,
 });

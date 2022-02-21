@@ -6,6 +6,8 @@ import {
   apiBankAccountModel,
   bankAccountModel,
   constructUserBankAccountModels,
+  apiOtpModel,
+  otpModel,
 } from '../../../models';
 
 import { constructProofOfBankFormData } from './bank-account.utils';
@@ -25,22 +27,18 @@ const getBankAccounts = () => {
     });
 };
 
-const createBankAccount = (formData) => {
-  let newBankAccount;
-  const _returnNewBankAccount = () => newBankAccount;
-
-  const _extractNewBankAccount = (apiResponse) => {
-    const bankAccount = _.get(apiResponse, 'data');
-    newBankAccount = userBankAccountModel(bankAccount);
-    return apiResponse;
+const createBankAccount = (bankAccountInfo) => {
+  const _extractToken = (apiResponse) => {
+    const bankAccountToken = _.get(apiResponse, 'data.token', null);
+    return { token: bankAccountToken };
   };
 
   const createBankAccountUrl = bankAccountUrls.bankAccountsUrl();
-  const apiModel = apiBankAccountModel(formData);
+  const apiModel = apiBankAccountModel(bankAccountInfo);
+
   return authNetworkService
     .post(createBankAccountUrl, apiModel)
-    .then(_extractNewBankAccount)
-    .then(_returnNewBankAccount)
+    .then(_extractToken)
     .catch((err) => {
       err.error = bankAccountModel(err.error);
       return Promise.reject(err);
@@ -86,6 +84,31 @@ const uploadProofOfBankDocument = (bankAccountId, proofOfBankDocumentPath) => {
   return authNetworkService.patch(proofOfBankUrl, proofOfBankData);
 };
 
+export const resendBankAccountOtp = (token) => {
+  const sendBankAccountOtpUrl = bankAccountUrls.sendOtpUrl();
+  return authNetworkService.post(sendBankAccountOtpUrl, {
+    bank_account: { token },
+  });
+};
+
+export const verifyBankAccountOtp = (formData, token) => {
+  const _extractNewBankAccount = (apiResponse) => {
+    const bankAccount = _.get(apiResponse, 'data');
+    return userBankAccountModel(bankAccount);
+  };
+
+  const verifyBankAccountOtpUrl = bankAccountUrls.verifyOtpUrl();
+  const apiModel = apiOtpModel(formData, token, 'bank_account');
+
+  return authNetworkService
+    .post(verifyBankAccountOtpUrl, apiModel)
+    .then(_extractNewBankAccount)
+    .catch((err) => {
+      err.errors = otpModel(err.errors);
+      return Promise.reject(err);
+    });
+};
+
 export default {
   getBankAccounts,
   deleteBankAccount,
@@ -93,4 +116,6 @@ export default {
   uploadBankAccountDocument,
   updateBankAccount,
   uploadProofOfBankDocument,
+  resendBankAccountOtp,
+  verifyBankAccountOtp,
 };

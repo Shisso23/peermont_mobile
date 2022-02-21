@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
 
+import { OtpNumericInput } from '../../../components/molecules';
 import { MobileNumberForm } from '../../../components/forms';
 import { requestResetPasswordOtpAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
@@ -11,7 +11,7 @@ import { useDisableBackButtonWhileLoading } from '../../../hooks';
 
 const ResetPasswordScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const [showOtpModal, setShowOtpModal] = useState(false);
   const { signInFormData, isLoading } = useSelector((reducers) => reducers.userAuthReducer);
 
   const _handleFormSubmission = (formData) => {
@@ -19,7 +19,11 @@ const ResetPasswordScreen = () => {
   };
 
   const _handleFormSuccess = () => {
-    navigation.replace('ResetPasswordOtp');
+    setShowOtpModal(true);
+  };
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
   };
 
   useDisableBackButtonWhileLoading(isLoading);
@@ -41,6 +45,11 @@ const ResetPasswordScreen = () => {
           onSuccess={_handleFormSuccess}
         />
       </PaddedContainer>
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        verificationType="RESET_PASSWORD"
+      />
     </KeyboardScrollContainer>
   );
 };

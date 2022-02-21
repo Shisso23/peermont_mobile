@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -8,17 +8,33 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
   isLastFilledCell,
-  MaskSymbol,
 } from 'react-native-confirmation-code-field';
+import { useFormikContext } from 'formik';
+import _ from 'lodash';
 
 import colors from '../../../../theme/theme.colors';
 
-const NumericInput = ({ value, onChange, cellCount, handleSubmit, onlyMask, ...rest }) => {
+const NumericInput = ({
+  value,
+  onChange,
+  cellCount,
+  handleSubmit,
+  onlyMask,
+  otpOption,
+  ...rest
+}) => {
   const ref = useBlurOnFulfill({ value, cellCount });
+  const { submitForm } = useFormikContext();
+  const [triggerOtpSend, setTriggerOtpSend] = useState(true);
+  const [lastCellFilled, setLastCellFilled] = useState(false);
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue: onChange,
   });
+
+  const verifyOtp = () => {
+    submitForm();
+  };
 
   return (
     <>
@@ -28,19 +44,21 @@ const NumericInput = ({ value, onChange, cellCount, handleSubmit, onlyMask, ...r
         {...rest}
         value={value}
         onChangeText={onChange}
-        onBlur={handleSubmit}
+        onBlur={lastCellFilled ? handleSubmit : null}
         keyboardType="number-pad"
         renderCell={({ index, symbol, isFocused }) => {
           let textChild = null;
+          if (isLastFilledCell({ index, value }) && triggerOtpSend && otpOption) {
+            setTriggerOtpSend(false);
+            verifyOtp();
+          }
+
+          if (_.isEqual(value.length, 4)) {
+            setLastCellFilled(true);
+          }
 
           if (symbol) {
-            textChild = onlyMask ? (
-              '*'
-            ) : (
-              <MaskSymbol maskSymbol="*" isLastFilledCell={isLastFilledCell({ index, value })}>
-                {symbol}
-              </MaskSymbol>
-            );
+            textChild = '*';
           } else if (isFocused) {
             textChild = <Cursor />;
           }
@@ -89,10 +107,12 @@ NumericInput.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   onlyMask: PropTypes.bool,
+  otpOption: PropTypes.bool,
 };
 
 NumericInput.defaultProps = {
   onlyMask: false,
+  otpOption: false,
 };
 
 export default NumericInput;

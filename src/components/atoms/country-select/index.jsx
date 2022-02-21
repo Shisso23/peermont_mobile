@@ -26,10 +26,12 @@ const CountrySelect = ({ onChange, initialCountry }) => {
 };
 
 CountrySelect.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   initialCountry: PropTypes.string.isRequired,
 };
 
-CountrySelect.defaultProps = {};
+CountrySelect.defaultProps = {
+  onChange: () => null,
+};
 
 export default CountrySelect;

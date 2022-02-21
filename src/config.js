@@ -29,6 +29,7 @@ export default {
   fcmEnabled: 'fcmEnabled',
   pushKitTokenKey: 'pushKitToken',
   pushKitEnabled: 'pushKitEnabled',
+  otpAutofill: 'otpAutofillEnabled',
   biometricOtpOut: 'biometric_opt_out',
   palaceBetLink: 'https://media.palacepartners.com/redirect.aspx?pid=2163&bid=1506',
   appCenterAndroid: APPCENTER_ANDROID_PRODUCTION,

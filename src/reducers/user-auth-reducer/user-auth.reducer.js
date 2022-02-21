@@ -18,12 +18,16 @@ export const setResetPasswordFormDataAction = setResetPasswordFormData.action;
 const setSignInFormData = CreateAction(reducerName, 'SET_SIGN_IN_FORM_DATA');
 export const setSignInFormDataAction = setSignInFormData.action;
 
+const setUnconfirmedEmail = CreateAction(reducerName, 'SET_UNCONFIRMED_EMAIL');
+export const setUnconfirmedEmailAction = setUnconfirmedEmail.action;
+
 const initialState = {
   isLoading: false,
   isAuthenticated: false,
   token: null,
   resetPasswordFormData: null,
   signInFormData: signInModel(),
+  unconfirmedEmail: '',
 };
 
 export default function userAuthReducer(state = initialState, action) {
@@ -52,6 +56,11 @@ export default function userAuthReducer(state = initialState, action) {
       return {
         ...state,
         signInFormData: signInModel(action.payload),
+      };
+    case setUnconfirmedEmail.actionType:
+      return {
+        ...state,
+        unconfirmedEmail: action.payload,
       };
     default:
       return state;

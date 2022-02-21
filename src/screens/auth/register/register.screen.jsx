@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Divider, ListItem, Text } from 'react-native-elements';
+
 import { MembershipCardForm } from '../../../components/forms';
 import { registrationMembershipCardModel } from '../../../models';
 import { registerAction } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
 import { Contact } from '../../../components/atoms';
+import { OtpNumericInput } from '../../../components/molecules';
 import { custom } from '../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../hooks';
 
@@ -14,13 +16,18 @@ const RegisterScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { isLoading } = useSelector((reducer) => reducer.userAuthReducer);
+  const [showOtpModal, setShowOtpModal] = useState(false);
 
   const _handleFormSubmit = (formData) => {
     return dispatch(registerAction({ formData }));
   };
 
   const _onFormSuccess = () => {
-    navigation.replace('RegisterOtp');
+    setShowOtpModal(true);
+  };
+
+  const _closeModal = (close) => {
+    setShowOtpModal(close);
   };
 
   useDisableBackButtonWhileLoading(isLoading);
@@ -60,6 +67,11 @@ const RegisterScreen = () => {
       </ListItem>
       <Contact />
       <Divider />
+      <OtpNumericInput
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        verificationType="REGISTER"
+      />
     </KeyboardScrollContainer>
   );
 };

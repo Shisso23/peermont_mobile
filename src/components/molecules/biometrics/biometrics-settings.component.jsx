@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactNativeBiometrics from 'react-native-biometrics';
@@ -7,6 +7,8 @@ import _ from 'lodash';
 
 import { createUserBiometricKey } from '../../../reducers/user-auth-reducer/user-auth.actions';
 import { storageService } from '../../../services';
+import { PaddedContainer } from '../../containers';
+import { custom } from '../../../../theme/theme.styles';
 
 const BiometricSettings = () => {
   const isSignedIn = useSelector((state) => state.userAuthReducer.isAuthenticated);
@@ -66,32 +68,19 @@ const BiometricSettings = () => {
   }
 
   return (
-    <View style={styles.settingsContainer}>
-      {isAvailable && (
-        <>
-          <Switch onValueChange={toggleSwitch} value={hasRegisteredForBiometrics} />
-        </>
-      )}
-      {!isAvailable && (
-        <>
-          <Text styles={styles.settingsText}>Not available</Text>
-        </>
-      )}
-    </View>
+    <PaddedContainer>
+      <View style={custom.rowAlign}>
+        <Text h4>Biometric Login</Text>
+        <View style={custom.settingsContainer}>
+          {isAvailable ? (
+            <Switch onValueChange={toggleSwitch} value={hasRegisteredForBiometrics} />
+          ) : (
+            <Text styles={custom.settingsText}>Not available</Text>
+          )}
+        </View>
+      </View>
+    </PaddedContainer>
   );
 };
 
 export default BiometricSettings;
-
-BiometricSettings.propTypes = {};
-
-const styles = StyleSheet.create({
-  settingsContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  settingsText: {
-    marginHorizontal: 10,
-  },
-});

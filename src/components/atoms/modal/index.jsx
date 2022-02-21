@@ -3,6 +3,7 @@ import { View, Modal as RNModal, TouchableOpacity, StyleSheet } from 'react-nati
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PropTypes from 'prop-types';
 
+import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';
 
 const Modal = ({
@@ -17,7 +18,6 @@ const Modal = ({
   backgroundFadeColor,
 }) => {
   const backgroundFadeStyle = { backgroundColor: backgroundFadeColor };
-  const hitSlop = { top: 10, bottom: 10, left: 10, right: 10 };
 
   return (
     <RNModal animationType="fade" transparent={transparent} visible={visible}>
@@ -25,7 +25,7 @@ const Modal = ({
         <TouchableOpacity
           onPress={setModalVisible}
           style={styles.closeIconContainer}
-          hitSlop={hitSlop}
+          hitSlop={custom.hitSlop}
         >
           <Icon name="times" color={closeButtonColor} size={closeButtonSize} />
         </TouchableOpacity>
