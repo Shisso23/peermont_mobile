@@ -17,7 +17,7 @@ const ResetPasswordSetPasswordScreen = () => {
   const { isLoading } = useSelector((reducer) => reducer.userAuthReducer);
 
   const _handleFormSubmission = (formData) => {
-    return dispatch(resetPasswordAction(formData));
+    return dispatch(resetPasswordAction(formData, false));
   };
 
   const _handleFormSuccess = () => {

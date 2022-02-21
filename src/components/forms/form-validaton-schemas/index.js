@@ -3,7 +3,12 @@ import { luhnChecksum } from '../../../helpers/credit-card.helper';
 
 const numberRegex = /^[0-9]+$/;
 
-export const emailSchema = Yup.string().email('Invalid Email').trim();
+export const emailSchema = Yup.string().required('Email is required').email('Invalid Email').trim();
+
+export const registerEmailSchema = Yup.string()
+  .required('Email is required')
+  .email('Invalid Email')
+  .trim();
 
 export const mobileNumberSchema = Yup.string()
   .required('Mobile number is required')

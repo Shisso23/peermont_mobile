@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, Divider } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native';
+
 import { NumericalInputForm } from '../../../../components/forms';
 import {
   verifyResetPasswordOtpAction,
@@ -11,7 +13,6 @@ import { otpModel } from '../../../../models';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
 import { useDisableBackButtonWhileLoading } from '../../../../hooks';
-import { TouchableOpacity } from 'react-native';
 
 const ResetPasswordOtpScreen = () => {
   const dispatch = useDispatch();

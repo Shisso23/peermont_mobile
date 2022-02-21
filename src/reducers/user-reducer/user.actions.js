@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { setUserAction, setLoadingAction } from './user.reducer';
+import { setUserAction, setLoadingAction, setOtpAutoFillAction } from './user.reducer';
 import { firebaseService, userService, pushKitService, appService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
@@ -18,6 +18,12 @@ export const getUserAction = () => {
       dispatch(setBankAccountsAction(_user.bankAccounts));
       dispatch(setLoadingAction(false));
     });
+  };
+};
+
+export const setOtpAutoFillSettingAction = (value) => {
+  return (dispatch) => {
+    dispatch(setOtpAutoFillAction(value));
   };
 };
 
@@ -109,17 +115,26 @@ export const userUploadProfileDocumentsAction = (formData) => {
 };
 
 export const verifyUpdateMobileOtpAction = (formData) => {
-  return (dispatch) => {
-    dispatch(setLoadingAction(true));
-    return userService
-      .verifyUpdateMobileOtpAction(formData)
-      .finally(() => dispatch(setLoadingAction(false)));
+  return () => {
+    return userService.verifyUpdateMobileOtpAction(formData);
+  };
+};
+
+export const verifyUpdateEmailOtpAction = (formData) => {
+  return () => {
+    return userService.verifyUpdateEmail(formData);
   };
 };
 
 export const resendUpdateMobileOtpAction = () => {
   return () => {
     return userService.resendUpdateMobileOtpAction();
+  };
+};
+
+export const sendUserEmailOtpAction = () => {
+  return () => {
+    return userService.sendEmailOtpAction();
   };
 };
 

@@ -144,6 +144,26 @@ export const rememberCardPin = (pin) => {
   };
 };
 
+export const forgetCardPin = () => {
+  return (dispatch, getState) => {
+    const membershipCardReducer = _.get(getState(), 'membershipCardReducer', {});
+    const membershipCards = _.get(membershipCardReducer, 'membershipCards', {});
+    const membershipCardPins = _.get(membershipCardReducer, 'membershipCardPins', {});
+    const currentCardId = _.get(membershipCardReducer, 'currentMembershipCard.id', 0);
+
+    membershipCards.forEach((card, index) => {
+      if (_.get(card, 'id') === currentCardId) {
+        membershipCardPins[index] = {
+          card_id: currentCardId,
+          card_pin: '',
+        };
+      }
+    });
+
+    dispatch(setMembershipCardPinsAction(membershipCardPins));
+  };
+};
+
 export const queryPatronEnquiryAction = (formData) => {
   return (dispatch) => {
     dispatch(setMembershipCardIsLoading(true));

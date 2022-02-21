@@ -1,51 +1,76 @@
-import React from 'react';
-import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  membershipCardSelector,
+  setCurrentMembershipCardAction,
+} from '../../../reducers/membership-card-reducer/membership-card.reducer';
+import { MembershipCardInput } from '../../atoms';
 import getCardType from '../../../helpers/getCardType';
-import { useMembershipCard } from '../../../hooks';
-import colors from '../../../../theme/theme.colors';
+import { custom } from '../../../../theme/theme.styles';
 
-const MembershipCardCarouselItem = ({ item, index, unconfirmedMobileNumber }) => {
-  const { viewMembershipCard } = useMembershipCard();
+const MembershipCardCarouselItem = ({
+  item,
+  index,
+  unconfirmedMobileNumber,
+  closeModal,
+  cardSelected,
+}) => {
+  const dispatch = useDispatch();
+  const { membershipCardPins } = useSelector(membershipCardSelector);
+  const [showMembershipModal, setShowMembershipModal] = useState(false);
+
+  const showModal = () => {
+    dispatch(setCurrentMembershipCardAction(_.get(item, 'id')));
+    cardSelected(index);
+    if (_.isEqual(cardSelected(), null)) {
+      setShowMembershipModal(true);
+    }
+  };
+
+  const _closeModal = (close) => {
+    setShowMembershipModal(close);
+    if (close) {
+      closeModal();
+    }
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => viewMembershipCard(_.get(item, 'id'), index, unconfirmedMobileNumber)}
-    >
-      <Image
-        resizeMode="contain"
-        style={styles.carouselImage}
-        source={getCardType(_.get(item, 'tierName'))}
+    <>
+      <TouchableOpacity onPress={showModal}>
+        <Image
+          resizeMode="contain"
+          style={custom.carouselImage}
+          source={getCardType(_.get(item, 'tierName'))}
+        />
+        <Text style={custom.carouselCardNumber}>{_.get(item, 'cardNumber')}</Text>
+      </TouchableOpacity>
+      <MembershipCardInput
+        visible={showMembershipModal}
+        closeModal={_closeModal}
+        cardPin={_.get(membershipCardPins[index], 'card_pin')}
+        unconfirmedMobileNumber={unconfirmedMobileNumber}
       />
-      <Text style={styles.carouselCardNumber}>{_.get(item, 'cardNumber')}</Text>
-    </TouchableOpacity>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  carouselCardNumber: {
-    alignSelf: 'center',
-    bottom: 15,
-    color: colors.darkGrey,
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 20,
-  },
-  carouselImage: {
-    height: 200,
-    width: 250,
-  },
-});
 
 MembershipCardCarouselItem.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   unconfirmedMobileNumber: PropTypes.string,
+  closeModal: PropTypes.func,
+  cardSelected: PropTypes.func,
 };
 
 MembershipCardCarouselItem.defaultProps = {
   unconfirmedMobileNumber: '',
+  closeModal: () => null,
+  cardSelected: () => null,
 };
 
 export default MembershipCardCarouselItem;

@@ -8,11 +8,13 @@ import {
   apiSignInModel,
   apiRegistrationMembershipCardModel,
   registrationMembershipCardModel,
+  apiResetPasswordModelOtp,
   apiResetPasswordModel,
   apiOtpModel,
   otpModel,
   apiSetPasswordModel,
   setPasswordModel,
+  apiRegistrationEmailModel,
 } from '../../../models';
 
 const _extractAndReturnTokenFromApiResponse = (apiResponse) =>
@@ -79,10 +81,13 @@ const verifyRegisterOtp = (formData, token) => {
 const setPassword = (formData, token) => {
   const setPasswordUrl = authUrls.setPasswordUrl();
   const apiModel = apiSetPasswordModel(formData, token);
-  return networkService.post(setPasswordUrl, apiModel).catch((err) => {
-    err.errors = setPasswordModel(err.errors);
-    return Promise.reject(err);
-  });
+  return networkService
+    .post(setPasswordUrl, apiModel)
+    .then(_extractAndReturnTokenFromApiResponse)
+    .catch((err) => {
+      err.errors = setPasswordModel(err.errors);
+      return Promise.reject(err);
+    });
 };
 
 // ==========================================================
@@ -90,7 +95,7 @@ const setPassword = (formData, token) => {
 // ==========================================================
 const requestResetPasswordOtp = (formData) => {
   const requestResetPasswordOtpUrl = authUrls.requestResetPasswordOtpUrl();
-  const apiModel = apiResetPasswordModel(formData);
+  const apiModel = apiResetPasswordModelOtp(formData);
   return networkService
     .post(requestResetPasswordOtpUrl, apiModel)
     .then(_extractAndReturnTokenFromApiResponse)
@@ -114,7 +119,7 @@ const verifyResetPasswordOtp = (formData, otpToken) => {
 
 const resetPassword = (formData, token) => {
   const resetPasswordUrl = authUrls.resetPasswordUrl();
-  const apiModel = apiSetPasswordModel(formData, token);
+  const apiModel = apiResetPasswordModel(formData, token);
   return networkService.post(resetPasswordUrl, apiModel).catch((err) => {
     err.errors = setPasswordModel(err.errors);
     return Promise.reject(err);
@@ -131,6 +136,16 @@ const createUserBiometricKey = (publicKey) => {
   return authNetworkService.post(url, data);
 };
 
+const setEmail = (formData, token) => {
+  const setEmailUrl = authUrls.setEmailUrl();
+  const apiModel = apiRegistrationEmailModel(formData, token);
+
+  return networkService.post(setEmailUrl, apiModel).catch((err) => {
+    err.errors = setPasswordModel(err.errors);
+    return Promise.reject(err);
+  });
+};
+
 export default {
   signIn,
   signOut,
@@ -143,4 +158,5 @@ export default {
   verifyRegisterOtp,
   setPassword,
   createUserBiometricKey,
+  setEmail,
 };

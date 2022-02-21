@@ -7,6 +7,11 @@ export const resetPasswordModel = ({ login, callingCode, country } = {}) => ({
   country: country || 'ZA',
 });
 
-export const apiResetPasswordModel = ({ mobileNumber, callingCode } = {}) => ({
+export const apiResetPasswordModelOtp = ({ mobileNumber, callingCode } = {}) => ({
   login: parseMobile(mobileNumber, callingCode) || '',
+});
+
+export const apiResetPasswordModel = ({ password } = {}, token) => ({
+  password: password || '',
+  token: token || '',
 });

@@ -9,6 +9,7 @@ import { NumericalInputForm } from '../../../../components/forms';
 import {
   verifyUpdateMobileOtpAction,
   resendUpdateMobileOtpAction,
+  verifyUpdateEmailOtpAction,
   getUserAction,
 } from '../../../../reducers/user-reducer/user.actions';
 import { updateSignInMobileNumberAction } from '../../../../reducers/user-auth-reducer/user-auth.actions';
@@ -22,9 +23,14 @@ const UpdateMobileOtpScreen = () => {
   const navigation = useNavigation();
   const { loading } = useSelector((reducer) => reducer.userReducer);
   const { params } = useRoute();
+
   const unconfirmedMobileNumber = _.get(params, 'unconfirmedMobileNumberFromQuery');
+  const unconfirmedEmail = _.get(params, 'unconfirmedEmail');
 
   const _handleFormSubmission = (formData) => {
+    if (!_.isNull(unconfirmedEmail)) {
+      return dispatch(verifyUpdateEmailOtpAction(formData));
+    }
     return dispatch(verifyUpdateMobileOtpAction(formData));
   };
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { exampleCard } from '../../../assets';
 import Modal from '../modal';
+import colors from '../../../../theme/theme.colors';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -13,6 +14,8 @@ const RegisterCardModal = ({ visible, setModalVisible }) => {
       transparent
       backgroundFade
       hasCloseButton
+      closeButtonColor={colors.gold}
+      closeButtonSize={22}
       visible={visible}
       setModalVisible={setModalVisible}
     >

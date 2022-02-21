@@ -8,6 +8,7 @@ export default {
   registerUrl: () => `${apiUrl}/registrations`,
   registerSendOtpUrl: () => `${apiUrl}/registrations/send_otp`,
   verifyRegisterOtpUrl: () => `${apiUrl}/registrations/verify_otp`,
+  setEmailUrl: () => `${apiUrl}/users/set_email`,
 
   requestResetPasswordOtpUrl: () => `${apiUrl}/users/send_password_otp`,
   verifyResetPasswordOtpUrl: () => `${apiUrl}/users/verify_password_otp`,

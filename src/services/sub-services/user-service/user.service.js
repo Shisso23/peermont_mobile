@@ -45,10 +45,22 @@ const verifyUpdateMobileOtpAction = (formData) => {
   return authNetworkService.post(verifyUpdateMobileOtpUrl, verifyUpdateMobileOtpModel);
 };
 
+const verifyUpdateEmail = (formData) => {
+  const verifyUpdateEmailOtpUrl = userUrls.verifyUpdateEmailOtp();
+  const verifyUpdateEmailOtpModel = userUpdateMobileOtpModel(formData);
+  return authNetworkService.post(verifyUpdateEmailOtpUrl, verifyUpdateEmailOtpModel);
+};
+
 const resendUpdateMobileOtpAction = () => {
   const resendUpdateMobileOtpUrl = userUrls.resendUpdateMobileOtp();
   return authNetworkService.get(resendUpdateMobileOtpUrl);
 };
+
+const sendEmailOtpAction = () => {
+  const sendUpdateMobileOtpUrl = userUrls.sendEmailOtpUrl();
+  return authNetworkService.get(sendUpdateMobileOtpUrl);
+};
+
 const updateDailyTopUpLimit = (model) => {
   const url = userUrls.updateDailyTopUpLimit();
 
@@ -62,4 +74,6 @@ export default {
   verifyUpdateMobileOtpAction,
   resendUpdateMobileOtpAction,
   updateDailyTopUpLimit,
+  verifyUpdateEmail,
+  sendEmailOtpAction,
 };
