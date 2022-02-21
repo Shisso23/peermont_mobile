@@ -8,6 +8,7 @@ import { Divider, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
+import { flashService } from '../../../services';
 import ModalLoader from '../../atoms/modal-loader';
 import OtpNumericInput from '../otp-numeric-input';
 import MembershipCardCarouselItem from '../membership-card-carousel-item';
@@ -117,8 +118,12 @@ const UpdateInput = ({ currentStep, setStep, visible, setModalVisible, updateTyp
     } else if (_.isEqual(updateType, 'MOBILE_NUMBER') && uniqueNumber(data)) {
       userData(data);
       setStep(STEPS[3]);
-    } else {
+    } else if (_.isEqual(updateType, 'EMAIL') && !uniqueEmail(data)) {
       _closeModal();
+      flashService.error('That is already your current email', 5000);
+    } else if (_.isEqual(updateType, 'MOBILE_NUMBER') && !uniqueNumber(data)) {
+      _closeModal();
+      flashService.error('That is already your current mobile number', 5000);
     }
   };
 
