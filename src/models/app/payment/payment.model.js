@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Moment from 'moment';
 
 export const apiPaymentModel = (_model = {}) => ({
   payment: {
@@ -9,4 +10,24 @@ export const apiPaymentModel = (_model = {}) => ({
     payment_provider: _.get(_model, 'paymentProvider'),
     membership_card_id: _.get(_model, 'membershipCardId'),
   },
+});
+
+const getPayableNumber = (item) => {
+  const bank = _.get(item, 'payable.bank_account.account_number', null);
+  const creditCard = _.get(item, 'payable.credit_card.obfuscated_card_number', null);
+
+  if (!_.isNull(bank)) {
+    return bank;
+  }
+  return creditCard;
+};
+
+export const paymentTransactionModel = (_model = {}) => ({
+  paymentProvider: _.get(_model, 'payment_provider'),
+  payableType: _.get(_model, 'payable_type'),
+  updatedAt: Moment(_.get(_model, 'updated_at')).format('YYYY/MM/DD, HH:MM'),
+  payable: getPayableNumber(_model),
+  amount: (_.get(_model, 'total.cents') / 100).toFixed(2),
+  status: _.capitalize(_.get(_model, 'status')),
+  paymentType: _.startCase(_.get(_model, 'payment_type')),
 });
