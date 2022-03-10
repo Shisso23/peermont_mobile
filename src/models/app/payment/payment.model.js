@@ -41,6 +41,8 @@ const formatPayableType = (payableType) => {
       return 'Credit card';
     case 'InstantEft':
       return 'Instant EFT';
+    case 'BankAccount':
+      return 'Bank Account';
     default:
       return payableType;
   }
