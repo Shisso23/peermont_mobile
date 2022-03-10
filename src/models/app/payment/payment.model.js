@@ -22,12 +22,37 @@ const getPayableNumber = (item) => {
   return creditCard;
 };
 
+const formatPaymentType = (paymentType) => {
+  switch (paymentType) {
+    case 'eft_topup':
+      return 'Top Up';
+    case 'credit_card_topup':
+      return 'Top Up';
+    case 'payout':
+      return 'Payout';
+    default:
+      return null;
+  }
+};
+
+const formatPayableType = (payableType) => {
+  switch (payableType) {
+    case 'CreditCard':
+      return 'Credit card';
+    case 'InstantEft':
+      return 'Instant EFT';
+    default:
+      return payableType;
+  }
+};
+
 export const paymentTransactionModel = (_model = {}) => ({
   paymentProvider: _.get(_model, 'payment_provider'),
-  payableType: _.get(_model, 'payable_type'),
+  payableType: formatPayableType(_.get(_model, 'payable_type')),
   updatedAt: Moment(_.get(_model, 'updated_at')).format('YYYY/MM/DD, HH:MM'),
   payable: getPayableNumber(_model),
   amount: (_.get(_model, 'total.cents') / 100).toFixed(2),
   status: _.capitalize(_.get(_model, 'status')),
-  paymentType: _.startCase(_.get(_model, 'payment_type')),
+  paymentType: formatPaymentType(_.get(_model, 'payment_type')),
+  bank: _.get(_model, 'bank'),
 });

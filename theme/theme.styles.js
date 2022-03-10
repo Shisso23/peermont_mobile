@@ -255,6 +255,14 @@ export const custom = {
     fontSize: 14,
     color: colors.grey,
   },
+  alignRight: {
+    alignItems: 'flex-end',
+    bottom: -3,
+    height: 64.5,
+  },
+  statusText: {
+    fontSize: 13,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
