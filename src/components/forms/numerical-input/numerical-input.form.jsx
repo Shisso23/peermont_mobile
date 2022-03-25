@@ -24,11 +24,11 @@ const NumericalInputForm = React.forwardRef(
     const _handleSubmission = (formData, actions) => {
       isLoading(true);
       submitForm(autoFillTry ? formOtpData : formData)
-        .then(() => {
+        .then((bankId) => {
           isLoading(false);
           actions.setSubmitting(false);
           OtpAutocomplete.removeListener();
-          onSuccess(formData);
+          onSuccess(bankId);
         })
         .catch((error) => {
           actions.setSubmitting(false);
