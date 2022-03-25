@@ -61,9 +61,12 @@ export const custom = {
     marginLeft: 25,
   },
   headerContainerTitle: {
-    fontSize: 18,
-    fontFamily: 'OpenSans-Bold',
+    alignSelf: 'center',
     color: colors.primary,
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 18,
+    left: -27,
+    right: 27,
   },
   headerContainerSubText: {
     fontSize: 12,
