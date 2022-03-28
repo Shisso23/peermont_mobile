@@ -192,6 +192,7 @@ const OtpNumericInput = ({
             onSuccess={_handleFormSuccess}
             otpOption={_.isEqual(otpAutoFill, 'true')}
             isLoading={triggerIsLoading}
+            bankAccount={_.isEqual(verificationType, 'BANK_ACCOUNT')}
           />
           <TouchableOpacity onPress={_handleResendOtp}>
             <Text style={custom.resendOtpStyle}>Resend OTP</Text>

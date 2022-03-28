@@ -12,7 +12,7 @@ import { numericSchema } from '../form-validaton-schemas';
 import { custom } from '../../../../theme/theme.styles';
 
 const NumericalInputForm = React.forwardRef(
-  ({ submitForm, onSuccess, initialValues, otpOption, isLoading }, ref) => {
+  ({ submitForm, onSuccess, initialValues, otpOption, isLoading, bankAccount }, ref) => {
     const [otp, setOtp] = useState('');
     const [autoFillTry, setAutoFillTry] = useState(otpOption);
     const [formOtpData, setFormOtpData] = useState({});
@@ -24,11 +24,11 @@ const NumericalInputForm = React.forwardRef(
     const _handleSubmission = (formData, actions) => {
       isLoading(true);
       submitForm(autoFillTry ? formOtpData : formData)
-        .then(() => {
+        .then((bankId) => {
           isLoading(false);
           actions.setSubmitting(false);
           OtpAutocomplete.removeListener();
-          onSuccess(formData);
+          onSuccess(bankAccount ? bankId : formData);
         })
         .catch((error) => {
           actions.setSubmitting(false);
@@ -136,12 +136,14 @@ NumericalInputForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
   otpOption: PropTypes.bool,
   isLoading: PropTypes.func,
+  bankAccount: PropTypes.bool,
 };
 
 NumericalInputForm.defaultProps = {
   onSuccess: () => null,
   otpOption: false,
   isLoading: () => null,
+  bankAccount: false,
 };
 
 export default NumericalInputForm;
