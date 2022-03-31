@@ -95,6 +95,12 @@ const DrawerComponent = (props) => {
           onPress={() => navigation.navigate('PrivacyPolicy')}
           labelStyle={styles.labelStyle}
         />
+        <DrawerItem
+          label="Contact Us"
+          icon={() => <DrawerIcon name="phone-alt" />}
+          onPress={() => navigation.navigate('ContactUs')}
+          labelStyle={styles.labelStyle}
+        />
       </DrawerContentScrollView>
       <View style={safeAreaStyle}>
         <DrawerItem
