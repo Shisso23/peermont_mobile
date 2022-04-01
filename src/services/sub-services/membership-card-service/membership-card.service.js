@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import authNetworkService from '../auth-network-service/auth-network.service';
 import membershipCardUrls from './membership-card.urls';
 import {
@@ -18,6 +19,23 @@ const getMembershipCardBalance = (id, formData) => {
   return authNetworkService
     .post(url, apiModel)
     .then(_createAndReturnUserMembershipCardModel)
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      return Promise.reject(err);
+    });
+};
+
+const numberCheck = (apiResponse) => {
+  return _.get(apiResponse.data, 'number_changed');
+};
+
+const checkForNumberChange = (id, formData) => {
+  const url = membershipCardUrls.membershipNumberCheck(id);
+  const apiModel = apiMembershipCardModel(formData);
+
+  return authNetworkService
+    .post(url, apiModel)
+    .then(numberCheck)
     .catch((err) => {
       // eslint-disable-next-line no-console
       return Promise.reject(err);
@@ -85,4 +103,5 @@ export default {
   getMembershipCardBalance,
   getMembershipCardPoints,
   queryPatronEnquiry,
+  checkForNumberChange,
 };

@@ -89,7 +89,15 @@ UpdateOptions.propTypes = {
   updateType: PropTypes.func.isRequired,
 };
 
-const UpdateInput = ({ currentStep, setStep, visible, setModalVisible, updateType, userData }) => {
+const UpdateInput = ({
+  currentStep,
+  setStep,
+  visible,
+  setModalVisible,
+  updateType,
+  userData,
+  updateMobileNumberFlow,
+}) => {
   if (currentStep !== STEPS[1]) {
     return null;
   }
@@ -170,8 +178,12 @@ const UpdateInput = ({ currentStep, setStep, visible, setModalVisible, updateTyp
             Update {_.isEqual(updateType, 'EMAIL') ? 'Email' : 'Mobile Number'}
           </Text>
           <Text style={custom.modalCenterSubtitle}>
-            {`Please enter a valid ${
-              _.isEqual(updateType, 'EMAIL') ? 'email address below:' : 'mobile number below:'
+            {`${
+              _.isEqual(updateType, 'EMAIL')
+                ? 'Please enter a valid email address below:'
+                : updateMobileNumberFlow
+                ? 'We have detected your mobile number was updated, Please enter your updated mobile number below:'
+                : 'Please enter your updated mobile number below:'
             }`}
           </Text>
 
@@ -194,6 +206,7 @@ UpdateInput.propTypes = {
   setStep: PropTypes.func.isRequired,
   updateType: PropTypes.string.isRequired,
   userData: PropTypes.func.isRequired,
+  updateMobileNumberFlow: PropTypes.bool.isRequired,
 };
 
 const UpdateOtp = ({
@@ -383,9 +396,9 @@ UpdateMembershipInput.propTypes = {
   updateMobileNumber: PropTypes.func.isRequired,
 };
 
-const UpdateProfile = ({ visible, setModalVisible }) => {
-  const [step, setStep] = useState(STEPS[0]);
-  const [updateType, setUpdateType] = useState('');
+const UpdateProfile = ({ visible, setModalVisible, updateMobileNumberFlow }) => {
+  const [step, setStep] = useState(updateMobileNumberFlow ? STEPS[1] : STEPS[0]);
+  const [updateType, setUpdateType] = useState(updateMobileNumberFlow ? 'MOBILE_NUMBER' : '');
   const [userData, setUserData] = useState({});
   const [cardIndex, setCardIndex] = useState(0);
   const [updateMobileNumber, setUpdateMobileNumber] = useState(false);
@@ -406,6 +419,7 @@ const UpdateProfile = ({ visible, setModalVisible }) => {
         setModalVisible={setModalVisible}
         updateType={updateType}
         userData={setUserData}
+        updateMobileNumberFlow={updateMobileNumberFlow}
       />
       <UpdateOtp
         currentStep={step}
@@ -472,8 +486,11 @@ const styles = StyleSheet.create({
 UpdateProfile.propTypes = {
   visible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
+  updateMobileNumberFlow: PropTypes.bool,
 };
 
-UpdateProfile.defaultProps = {};
+UpdateProfile.defaultProps = {
+  updateMobileNumberFlow: false,
+};
 
 export default UpdateProfile;

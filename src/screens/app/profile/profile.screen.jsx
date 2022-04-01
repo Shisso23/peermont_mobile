@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import _ from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useRoute } from '@react-navigation/native';
 
 import { infoPopUpService } from '../../../services';
 import { UpdateProfile } from '../../../components/molecules';
@@ -18,6 +19,8 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((reducers) => reducers.userReducer);
   const [showOtpModal, setShowOtpModal] = useState(false);
+  const route = useRoute();
+  const updateMobileNumber = _.get(route, 'params.updateMobileNumber');
 
   const initialValues = _.pick(user, [
     'mobileNumber',
@@ -40,6 +43,9 @@ const ProfileScreen = () => {
   useEffect(() => {
     dispatch(getUserAction());
     setShowOtpModal(false);
+    if (updateMobileNumber) {
+      setShowOtpModal(true);
+    }
   }, []);
 
   useRefreshHeaderButton(() => {
@@ -94,7 +100,11 @@ const ProfileScreen = () => {
         />
         <Button title="Update Profile" onPress={_openModal} />
       </PaddedContainer>
-      <UpdateProfile visible={showOtpModal} setModalVisible={_closeModal} />
+      <UpdateProfile
+        visible={showOtpModal}
+        setModalVisible={_closeModal}
+        updateMobileNumberFlow={updateMobileNumber}
+      />
     </KeyboardScrollContainer>
   ) : (
     <LoadingComponent />

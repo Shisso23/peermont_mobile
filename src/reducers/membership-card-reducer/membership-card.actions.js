@@ -11,6 +11,7 @@ import {
   setIsLoadingAction as setMembershipCardIsLoading,
   setIsLoadingPointsAction,
   setPointsBalancesAction,
+  setTempCardInfoAction,
 } from './membership-card.reducer';
 import { membershipCardService, encryptionService } from '../../services';
 
@@ -33,6 +34,7 @@ export const getMembershipCardBalanceAction = (formData) => {
     const clearTextPin = formData.numeric;
 
     dispatch(setMembershipCardIsLoading(true));
+    dispatch(setTempCardInfoAction(formData));
 
     return Promise.resolve(clearTextPin)
       .then((pin) => encryptionService.encryptPin(_.get(currentMembershipCard, 'cardNumber'), pin))
@@ -49,6 +51,27 @@ export const getMembershipCardBalanceAction = (formData) => {
         dispatch(getMembershipCardPointsAction());
       })
       .finally(() => dispatch(setMembershipCardIsLoading(false)));
+  };
+};
+
+export const checkForNumberChangeAction = () => {
+  return (dispatch, getState) => {
+    const { currentMembershipCard, tempCardInfo } = getState().membershipCardReducer;
+    const clearTextPin = tempCardInfo.numeric;
+
+    return Promise.resolve(clearTextPin)
+      .then((pin) => encryptionService.encryptPin(_.get(currentMembershipCard, 'cardNumber'), pin))
+      .then((encryptedPin) => {
+        return membershipCardService
+          .checkForNumberChange(currentMembershipCard.id, {
+            encryptedPin,
+            cardNumber: currentMembershipCard.cardNumber,
+          })
+          .then((numberChanged) => {
+            return numberChanged;
+          })
+          .finally(() => dispatch(setTempCardInfoAction({})));
+      });
   };
 };
 

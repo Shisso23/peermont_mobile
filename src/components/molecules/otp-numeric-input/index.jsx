@@ -45,10 +45,11 @@ const OtpNumericInput = ({
   afterOtpRoute,
   verificationType,
   userData,
+  topUp,
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { otpAutoFill } = useSelector((reducers) => reducers.userReducer);
+  const { user, otpAutoFill } = useSelector((reducers) => reducers.userReducer);
   const [showOtpMethodModal, setShowOtpMethodModal] = useState(false);
   const [otpMethod, setOtpMethod] = useState('SMS');
   const [unconfirmedMobileNumber, setUnconfirmedMobileNumber] = useState('');
@@ -115,8 +116,9 @@ const OtpNumericInput = ({
   const _handleResendOtp = () => {
     switch (verificationType) {
       case 'PAYMENT':
-        dispatch(sendPaymentOtpAction(''));
-        break;
+        return user.emailConfirmed && topUp
+          ? setShowOtpMethodModal(true)
+          : dispatch(sendPaymentOtpAction(''));
       case 'REGISTER':
         dispatch(registerResendOtpAction());
         break;
@@ -190,6 +192,7 @@ const OtpNumericInput = ({
             onSuccess={_handleFormSuccess}
             otpOption={_.isEqual(otpAutoFill, 'true')}
             isLoading={triggerIsLoading}
+            bankAccount={_.isEqual(verificationType, 'BANK_ACCOUNT')}
           />
           <TouchableOpacity onPress={_handleResendOtp}>
             <Text style={custom.resendOtpStyle}>Resend OTP</Text>
@@ -226,11 +229,13 @@ OtpNumericInput.propTypes = {
   afterOtpRoute: PropTypes.string,
   verificationType: PropTypes.string.isRequired,
   userData: PropTypes.object,
+  topUp: PropTypes.bool,
 };
 
 OtpNumericInput.defaultProps = {
   userData: {},
   afterOtpRoute: '',
+  topUp: false,
 };
 
 export default OtpNumericInput;
