@@ -43,4 +43,7 @@ export default {
   androidStoreUrl: 'https://play.google.com/store/apps/details?id=com.codehesion.peermont_mobile',
   huaweiAppGalleryUrl: 'https://peermontwinnerscircle.dre.agconnect.link/6kME',
   callpayUrl: CALLPAY_URL,
+  peermontHotelIosStoreUrl: 'https://apps.apple.com/us/app/peermont-hotels/id1551006242',
+  peermontHotelAndroidStoreUrl:
+    'https://play.google.com/store/apps/details?id=com.intelitycorp.icedroidplus.brand.peermontbrand',
 };
