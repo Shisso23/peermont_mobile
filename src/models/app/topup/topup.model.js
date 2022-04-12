@@ -5,6 +5,7 @@ export const topUpModel = (_model = {}) => ({
   creditCardId: _.get(_model, 'creditCardId'),
   isEft: _.get(_model, 'isEft', false),
   isOzowEft: _.get(_model, 'isOzowEft', false),
+  isZapperEft: _.get(_model, 'isZapperEft', false),
 });
 
 export const apiDailyTopUpLimitModel = (_model = {}) => ({

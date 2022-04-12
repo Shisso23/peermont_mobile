@@ -90,8 +90,8 @@ export const paymentAmountSchema = (availableBalance) =>
     .required('Amount is required')
     .typeError('Amount can only be a number');
 
-export const topupCreditCardIdSchema = Yup.string().when(['isEft', 'isOzowEft'], {
-  is: (isEft, isOzowEft) => !isEft && !isOzowEft,
+export const topupCreditCardIdSchema = Yup.string().when(['isEft', 'isOzowEft', 'isZapperEft'], {
+  is: (isEft, isOzowEft, isZapperEft) => !isEft && !isOzowEft && !isZapperEft,
   then: Yup.string().required('Payment method required'),
 });
 

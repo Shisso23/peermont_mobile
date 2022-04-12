@@ -31,6 +31,7 @@ import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
 import NotificationsScreen from '../../screens/app/notification/notifications.screen';
 import TransactionsScreen from '../../screens/app/transactions/transactions.screen';
 import ContactUsScreen from '../../screens/app/contact-screen/contact-us.screen';
+import PaymentStatusScreen from '../../screens/app/payments/top-up/top-up-complete/payment-status.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -153,6 +154,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="ContactUs"
       component={ContactUsScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="PaymentStatus"
+      component={PaymentStatusScreen}
       options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>
