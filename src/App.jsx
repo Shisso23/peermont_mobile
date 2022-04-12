@@ -21,6 +21,7 @@ import { AutoSignOut } from './components/atoms';
 import { splashScreen } from './assets';
 import { useBiometricLogin, useAuthentication } from './hooks';
 import config from './config';
+import linking from './linking';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -180,7 +181,7 @@ const App = () => {
     <>
       <AutoSignOut />
       <StatusBar backgroundColor={colors.primary} />
-      <NavigationContainer />
+      <NavigationContainer linking={linking} />
     </>
   );
 };

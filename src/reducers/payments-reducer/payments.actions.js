@@ -16,7 +16,34 @@ export const initiateTopUpAction = (topUpFormData) => {
     if (topUpFormData.isOzowEft) {
       return dispatch(ozowEftTopUpAction(topUpFormData));
     }
+    if (topUpFormData.isZapperEft) {
+      return dispatch(zapperEftTopUpAction(topUpFormData));
+    }
     return dispatch(creditCardTopUpAction(topUpFormData));
+  };
+};
+
+const zapperEftTopUpAction = (topUpForm) => {
+  return (dispatch, getState) => {
+    dispatch(setIsLoadingAction(true));
+
+    const { currentMembershipCard } = getState().membershipCardReducer;
+    return paymentService
+      .createEft()
+      .then((eftPayableId) =>
+        paymentService.createPayment({
+          amount: topUpForm.amount,
+          membershipCardId: currentMembershipCard.id,
+          payableId: eftPayableId,
+          paymentType: 'eft_topup',
+          paymentProvider: 'Zapper',
+          payableType: 'InstantEft',
+        }),
+      )
+      .then((paymentId) => {
+        dispatch(setPendingPaymentIdAction(paymentId));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
 

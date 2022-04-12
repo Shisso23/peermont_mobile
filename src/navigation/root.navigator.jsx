@@ -5,13 +5,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import AuthNavigator from './auth/auth.navigator';
 import AppNavigator from './app/app.navigator';
+import linking from '../linking';
 
 const RootStack = createStackNavigator();
 
 const AppContainer = () => {
   const { isAuthenticated } = useSelector((reducer) => reducer.userAuthReducer);
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           <RootStack.Screen name="APP" component={AppNavigator} />

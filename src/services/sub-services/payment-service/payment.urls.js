@@ -10,4 +10,6 @@ export default {
   eftPaymentUrl: () => `${apiUrl}/instant_efts`,
   transactions: () => `${apiUrl}/payments/transaction_statements`,
   hasQueuedPayoutsUrl: () => `${apiUrl}/payments/has_queued_payouts`,
+  paymentSuccess: () => `${apiUrl}/payments/payment_success`,
+  paymentFailed: () => `${apiUrl}/payments/payment_cancel`,
 };

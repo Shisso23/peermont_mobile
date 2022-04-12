@@ -14,7 +14,7 @@ import { getCreditCardsAction } from '../../../reducers/credit-card-reducer/cred
 import { LoadingComponent, CreditCard } from '../../molecules';
 import { CurrencyIcon, AddButton } from '../../atoms';
 import { getFormError } from '../form-utils';
-import { callPayLogo, ozowLogo } from '../../../assets';
+import { callPayLogo, ozowLogo, zapperLogo } from '../../../assets';
 import { custom } from '../../../../theme/theme.styles';
 
 const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
@@ -92,7 +92,10 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                 <>
                   {creditCards.map((creditCard) => {
                     const isSelected =
-                      values.creditCardId === creditCard.id && !values.isEft && !values.isOzowEft;
+                      values.creditCardId === creditCard.id &&
+                      !values.isEft &&
+                      !values.isOzowEft &&
+                      !values.isZapperEft;
 
                     return (
                       <CreditCard
@@ -102,6 +105,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                           setFieldValue('creditCardId', creditCard.id);
                           setFieldValue('isEft', false);
                           setFieldValue('isOzowEft', false);
+                          setFieldValue('isZapperEft', false);
                         }}
                         disabled={_.get(creditCard, 'status') !== 'verified'}
                         hasCheckBox={_.get(creditCard, 'status') === 'verified'}
@@ -129,6 +133,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
               bottomDivider
               onPress={() => {
                 setFieldValue('isOzowEft', false);
+                setFieldValue('isZapperEft', false);
                 setFieldValue('isEft', true);
                 setFieldValue('creditCardId', undefined);
               }}
@@ -144,6 +149,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
               bottomDivider
               onPress={() => {
                 setFieldValue('isOzowEft', true);
+                setFieldValue('isZapperEft', false);
                 setFieldValue('isEft', false);
                 setFieldValue('creditCardId', undefined);
               }}
@@ -153,6 +159,22 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
                 <ListItem.Title>Instant EFT</ListItem.Title>
               </ListItem.Content>
               <CheckBox checked={values.isOzowEft} disabled />
+            </ListItem>
+
+            <ListItem
+              bottomDivider
+              onPress={() => {
+                setFieldValue('isOzowEft', false);
+                setFieldValue('isZapperEft', true);
+                setFieldValue('isEft', false);
+                setFieldValue('creditCardId', undefined);
+              }}
+            >
+              <Image source={zapperLogo} style={custom.paymentProviderIcon} />
+              <ListItem.Content>
+                <ListItem.Title>Instant EFT</ListItem.Title>
+              </ListItem.Content>
+              <CheckBox checked={values.isZapperEft} disabled />
             </ListItem>
 
             <Text style={[custom.errorStyle, styles.errorStyle]}> {error('creditCardId')}</Text>
