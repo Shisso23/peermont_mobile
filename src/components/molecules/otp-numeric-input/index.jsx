@@ -184,7 +184,7 @@ const OtpNumericInput = ({
           >
             <Icon name="times" color={colors.gold} size={22} />
           </TouchableOpacity>
-          <Text style={custom.modalCenterTitle}>VERIFICATION CODE</Text>
+          <Text style={custom.modalCenterTitle}>ONE TIME PIN CODE</Text>
           <Text style={custom.modalCenterSubtitle}>{otpMessage(otpMethod, verificationType)}</Text>
           <NumericalInputForm
             submitForm={_handleFormSubmission}
