@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
@@ -52,20 +51,13 @@ const PayOutScreen = () => {
   useEffect(() => {
     _getBankAccounts();
     dispatch(hasQueuedPayouts({ membership_card_id: currentMembershipCard.id }));
-    Alert.alert(
-      'Payouts',
-      'Payouts may take up to 48 hours to process, not including weekends and public holidays.',
-    );
   }, []);
 
   return (
     <KeyboardScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>Pay Out</Text>
-        <Text style={custom.centerSubtitle}>
-          Enter an amount and select a bank account. Payouts may take 48 hours to process, not
-          including weekends and public holidays.
-        </Text>
+        <Text style={custom.centerSubtitle}>Enter an amount and select a bank account.</Text>
         <Text h4 style={custom.centerSubtitle}>
           Your balance is {_.get(route, 'params.balance')}
         </Text>
