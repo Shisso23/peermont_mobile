@@ -51,7 +51,7 @@ const formatPayableType = (payableType) => {
 export const paymentTransactionModel = (_model = {}) => ({
   paymentProvider: _.get(_model, 'payment_provider'),
   payableType: formatPayableType(_.get(_model, 'payable_type')),
-  updatedAt: Moment(_.get(_model, 'updated_at')).format('YYYY/MM/DD, HH:MM'),
+  updatedAt: Moment(_.get(_model, 'updated_at')).format('YYYY/MM/DD, HH:mm'),
   payable: getPayableNumber(_model),
   amount: (_.get(_model, 'total.cents') / 100).toFixed(2),
   status: _.capitalize(_.get(_model, 'status')),

@@ -33,6 +33,9 @@ export const setCurrentMembershipCardPinAction = setCurrentMembershipCardPin.act
 const setPointsBalances = CreateAction(reducerName, 'SET_POINTS_BALANCES');
 export const setPointsBalancesAction = setPointsBalances.action;
 
+const setTempCardInfo = CreateAction(reducerName, 'SET_TEMP_CARD_INFO');
+export const setTempCardInfoAction = setTempCardInfo.action;
+
 const initialState = {
   isLoading: false,
   isLoadingPoints: false,
@@ -41,6 +44,7 @@ const initialState = {
   currentMembershipCard: null,
   currentMembershipCardPin: null,
   pointsBalances: {},
+  tempCardInfo: {},
 };
 
 export const membershipCardSelector = (reducers) => reducers.membershipCardReducer;
@@ -96,6 +100,11 @@ export default function membershipCardReducer(state = initialState, action) {
       return {
         ...state,
         pointsBalances: action.payload,
+      };
+    case setTempCardInfo.actionType:
+      return {
+        ...state,
+        tempCardInfo: action.payload,
       };
     default:
       return state;

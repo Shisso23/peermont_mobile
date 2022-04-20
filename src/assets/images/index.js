@@ -11,3 +11,4 @@ export { default as blackPath } from './membership-cards/black-card.png';
 export { default as palaceBetIcon } from './palace-bet.png';
 export { default as palaceBetIconBlue } from './palace-bet-blue.png';
 export { default as imageUri } from './header-alt.png';
+export { default as contactUs } from './contact-us.png';

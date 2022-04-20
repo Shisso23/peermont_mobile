@@ -38,6 +38,10 @@ const NumericalInputForm = React.forwardRef(
             actions.setFieldValue('numeric', '', false);
             actions.setFieldError('numeric', _.get(apiErrors, 'numeric'), false);
             turnOffOtpAutoFill();
+          } else if (_.get(error, 'statusCode') === 503) {
+            actions.setFieldValue('numeric', '', false);
+            actions.setFieldError('numeric', 'Service Unavailable', false);
+            turnOffOtpAutoFill();
           } else {
             actions.setFieldValue('numeric', '', false);
             actions.setFieldError('numeric', apiErrors, false);

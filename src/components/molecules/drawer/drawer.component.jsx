@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, View, Linking } from 'react-native';
+import { Image, StyleSheet, View, Linking, Platform } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getBuildNumber, getVersion } from 'react-native-device-info';
+import DeviceInfo, { getBuildNumber, getVersion } from 'react-native-device-info';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import codePush from 'react-native-code-push';
@@ -17,10 +17,11 @@ import { palaceBetIcon } from '../../../assets';
 import variables from '../../../../theme/theme.variables';
 
 const DrawerComponent = (props) => {
-  const [codePushVersion, setCodePushVersion] = useState();
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [codePushVersion, setCodePushVersion] = useState();
+  const [storeUrl, setStoreUrl] = useState('');
 
   const safeAreaStyle = {
     paddingBottom: insets.bottom,
@@ -37,8 +38,25 @@ const DrawerComponent = (props) => {
     });
   };
 
+  const setStoreUrls = () => {
+    DeviceInfo.hasHms().then((hasHms) => {
+      if (hasHms) {
+        setStoreUrl('');
+      } else if (Platform.OS === 'ios') {
+        setStoreUrl(appConfig.peermontHotelIosStoreUrl);
+      } else {
+        setStoreUrl(appConfig.peermontHotelAndroidStoreUrl);
+      }
+    });
+  };
+
+  const _openPeermontHotels = () => {
+    Linking.openURL(storeUrl).then();
+  };
+
   useEffect(() => {
     getAppCenterCodeVersion();
+    setStoreUrls();
   }, []);
 
   return (
@@ -83,6 +101,14 @@ const DrawerComponent = (props) => {
           onPress={() => Linking.openURL(appConfig.palaceBetLink)}
           labelStyle={styles.labelStyle}
         />
+        {_.isEmpty(storeUrl) ? null : (
+          <DrawerItem
+            label="Peermont Hotels"
+            icon={() => <DrawerIcon name="bed" />}
+            onPress={_openPeermontHotels}
+            labelStyle={styles.labelStyle}
+          />
+        )}
         <DrawerItem
           label="T&C’s"
           icon={() => <DrawerIcon name="file" />}
@@ -93,6 +119,12 @@ const DrawerComponent = (props) => {
           label="Privacy Policy"
           icon={() => <DrawerIcon name="shield-alt" />}
           onPress={() => navigation.navigate('PrivacyPolicy')}
+          labelStyle={styles.labelStyle}
+        />
+        <DrawerItem
+          label="Contact Us"
+          icon={() => <DrawerIcon name="phone-alt" />}
+          onPress={() => navigation.navigate('ContactUs')}
           labelStyle={styles.labelStyle}
         />
       </DrawerContentScrollView>

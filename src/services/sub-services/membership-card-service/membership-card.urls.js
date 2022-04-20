@@ -9,4 +9,5 @@ export default {
   membershipCardPointsUrl: (id) => `${apiUrl}/membership_cards/${id}/points`,
   membershipCardPatronEnquiryUrl: () =>
     `${apiUrl}/membership_cards/update_mobile_number_patron_enquiry`,
+  membershipNumberCheck: (id) => `${apiUrl}/membership_cards/${id}/number_changed`,
 };
