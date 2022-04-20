@@ -266,6 +266,60 @@ export const custom = {
   statusText: {
     fontSize: 13,
   },
+  buttonContactUs: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: colors.white,
+    borderColor: colors.gold,
+    borderRadius: 10,
+    borderWidth: 1.5,
+    flexDirection: 'row',
+    height: 50,
+    marginBottom: 10,
+    width: 350,
+  },
+  buttonTextContactUs: {
+    fontFamily: variables.fontFamilyPrimary,
+    fontSize: 16,
+    marginLeft: 15,
+  },
+  centerTitleConactUs: {
+    color: colors.gold,
+    fontFamily: variables.fontFamilySecondary,
+    fontSize: 35,
+    marginBottom: 10,
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  contactUsImage: {
+    alignSelf: 'center',
+    height: 310,
+    width: 370,
+  },
+  labelContactUs: {
+    fontFamily: variables.fontFamilySecondary,
+    fontSize: 18,
+    marginBottom: 5,
+    marginLeft: 15,
+  },
+  leftIconStyleContactUs: {
+    marginLeft: 8,
+  },
+  rightIconStyleContactUs: {
+    right: 5,
+  },
+  textCallCentre: {
+    left: -80,
+  },
+  textContainerContactUs: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textEmail: {
+    left: -37,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

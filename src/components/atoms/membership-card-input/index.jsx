@@ -16,6 +16,7 @@ import {
   getMembershipCardBalanceAction,
   rememberCardPin,
   queryPatronEnquiryAction,
+  checkForNumberChangeAction,
 } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import { membershipCardPinModel } from '../../../models';
@@ -50,10 +51,19 @@ const MembershipCardInput = ({
     return dispatch(getMembershipCardBalanceAction(formData)).then(() => {});
   };
 
+  const checkNumberChange = () => {
+    dispatch(checkForNumberChangeAction()).then((result) => {
+      if (result) {
+        navigation.navigate('MyProfile', { updateMobileNumber: true });
+      }
+    });
+  };
+
   const _handleFormSuccess = (formData) => {
     if (!_.isEmpty(unconfirmedMobileNumber)) {
       succesfulInput();
     } else {
+      checkNumberChange();
       setSuccessLoader(true);
       _closeModal();
       const pin = _.get(formData, 'numeric');

@@ -30,6 +30,7 @@ import PrivacyPolicyScreen from '../../screens/global/privacy-policy/privacy-pol
 import PalaceBetScreen from '../../screens/app/palace-bet/palace-bet';
 import NotificationsScreen from '../../screens/app/notification/notifications.screen';
 import TransactionsScreen from '../../screens/app/transactions/transactions.screen';
+import ContactUsScreen from '../../screens/app/contact-screen/contact-us.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -147,6 +148,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="PayOutComplete"
       component={PayOutCompleteScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="ContactUs"
+      component={ContactUsScreen}
       options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>
