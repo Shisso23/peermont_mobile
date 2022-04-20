@@ -40,7 +40,7 @@ const ContactUsScreen = () => {
       >
         <View style={custom.textContainerContactUs}>
           <Icon name="email" size={25} color="black" style={custom.leftIconStyleContactUs} />
-          <Text style={custom.textEmail}>customercare@peermont.com</Text>
+          <Text style={custom.textEmail}>apphelp@peermont.com</Text>
           <Icon
             name="arrow-forward"
             size={20}
@@ -52,7 +52,7 @@ const ContactUsScreen = () => {
 
       <Text style={custom.labelContactUs}>Black Card Members</Text>
       <View style={custom.buttonContactUs}>
-        <Text style={custom.buttonTextContactUs}>Please contact your host for assistance</Text>
+        <Text style={custom.buttonTextContactUs}>Please contact your VIP host for assistance</Text>
       </View>
     </ScrollContainer>
   );

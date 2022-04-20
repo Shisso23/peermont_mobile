@@ -280,7 +280,7 @@ export const custom = {
   },
   buttonTextContactUs: {
     fontFamily: variables.fontFamilyPrimary,
-    fontSize: 18,
+    fontSize: 16,
     marginLeft: 15,
   },
   centerTitleConactUs: {
@@ -318,7 +318,7 @@ export const custom = {
     justifyContent: 'space-between',
   },
   textEmail: {
-    left: -17,
+    left: -37,
   },
 };
 export const globalScreenOptions = {
