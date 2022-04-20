@@ -89,15 +89,7 @@ UpdateOptions.propTypes = {
   updateType: PropTypes.func.isRequired,
 };
 
-const UpdateInput = ({
-  currentStep,
-  setStep,
-  visible,
-  setModalVisible,
-  updateType,
-  userData,
-  updateMobileNumberFlow,
-}) => {
+const UpdateInput = ({ currentStep, setStep, visible, setModalVisible, updateType, userData }) => {
   if (currentStep !== STEPS[1]) {
     return null;
   }
@@ -181,8 +173,6 @@ const UpdateInput = ({
             {`${
               _.isEqual(updateType, 'EMAIL')
                 ? 'Please enter a valid email address below:'
-                : updateMobileNumberFlow
-                ? 'We have detected your mobile number was updated, Please enter your updated mobile number below:'
                 : 'Please enter your updated mobile number below:'
             }`}
           </Text>
@@ -206,7 +196,6 @@ UpdateInput.propTypes = {
   setStep: PropTypes.func.isRequired,
   updateType: PropTypes.string.isRequired,
   userData: PropTypes.func.isRequired,
-  updateMobileNumberFlow: PropTypes.bool.isRequired,
 };
 
 const UpdateOtp = ({
