@@ -8,6 +8,7 @@ import codePush from 'react-native-code-push';
 import DeviceInfo from 'react-native-device-info';
 import { HmsPushEvent } from '@hmscore/react-native-hms-push';
 import AsyncStorage from '@react-native-community/async-storage';
+import _ from 'lodash';
 
 import colors from '../theme/theme.colors';
 import NavigationContainer from './navigation/root.navigator';
@@ -56,6 +57,13 @@ const App = () => {
   const requestPermission = async () => {
     await messaging().requestPermission();
     await firebaseService.getAndSetToken();
+  };
+
+  const setDeeplinkTransition = async () => {
+    const deeplinkTransitionEnabled = await AsyncStorage.getItem(config.deeplinkTransition);
+    if (_.isEqual(deeplinkTransitionEnabled, null)) {
+      await AsyncStorage.setItem(config.deeplinkTransition, 'false');
+    }
   };
 
   const setOtpAutoFill = async () => {
@@ -136,6 +144,7 @@ const App = () => {
     LogBox.ignoreLogs(['Require cycle: ', 'Usage of ']);
     loadAppCenter();
     setOtpAutoFill();
+    setDeeplinkTransition();
     DeviceInfo.hasHms().then((hasHms) => {
       if (hasHms) {
         checkPermission()

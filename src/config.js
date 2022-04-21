@@ -30,6 +30,7 @@ export default {
   pushKitTokenKey: 'pushKitToken',
   pushKitEnabled: 'pushKitEnabled',
   otpAutofill: 'otpAutofillEnabled',
+  deeplinkTransition: 'deeplinkTransition',
   biometricOtpOut: 'biometric_opt_out',
   palaceBetLink: 'https://media.palacepartners.com/redirect.aspx?pid=2163&bid=1506',
   appCenterAndroid: APPCENTER_ANDROID_PRODUCTION,
