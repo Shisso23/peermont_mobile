@@ -47,10 +47,6 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
       .catch((error) => _handleFormSubmitError(error, actions, formData));
   };
 
-  const _navigateBackToMembershipDetail = () => {
-    navigation.navigate('MembershipCardDetail');
-  };
-
   const _payoutNotify = (formData, actions) => {
     if (hasQueuedPayouts) {
       Alert.alert(
@@ -59,7 +55,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
         [
           {
             text: 'Cancel',
-            onPress: () => _navigateBackToMembershipDetail(),
+            onPress: () => navigation.navigate('MembershipCardDetail'),
             style: 'cancel',
           },
           {
@@ -73,33 +69,11 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
     }
   };
 
-  const _amountCheck = (formData, actions) => {
-    if (formData.amount > 250000) {
-      Alert.alert(
-        'Payout Amount',
-        'The payment platform is available 24/7 of up to an amount of R250k per payout. Between 00:00 and 16:00 on week days a payout amount of up to R5mil is avaliable.',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => _navigateBackToMembershipDetail(),
-            style: 'cancel',
-          },
-          {
-            text: 'OK',
-            onPress: () => _payoutNotify(formData, actions),
-          },
-        ],
-      );
-    } else {
-      _payoutNotify(formData, actions);
-    }
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       initialStatus={{ apiErrors: {} }}
-      onSubmit={_amountCheck}
+      onSubmit={_payoutNotify}
       validationSchema={validationSchema}
       enableReinitialize
     >
