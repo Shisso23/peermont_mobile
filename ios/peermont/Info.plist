@@ -99,5 +99,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>zapper</string>
+	</array>
 </dict>
 </plist>
