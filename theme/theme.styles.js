@@ -320,6 +320,12 @@ export const custom = {
   textEmail: {
     left: -37,
   },
+  amountNotify: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    padding: 2,
+    textAlign: 'center',
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
