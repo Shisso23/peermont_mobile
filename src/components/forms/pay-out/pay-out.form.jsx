@@ -74,7 +74,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
   };
 
   const _amountCheck = (formData, actions) => {
-    if (formData.amount > 250000) {
+    if (formData.amount > 1) {
       Alert.alert(
         'Payout Amount',
         'The payment platform is available 24/7 of up to an amount of R250k per payout. Between 00:00 and 16:00 on week days a payout amount of up to R5mil is avaliable.',
