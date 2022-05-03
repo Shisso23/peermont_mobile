@@ -16,7 +16,7 @@ import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schem
 import { AddButton, CurrencyIcon } from '../../atoms';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 
-const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
+const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
   const navigation = useNavigation();
   const { hasQueuedPayouts } = useSelector((reducers) => reducers.paymentReducer);
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
@@ -73,33 +73,11 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
     }
   };
 
-  const _amountCheck = (formData, actions) => {
-    if (formData.amount > 1) {
-      Alert.alert(
-        'Payout Amount',
-        'The payment platform is available 24/7 of up to an amount of R250k per payout. Between 00:00 and 16:00 on week days a payout amount of up to R5mil is avaliable.',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => _navigateBackToMembershipDetail(),
-            style: 'cancel',
-          },
-          {
-            text: 'OK',
-            onPress: () => _payoutNotify(formData, actions),
-          },
-        ],
-      );
-    } else {
-      _payoutNotify(formData, actions);
-    }
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       initialStatus={{ apiErrors: {} }}
-      onSubmit={_amountCheck}
+      onSubmit={_payoutNotify}
       validationSchema={validationSchema}
       enableReinitialize
     >
@@ -128,7 +106,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
                 keyboardType="phone-pad"
                 leftIcon={CurrencyIcon}
               />
-
+              {amountNotify(values.amount > 1)}
               <View style={styles.rowAlign}>
                 <Text h4>Bank Accounts</Text>
                 <AddButton onPress={() => navigation.navigate('AddBankAccount')} />
@@ -181,10 +159,12 @@ PayOutForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
+  amountNotify: PropTypes.func,
 };
 
 PayOutForm.defaultProps = {
   onSuccess: () => null,
+  amountNotify: () => null,
 };
 
 const styles = StyleSheet.create({
