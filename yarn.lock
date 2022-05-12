@@ -748,6 +748,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@hmscore/react-native-hms-account@6.4.0-300":
+  version "6.1.0-302"
+  resolved "https://repo.huaweicloud.com/repository/npm/@hmscore/react-native-hms-account/-/react-native-hms-account-6.1.0-302.tgz#dfb8dec1089dc3a6f5e933f9f21e24ac498d3a1f"
+  integrity sha512-eD3ojVnEuVugGIMK0g6NY4S39lH0VngxDf18HSzaB/ENNjf5RbFjo56yakm9BmqdWUKdiPm8/lNMjo13W7rfkg==
+
 "@hmscore/react-native-hms-push@^5.3.0-304":
   version "5.3.0-304"
   resolved "https://repo.huaweicloud.com/repository/npm/@hmscore/react-native-hms-push/-/react-native-hms-push-5.3.0-304.tgz#733d6d4705a56bfcdba0b1cb5d579063e0600695"
