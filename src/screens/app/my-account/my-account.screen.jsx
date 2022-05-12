@@ -142,7 +142,7 @@ const MyAccountScreen = () => {
       <BiometricSettings />
       <PushNotificationSettings />
       <SmsSettings />
-      {Platform.OS === 'android' ? <OtpAutofillSetting /> : null}
+      {Platform.OS === 'ios' ? null : <OtpAutofillSetting />}
     </>
   );
 
