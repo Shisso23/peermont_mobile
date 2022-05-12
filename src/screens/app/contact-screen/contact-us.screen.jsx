@@ -36,7 +36,7 @@ const ContactUsScreen = () => {
       <Text style={custom.labelContactUs}>Email</Text>
       <TouchableOpacity
         style={custom.buttonContactUs}
-        onPress={() => openEmailApp(config.customerCareEmail)}
+        onPress={() => openEmailApp(config.appHelpEmail)}
       >
         <View style={custom.textContainerContactUs}>
           <Icon name="email" size={25} color="black" style={custom.leftIconStyleContactUs} />
