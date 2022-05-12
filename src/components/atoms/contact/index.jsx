@@ -16,10 +16,10 @@ const Contact = () => {
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-      <ListItem onPress={() => openEmailApp(config.customerCareEmail)} bottomDivider>
+      <ListItem onPress={() => openEmailApp(config.appHelpEmail)} bottomDivider>
         <ListItem.Subtitle>Email</ListItem.Subtitle>
         <ListItem.Content style={styles.alignRight}>
-          <ListItem.Subtitle>customercare@peermont.com</ListItem.Subtitle>
+          <ListItem.Subtitle>apphelp@peermont.com</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
