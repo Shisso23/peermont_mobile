@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
@@ -14,12 +14,15 @@ import { hasIncomingNotification } from '../../../reducers/notification-reducer/
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import { custom } from '../../../../theme/theme.styles';
 import { getSplashAdvertAction } from '../../../reducers/advert-reducer/advert.actions';
+import { JackpotListSelect } from '../../../components/atoms';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const biometricRegister = useBiometricRegister();
   const notificationOpenedBackGround = handleNotificationOpenedBackGround();
+  const route = useRoute();
+  const [visible, setVisible] = useState(false);
 
   const { user } = useSelector((reducers) => reducers.userReducer);
   const { membershipCards } = useSelector(membershipCardSelector);
@@ -30,8 +33,13 @@ const HomeScreen = () => {
     setActiveSlideIndex(index);
   };
 
+  const _closeModal = () => {
+    navigation.setParams({ visible: false });
+  };
+
   useFocusEffect(
     React.useCallback(() => {
+      navigation.setParams({ visible: false });
       dispatch(hasIncomingNotification());
     }, []),
   );
@@ -41,6 +49,14 @@ const HomeScreen = () => {
     biometricRegister().then();
     dispatch(getSplashAdvertAction());
   }, []);
+
+  useEffect(() => {
+    if (_.isEqual(_.get(route.params, 'visible'), true)) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  }, [_.get(route.params, 'visible'), visible]);
 
   useFocusEffect(exitAppOnHardwarePressListener);
   const _keyExtractor = (item) => _.get(item, 'id', '').toString();
@@ -92,6 +108,7 @@ const HomeScreen = () => {
       <PaddedContainer>
         <Button title="Add Card" onPress={() => navigation.navigate('AddMembershipCard')} />
       </PaddedContainer>
+      {visible ? <JackpotListSelect visible={visible} closeModal={_closeModal} /> : null}
     </ScrollContainer>
   );
 };
