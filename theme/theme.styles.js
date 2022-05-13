@@ -23,6 +23,9 @@ export const custom = {
     marginTop: 10,
     textAlign: 'center',
   },
+  buttonWidth: {
+    width: 275,
+  },
   errorStyle: {
     fontFamily: variables.fontFamily,
     color: colors.danger,

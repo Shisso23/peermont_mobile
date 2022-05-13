@@ -94,6 +94,12 @@ const DrawerComponent = (props) => {
           labelStyle={styles.labelStyle}
         />
         <DrawerItem
+          label="Jackpot Look Up"
+          icon={() => <DrawerIcon name="trophy" />}
+          onPress={() => navigation.navigate('Home', { visible: true })}
+          labelStyle={styles.labelStyle}
+        />
+        <DrawerItem
           label="PalaceBet"
           icon={() => (
             <Image source={palaceBetIcon} style={styles.palaceBetSize} width={22} height={21} />
