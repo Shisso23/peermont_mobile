@@ -17,3 +17,4 @@ export { default as storageService } from './sub-services/storage-service/storag
 export { default as advertService } from './sub-services/advert-service/advert.service';
 export { default as appService } from './sub-services/app-service/app.service';
 export { default as pushKitService } from './sub-services/push-kit-service/push-kit.service';
+export { default as jackpotListService } from './sub-services/jackpot-list-service/jackpot-list.service';

@@ -329,6 +329,51 @@ export const custom = {
     padding: 2,
     textAlign: 'center',
   },
+  activeCardPagination: {
+    color: colors.gold,
+    fontWeight: 'bold',
+    marginLeft: '7%',
+  },
+  inactiveCardPagination: {
+    color: colors.grey,
+    marginLeft: '7%',
+  },
+  topPadding: {
+    paddingTop: 10,
+  },
+  gameName: {
+    color: colors.gold,
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  jackpotCard: {
+    backgroundColor: colors.white,
+    borderRadius: 12,
+    elevation: 3,
+    paddingVertical: 10,
+    shadowColor: colors.grey,
+    shadowOffset: {
+      height: 1,
+      width: 1,
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 12,
+  },
+  jackpotData: {
+    color: colors.black,
+    marginHorizontal: '5%',
+  },
+  line: {
+    borderColor: colors.gold,
+    borderWidth: 0.6,
+    marginHorizontal: '2%',
+    marginVertical: '1%',
+  },
+  smallCenterSubtitle: {
+    fontSize: 12,
+    textAlign: 'center',
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

@@ -10,6 +10,7 @@ import healthSurveyReducer from './health-survey-reducer/health-survey.reducer';
 import paymentReducer from './payments-reducer/payments.reducer';
 import notificationReducer from './notification-reducer/notification.reducer';
 import advertReducer from './advert-reducer/advert.reducer';
+import hotSlotPredictionsReducer from './hot-slot-predictions-reducer/hot-slot-predictions.reducer';
 
 export default combineReducers({
   userAuthReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
   paymentReducer,
   notificationReducer,
   advertReducer,
+  hotSlotPredictionsReducer,
 });
