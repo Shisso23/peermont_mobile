@@ -19,4 +19,5 @@ export { default as PalaceBet } from './palace-bet';
 export { default as OtpNumericInput } from './otp-numeric-input';
 export { default as OtpAutofillSetting } from './otp-autofill/otp-autofill-setting';
 export { default as UpdateProfile } from './update-profile';
+export { default as Jackpot } from './jackpot';
 export { default as Slot } from './slot';

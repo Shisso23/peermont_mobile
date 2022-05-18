@@ -3,6 +3,23 @@ import colors from './theme.colors';
 import variables from './theme.variables';
 
 export const custom = {
+  casinoSelectorDropdownOptions: {
+    backgroundColor: colors.grey,
+    color: colors.black,
+    fontSize: 14,
+    opacity: 0.5,
+  },
+  casinoSelectorText: {
+    fontSize: 15,
+  },
+  searchContainer: {
+    backgroundColor: colors.white,
+    borderBottomColor: colors.white,
+    borderTopColor: colors.white,
+  },
+  iconContainerStyle: {
+    marginRight: 15,
+  },
   centerTitle: {
     color: colors.gold,
     fontFamily: variables.fontFamilySecondary,
@@ -178,6 +195,20 @@ export const custom = {
     marginHorizontal: 10,
     position: 'absolute',
     right: 0,
+    top: -10,
+    width: 30,
+    zIndex: 1,
+  },
+  leftCloseIconContainer: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderRadius: 30,
+    height: 30,
+    justifyContent: 'center',
+    left: 0,
+    margin: 20,
+    marginHorizontal: 10,
+    position: 'absolute',
     top: -10,
     width: 30,
     zIndex: 1,
