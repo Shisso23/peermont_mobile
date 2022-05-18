@@ -11,6 +11,7 @@ import paymentReducer from './payments-reducer/payments.reducer';
 import notificationReducer from './notification-reducer/notification.reducer';
 import advertReducer from './advert-reducer/advert.reducer';
 import hotSlotPredictionsReducer from './hot-slot-predictions-reducer/hot-slot-predictions.reducer';
+import jackpotListReducer from './jackpot-list-reducer/jackpot-list.reducer';
 
 export default combineReducers({
   userAuthReducer,
@@ -24,4 +25,5 @@ export default combineReducers({
   notificationReducer,
   advertReducer,
   hotSlotPredictionsReducer,
+  jackpotListReducer,
 });

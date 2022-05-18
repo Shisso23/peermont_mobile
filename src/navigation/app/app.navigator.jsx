@@ -34,6 +34,7 @@ import ContactUsScreen from '../../screens/app/contact-screen/contact-us.screen'
 import PaymentStatusScreen from '../../screens/app/payments/top-up/top-up-complete/payment-status.screen';
 import JackpotListScreen from '../../screens/app/jackpot-look-up/jackpot-list.screen';
 import JackpotPredictionsScreen from '../../screens/app/jackpot-look-up/jackpot-predictions.screen';
+import FilterHeader from '../../components/headers/filter-header';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -166,7 +167,7 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="JackpotList"
       component={JackpotListScreen}
-      options={{ headerShown: true, title: '' }}
+      options={{ headerShown: true, title: '', headerRight: () => <FilterHeader /> }}
     />
     <AppStack.Screen
       name="JackpotPredictions"

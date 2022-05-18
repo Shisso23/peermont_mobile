@@ -21,3 +21,4 @@ export { default as CreditCardStatus } from './credit-card-status';
 export { default as OtpMethodModal } from './otp-method-modal';
 export { default as MembershipCardInput } from './membership-card-input';
 export { default as JackpotListSelect } from './jackpot-list-select';
+export { default as JackpotListFilter } from './jackpot-list-filter';
