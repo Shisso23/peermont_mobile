@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import jackpotListUrls from './jackpot-list.urls';
 import authNetworkService from '../auth-network-service/auth-network.service';
+import { apiJackpotModel } from '../../../models';
 
 export const getRedHotSlots = () => {
   const jackpotUrl = jackpotListUrls.redHotSlotsUrl();
@@ -22,21 +23,24 @@ export const getJackpots = () => {
 };
 
 export const getJackpotsByCasino = (casino) => {
-  const jackpotUrl = jackpotListUrls.jackpotsByCasinoUrl(casino);
+  const apiModel = apiJackpotModel({ casino });
+  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl();
   const returnJackpots = (apiResponse) => _.get(apiResponse, 'data');
-  return authNetworkService.get(jackpotUrl).then(returnJackpots);
+  return authNetworkService.post(jackpotUrl, apiModel).then(returnJackpots);
 };
 
-export const getJackpotsByMachine = (machine) => {
-  const jackpotUrl = jackpotListUrls.jackpotsByMachineUrl(machine);
+export const getJackpotsByMachine = (casino, machine) => {
+  const apiModel = apiJackpotModel({ casino, machine });
+  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl(machine);
   const returnJackpots = (apiResponse) => _.get(apiResponse, 'data');
-  return authNetworkService.get(jackpotUrl).then(returnJackpots);
+  return authNetworkService.post(jackpotUrl, apiModel).then(returnJackpots);
 };
 
 export const getJackpotsByAmount = (amount) => {
-  const jackpotUrl = jackpotListUrls.jackpotsByAmountUrl(amount);
+  const apiModel = apiJackpotModel({ amount });
+  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl(amount);
   const returnJackpots = (apiResponse) => _.get(apiResponse, 'data');
-  return authNetworkService.get(jackpotUrl).then(returnJackpots);
+  return authNetworkService.post(jackpotUrl, apiModel).then(returnJackpots);
 };
 
 export const getJackpotsByLargest = () => {

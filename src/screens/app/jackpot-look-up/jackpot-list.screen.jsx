@@ -1,19 +1,19 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions, View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
-import { Text, SearchBar } from 'react-native-elements';
-import ModalDropdown from 'react-native-modal-dropdown';
+import { Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import { useFocusEffect } from '@react-navigation/native';
+import _ from 'lodash';
 
 import { custom } from '../../../../theme/theme.styles';
-import colors from '../../../../theme/theme.colors';
-import { Jackpot } from '../../../components/molecules';
+import { Jackpot, LoadingComponent } from '../../../components/molecules';
 import { jackpotListSelector } from '../../../reducers/jackpot-list-reducer/jackpot-list.reducer';
-import { getJackpotsAction } from '../../../reducers/jackpot-list-reducer/jackpot-list.actions';
 import {
-  getJackpotsByCasino,
-  getJackpotsByMachine,
-} from '../../../services/sub-services/jackpot-list-service/jackpot-list.service';
+  getJackpotsAction,
+  getJackpotsByCasinoAction,
+  getJackpotsByMachineAction,
+} from '../../../reducers/jackpot-list-reducer/jackpot-list.actions';
+import { JackpotListForm } from '../../../components/forms';
+import { jackpotFormModel } from '../../../models';
 
 const data = [
   {
@@ -27,61 +27,31 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const JackpotListScreen = () => {
   const dispatch = useDispatch();
-  const [machineNumber, setMachineNumber] = useState();
-  const [casino, setCasino] = useState();
-  const casinos = ['casino 1', 'casino 2', 'casino 3', 'casino 4'];
-  const { jackpots } = useSelector(jackpotListSelector);
+  const casinos = ['EP', 'FI', 'GL', 'GP', 'KH', 'MP', 'RC', 'TM', 'UM'];
+  const { jackpots, isLoading } = useSelector(jackpotListSelector);
 
   const renderJackpotCard = ({ item }) => <Jackpot jackpotData={item} />;
 
-  const updateSearch = (value) => {
-    setMachineNumber(value);
+  const _handleFormSubmit = (formData) => {
+    if (!_.isNull(formData.casino) && _.isNull(formData.machine))
+      dispatch(getJackpotsByCasinoAction(casinos[formData.casino]));
+    if (!_.isNull(formData.casino) && !_.isNull(formData.machine))
+      dispatch(getJackpotsByMachineAction(casinos[formData.casino], formData.machine));
   };
 
-  const updateCasino = (index) => {
-    setCasino(casinos[index]);
-  };
+  useEffect(() => {
+    dispatch(getJackpotsAction());
+  }, []);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      dispatch(getJackpotsAction);
-    }, []),
-  );
-
-  useMemo(() => {
-    dispatch(getJackpotsByCasino(casino));
-  }, [casino]);
-
-  useMemo(() => {
-    dispatch(getJackpotsByMachine(machineNumber));
-  }, [machineNumber]);
-
-  return (
+  return isLoading ? (
+    <View style={custom.loaderMargin}>
+      <LoadingComponent hasBackground={false} />
+    </View>
+  ) : (
     <SafeAreaView>
       <Text style={[custom.centerTitle, custom.topPadding]}>Jackpot List</Text>
       <View style={custom.headerContainer}>
-        <View style={[styles.searchWidth, custom.headerContainer]}>
-          <ModalDropdown
-            options={casinos}
-            style={[styles.searchWidth, styles.casinoSelector]}
-            textStyle={custom.casinoSelectorText}
-            dropdownStyle={styles.casinoSelectorDropdown}
-            dropdownTextStyle={custom.casinoSelectorDropdownOptions}
-            defaultValue="Please Select a casino"
-            onSelect={(value) => updateCasino(value)}
-          />
-          <SearchBar
-            placeholder="Type machine number here..."
-            onChangeText={(value) => updateSearch(value)}
-            value={machineNumber}
-            round
-            containerStyle={custom.searchContainer}
-            inputStyle={custom.searchContainer}
-            inputContainerStyle={custom.searchContainer}
-            lightTheme
-            clearIcon
-          />
-        </View>
+        <JackpotListForm initialValues={jackpotFormModel()} submitForm={_handleFormSubmit} />
         <FlatList
           style={styles.jackpotDimensions}
           scrollEnabled={data.length > 4}
@@ -94,27 +64,8 @@ const JackpotListScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  casinoSelector: {
-    alignSelf: 'center',
-    backgroundColor: colors.grey,
-    borderRadius: 12,
-    marginTop: 5,
-    opacity: 0.5,
-    padding: 10,
-    width: screenWidth * 0.7,
-  },
-  casinoSelectorDropdown: {
-    borderRadius: 12,
-    height: 120,
-    marginLeft: 0,
-    marginTop: 20,
-    width: screenWidth * 0.65,
-  },
   jackpotDimensions: {
     width: screenWidth * 0.9,
-  },
-  searchWidth: {
-    width: screenWidth * 0.8,
   },
 });
 

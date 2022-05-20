@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Divider, Text, Button } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useDispatch } from 'react-redux';
 
@@ -21,7 +20,6 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const JackpotListFilter = ({ visible, closeModal }) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const [display, setDisplay] = useState(visible);
   const [range, setRange] = useState([0, 1000000]);
 
@@ -31,20 +29,22 @@ const JackpotListFilter = ({ visible, closeModal }) => {
   };
 
   const jackpotsLargest = () => {
-    dispatch(getJackpotsByLargestAction);
-    navigation.navigate('JackpotList');
+    dispatch(getJackpotsByLargestAction());
+    closeModal();
     setDisplay(false);
   };
 
   const jackpotsSmallest = () => {
-    dispatch(getJackpotsBySmallestAction);
-    navigation.navigate('JackpotList');
+    dispatch(getJackpotsBySmallestAction());
+    closeModal();
     setDisplay(false);
   };
 
-  useMemo(() => {
-    dispatch(getJackpotsByAmountAction(range));
-  }, [range]);
+  const submitModal = () => {
+    dispatch(getJackpotsByAmountAction(range[0]));
+    closeModal();
+    setDisplay(false);
+  };
 
   return (
     <>
@@ -66,7 +66,7 @@ const JackpotListFilter = ({ visible, closeModal }) => {
               <Icon name="times" color={colors.gold} size={22} />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={_closeModal}
+              onPress={submitModal}
               style={custom.closeIconContainer}
               hitSlop={custom.hitSlop}
             >

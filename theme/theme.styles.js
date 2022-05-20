@@ -20,6 +20,9 @@ export const custom = {
   iconContainerStyle: {
     marginRight: 15,
   },
+  loaderMargin: {
+    marginTop: '100%',
+  },
   centerTitle: {
     color: colors.gold,
     fontFamily: variables.fontFamilySecondary,
@@ -230,6 +233,9 @@ export const custom = {
   rowAlign: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  row: {
+    flexDirection: 'row',
   },
   settingsContainer: {
     alignItems: 'center',
