@@ -95,6 +95,10 @@ export const topupCreditCardIdSchema = Yup.string().when(['isEft', 'isOzowEft', 
   then: Yup.string().required('Payment method required'),
 });
 
+export const machineSchema = Yup.string().matches(/^[0-9]+$/, 'Only numbers permitted');
+
+export const casinoSchema = Yup.string().required('Casino is required');
+
 export const payOutBankIdSchema = Yup.string().required('Approved bank account required');
 
 export const dailyTopUpLimitSchema = Yup.number()

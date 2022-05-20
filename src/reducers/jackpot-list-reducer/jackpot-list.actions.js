@@ -21,11 +21,11 @@ export const getJackpotsByCasinoAction = (casino) => {
   };
 };
 
-export const getJackpotsByMachineAction = (machine) => {
+export const getJackpotsByMachineAction = (casino, machine) => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
     return jackpotListService
-      .getJackpotsByMachine(machine)
+      .getJackpotsByMachine(casino, machine)
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
   };
