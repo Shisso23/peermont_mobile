@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Dimensions, View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { Dimensions, View, FlatList, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
@@ -52,12 +52,14 @@ const JackpotListScreen = () => {
       <Text style={[custom.centerTitle, custom.topPadding]}>Jackpot List</Text>
       <View style={custom.headerContainer}>
         <JackpotListForm initialValues={jackpotFormModel()} submitForm={_handleFormSubmit} />
-        <FlatList
-          style={styles.jackpotDimensions}
-          scrollEnabled={data.length > 4}
-          data={jackpots}
-          renderItem={renderJackpotCard}
-        />
+        <ScrollView style={custom.jackpotScrolViewMargin}>
+          <FlatList
+            style={styles.jackpotDimensions}
+            scrollEnabled={data.length > 4}
+            data={jackpots}
+            renderItem={renderJackpotCard}
+          />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

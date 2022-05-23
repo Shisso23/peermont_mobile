@@ -41,6 +41,16 @@ export const getJackpotsByAmountAction = (amount) => {
   };
 };
 
+export const getJackpotsByRangeAction = (lowerLimit, upperLimit) => {
+  return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+    return jackpotListService
+      .getJackpotsByRange(lowerLimit, upperLimit)
+      .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
+      .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
 export const getJackpotsByLargestAction = () => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));

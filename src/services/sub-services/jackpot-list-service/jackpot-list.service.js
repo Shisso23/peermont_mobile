@@ -31,14 +31,21 @@ export const getJackpotsByCasino = (casino) => {
 
 export const getJackpotsByMachine = (casino, machine) => {
   const apiModel = apiJackpotModel({ casino, machine });
-  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl(machine);
+  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl();
   const returnJackpots = (apiResponse) => _.get(apiResponse, 'data');
   return authNetworkService.post(jackpotUrl, apiModel).then(returnJackpots);
 };
 
 export const getJackpotsByAmount = (amount) => {
   const apiModel = apiJackpotModel({ amount });
-  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl(amount);
+  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl();
+  const returnJackpots = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.post(jackpotUrl, apiModel).then(returnJackpots);
+};
+
+export const getJackpotsByRange = (lowerLimit, upperLimit) => {
+  const apiModel = apiJackpotModel({ lowerLimit, upperLimit });
+  const jackpotUrl = jackpotListUrls.jackpotsByParamsUrl();
   const returnJackpots = (apiResponse) => _.get(apiResponse, 'data');
   return authNetworkService.post(jackpotUrl, apiModel).then(returnJackpots);
 };
@@ -63,5 +70,6 @@ export default {
   getJackpotsByMachine,
   getJackpotsByLargest,
   getJackpotsByAmount,
+  getJackpotsByRange,
   getJackpotsBySmallest,
 };

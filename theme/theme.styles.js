@@ -3,6 +3,9 @@ import colors from './theme.colors';
 import variables from './theme.variables';
 
 export const custom = {
+  jackpotScrolViewMargin: {
+    marginBottom: '35%',
+  },
   casinoSelectorDropdownOptions: {
     backgroundColor: colors.grey,
     color: colors.black,
