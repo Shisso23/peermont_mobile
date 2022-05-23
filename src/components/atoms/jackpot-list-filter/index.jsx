@@ -13,7 +13,7 @@ import { custom } from '../../../../theme/theme.styles';
 import {
   getJackpotsByLargestAction,
   getJackpotsBySmallestAction,
-  getJackpotsByAmountAction,
+  getJackpotsByRangeAction,
 } from '../../../reducers/jackpot-list-reducer/jackpot-list.actions';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -21,7 +21,7 @@ const { width: screenWidth } = Dimensions.get('window');
 const JackpotListFilter = ({ visible, closeModal }) => {
   const dispatch = useDispatch();
   const [display, setDisplay] = useState(visible);
-  const [range, setRange] = useState([0, 1000000]);
+  const [range, setRange] = useState([0, 5000000]);
 
   const _closeModal = () => {
     closeModal();
@@ -41,7 +41,7 @@ const JackpotListFilter = ({ visible, closeModal }) => {
   };
 
   const submitModal = () => {
-    dispatch(getJackpotsByAmountAction(range[0]));
+    dispatch(getJackpotsByRangeAction(range[0], range[1]));
     closeModal();
     setDisplay(false);
   };
@@ -79,7 +79,7 @@ const JackpotListFilter = ({ visible, closeModal }) => {
               <MultiSlider
                 values={range}
                 min={0}
-                max={1000000}
+                max={5000000}
                 step={100000}
                 enableLabel
                 snapped

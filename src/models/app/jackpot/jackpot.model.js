@@ -15,6 +15,8 @@ export const apiJackpotModel = (_model = {}) => ({
     casino_code: _.get(_model, 'casino'),
     machine_code: _.get(_model, 'machine'),
     amount: _.get(_model, 'amount'),
+    upper_limit: _.get(_model, 'upperLimit'),
+    lower_limit: _.get(_model, 'lowerLimit'),
   },
 });
 
