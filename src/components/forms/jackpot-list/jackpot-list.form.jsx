@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View, Button } from 'react-native';
-import { SearchBar, Text } from 'react-native-elements';
+import { StyleSheet, Dimensions, View } from 'react-native';
+import { SearchBar, Text, Button } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
@@ -75,7 +75,7 @@ const JackpotListForm = ({ submitForm, initialValues }) => {
                 <Text style={[custom.errorStyle, styles.errorStyle]}> {error('machine')}</Text>
               ) : null}
               <View style={styles.submit}>
-                <Button title="filter" onPress={handleSubmit} color={colors.white} />
+                <Button title="Filter" onPress={handleSubmit} />
               </View>
             </View>
           </>
@@ -107,9 +107,7 @@ const styles = StyleSheet.create({
   },
   submit: {
     alignSelf: 'center',
-    backgroundColor: colors.gold,
-    borderRadius: 10,
-    width: screenWidth * 0.2,
+    width: screenWidth * 0.5,
   },
 });
 

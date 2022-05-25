@@ -6,7 +6,6 @@ import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Divider, Text, Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
-import { PaddedContainer } from '../../containers';
 import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
 
@@ -23,11 +22,6 @@ const JackpotListSelect = ({ visible, closeModal }) => {
 
   const navigateJackpotList = () => {
     navigation.navigate('JackpotList');
-    setDisplay(false);
-  };
-
-  const navigateJackpotPredictions = () => {
-    navigation.navigate('JackpotPredictions');
     setDisplay(false);
   };
 
@@ -53,20 +47,9 @@ const JackpotListSelect = ({ visible, closeModal }) => {
             </TouchableOpacity>
             <Text style={custom.modalCenterTitle}>Jackpot Look Up</Text>
             <Divider />
-            <PaddedContainer>
-              <Button
-                title="Jackpot List"
-                onPress={navigateJackpotList}
-                style={custom.buttonWidth}
-              />
-            </PaddedContainer>
-            <PaddedContainer>
-              <Button
-                title="Jackpot Predictions"
-                onPress={navigateJackpotPredictions}
-                style={custom.buttonWidth}
-              />
-            </PaddedContainer>
+            <View style={styles.buttonWidth}>
+              <Button title="Jackpot List" onPress={navigateJackpotList} />
+            </View>
           </View>
         </View>
       </Modal>
@@ -75,6 +58,10 @@ const JackpotListSelect = ({ visible, closeModal }) => {
 };
 
 const styles = StyleSheet.create({
+  buttonWidth: {
+    padding: 10,
+    width: screenWidth * 0.9,
+  },
   modalView: {
     alignItems: 'center',
     backgroundColor: colors.white,

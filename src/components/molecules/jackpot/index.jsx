@@ -9,6 +9,10 @@ import { jackpotModel } from '../../../models';
 const Jackpot = ({ jackpotData }) => {
   const jackpot = jackpotModel(jackpotData);
 
+  const currencyFormat = (num) => {
+    return `R${num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
+  };
+
   return (
     <PaddedContainer>
       <View style={custom.jackpotCard}>
@@ -34,7 +38,7 @@ const Jackpot = ({ jackpotData }) => {
         </View>
         <View style={custom.line} />
         <Text style={custom.smallCenterSubtitle}>Amount</Text>
-        <Text style={custom.gameName}>{jackpot.amount}</Text>
+        <Text style={custom.gameName}>{currencyFormat(jackpot.amount)}</Text>
       </View>
     </PaddedContainer>
   );
