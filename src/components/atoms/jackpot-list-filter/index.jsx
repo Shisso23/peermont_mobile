@@ -21,7 +21,7 @@ const { width: screenWidth } = Dimensions.get('window');
 const JackpotListFilter = ({ visible, closeModal }) => {
   const dispatch = useDispatch();
   const [display, setDisplay] = useState(visible);
-  const [range, setRange] = useState([0, 5000000]);
+  const [range, setRange] = useState([1000, 5000000]);
 
   const _closeModal = () => {
     closeModal();
@@ -78,7 +78,7 @@ const JackpotListFilter = ({ visible, closeModal }) => {
             <PaddedContainer>
               <MultiSlider
                 values={range}
-                min={0}
+                min={1000}
                 max={5000000}
                 step={100000}
                 enableLabel

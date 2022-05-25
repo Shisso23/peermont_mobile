@@ -15,14 +15,6 @@ import {
 import { JackpotListForm } from '../../../components/forms';
 import { jackpotFormModel } from '../../../models';
 
-const data = [
-  {
-    id: 1,
-    name: 'Test 1',
-    machine: '1234',
-  },
-];
-
 const { width: screenWidth } = Dimensions.get('window');
 
 const JackpotListScreen = () => {
@@ -55,7 +47,7 @@ const JackpotListScreen = () => {
         <ScrollView style={custom.jackpotScrolViewMargin}>
           <FlatList
             style={styles.jackpotDimensions}
-            scrollEnabled={data.length > 4}
+            scrollEnabled={jackpots.length > 4}
             data={jackpots}
             renderItem={renderJackpotCard}
           />
