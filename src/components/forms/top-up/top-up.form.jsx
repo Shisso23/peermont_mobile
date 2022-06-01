@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Input, Text, ListItem, CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +22,34 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const expiredTokenNotify = () => {
+    Alert.alert(
+      'Expired Credit Card Token',
+      'For security purposes your credit card information needs to be verified. To do so please delete the card from the My Account menu and resubmit.',
+      [
+        {
+          text: 'Top Up',
+          onPress: () => {},
+        },
+        {
+          text: 'My Account',
+          onPress: () => {
+            navigation.navigate('MyAccount');
+          },
+        },
+      ],
+    );
+  };
+
+  const hasExpiredCard = () => {
+    for (let i = 0; i < creditCards.length; i++) {
+      if (creditCards[i].status === 'expired') {
+        expiredTokenNotify();
+        break;
+      }
+    }
+  };
+
   const validationSchema = Yup.object().shape({
     amount: paymentAmountSchema(Number.MAX_VALUE),
     creditCardId: topupCreditCardIdSchema,
@@ -29,6 +57,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
 
   useEffect(() => {
     dispatch(getCreditCardsAction());
+    hasExpiredCard();
   }, []);
 
   const _handleFormSubmitError = (error, actions, formData) => {
