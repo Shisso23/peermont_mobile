@@ -98,7 +98,7 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 _changeCardTypeToMatchCardNumber();
                 handleBlur('cardNumber')(e);
               }}
-              errorMessage={error('cardNumber')}
+              errorMessage={[error('cardNumber'), error('cardType')]}
               onSubmitEditing={() => cardHolderRef.current.focus()}
               maxLength={19}
             />

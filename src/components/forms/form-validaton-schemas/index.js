@@ -47,15 +47,17 @@ export const pinSchema = Yup.string()
   .matches(numberRegex, 'Card PIN can only contain digits');
 
 export const creditCardNumberSchema = Yup.mixed()
-  .required('Card number is required')
+  .required('Card number is required. ')
   .test({
     name: 'luhnAlgorithm',
-    message: 'Invalid credit card',
+    message: 'Invalid credit card. ',
     test: (value) => luhnChecksum(value),
   });
 
 export const creditCardExpiryDateSchema = Yup.string().required('Expiry date is required');
-export const creditCardTypeSchema = Yup.string().required('Card type is required');
+export const creditCardTypeSchema = Yup.string().required(
+  'Accepted Card Types: VISA and Mastercard.',
+);
 export const creditCardHolderSchema = Yup.string().required('Card holder is required');
 export const creditCardCvvSchema = Yup.string()
   .matches(numberRegex, 'CVV can only contain digits')
