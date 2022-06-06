@@ -25,7 +25,6 @@ const PayOutScreen = () => {
   const { currentMembershipCard } = useSelector(membershipCardSelector);
   const initialBankAccountValues = payOutModel();
   const [showOtpModal, setShowOtpModal] = useState(false);
-  const [alertPayoutAmount, setAlertPayoutAmount] = useState(false);
 
   const _handleSubmission = (formData) => {
     return dispatch(performPayoutAction(formData));
@@ -59,13 +58,6 @@ const PayOutScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Pay Out</Text>
         <Text style={custom.centerSubtitle}>Enter an amount and select a bank account.</Text>
-        {alertPayoutAmount ? (
-          <Text style={custom.amountNotify}>
-            The amount requested exceeds the maximum immediate payout limit of R250 000 per
-            transaction between 16h00 and 23h59. Please process multiple transactions of R250 000 or
-            contact the cash desk for assistance.
-          </Text>
-        ) : null}
         <Text h4 style={custom.centerSubtitle}>
           Your balance is {_.get(route, 'params.balance')}
         </Text>
@@ -74,7 +66,6 @@ const PayOutScreen = () => {
         initialValues={initialBankAccountValues}
         submitForm={_handleSubmission}
         onSuccess={_handleSuccess}
-        amountNotify={(value) => setAlertPayoutAmount(value)}
       />
       <OtpNumericInput
         visible={showOtpModal}
