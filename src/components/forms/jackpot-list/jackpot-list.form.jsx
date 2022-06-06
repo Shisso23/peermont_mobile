@@ -5,11 +5,13 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import ModalDropdown from 'react-native-modal-dropdown';
-import colors from '../../../../theme/theme.colors';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
+import colors from '../../../../theme/theme.colors';
 import { casinoSchema, machineSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { custom } from '../../../../theme/theme.styles';
+import PaddedContainer from '../../containers/buttons-container/buttons.container';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -58,7 +60,7 @@ const JackpotListForm = ({ submitForm, initialValues }) => {
                 value={values.casino}
               />
               {error('casino') ? (
-                <Text style={[custom.errorStyle, styles.errorStyle]}> {error('casino')}</Text>
+                <Text style={[custom.errorStyle, styles.errorStyle]}>{error('casino')}</Text>
               ) : null}
               <SearchBar
                 placeholder="Type machine number here..."
@@ -74,6 +76,19 @@ const JackpotListForm = ({ submitForm, initialValues }) => {
               {error('machine') ? (
                 <Text style={[custom.errorStyle, styles.errorStyle]}> {error('machine')}</Text>
               ) : null}
+              <View style={custom.rangeMargin}>
+                <PaddedContainer>
+                  <MultiSlider
+                    values={values.range}
+                    min={20000}
+                    max={5000000}
+                    step={100000}
+                    enableLabel
+                    snapped
+                    onValuesChangeFinish={(array) => setFieldValue('range', array)}
+                  />
+                </PaddedContainer>
+              </View>
               <View style={styles.submit}>
                 <Button title="Filter" onPress={handleSubmit} />
               </View>
