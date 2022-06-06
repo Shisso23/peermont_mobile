@@ -16,7 +16,7 @@ import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schem
 import { AddButton, CurrencyIcon } from '../../atoms';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 
-const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
+const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
   const navigation = useNavigation();
   const { hasQueuedPayouts } = useSelector((reducers) => reducers.paymentReducer);
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
@@ -73,11 +73,33 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
     }
   };
 
+  const _amountCheck = (formData, actions) => {
+    if (formData.amount > 2) {
+      Alert.alert(
+        'Payout Amount',
+        'The amount requested exceeds the maximum immediate payout limit of R250 000 per transaction between 16h00 and 23h59. Please process multiple transactions of R250 000 or contact the cash desk for assistance.',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => _navigateBackToMembershipDetail(),
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => _payoutNotify(formData, actions),
+          },
+        ],
+      );
+    } else {
+      _payoutNotify(formData, actions);
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       initialStatus={{ apiErrors: {} }}
-      onSubmit={_payoutNotify}
+      onSubmit={_amountCheck}
       validationSchema={validationSchema}
       enableReinitialize
     >
@@ -106,7 +128,6 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
                 keyboardType="phone-pad"
                 leftIcon={CurrencyIcon}
               />
-              {amountNotify(values.amount > 250000)}
               <View style={styles.rowAlign}>
                 <Text h4>Bank Accounts</Text>
                 <AddButton onPress={() => navigation.navigate('AddBankAccount')} />
@@ -159,12 +180,10 @@ PayOutForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
-  amountNotify: PropTypes.func,
 };
 
 PayOutForm.defaultProps = {
   onSuccess: () => null,
-  amountNotify: () => null,
 };
 
 const styles = StyleSheet.create({
