@@ -82,7 +82,7 @@ const JackpotListForm = ({ submitForm, initialValues }) => {
                     values={values.range}
                     min={20000}
                     max={5000000}
-                    step={100000}
+                    step={10000}
                     enableLabel
                     snapped
                     onValuesChangeFinish={(array) => setFieldValue('range', array)}
