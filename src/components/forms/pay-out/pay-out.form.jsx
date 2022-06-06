@@ -106,7 +106,7 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
                 keyboardType="phone-pad"
                 leftIcon={CurrencyIcon}
               />
-              {amountNotify(values.amount > 1)}
+              {amountNotify(values.amount > 250000)}
               <View style={styles.rowAlign}>
                 <Text h4>Bank Accounts</Text>
                 <AddButton onPress={() => navigation.navigate('AddBankAccount')} />
