@@ -201,7 +201,7 @@ const TopUpForm = ({ submitForm, onSuccess, initialValues }) => {
             >
               <Image source={zapperLogo} style={custom.paymentProviderIcon} />
               <ListItem.Content>
-                <ListItem.Title>Instant EFT</ListItem.Title>
+                <ListItem.Title>Zapper payment</ListItem.Title>
               </ListItem.Content>
               <CheckBox checked={values.isZapperEft} disabled />
             </ListItem>

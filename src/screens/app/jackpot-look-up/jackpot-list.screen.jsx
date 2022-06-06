@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Dimensions, View, FlatList, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import { Dimensions, View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
@@ -11,6 +11,7 @@ import {
   getJackpotsAction,
   getJackpotsByCasinoAction,
   getJackpotsByMachineAction,
+  getJackpotsByRangeAction,
 } from '../../../reducers/jackpot-list-reducer/jackpot-list.actions';
 import { JackpotListForm } from '../../../components/forms';
 import { jackpotFormModel } from '../../../models';
@@ -29,6 +30,8 @@ const JackpotListScreen = () => {
       dispatch(getJackpotsByCasinoAction(casinos[formData.casino]));
     if (!_.isNull(formData.casino) && !_.isNull(formData.machine))
       dispatch(getJackpotsByMachineAction(casinos[formData.casino], formData.machine));
+    if (!_.isNull(formData.range))
+      dispatch(getJackpotsByRangeAction(formData.range[0], formData.range[1]));
   };
 
   useEffect(() => {
@@ -44,14 +47,11 @@ const JackpotListScreen = () => {
       <Text style={[custom.centerTitle, custom.topPadding]}>Jackpot List</Text>
       <View style={custom.headerContainer}>
         <JackpotListForm initialValues={jackpotFormModel()} submitForm={_handleFormSubmit} />
-        <ScrollView style={custom.jackpotScrolViewMargin}>
-          <FlatList
-            style={styles.jackpotDimensions}
-            scrollEnabled={jackpots.length > 4}
-            data={jackpots}
-            renderItem={renderJackpotCard}
-          />
-        </ScrollView>
+        <FlatList
+          style={[styles.jackpotDimensions, custom.jackpotScrolViewMargin]}
+          data={jackpots}
+          renderItem={renderJackpotCard}
+        />
       </View>
     </SafeAreaView>
   );

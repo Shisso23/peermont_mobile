@@ -23,4 +23,5 @@ export const apiJackpotModel = (_model = {}) => ({
 export const jackpotFormModel = (_model = {}) => ({
   casino: _.get(_model, 'casino'),
   machine: _.get(_model, 'machine'),
+  range: _.get(_model, 'range', [20000, 5000000]),
 });

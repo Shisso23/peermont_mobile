@@ -3,6 +3,9 @@ import colors from './theme.colors';
 import variables from './theme.variables';
 
 export const custom = {
+  rangeMargin: {
+    marginTop: 10,
+  },
   jackpotScrolViewMargin: {
     marginBottom: '35%',
   },

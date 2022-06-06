@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import _ from 'lodash';
 import { luhnChecksum } from '../../../helpers/credit-card.helper';
 
 const numberRegex = /^[0-9]+$/;
@@ -99,7 +100,10 @@ export const topupCreditCardIdSchema = Yup.string().when(['isEft', 'isOzowEft', 
 
 export const machineSchema = Yup.string().matches(/^[0-9]+$/, 'Only numbers permitted');
 
-export const casinoSchema = Yup.string().required('Casino is required');
+export const casinoSchema = Yup.string().when(['machine'], {
+  is: (machine) => !_.isUndefined(machine),
+  then: Yup.string().required('Casino is required to filter by machine.'),
+});
 
 export const payOutBankIdSchema = Yup.string().required('Approved bank account required');
 

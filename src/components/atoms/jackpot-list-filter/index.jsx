@@ -4,7 +4,6 @@ import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Divider, Text, Button } from 'react-native-elements';
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useDispatch } from 'react-redux';
 
 import { PaddedContainer } from '../../containers';
@@ -13,7 +12,6 @@ import { custom } from '../../../../theme/theme.styles';
 import {
   getJackpotsByLargestAction,
   getJackpotsBySmallestAction,
-  getJackpotsByRangeAction,
 } from '../../../reducers/jackpot-list-reducer/jackpot-list.actions';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -21,7 +19,6 @@ const { width: screenWidth } = Dimensions.get('window');
 const JackpotListFilter = ({ visible, closeModal }) => {
   const dispatch = useDispatch();
   const [display, setDisplay] = useState(visible);
-  const [range, setRange] = useState([1000, 5000000]);
 
   const _closeModal = () => {
     closeModal();
@@ -36,12 +33,6 @@ const JackpotListFilter = ({ visible, closeModal }) => {
 
   const jackpotsSmallest = () => {
     dispatch(getJackpotsBySmallestAction());
-    closeModal();
-    setDisplay(false);
-  };
-
-  const submitModal = () => {
-    dispatch(getJackpotsByRangeAction(range[0], range[1]));
     closeModal();
     setDisplay(false);
   };
@@ -65,29 +56,9 @@ const JackpotListFilter = ({ visible, closeModal }) => {
             >
               <Icon name="times" color={colors.gold} size={22} />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={submitModal}
-              style={custom.closeIconContainer}
-              hitSlop={custom.hitSlop}
-            >
-              <Icon name="check" color={colors.gold} size={22} />
-            </TouchableOpacity>
             <Text style={custom.modalCenterTitle}>Filter by Value</Text>
             <Divider />
             <Divider />
-            <PaddedContainer>
-              <MultiSlider
-                values={range}
-                min={1000}
-                max={5000000}
-                step={100000}
-                enableLabel
-                snapped
-                onValuesChangeFinish={(value) => {
-                  setRange(value);
-                }}
-              />
-            </PaddedContainer>
             <PaddedContainer>
               <Button
                 title="Largest to Smallest"
@@ -114,7 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 20,
     elevation: 5,
-    marginTop: '150%',
+    marginTop: '170%',
     paddingBottom: '100%',
     paddingTop: 50,
     shadowColor: colors.black,
