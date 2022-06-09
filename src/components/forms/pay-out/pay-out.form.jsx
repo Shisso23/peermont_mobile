@@ -7,8 +7,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { custom } from '../../../../theme/theme.styles';
+import moment from 'moment';
 
+import { custom } from '../../../../theme/theme.styles';
 import { getFormError } from '../form-utils';
 import { PaddedContainer } from '../../containers';
 import { BankAccount, LoadingComponent } from '../../molecules';
@@ -73,23 +74,45 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
     }
   };
 
+  const isWeekday = () => {
+    const today = new Date();
+    if (today.getDay() === 0 && today.getDay() === 6)
+      return 'The amount requested exceeds the maximum immediate payout limit of R250 000 on weekends. Please process multiple transactions of R250 000 or contact the cash desk for assistance.';
+    if (isPublicHoliday(moment(today).format('MM-DD')))
+      return 'The amount requested exceeds the maximum immediate payout limit of R250 000 on public holidays. Please process multiple transactions of R250 000 or contact the cash desk for assistance.';
+    return 'The amount requested exceeds the maximum immediate payout limit of R250 000 per transaction on weekdays between 16h00 and 23h59. Please process multiple transactions of R250 000 or contact the cash desk for assistance.';
+  };
+
+  const isPublicHoliday = (today) => {
+    return (
+      '01-01'.includes(today) ||
+      '03-21'.includes(today) ||
+      '04-15'.includes(today) ||
+      '04-18'.includes(today) ||
+      '04-27'.includes(today) ||
+      '05-02'.includes(today) ||
+      '06-16'.includes(today) ||
+      '07-09'.includes(today) ||
+      '09-24'.includes(today) ||
+      '12-16'.includes(today) ||
+      '12-25'.includes(today) ||
+      '12-26'.includes(today)
+    );
+  };
+
   const _amountCheck = (formData, actions) => {
-    if (formData.amount > 2) {
-      Alert.alert(
-        'Payout Amount',
-        'The amount requested exceeds the maximum immediate payout limit of R250 000 per transaction between 16h00 and 23h59. Please process multiple transactions of R250 000 or contact the cash desk for assistance.',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => _navigateBackToMembershipDetail(),
-            style: 'cancel',
-          },
-          {
-            text: 'OK',
-            onPress: () => _payoutNotify(formData, actions),
-          },
-        ],
-      );
+    if (formData.amount > 250000) {
+      Alert.alert('Payout Amount', isWeekday(), [
+        {
+          text: 'Cancel',
+          onPress: () => _navigateBackToMembershipDetail(),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => _payoutNotify(formData, actions),
+        },
+      ]);
     } else {
       _payoutNotify(formData, actions);
     }
