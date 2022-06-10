@@ -66,7 +66,6 @@ const PayOutScreen = () => {
         initialValues={initialBankAccountValues}
         submitForm={_handleSubmission}
         onSuccess={_handleSuccess}
-        amountNotify={(value) => setAlertPayoutAmount(value)}
       />
       <OtpNumericInput
         visible={showOtpModal}

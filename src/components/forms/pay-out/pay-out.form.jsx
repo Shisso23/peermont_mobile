@@ -17,7 +17,7 @@ import { paymentAmountSchema, payOutBankIdSchema } from '../form-validaton-schem
 import { AddButton, CurrencyIcon } from '../../atoms';
 import { membershipCardSelector } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 
-const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
+const PayOutForm = ({ submitForm, onSuccess, initialValues }) => {
   const navigation = useNavigation();
   const { hasQueuedPayouts } = useSelector((reducers) => reducers.paymentReducer);
   const { bankAccounts, isLoading } = useSelector((reducers) => reducers.bankAccountReducer);
@@ -104,12 +104,12 @@ const PayOutForm = ({ submitForm, onSuccess, initialValues, amountNotify }) => {
     if (formData.amount > 250000) {
       Alert.alert('Payout Amount', isWeekday(), [
         {
-          text: 'Cancel',
+          text: 'Back',
           onPress: () => _navigateBackToMembershipDetail(),
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: 'Proceed',
           onPress: () => _payoutNotify(formData, actions),
         },
       ]);
@@ -203,12 +203,10 @@ PayOutForm.propTypes = {
   submitForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
-  amountNotify: PropTypes.func,
 };
 
 PayOutForm.defaultProps = {
   onSuccess: () => null,
-  amountNotify: () => null,
 };
 
 const styles = StyleSheet.create({
