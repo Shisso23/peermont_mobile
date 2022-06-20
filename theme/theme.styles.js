@@ -63,6 +63,12 @@ export const custom = {
     marginTop: 0,
     marginBottom: 0,
   },
+  creditCardErrorStyle: {
+    alignSelf: 'center',
+    fontFamily: variables.fontFamily,
+    color: colors.danger,
+    marginBottom: '5%',
+  },
   errorStyleCardPin: {
     color: colors.danger,
     fontFamily: variables.fontFamily,
