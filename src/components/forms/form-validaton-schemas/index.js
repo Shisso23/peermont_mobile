@@ -55,16 +55,15 @@ export const creditCardNumberSchema = Yup.mixed()
     test: (value) => luhnChecksum(value),
   });
 
-export const creditCardExpiryDateSchema = Yup.string().required('Expiry date is required');
-export const creditCardTypeSchema = Yup.string().required(
-  'Accepted Card Types: VISA and Mastercard.',
-);
-export const creditCardHolderSchema = Yup.string().required('Card holder is required');
+export const creditCardExpiryYearSchema = Yup.string().required('Expiry year is required. ');
+export const creditCardExpiryMonthSchema = Yup.string().required('Expiry month is required. ');
+export const creditCardTypeSchema = Yup.string().required('Card type unrecognised. ');
+export const creditCardHolderSchema = Yup.string().required('Card holder is required. ');
 export const creditCardCvvSchema = Yup.string()
   .matches(numberRegex, 'CVV can only contain digits')
-  .min(3, 'CVV invalid')
-  .max(4, 'CVV invalid')
-  .required('CVV is required');
+  .min(3, 'CVV invalid. ')
+  .max(4, 'CVV invalid. ')
+  .required('CVV is required. ');
 
 export const bankAccountHolderSchema = Yup.string().required('Account holder is required');
 export const bankAccountAccountNumberSchema = Yup.string().required('Account number is required');
