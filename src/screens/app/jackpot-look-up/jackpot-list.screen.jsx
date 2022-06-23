@@ -59,6 +59,7 @@ const JackpotListScreen = () => {
 
 const styles = StyleSheet.create({
   jackpotDimensions: {
+    alignSelf: 'center',
     width: screenWidth * 0.9,
   },
 });

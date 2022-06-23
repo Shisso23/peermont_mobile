@@ -13,3 +13,5 @@ export { default as palaceBetIconBlue } from './palace-bet-blue.png';
 export { default as imageUri } from './header-alt.png';
 export { default as contactUs } from './contact-us.png';
 export { default as zapperLogo } from './zapper-logo.png';
+export { default as frontCard } from './credit-cards/Front.png';
+export { default as backCard } from './credit-cards/Back.png';
