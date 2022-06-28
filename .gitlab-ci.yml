@@ -1,0 +1,18 @@
+
+image: node:14.17.6-alpine3.13
+
+cache:
+  paths:
+    - node_modules/
+    - .yarn
+
+stages:
+    - test
+ 
+run-unit-tests:
+    stage: test
+    script:
+        - yarn install --cache-folder .yarn
+        - yarn test
+    only:
+        - merge_requests
