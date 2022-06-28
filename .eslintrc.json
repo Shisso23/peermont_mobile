@@ -7,7 +7,9 @@
   },
   "env": {
     "browser": true,
-    "react-native/react-native": true
+    "react-native/react-native": true,
+    "jasmine": true,
+    "jest": true
   },
   "plugins": ["react", "react-native", "prettier"],
   "extends": [
