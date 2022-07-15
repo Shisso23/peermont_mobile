@@ -1,0 +1,44 @@
+diff --git a/node_modules/react-native-credit-card-input/src/CreditCardInput.js b/node_modules/react-native-credit-card-input/src/CreditCardInput.js
+index 44f43c8..213b3ff 100644
+--- a/node_modules/react-native-credit-card-input/src/CreditCardInput.js
++++ b/node_modules/react-native-credit-card-input/src/CreditCardInput.js
+@@ -31,6 +31,9 @@ const s = StyleSheet.create({
+   input: {
+     height: 40,
+   },
++  row: {
++    flexDirection: "row"
++  }
+ });
+ 
+ const CVC_INPUT_WIDTH = 70;
+@@ -161,7 +164,6 @@ export default class CreditCardInput extends Component {
+           expiry={expiry}
+           cvc={cvc} />
+         <ScrollView ref="Form"
+-          horizontal
+           keyboardShouldPersistTaps="always"
+           scrollEnabled={allowScroll}
+           showsHorizontalScrollIndicator={false}
+@@ -169,13 +171,15 @@ export default class CreditCardInput extends Component {
+           <CCInput {...this._inputProps("number")}
+             keyboardType="numeric"
+             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
+-          <CCInput {...this._inputProps("expiry")}
+-            keyboardType="numeric"
+-            containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
+-          { requiresCVC &&
+-            <CCInput {...this._inputProps("cvc")}
++          <View style={s.row}>
++            <CCInput {...this._inputProps("expiry")}
+               keyboardType="numeric"
+-              containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
++              containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
++            { requiresCVC &&
++              <CCInput {...this._inputProps("cvc")}
++                keyboardType="numeric"
++                containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
++          </View> 
+           { requiresName &&
+             <CCInput {...this._inputProps("name")}
+               containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }

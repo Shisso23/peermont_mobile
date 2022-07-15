@@ -17,7 +17,7 @@ import {
   creditCardExpiryMonthSchema,
 } from '../form-validaton-schemas';
 import { custom } from '../../../../theme/theme.styles';
-import { backCard, frontCard } from '../../../assets';
+import { backBlueCard, frontBlueCard } from '../../../assets';
 
 const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
   const validationSchema = Yup.object().shape({
@@ -82,8 +82,9 @@ const CreditCardForm = ({ submitForm, onSuccess, initialValues }) => {
             <CreditCardInput
               onChange={(data) => _handleChange(data, setFieldValue)}
               requiresName
-              cardImageFront={frontCard}
-              cardImageBack={backCard}
+              cardImageFront={frontBlueCard}
+              cardImageBack={backBlueCard}
+              labelStyle={custom.creditCardLabel}
             />
             <Divider />
             {error ? (
