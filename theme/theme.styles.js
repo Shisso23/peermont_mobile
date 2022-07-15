@@ -3,6 +3,10 @@ import colors from './theme.colors';
 import variables from './theme.variables';
 
 export const custom = {
+  creditCardLabel: {
+    paddingTop: 10,
+    color: colors.gold,
+  },
   rangeMargin: {
     marginTop: 10,
   },

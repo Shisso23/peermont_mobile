@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "initEnv": "[ ! -f .env ] && { echo \"Created environment file.\"; cp .env.example .env; } || echo \"Environment file exists.\"",
-    "postinstall": "yarn initEnv && { cd ios; pod install; cd ..; } && npx jetify"
+    "postinstall": "yarn initEnv && { cd ios; pod install; cd ..; } && npx jetify && patch-package"
   },
   "dependencies": {
     "@hmscore/react-native-hms-account": "6.1.0-302",
@@ -33,6 +33,8 @@
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "node-forge": "^0.10.0",
+    "patch-package": "6.4.7",
+    "postinstall-postinstall": "2.1.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "^18.2.0",
