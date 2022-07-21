@@ -31,7 +31,9 @@ const PalaceBet = () => {
       <Image source={palaceBetIconBlue} style={custom.palaceBetIcon} />
       <View style={custom.headerContainerText}>
         <Text style={custom.headerContainerTitle}>Visit PalaceBet</Text>
-        <Text style={custom.headerContainerSubText}>Place your bets on a wide range of sports</Text>
+        <Text style={custom.headerContainerSubText}>
+          Play your favourite live games. Bet on sports
+        </Text>
       </View>
     </PalaceBetViewContainer>
   );
