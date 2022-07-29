@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Linking, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  Linking,
+  StyleSheet,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
@@ -9,35 +17,43 @@ import { custom } from '../../../../theme/theme.styles';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const PalaceBet = () => {
-  const onPalaceBetPress = () => {
-    Linking.openURL(appConfig.palaceBetLink);
+const PalaceBetInstall = () => {
+  const onPalaceBetInstallPress = () => {
+    if (Platform.OS === 'ios') {
+      Linking.openURL(appConfig.palaceBetIosAppLink);
+    }
+    if (Platform.OS === 'android') {
+      Linking.openURL(appConfig.palaceBetAndroidAppLink);
+    }
   };
 
-  const PalaceBetViewContainer = ({ children }) => {
+  const PalaceBetInstallViewContainer = ({ children }) => {
     return (
-      <TouchableOpacity style={[custom.headerButton, styles.addWidth]} onPress={onPalaceBetPress}>
+      <TouchableOpacity
+        style={[custom.headerButton, styles.addWidth]}
+        onPress={onPalaceBetInstallPress}
+      >
         {children}
       </TouchableOpacity>
     );
   };
 
-  PalaceBetViewContainer.propTypes = {
+  PalaceBetInstallViewContainer.propTypes = {
     children: PropTypes.node.isRequired,
   };
 
   return (
-    <PalaceBetViewContainer>
+    <PalaceBetInstallViewContainer>
       <Image source={palaceBetIconBlue} style={custom.palaceBetIcon} />
       <View style={custom.headerContainerText}>
         <Text style={[custom.headerContainerTitle, styles.centerPalaceBetButtons]}>
-          Visit PalaceBet
+          Install PalaceBet
         </Text>
         <Text style={[custom.headerContainerSubText, styles.centerPalaceBetButtons]}>
-          Play your favourite live games. Bet on sports
+          Download the Palace Bet App
         </Text>
       </View>
-    </PalaceBetViewContainer>
+    </PalaceBetInstallViewContainer>
   );
 };
 
@@ -46,11 +62,11 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.9,
   },
   centerPalaceBetButtons: {
-    left: screenWidth * 0.01,
+    left: screenWidth * 0.1,
   },
 });
 
-PalaceBet.propTypes = {};
-PalaceBet.defaultProps = {};
+PalaceBetInstall.propTypes = {};
+PalaceBetInstall.defaultProps = {};
 
-export default PalaceBet;
+export default PalaceBetInstall;

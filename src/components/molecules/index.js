@@ -21,3 +21,4 @@ export { default as OtpAutofillSetting } from './otp-autofill/otp-autofill-setti
 export { default as UpdateProfile } from './update-profile';
 export { default as Jackpot } from './jackpot';
 export { default as Slot } from './slot';
+export { default as PalaceBetInstall } from './palace-bet-install';

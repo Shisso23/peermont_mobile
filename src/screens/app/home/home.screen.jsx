@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, Divider } from 'react-native-elements';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
 
-import { MembershipCardCarouselItem, SplashAd, PalaceBet } from '../../../components';
+import {
+  MembershipCardCarouselItem,
+  SplashAd,
+  PalaceBet,
+  PalaceBetInstall,
+} from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useBiometricRegister, handleNotificationOpenedBackGround } from '../../../hooks';
@@ -67,6 +72,8 @@ const HomeScreen = () => {
       <PaddedContainer>
         <View style={custom.headerContainer}>
           <PalaceBet />
+          <Divider />
+          <PalaceBetInstall />
         </View>
       </PaddedContainer>
       <View style={custom.nameContainer}>

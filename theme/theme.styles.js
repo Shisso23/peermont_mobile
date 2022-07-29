@@ -104,8 +104,6 @@ export const custom = {
     color: colors.primary,
     fontFamily: 'OpenSans-Bold',
     fontSize: 18,
-    left: -27,
-    right: 27,
   },
   headerContainerSubText: {
     fontSize: 12,
