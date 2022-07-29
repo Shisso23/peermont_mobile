@@ -47,4 +47,6 @@ export default {
   peermontHotelIosStoreUrl: 'https://apps.apple.com/us/app/peermont-hotels/id1551006242',
   peermontHotelAndroidStoreUrl:
     'https://play.google.com/store/apps/details?id=com.intelitycorp.icedroidplus.brand.peermontbrand',
+  palaceBetAndroidAppLink: 'http://bit.ly/3cFyjvu',
+  palaceBetIosAppLink: 'http://apple.co/3BiOSaJ',
 };
