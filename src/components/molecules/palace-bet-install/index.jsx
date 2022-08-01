@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  Linking,
-  StyleSheet,
-  Dimensions,
-  Platform,
-} from 'react-native';
+import { View, TouchableOpacity, Image, Linking, StyleSheet, Dimensions } from 'react-native';
 import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
@@ -19,20 +11,12 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const PalaceBetInstall = () => {
   const onPalaceBetInstallPress = () => {
-    if (Platform.OS === 'ios') {
-      Linking.openURL(appConfig.palaceBetIosAppLink);
-    }
-    if (Platform.OS === 'android') {
-      Linking.openURL(appConfig.palaceBetAndroidAppLink);
-    }
+    Linking.openURL(appConfig.palaceBetAndroidAppLink);
   };
 
   const PalaceBetInstallViewContainer = ({ children }) => {
     return (
-      <TouchableOpacity
-        style={[custom.headerButton, styles.addWidth]}
-        onPress={onPalaceBetInstallPress}
-      >
+      <TouchableOpacity style={custom.headerButton} onPress={onPalaceBetInstallPress}>
         {children}
       </TouchableOpacity>
     );
@@ -58,9 +42,6 @@ const PalaceBetInstall = () => {
 };
 
 const styles = StyleSheet.create({
-  addWidth: {
-    width: screenWidth * 0.9,
-  },
   centerPalaceBetButtons: {
     left: screenWidth * 0.1,
   },

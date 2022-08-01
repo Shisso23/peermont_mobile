@@ -16,7 +16,7 @@ const PalaceBet = () => {
 
   const PalaceBetViewContainer = ({ children }) => {
     return (
-      <TouchableOpacity style={[custom.headerButton, styles.addWidth]} onPress={onPalaceBetPress}>
+      <TouchableOpacity style={custom.headerButton} onPress={onPalaceBetPress}>
         {children}
       </TouchableOpacity>
     );
@@ -42,9 +42,6 @@ const PalaceBet = () => {
 };
 
 const styles = StyleSheet.create({
-  addWidth: {
-    width: screenWidth * 0.9,
-  },
   centerPalaceBetButtons: {
     left: screenWidth * 0.01,
   },
