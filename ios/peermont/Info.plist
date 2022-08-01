@@ -102,7 +102,6 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>zapper</string>
-		<string>apple</string>
 	</array>
 </dict>
 </plist>
