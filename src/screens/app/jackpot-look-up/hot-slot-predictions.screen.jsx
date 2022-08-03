@@ -8,26 +8,26 @@ import _ from 'lodash';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { custom } from '../../../../theme/theme.styles';
-import Slot from '../../../components/molecules/slot';
 import {
   getRedHotSlotsAction,
   getSlotPredictionsAction,
 } from '../../../reducers/hot-slot-predictions-reducer/hot-slot-predictions.actions';
 import { hotSlotPredictionsSelector } from '../../../reducers/hot-slot-predictions-reducer/hot-slot-predictions.reducer';
+import { HotSlotPrediction, LoadingComponent } from '../../../components';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const JackpotPredictionsScreen = () => {
+const HotSlotPredictionsScreen = () => {
   const dispatch = useDispatch();
   const [carouselRef, setCarouselRef] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { redHotSlots, slotPredictions } = useSelector(hotSlotPredictionsSelector);
+  const { redHotSlots, slotPredictions, isLoading } = useSelector(hotSlotPredictionsSelector);
 
   const lists = [{ name: 'Red Hot Slots' }, { name: 'Slots Predictions' }];
   const predictions = [{ prediction: redHotSlots }, { prediction: slotPredictions }];
 
-  const renderSlotCards = ({ item }) => <Slot slotData={item} />;
+  const renderSlotCards = ({ item }) => <HotSlotPrediction HotSlotPredictionData={item} />;
 
   const _setActiveSlideIndex = (index) => {
     setActiveIndex(index);
@@ -40,7 +40,11 @@ const JackpotPredictionsScreen = () => {
     }, []),
   );
 
-  return (
+  return isLoading ? (
+    <View style={custom.loaderMargin}>
+      <LoadingComponent hasBackground={false} />
+    </View>
+  ) : (
     <SafeAreaView>
       <Text style={[custom.centerTitle, custom.topPadding]}>Hot Slot Predictions</Text>
       <View style={custom.headerContainer}>
@@ -85,8 +89,4 @@ const JackpotPredictionsScreen = () => {
   );
 };
 
-JackpotPredictionsScreen.propTypes = {};
-
-JackpotPredictionsScreen.defaultProps = {};
-
-export default JackpotPredictionsScreen;
+export default HotSlotPredictionsScreen;

@@ -33,8 +33,8 @@ import TransactionsScreen from '../../screens/app/transactions/transactions.scre
 import ContactUsScreen from '../../screens/app/contact-screen/contact-us.screen';
 import PaymentStatusScreen from '../../screens/app/payments/top-up/top-up-complete/payment-status.screen';
 import JackpotListScreen from '../../screens/app/jackpot-look-up/jackpot-list.screen';
-import JackpotPredictionsScreen from '../../screens/app/jackpot-look-up/jackpot-predictions.screen';
 import FilterHeader from '../../components/headers/filter-header';
+import HotSlotPredictionsScreen from '../../screens/app/jackpot-look-up/hot-slot-predictions.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -170,8 +170,8 @@ const AppNavigator = () => (
       options={{ headerShown: true, title: '', headerRight: () => <FilterHeader /> }}
     />
     <AppStack.Screen
-      name="JackpotPredictions"
-      component={JackpotPredictionsScreen}
+      name="HotSlotPredictions"
+      component={HotSlotPredictionsScreen}
       options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>
