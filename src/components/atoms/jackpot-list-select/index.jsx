@@ -25,6 +25,11 @@ const JackpotListSelect = ({ visible, closeModal }) => {
     setDisplay(false);
   };
 
+  const navigateHotSlotPredictionsList = () => {
+    navigation.navigate('HotSlotPredictions');
+    setDisplay(false);
+  };
+
   return (
     <>
       <Modal
@@ -49,6 +54,8 @@ const JackpotListSelect = ({ visible, closeModal }) => {
             <Divider />
             <View style={styles.buttonWidth}>
               <Button title="Jackpot List" onPress={navigateJackpotList} />
+              <Divider />
+              <Button title="Hot Slots & Predictions" onPress={navigateHotSlotPredictionsList} />
             </View>
           </View>
         </View>

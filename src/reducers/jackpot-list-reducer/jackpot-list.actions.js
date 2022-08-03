@@ -1,10 +1,10 @@
 import { setIsLoadingAction, setJackpotsAction } from './jackpot-list.reducer';
-import { jackpotListService } from '../../services';
+import { jackpotLookupService } from '../../services';
 
 export const getJackpotsAction = () => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpots()
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
@@ -14,7 +14,7 @@ export const getJackpotsAction = () => {
 export const getJackpotsByCasinoAction = (casino) => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpotsByCasino(casino)
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
@@ -24,7 +24,7 @@ export const getJackpotsByCasinoAction = (casino) => {
 export const getJackpotsByMachineAction = (casino, machine) => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpotsByMachine(casino, machine)
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
@@ -34,7 +34,7 @@ export const getJackpotsByMachineAction = (casino, machine) => {
 export const getJackpotsByAmountAction = (amount) => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpotsByAmount(amount)
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
@@ -44,7 +44,7 @@ export const getJackpotsByAmountAction = (amount) => {
 export const getJackpotsByRangeAction = (lowerLimit, upperLimit) => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpotsByRange(lowerLimit, upperLimit)
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
@@ -54,7 +54,7 @@ export const getJackpotsByRangeAction = (lowerLimit, upperLimit) => {
 export const getJackpotsByLargestAction = () => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpotsByLargest()
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
@@ -64,7 +64,7 @@ export const getJackpotsByLargestAction = () => {
 export const getJackpotsBySmallestAction = () => {
   return (dispatch) => {
     dispatch(setIsLoadingAction(true));
-    return jackpotListService
+    return jackpotLookupService
       .getJackpotsBySmallest()
       .then((jackpots) => dispatch(setJackpotsAction(jackpots)))
       .finally(() => dispatch(setIsLoadingAction(false)));
