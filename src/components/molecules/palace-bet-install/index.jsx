@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Linking, StyleSheet, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Image, Linking } from 'react-native';
 import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 import appConfig from '../../../config';
 import { palaceBetIconBlue } from '../../../assets';
 import { custom } from '../../../../theme/theme.styles';
-
-const { width: screenWidth } = Dimensions.get('window');
 
 const PalaceBetInstall = () => {
   const onPalaceBetInstallPress = () => {
@@ -30,22 +28,16 @@ const PalaceBetInstall = () => {
     <PalaceBetInstallViewContainer>
       <Image source={palaceBetIconBlue} style={custom.palaceBetIcon} />
       <View style={custom.headerContainerText}>
-        <Text style={[custom.headerContainerTitle, styles.centerPalaceBetButtons]}>
-          Install PalaceBet
+        <Text style={[custom.headerContainerTitle, custom.centerPalaceBetText]}>
+          Get The PalaceBet App
         </Text>
-        <Text style={[custom.headerContainerSubText, styles.centerPalaceBetButtons]}>
-          Download the Palace Bet App
+        <Text style={[custom.headerContainerSubText, custom.centerPalaceBetText]}>
+          Play your favourite live games. Bet on sports
         </Text>
       </View>
     </PalaceBetInstallViewContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  centerPalaceBetButtons: {
-    left: screenWidth * 0.1,
-  },
-});
 
 PalaceBetInstall.propTypes = {};
 PalaceBetInstall.defaultProps = {};

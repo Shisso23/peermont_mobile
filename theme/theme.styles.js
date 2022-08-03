@@ -153,6 +153,10 @@ export const custom = {
     marginLeft: 20,
     marginRight: -10,
     width: 34,
+    left: -10,
+  },
+  centerPalaceBetText: {
+    left: -10,
   },
   healthIcon: {
     marginLeft: 5,
