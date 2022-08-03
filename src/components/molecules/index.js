@@ -15,7 +15,6 @@ export { default as SplashAd } from './splash-ad';
 export { default as MembershipCardCarouselItem } from './membership-card-carousel-item';
 export { default as MembershipCardBalance } from './membership-card/balance';
 export { default as HealthSurvey } from './health-survey';
-export { default as PalaceBet } from './palace-bet';
 export { default as OtpNumericInput } from './otp-numeric-input';
 export { default as OtpAutofillSetting } from './otp-autofill/otp-autofill-setting';
 export { default as UpdateProfile } from './update-profile';
