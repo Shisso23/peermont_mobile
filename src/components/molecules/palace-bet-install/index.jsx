@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Linking } from 'react-native';
+import { View, TouchableOpacity, Image, Linking, Platform } from 'react-native';
 import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,11 @@ import { custom } from '../../../../theme/theme.styles';
 
 const PalaceBetInstall = () => {
   const onPalaceBetInstallPress = () => {
-    Linking.openURL(appConfig.palaceBetAndroidAppLink);
+    if (Platform.OS === 'ios') {
+      Linking.openURL(appConfig.palaceBetIosAppLink);
+    } else {
+      Linking.openURL(appConfig.palaceBetAndroidAppLink);
+    }
   };
 
   const PalaceBetInstallViewContainer = ({ children }) => {
