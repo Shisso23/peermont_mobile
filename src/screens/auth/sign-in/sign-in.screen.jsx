@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Image, Platform, View } from 'react-native';
 import { Divider, Button, ListItem, Text } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import RNBootSplash from 'react-native-bootsplash';
+import { getVersion } from 'react-native-device-info';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../components/containers';
 import { Footer, Contact, ModalLoader } from '../../../components';
@@ -132,6 +133,9 @@ const SignInScreen = () => {
       </ListItem>
       <Contact />
       <Divider />
+      <View style={custom.alignRow}>
+        <Text style={custom.smallText}>{`Version ${getVersion()}`}</Text>
+      </View>
       <Footer />
     </KeyboardScrollContainer>
   );

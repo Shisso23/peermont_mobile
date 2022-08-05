@@ -423,6 +423,15 @@ export const custom = {
     fontSize: 12,
     textAlign: 'center',
   },
+  alignRow: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 15,
+  },
+  smallText: {
+    color: colors.grey,
+    fontSize: 12,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
