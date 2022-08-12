@@ -6,7 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import _ from 'lodash';
 
-import { MembershipCardCarouselItem, SplashAd, PalaceBetInstall } from '../../../components';
+import {
+  MembershipCardCarouselItem,
+  SplashAd,
+  PalaceBetInstall,
+  CarWash,
+} from '../../../components';
 import { ScrollContainer, PaddedContainer } from '../../../components/containers';
 import { exitAppOnHardwarePressListener } from '../../../helpers';
 import { useBiometricRegister, handleNotificationOpenedBackGround } from '../../../hooks';
@@ -66,6 +71,7 @@ const HomeScreen = () => {
       <SplashAd />
       <PaddedContainer>
         <View style={custom.headerContainer}>
+          <CarWash />
           {!_.isEqual(Platform.OS, 'huawei') ? <PalaceBetInstall /> : null}
         </View>
       </PaddedContainer>

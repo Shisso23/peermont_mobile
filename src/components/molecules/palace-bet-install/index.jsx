@@ -32,9 +32,7 @@ const PalaceBetInstall = () => {
     <PalaceBetInstallViewContainer>
       <Image source={palaceBetIconBlue} style={custom.palaceBetIcon} />
       <View style={custom.headerContainerText}>
-        <Text style={[custom.headerContainerTitle, custom.centerPalaceBetText]}>
-          Get The PalaceBet App
-        </Text>
+        <Text style={[custom.headerContainerTitle, custom.centerPalaceBetText]}>PalaceBet</Text>
         <Text style={[custom.headerContainerSubText, custom.centerPalaceBetText]}>
           Play your favourite live games. Bet on sports
         </Text>
