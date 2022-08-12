@@ -106,7 +106,7 @@ export const custom = {
     fontSize: 18,
   },
   headerContainerSubText: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'OpenSans-Regular',
     color: colors.darkGrey,
   },
@@ -125,7 +125,8 @@ export const custom = {
     borderWidth: 1,
     elevation: 5,
     flexDirection: 'row',
-    height: 70,
+    height: 90,
+    justifyContent: 'space-evenly',
     marginHorizontal: 3,
     padding: 13,
     shadowColor: colors.black,
@@ -135,6 +136,7 @@ export const custom = {
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    width: 180,
   },
   resendOtpStyle: {
     color: colors.textGrey,
@@ -147,6 +149,8 @@ export const custom = {
   },
   headerContainer: {
     alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   palaceBetIcon: {
     height: 32,
@@ -156,6 +160,9 @@ export const custom = {
     left: -10,
   },
   centerPalaceBetText: {
+    left: -9,
+  },
+  centerCarWashText: {
     left: -10,
   },
   healthIcon: {

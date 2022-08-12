@@ -21,3 +21,4 @@ export { default as UpdateProfile } from './update-profile';
 export { default as Jackpot } from './jackpot';
 export { default as HotSlotPrediction } from './hot-slot-prediction';
 export { default as PalaceBetInstall } from './palace-bet-install';
+export { default as CarWash } from './car-wash';
