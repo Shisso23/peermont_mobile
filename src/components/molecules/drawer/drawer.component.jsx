@@ -96,7 +96,7 @@ const DrawerComponent = (props) => {
         <DrawerItem
           label="Car Wash"
           icon={() => <DrawerIcon name="car" />}
-          onPress={() => navigation.navigate('Notifications')}
+          onPress={() => navigation.navigate('CarWashHome')}
           labelStyle={styles.labelStyle}
         />
         <DrawerItem

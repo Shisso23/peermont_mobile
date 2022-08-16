@@ -35,6 +35,7 @@ import PaymentStatusScreen from '../../screens/app/payments/top-up/top-up-comple
 import JackpotListScreen from '../../screens/app/jackpot-look-up/jackpot-list.screen';
 import FilterHeader from '../../components/headers/filter-header';
 import HotSlotPredictionsScreen from '../../screens/app/jackpot-look-up/hot-slot-predictions.screen';
+import CarWashHomeScreen from '../../screens/app/car-wash/home/car-wash-home.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -172,6 +173,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="HotSlotPredictions"
       component={HotSlotPredictionsScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="CarWashHome"
+      component={CarWashHomeScreen}
       options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>

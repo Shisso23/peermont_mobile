@@ -31,6 +31,8 @@
     "camelcase-keys": "^6.2.2",
     "formik": "^2.2.6",
     "lodash": "^4.17.20",
+    "lottie-ios": "3.2.3",
+    "lottie-react-native": "4.0.3",
     "moment": "^2.29.1",
     "node-forge": "^0.10.0",
     "patch-package": "6.4.7",
