@@ -12,6 +12,7 @@
     "postinstall": "yarn initEnv && { cd ios; pod install; cd ..; } && npx jetify && patch-package"
   },
   "dependencies": {
+    "@dynatrace/react-native-plugin": "^2.247.1",
     "@hmscore/react-native-hms-account": "6.1.0-302",
     "@hmscore/react-native-hms-push": "^6.3.0-304",
     "@ptomasroos/react-native-multi-slider": "2.2.2",
