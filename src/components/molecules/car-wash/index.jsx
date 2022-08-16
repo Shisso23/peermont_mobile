@@ -11,7 +11,7 @@ const CarWash = () => {
   const navigation = useNavigation();
 
   const onCarWashPress = () => {
-    navigation.navigate('Notifications');
+    navigation.navigate('CarWashHome');
   };
 
   const CarWashViewContainer = ({ children }) => {

@@ -439,6 +439,16 @@ export const custom = {
     color: colors.grey,
     fontSize: 12,
   },
+  carWashHomeButtonBlue: {
+    backgroundColor: colors.primary,
+  },
+  carWashHomeButtonWhite: {
+    backgroundColor: colors.white,
+    borderColor: colors.primary,
+  },
+  carWashHomeTitleBlue: {
+    color: colors.primary,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
