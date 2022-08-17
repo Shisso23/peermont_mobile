@@ -25,11 +25,11 @@ const CarWashHomeScreen = () => {
         <Button
           title="Available Car Washes"
           buttonStyle={custom.carWashHomeButtonBlue}
-          onPress={() => navigation.navigate('Notifications')}
+          onPress={() => navigation.navigate('AvailableCarWashes')}
         />
         <Divider />
         <Button
-          title="Available Car Washes"
+          title="Redeemed Car Washes"
           buttonStyle={custom.carWashHomeButtonWhite}
           titleStyle={custom.carWashHomeTitleBlue}
           type="outline"

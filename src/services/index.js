@@ -18,3 +18,4 @@ export { default as advertService } from './sub-services/advert-service/advert.s
 export { default as appService } from './sub-services/app-service/app.service';
 export { default as pushKitService } from './sub-services/push-kit-service/push-kit.service';
 export { default as jackpotLookupService } from './sub-services/jackpot-lookup-service/jackpot-lookup.service';
+export { default as carWashService } from './sub-services/car-wash-service/car-wash.service';
