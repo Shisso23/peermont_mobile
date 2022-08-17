@@ -53,6 +53,24 @@ export const custom = {
     marginTop: 10,
     textAlign: 'center',
   },
+  centerTitleCarwash: {
+    color: colors.gold,
+    fontFamily: variables.fontFamilySecondary,
+    fontSize: 26,
+    marginBottom: 10,
+    marginTop: 10,
+    textAlign: 'left',
+    width: 200,
+    left: 50,
+  },
+  carWashIconBackground: {
+    flex: 1,
+    alignSelf: 'center',
+    width: 350,
+    height: 220,
+    padding: 10,
+    marginBottom: 10,
+  },
   buttonWidth: {
     width: 275,
   },
@@ -262,6 +280,10 @@ export const custom = {
   row: {
     flexDirection: 'row',
   },
+  carwashIconPosition: {
+    left: 30,
+    top: 20,
+  },
   settingsContainer: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -438,6 +460,29 @@ export const custom = {
   smallText: {
     color: colors.grey,
     fontSize: 12,
+  },
+  carWashVoucherDescription: {
+    color: 'white',
+    left: 122,
+    top: -10,
+  },
+  carWashVoucherExpiration: {
+    color: 'white',
+    left: 122,
+    top: -9,
+  },
+  dottedLineWidth: {
+    width: 500,
+  },
+  claimContainer: {
+    marginTop: 12,
+    height: 40,
+  },
+  claimButton: {
+    height: 40,
+  },
+  claimTitle: {
+    top: -3,
   },
   carWashHomeButtonBlue: {
     backgroundColor: colors.primary,

@@ -22,3 +22,4 @@ export * from './app/pay-out/pay-out.model';
 export * from './app/advert/advert.model';
 export * from './app/jackpot/jackpot.model';
 export * from './app/hot-slot-predictions/hot-slot-predictions.model';
+export * from './app/car-wash/car-wash.model';
