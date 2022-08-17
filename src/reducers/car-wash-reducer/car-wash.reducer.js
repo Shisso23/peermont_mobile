@@ -5,11 +5,15 @@ const reducerName = 'carWash';
 const setVouchers = CreateAction(reducerName, 'SET_VOUCHERS');
 export const setVouchersAction = setVouchers.action;
 
+const setCarWashes = CreateAction(reducerName, 'SET_CAR_WASHES');
+export const setCarWashesAction = setCarWashes.action;
+
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
 const initialState = {
   vouchers: [],
+  carWashes: [],
   isLoading: false,
 };
 
@@ -21,6 +25,11 @@ export default function carWashReducer(state = initialState, action) {
       return {
         ...state,
         vouchers: action.payload,
+      };
+    case setCarWashes.actionType:
+      return {
+        ...state,
+        carWashes: action.payload,
       };
     case setIsLoading.actionType:
       return {

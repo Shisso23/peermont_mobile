@@ -37,6 +37,7 @@ import FilterHeader from '../../components/headers/filter-header';
 import HotSlotPredictionsScreen from '../../screens/app/jackpot-look-up/hot-slot-predictions.screen';
 import AvailableCarWashesScreen from '../../screens/app/car-wash/available-car-washes/available-car-washes.screen';
 import CarWashHomeScreen from '../../screens/app/car-wash/home/car-wash-home.screen';
+import RedeemedCarWashesScreen from '../../screens/app/car-wash/history/redeemed-car-washes.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -184,6 +185,11 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="CarWashHome"
       component={CarWashHomeScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="RedeemedCarWashes"
+      component={RedeemedCarWashesScreen}
       options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>

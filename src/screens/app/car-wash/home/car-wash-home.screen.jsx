@@ -33,7 +33,7 @@ const CarWashHomeScreen = () => {
           buttonStyle={custom.carWashHomeButtonWhite}
           titleStyle={custom.carWashHomeTitleBlue}
           type="outline"
-          onPress={() => navigation.navigate('Notifications')}
+          onPress={() => navigation.navigate('RedeemedCarWashes')}
         />
       </PaddedContainer>
     </KeyboardScrollContainer>
