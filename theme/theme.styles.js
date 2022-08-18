@@ -280,6 +280,9 @@ export const custom = {
   row: {
     flexDirection: 'row',
   },
+  center: {
+    alignItems: 'center',
+  },
   carwashIconPosition: {
     left: 30,
     top: 20,

@@ -47,7 +47,7 @@ const HotSlotPredictionsScreen = () => {
   ) : (
     <SafeAreaView>
       <Text style={[custom.centerTitle, custom.topPadding]}>Hot Slot Predictions</Text>
-      <View style={custom.headerContainer}>
+      <View style={custom.center}>
         <Pagination
           renderDots={() =>
             lists.map((value, index) => (
