@@ -45,7 +45,7 @@ const JackpotListScreen = () => {
   ) : (
     <SafeAreaView>
       <Text style={[custom.centerTitle, custom.topPadding]}>Jackpot List</Text>
-      <View style={custom.headerContainer}>
+      <View style={custom.center}>
         <JackpotListForm initialValues={jackpotFormModel()} submitForm={_handleFormSubmit} />
         <FlatList
           style={[styles.jackpotDimensions, custom.jackpotScrolViewMargin]}

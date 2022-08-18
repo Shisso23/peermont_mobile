@@ -30,7 +30,7 @@ const RedeemedCarWashesScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Redeemed Car Washes</Text>
       </PaddedContainer>
-      <PaddedContainer style={custom.headerContainer}>
+      <PaddedContainer style={custom.center}>
         <FlatList
           style={[styles.carWashDimensions, custom.jackpotScrolViewMargin]}
           data={carWashes.data}

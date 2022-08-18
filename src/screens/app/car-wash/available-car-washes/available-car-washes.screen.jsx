@@ -30,7 +30,7 @@ const AvailableCarWashesScreen = () => {
       <PaddedContainer>
         <Text style={custom.centerTitle}>Available Carwashes</Text>
       </PaddedContainer>
-      <PaddedContainer style={custom.headerContainer}>
+      <PaddedContainer style={custom.center}>
         <FlatList
           style={[styles.voucherDimensions, custom.jackpotScrolViewMargin]}
           data={vouchers.data}
