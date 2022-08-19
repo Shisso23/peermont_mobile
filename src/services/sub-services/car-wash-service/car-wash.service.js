@@ -4,15 +4,15 @@ import carWashUrls from './car-wash.urls';
 import authNetworkService from '../auth-network-service/auth-network.service';
 import { apiVoucherModel } from '../../../models';
 
-export const getAvailableCarWashes = (MembershipCard, tierCode) => {
-  const apiModel = apiVoucherModel({ MembershipCard, tierCode });
+export const getAvailableCarWashes = (membershipCard, tierCode) => {
+  const apiModel = apiVoucherModel({ membershipCard, tierCode });
   const carWashUrl = carWashUrls.availableCarWashes();
   const returnVouchers = (apiResponse) => _.get(apiResponse, 'data');
   return authNetworkService.post(carWashUrl, apiModel).then(returnVouchers);
 };
 
-export const getClaimHistory = (MembershipCard) => {
-  const apiModel = apiVoucherModel({ MembershipCard });
+export const getClaimHistory = (membershipCard) => {
+  const apiModel = apiVoucherModel({ membershipCard });
   const carWashUrl = carWashUrls.claimHistory();
   const returnVouchers = (apiResponse) => _.get(apiResponse, 'data');
   return authNetworkService.post(carWashUrl, apiModel).then(returnVouchers);
