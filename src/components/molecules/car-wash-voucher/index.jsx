@@ -28,7 +28,7 @@ const CarWashVoucher = ({ voucherData }) => {
         buttonStyle={custom.claimButton}
         titleStyle={custom.claimTitle}
         title="Claim"
-        onPress={() => navigation.navigate('Notifications')}
+        onPress={() => navigation.navigate('CarWashSuccess')}
       />
     </ImageBackground>
   );

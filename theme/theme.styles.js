@@ -45,6 +45,13 @@ export const custom = {
     fontSize: 15,
     textAlign: 'center',
   },
+  centerTitleBlack: {
+    fontSize: 22,
+    textAlign: 'center',
+  },
+  topMargin: {
+    marginTop: 20,
+  },
   centerTitleSmall: {
     color: colors.gold,
     fontFamily: variables.fontFamilySecondary,
@@ -496,6 +503,13 @@ export const custom = {
   },
   carWashHomeTitleBlue: {
     color: colors.primary,
+  },
+  carWashSuccessMargin: {
+    marginBottom: 50,
+    marginTop: 90,
+  },
+  carWashDoneMargin: {
+    marginTop: 50,
   },
 };
 export const globalScreenOptions = {

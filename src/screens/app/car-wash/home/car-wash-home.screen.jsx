@@ -1,14 +1,11 @@
 import React from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { Image, View } from 'react-native';
 import { Button, Divider, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
-import { sparklingCar } from '../../../../assets/animations';
-
-const { width: screenWidth } = Dimensions.get('window');
+import { carWashImage } from '../../../../assets';
 
 const CarWashHomeScreen = () => {
   const navigation = useNavigation();
@@ -19,8 +16,9 @@ const CarWashHomeScreen = () => {
         <Text style={custom.centerTitle}>Car Wash</Text>
       </PaddedContainer>
       <PaddedContainer>
-        <LottieView style={styles.icon} source={sparklingCar} autoPlay loop />
+        <Image source={carWashImage} />
       </PaddedContainer>
+      <View style={custom.carWashDoneMargin} />
       <PaddedContainer>
         <Button
           title="Available Car Washes"
@@ -39,14 +37,6 @@ const CarWashHomeScreen = () => {
     </KeyboardScrollContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  icon: {
-    alignSelf: 'center',
-    marginBottom: 20,
-    width: screenWidth * 0.7,
-  },
-});
 
 CarWashHomeScreen.propTypes = {};
 
