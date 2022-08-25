@@ -34,7 +34,7 @@ const PalaceBetInstall = () => {
       <View style={custom.headerContainerText}>
         <Text style={[custom.headerContainerTitle, custom.centerPalaceBetText]}>PalaceBet</Text>
         <Text style={[custom.headerContainerSubText, custom.centerPalaceBetText]}>
-          Play your favourite live games. Bet on sports
+          Bet on slots, live casino games or sports!
         </Text>
       </View>
     </PalaceBetInstallViewContainer>
