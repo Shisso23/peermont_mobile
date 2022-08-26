@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { StyleSheet, Dimensions, View, Platform } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,7 +12,7 @@ import { getFormError } from '../form-utils';
 import { custom } from '../../../../theme/theme.styles';
 import { dropDownCasinoList } from '../../../helpers/casino-dropdown-helper';
 
-const { width: screenWidth } = Dimensions.get('window');
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const PredictionsForm = ({ submitForm, initialValues }) => {
   const casinos = dropDownCasinoList;
@@ -79,7 +79,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGrey,
     borderRadius: 12,
     borderWidth: 5,
-    height: 350,
+    ...Platform.select({
+      ios: {
+        height: screenHeight * 0.4,
+      },
+      android: {
+        height: screenHeight * 0.5,
+      },
+    }),
     marginLeft: -10,
     marginTop: 20,
     width: screenWidth * 0.45,

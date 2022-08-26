@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { StyleSheet, Dimensions, View, Platform } from 'react-native';
 import { SearchBar, Text, Button } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -14,7 +14,7 @@ import { custom } from '../../../../theme/theme.styles';
 import PaddedContainer from '../../containers/buttons-container/buttons.container';
 import { dropDownCasinoList } from '../../../helpers/casino-dropdown-helper';
 
-const { width: screenWidth } = Dimensions.get('window');
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const JackpotListForm = ({ submitForm, initialValues }) => {
   const casinos = dropDownCasinoList;
@@ -102,8 +102,17 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.7,
   },
   casinoSelectorDropdown: {
+    backgroundColor: colors.lightGrey,
     borderRadius: 12,
-    height: 120,
+    borderWidth: 5,
+    ...Platform.select({
+      ios: {
+        height: screenHeight * 0.4,
+      },
+      android: {
+        height: screenHeight * 0.55,
+      },
+    }),
     marginLeft: 0,
     marginTop: 20,
     width: screenWidth * 0.65,
