@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         height: screenHeight * 0.4,
       },
       android: {
-        height: screenHeight * 0.5,
+        height: screenHeight * 0.45,
       },
     }),
     marginLeft: -10,
