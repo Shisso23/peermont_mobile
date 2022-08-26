@@ -511,6 +511,28 @@ export const custom = {
   carWashDoneMargin: {
     marginTop: 50,
   },
+  predictionsFilterView: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  predictionsModal: {
+    left: 45,
+    marginRight: 5,
+    borderRadius: 12,
+  },
+  predictionsFilterButtonContainer: {
+    height: 40,
+    width: 70,
+    borderRadius: 12,
+    marginTop: 5,
+  },
+  predictionsFilterButton: {
+    borderRadius: 12,
+    height: 40,
+  },
+  predictionsButtonTitle: {
+    fontSize: 15,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

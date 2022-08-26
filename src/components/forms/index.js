@@ -14,3 +14,4 @@ export { default as ProfileForm } from './profile-form/profile.form';
 export { default as UploadProfileDocumentsForm } from './profile-form/upload-profile-documents.form';
 export { default as RegisterEmailForm } from './register-email/register-email.form';
 export { default as JackpotListForm } from './jackpot-list/jackpot-list.form';
+export { default as PredictionsForm } from './hot-slots-predictions/predictions.form';
