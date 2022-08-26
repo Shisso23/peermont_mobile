@@ -14,7 +14,7 @@ export const custom = {
     marginBottom: '35%',
   },
   casinoSelectorDropdownOptions: {
-    backgroundColor: colors.grey,
+    backgroundColor: colors.lightGrey,
     color: colors.black,
     fontSize: 14,
     opacity: 0.5,
