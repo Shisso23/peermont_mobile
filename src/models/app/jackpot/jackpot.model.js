@@ -25,3 +25,7 @@ export const jackpotFormModel = (_model = {}) => ({
   machine: _.get(_model, 'machine'),
   range: _.get(_model, 'range', [20000, 5000000]),
 });
+
+export const predictionsFormModel = (_model = {}) => ({
+  casino: _.get(_model, 'casino'),
+});

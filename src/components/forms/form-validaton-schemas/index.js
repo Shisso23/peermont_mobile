@@ -104,6 +104,8 @@ export const casinoSchema = Yup.string().when(['machine'], {
   then: Yup.string().required('Casino is required to filter by machine.'),
 });
 
+export const casinoSelectSchema = Yup.string().required('A casino is required');
+
 export const payOutBankIdSchema = Yup.string().required('Approved bank account required');
 
 export const dailyTopUpLimitSchema = Yup.number()

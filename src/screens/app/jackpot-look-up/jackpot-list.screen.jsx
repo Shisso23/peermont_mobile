@@ -15,12 +15,13 @@ import {
 } from '../../../reducers/jackpot-list-reducer/jackpot-list.actions';
 import { JackpotListForm } from '../../../components/forms';
 import { jackpotFormModel } from '../../../models';
+import { jackpotCasinoCodeList } from '../../../helpers/casino-dropdown-helper';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const JackpotListScreen = () => {
   const dispatch = useDispatch();
-  const casinos = ['EP', 'FI', 'GL', 'GP', 'KH', 'MP', 'RC', 'TM', 'UM'];
+  const casinos = jackpotCasinoCodeList;
   const { jackpots, isLoading } = useSelector(jackpotListSelector);
 
   const renderJackpotCard = ({ item }) => <Jackpot jackpotData={item} />;

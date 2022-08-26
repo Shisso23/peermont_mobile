@@ -12,21 +12,12 @@ import { casinoSchema, machineSchema } from '../form-validaton-schemas';
 import { getFormError } from '../form-utils';
 import { custom } from '../../../../theme/theme.styles';
 import PaddedContainer from '../../containers/buttons-container/buttons.container';
+import { dropDownCasinoList } from '../../../helpers/casino-dropdown-helper';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const JackpotListForm = ({ submitForm, initialValues }) => {
-  const casinos = [
-    'Emperors Palace',
-    'Frontier Inn',
-    'Graceland',
-    'The Grand Palm',
-    'Khoroni',
-    'Mmabatho Palms',
-    'Rio',
-    'Thaba Moshate',
-    'Umfolozi',
-  ];
+  const casinos = dropDownCasinoList;
 
   const validationSchema = Yup.object().shape({
     machine: machineSchema,
