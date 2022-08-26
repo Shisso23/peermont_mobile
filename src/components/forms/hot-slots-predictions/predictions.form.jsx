@@ -76,9 +76,10 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.45,
   },
   casinoSelectorDropdown: {
+    backgroundColor: colors.lightGrey,
     borderRadius: 12,
     borderWidth: 5,
-    height: 340,
+    height: 350,
     marginLeft: -10,
     marginTop: 20,
     width: screenWidth * 0.45,
