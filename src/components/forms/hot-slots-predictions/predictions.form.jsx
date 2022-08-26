@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   casinoSelectorDropdown: {
     borderRadius: 12,
     borderWidth: 5,
-    height: 120,
+    height: 340,
     marginLeft: -10,
     marginTop: 20,
     width: screenWidth * 0.45,
