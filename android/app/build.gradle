@@ -145,8 +145,8 @@ android {
         applicationId "com.codehesion.peermont_mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 60
-        versionName "1.3.3"
+        versionCode 61
+        versionName "1.3.4"
         multiDexEnabled true
         resValue 'string', "CODE_PUSH_APK_BUILD_TIME", String.format("\"%d\"", System.currentTimeMillis())
     }

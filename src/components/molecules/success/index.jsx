@@ -3,14 +3,14 @@ import { Dimensions, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 import PaddedContainer from '../../containers/buttons-container/buttons.container';
-import { successTick } from '../../../assets/animations';
+import { success } from '../../../assets/animations';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const SuccessComponent = () => {
   return (
     <PaddedContainer>
-      <LottieView style={styles.icon} source={successTick} autoPlay />
+      <LottieView style={styles.icon} source={success} autoPlay loop={false} />
     </PaddedContainer>
   );
 };

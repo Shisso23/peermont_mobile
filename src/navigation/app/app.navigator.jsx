@@ -40,6 +40,8 @@ import CarWashHomeScreen from '../../screens/app/car-wash/home/car-wash-home.scr
 import RedeemedCarWashesScreen from '../../screens/app/car-wash/history/redeemed-car-washes.screen';
 import CarWashSuccessScreen from '../../screens/app/car-wash/final-states/car-wash-success.screen';
 import CarWashFailureScreen from '../../screens/app/car-wash/final-states/car-wash-failure.screen';
+import ScannerSelectScreen from '../../screens/app/car-wash/scanner/scanner-select.screen';
+import ScannerScreen from '../../screens/app/car-wash/scanner/scanner.screen';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -202,6 +204,16 @@ const AppNavigator = () => (
     <AppStack.Screen
       name="CarWashFailure"
       component={CarWashFailureScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="ScannerSelect"
+      component={ScannerSelectScreen}
+      options={{ headerShown: true, title: '' }}
+    />
+    <AppStack.Screen
+      name="Scanner"
+      component={ScannerScreen}
       options={{ headerShown: true, title: '' }}
     />
   </AppStack.Navigator>

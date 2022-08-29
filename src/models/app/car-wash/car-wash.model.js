@@ -19,4 +19,11 @@ export const claimedCarWashModel = (_model = {}) => ({
 export const apiVoucherModel = (_model = {}) => ({
   membership_card: _.get(_model, 'membershipCard'),
   tier_code: _.get(_model, 'tierCode'),
+  outlet_code: _.get(_model, 'qrCode'),
+  benefit_id: _.get(_model, 'benefitId'),
+});
+
+export const carWashMessageModel = (_model = {}) => ({
+  succeeded: _.get(_model, 'succeeded', ''),
+  messages: _.get(_model, 'messages', ''),
 });
