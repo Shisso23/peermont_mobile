@@ -3,14 +3,22 @@ import { View, Text, Image, ImageBackground } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
+import { useDispatch } from 'react-redux';
 
 import { custom } from '../../../../theme/theme.styles';
 import { voucherModel } from '../../../models';
 import { carWashIcon, ticketIcon, ticketLine } from '../../../assets';
+import { setCurrentVoucher } from '../../../reducers/car-wash-reducer/car-wash.actions';
 
 const CarWashVoucher = ({ voucherData }) => {
   const voucher = voucherModel(voucherData);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const _navigateScannerSelect = () => {
+    dispatch(setCurrentVoucher(voucher));
+    navigation.navigate('ScannerSelect');
+  };
 
   return (
     <ImageBackground source={ticketIcon} style={custom.carWashIconBackground} resizeMode="cover">
@@ -28,7 +36,7 @@ const CarWashVoucher = ({ voucherData }) => {
         buttonStyle={custom.claimButton}
         titleStyle={custom.claimTitle}
         title="Claim"
-        onPress={() => navigation.navigate('CarWashFailure')}
+        onPress={_navigateScannerSelect}
       />
     </ImageBackground>
   );

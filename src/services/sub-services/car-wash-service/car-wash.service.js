@@ -18,7 +18,15 @@ export const getClaimHistory = (membershipCard) => {
   return authNetworkService.post(carWashUrl, apiModel).then(returnVouchers);
 };
 
+export const claimCarWashVoucher = (membershipCard, tierCode, qrCode, benefitId) => {
+  const apiModel = apiVoucherModel({ membershipCard, tierCode, qrCode, benefitId });
+  const carWashUrl = carWashUrls.claimCarWashVoucher();
+  const returnVouchers = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.post(carWashUrl, apiModel).then(returnVouchers);
+};
+
 export default {
   getAvailableCarWashes,
   getClaimHistory,
+  claimCarWashVoucher,
 };

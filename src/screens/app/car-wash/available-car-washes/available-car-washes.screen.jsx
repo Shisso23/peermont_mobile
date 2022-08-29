@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { Dimensions, View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import { custom } from '../../../../../theme/theme.styles';
+import _ from 'lodash';
 
+import { custom } from '../../../../../theme/theme.styles';
 import { PaddedContainer } from '../../../../components/containers';
 import { CarWashVoucher, LoadingComponent } from '../../../../components';
 import { carWashSelector } from '../../../../reducers/car-wash-reducer/car-wash.reducer';
@@ -18,7 +19,7 @@ const AvailableCarWashesScreen = () => {
   const renderCarWashVouchers = ({ item }) => <CarWashVoucher voucherData={item} />;
 
   useEffect(() => {
-    dispatch(getAvailableCarWashesAction('1000000003', 'PLATINUM'));
+    dispatch(getAvailableCarWashesAction('1000000009', 'PLATINUM'));
   }, []);
 
   return isLoading ? (
@@ -37,6 +38,9 @@ const AvailableCarWashesScreen = () => {
           renderItem={renderCarWashVouchers}
         />
       </PaddedContainer>
+      {_.isEmpty(vouchers.data) ? (
+        <Text style={custom.centerTitleBlack}>You have no available car washes</Text>
+      ) : null}
     </SafeAreaView>
   );
 };

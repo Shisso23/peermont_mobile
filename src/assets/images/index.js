@@ -21,3 +21,4 @@ export { default as carWashIcon } from './car-wash-icon.png';
 export { default as ticketIcon } from './ticket.png';
 export { default as ticketLine } from './ticket-line.png';
 export { default as carWashImage } from './car-wash-image.png';
+export { default as barCodeFrame } from './bar-code-frame.png';

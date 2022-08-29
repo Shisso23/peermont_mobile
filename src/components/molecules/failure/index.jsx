@@ -10,7 +10,7 @@ const { width: screenWidth } = Dimensions.get('window');
 const FailureComponent = () => {
   return (
     <PaddedContainer>
-      <LottieView style={styles.icon} source={failure} autoPlay />
+      <LottieView style={styles.icon} source={failure} autoPlay loop={false} />
     </PaddedContainer>
   );
 };
