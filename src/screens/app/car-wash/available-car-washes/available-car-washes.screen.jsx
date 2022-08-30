@@ -19,7 +19,7 @@ const AvailableCarWashesScreen = () => {
   const renderCarWashVouchers = ({ item }) => <CarWashVoucher voucherData={item} />;
 
   useEffect(() => {
-    dispatch(getAvailableCarWashesAction('1000000009', 'PLATINUM'));
+    dispatch(getAvailableCarWashesAction('10000000013', 'PLATINUM'));
   }, []);
 
   return isLoading ? (

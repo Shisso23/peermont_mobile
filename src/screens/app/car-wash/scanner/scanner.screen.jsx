@@ -15,7 +15,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 const ScannerScreen = () => {
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(false);
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState(false);
   const [active, setActive] = useState(true);
   const devices = useCameraDevices();
   const device = devices.back;
@@ -31,25 +31,27 @@ const ScannerScreen = () => {
       setActive(false);
       dispatch(
         claimCarWashVoucherAction(
-          '1000000009',
+          '10000000013',
           'PLATINUM',
           barcodeResults[0].content.data,
           voucher.id,
         ),
       );
-      setMessage(messages);
+      setMessage(true);
     }
   }, [barcodeResults]);
 
   useEffect(() => {
-    if (!_.isEmpty(message)) {
-      if (message.succeeded) {
-        navigation.navigate('CarWashSuccess');
-      } else {
-        navigation.navigate('CarWashFailure');
+    if (message) {
+      if (!_.isEmpty(messages)) {
+        if (messages.succeeded) {
+          navigation.navigate('CarWashSuccess');
+        } else {
+          navigation.navigate('CarWashFailure');
+        }
       }
     }
-  }, [message]);
+  }, [messages]);
 
   useEffect(() => {
     (async () => {
