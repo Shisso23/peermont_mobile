@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { Button, Divider, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -7,11 +7,21 @@ import LottieView from 'lottie-react-native';
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
 import { qrScanner } from '../../../../assets/animations';
+import { QrInputModal } from '../../../../components';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const ScannerSelectScreen = () => {
   const navigation = useNavigation();
+  const [showInputModal, setShowInputModal] = useState(false);
+
+  const openInputModal = () => {
+    setShowInputModal(true);
+  };
+
+  const _closeModal = (close) => {
+    setShowInputModal(close);
+  };
 
   return (
     <KeyboardScrollContainer>
@@ -30,8 +40,9 @@ const ScannerSelectScreen = () => {
         buttonStyle={custom.carWashHomeButtonWhite}
         titleStyle={custom.carWashHomeTitleBlue}
         type="outline"
-        onPress={() => navigation.navigate('RedeemedCarWashes')}
+        onPress={openInputModal}
       />
+      <QrInputModal closeModal={_closeModal} visible={showInputModal} />
     </KeyboardScrollContainer>
   );
 };

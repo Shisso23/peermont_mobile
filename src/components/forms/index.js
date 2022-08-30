@@ -15,3 +15,4 @@ export { default as UploadProfileDocumentsForm } from './profile-form/upload-pro
 export { default as RegisterEmailForm } from './register-email/register-email.form';
 export { default as JackpotListForm } from './jackpot-list/jackpot-list.form';
 export { default as PredictionsForm } from './hot-slots-predictions/predictions.form';
+export { default as QrInputForm } from './qr-input/qr-input.form';

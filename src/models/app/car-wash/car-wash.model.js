@@ -27,3 +27,7 @@ export const carWashMessageModel = (_model = {}) => ({
   succeeded: _.get(_model, 'succeeded', ''),
   messages: _.get(_model, 'messages', ''),
 });
+
+export const qrModel = (_model = {}) => ({
+  qrCode: _.get(_model, 'qrCode'),
+});

@@ -533,6 +533,19 @@ export const custom = {
   predictionsButtonTitle: {
     fontSize: 15,
   },
+  qrSubmitButtonContainer: {
+    borderRadius: 12,
+    width: 300,
+  },
+  qrSubmitButton: {
+    borderRadius: 12,
+    backgroundColor: 'white',
+    borderColor: 'grey',
+    borderWidth: 1,
+  },
+  qrSubmitTitle: {
+    color: 'grey',
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
