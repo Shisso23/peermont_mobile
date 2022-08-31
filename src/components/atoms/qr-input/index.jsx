@@ -12,7 +12,7 @@ import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
 import { qrModel } from '../../../models';
 import { QrInputForm } from '../../forms';
-import { carWashSelector } from '../../../reducers';
+import { carWashSelector } from '../../../reducers/car-wash-reducer/car-wash.reducer';
 import { claimCarWashVoucherAction } from '../../../reducers/car-wash-reducer/car-wash.actions';
 
 const { width: screenWidth } = Dimensions.get('window');
