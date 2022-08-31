@@ -4,6 +4,7 @@ import {
   setIsLoadingAction,
   setMessagesAction,
   setVoucherAction,
+  setVoucherCountAction,
   setVouchersAction,
 } from './car-wash.reducer';
 
@@ -42,5 +43,17 @@ export const claimCarWashVoucherAction = (MembershipCard, tierCode, qrCode, bene
 export const setCurrentVoucher = (voucher) => {
   return (dispatch) => {
     return dispatch(setVoucherAction(voucher));
+  };
+};
+
+export const getVoucherCountAction = (MembershipCard, tierCode) => {
+  return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+    return carWashService
+      .getVoucherCount(MembershipCard, tierCode)
+      .then((count) => {
+        dispatch(setVoucherCountAction(count));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };

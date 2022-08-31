@@ -15,6 +15,9 @@ export const setMessagesAction = setMessages.action;
 const setCarWashes = CreateAction(reducerName, 'SET_CAR_WASHES');
 export const setCarWashesAction = setCarWashes.action;
 
+const setVoucherCount = CreateAction(reducerName, 'SET_VOUCHER_COUNT');
+export const setVoucherCountAction = setVoucherCount.action;
+
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
@@ -24,6 +27,7 @@ const initialState = {
   isLoading: false,
   voucher: voucherModel,
   messages: {},
+  voucherCount: {},
 };
 
 export const carWashSelector = (reducers) => reducers.carWashReducer;
@@ -49,6 +53,11 @@ export default function carWashReducer(state = initialState, action) {
       return {
         ...state,
         carWashes: action.payload,
+      };
+    case setVoucherCount.actionType:
+      return {
+        ...state,
+        voucherCount: action.payload,
       };
     case setIsLoading.actionType:
       return {
