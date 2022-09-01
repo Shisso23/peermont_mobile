@@ -4,6 +4,7 @@ import { Icon, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
+import _ from 'lodash';
 
 import { custom } from '../../../../theme/theme.styles';
 import { getVoucherCountAction } from '../../../reducers/car-wash-reducer/car-wash.actions';
@@ -18,6 +19,9 @@ const CarWash = () => {
   const onCarWashPress = () => {
     navigation.navigate('CarWashHome');
   };
+
+  const validateCountPresence = () =>
+    _.isNull(voucherCount.data[0]) ? voucherCount.data[0].count : null;
 
   const CarWashViewContainer = ({ children }) => {
     return (
@@ -41,7 +45,7 @@ const CarWash = () => {
       <View style={custom.headerContainerText}>
         <Text style={[custom.headerContainerTitle, custom.centerCarWashText]}>Car wash</Text>
         <Text style={[custom.headerContainerSubText, custom.centerCarWashText]}>
-          {isLoading ? null : voucherCount.data[0].count} Vouchers Available
+          {isLoading ? null : validateCountPresence()} Vouchers Available
         </Text>
       </View>
     </CarWashViewContainer>

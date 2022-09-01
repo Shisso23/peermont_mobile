@@ -34,8 +34,8 @@ module.exports = {
             configurations {
                 defaultConfig {
                     autoStart {
-                        applicationId 'f10c3970-8ae9-4b14-a040-f07a1314629b'
-                        beaconUrl 'https://bf20365ozt.bf.dynatrace.com/mbeacon'
+                        applicationId project.env.get('DYNATRACE_APP_ID')
+                        beaconUrl project.env.get('DYNATRACE_BEACON')
                     }
                     userOptIn false
                     agentBehavior.startupLoadBalancing true
@@ -48,9 +48,9 @@ module.exports = {
     // Those configs are copied 1:1
     config: `
         <key>DTXApplicationID</key>
-        <string>f10c3970-8ae9-4b14-a040-f07a1314629b</string>
+        <string>[ReactNativeConfig envFor:@"DYNATRACE_APP_ID"]</string>
         <key>DTXBeaconURL</key>
-        <string>https://bf20365ozt.bf.dynatrace.com/mbeacon</string>
+        <string>[ReactNativeConfig envFor:@"DYNATRACE_BEACON"]</string>
         <key>DTXLogLevel</key>
         <string>ALL</string>
         <key>DTXUserOptIn</key>
