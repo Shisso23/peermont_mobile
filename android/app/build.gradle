@@ -245,3 +245,17 @@ task copyDownloadableDepsToLibs(type: Copy) {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
+
+dynatrace {
+    configurations {
+        sampleConfig {
+            autoStart {
+                applicationId project.env.get('DYNATRACE_APP_ID')
+                beaconUrl project.env.get('DYNATRACE_BEACON')
+            }
+            userOptIn false
+            agentBehavior.startupLoadBalancing true
+            sessionReplay.enabled false
+        }
+    }
+}
