@@ -36,6 +36,10 @@ import {
 import { otpMessage } from '../../../helpers/otp-message.helper';
 import colors from '../../../../theme/theme.colors';
 import { custom } from '../../../../theme/theme.styles';
+import {
+  canClaimVoucherAction,
+  sendCanClaimOtpAction,
+} from '../../../reducers/car-wash-reducer/car-wash.actions';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -46,6 +50,7 @@ const OtpNumericInput = ({
   verificationType,
   userData,
   topUp,
+  voucherData,
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -75,6 +80,8 @@ const OtpNumericInput = ({
         return dispatch(verifyResetPasswordOtpAction(formData));
       case 'BANK_ACCOUNT':
         return dispatch(verifyBankAccountOtpAction(formData));
+      case 'CAR_WASH':
+        return dispatch(canClaimVoucherAction('10000000013', voucherData.id, formData.numeric));
       default:
         return null;
     }
@@ -107,6 +114,9 @@ const OtpNumericInput = ({
           bankAccountId,
         });
         break;
+      case 'CAR_WASH':
+        _closeModal();
+        break;
       default:
         return null;
     }
@@ -130,6 +140,9 @@ const OtpNumericInput = ({
         break;
       case 'BANK_ACCOUNT':
         dispatch(BankAccountResendOtpAction());
+        break;
+      case 'CAR_WASH':
+        dispatch(sendCanClaimOtpAction());
         break;
       default:
         return null;
@@ -230,12 +243,14 @@ OtpNumericInput.propTypes = {
   verificationType: PropTypes.string.isRequired,
   userData: PropTypes.object,
   topUp: PropTypes.bool,
+  voucherData: PropTypes.object,
 };
 
 OtpNumericInput.defaultProps = {
   userData: {},
   afterOtpRoute: '',
   topUp: false,
+  voucherData: {},
 };
 
 export default OtpNumericInput;

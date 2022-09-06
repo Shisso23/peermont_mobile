@@ -20,8 +20,7 @@ const CarWash = () => {
     navigation.navigate('CarWashHome');
   };
 
-  const validateCountPresence = () =>
-    _.isNull(voucherCount.data[0]) ? voucherCount.data[0].count : null;
+  const validateCountPresence = () => (_.isEmpty(voucherCount) ? null : voucherCount.data[0].count);
 
   const CarWashViewContainer = ({ children }) => {
     return (

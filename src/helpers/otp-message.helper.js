@@ -39,6 +39,11 @@ export function otpMessage(otpMethod, verificationType) {
         otpMethod,
       )}
         for validation.`;
+    case 'CAR_WASH':
+      return `We have sent a ${_.lowerCase(otpMethod)} with a One Time Pin (OTP) to ${methodText(
+        otpMethod,
+      )}
+      for validation.`;
     default:
       return null;
   }

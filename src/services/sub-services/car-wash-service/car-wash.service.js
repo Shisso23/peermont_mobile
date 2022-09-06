@@ -32,9 +32,23 @@ export const getVoucherCount = (membershipCard, tierCode) => {
   return authNetworkService.post(carWashUrl, apiModel).then(returnVoucherCount);
 };
 
+export const canClaimVoucher = (membershipCard, benefitId, otp) => {
+  const apiModel = apiVoucherModel({ membershipCard, benefitId, otp });
+  const carWashUrl = carWashUrls.canClaimVoucher();
+  const returnVoucherCount = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.post(carWashUrl, apiModel).then(returnVoucherCount);
+};
+
+export const sendCanClaimOtp = () => {
+  const carWashUrl = carWashUrls.sendCanClaimOtp();
+  return authNetworkService.get(carWashUrl);
+};
+
 export default {
   getAvailableCarWashes,
   getClaimHistory,
   claimCarWashVoucher,
   getVoucherCount,
+  canClaimVoucher,
+  sendCanClaimOtp,
 };

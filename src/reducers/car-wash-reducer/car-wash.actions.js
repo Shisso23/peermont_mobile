@@ -57,3 +57,17 @@ export const getVoucherCountAction = (MembershipCard, tierCode) => {
       .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
+
+export const canClaimVoucherAction = (membershipCard, benefitId, otp) => {
+  return (dispatch) => {
+    return carWashService.canClaimVoucher(membershipCard, benefitId, otp).then((messages) => {
+      dispatch(setMessagesAction(messages));
+    });
+  };
+};
+
+export const sendCanClaimOtpAction = () => {
+  return () => {
+    return carWashService.sendCanClaimOtp();
+  };
+};

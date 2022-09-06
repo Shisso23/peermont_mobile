@@ -7,4 +7,6 @@ export default {
   claimHistory: () => `${apiUrl}/car_washes/get_claim_history`,
   claimCarWashVoucher: () => `${apiUrl}/car_washes/claim_voucher`,
   voucherCount: () => `${apiUrl}/car_washes/voucher_count`,
+  canClaimVoucher: () => `${apiUrl}/car_washes/can_claim_voucher`,
+  sendCanClaimOtp: () => `${apiUrl}/car_washes/send_can_claim_otp`,
 };
