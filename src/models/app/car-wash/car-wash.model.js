@@ -21,6 +21,7 @@ export const apiVoucherModel = (_model = {}) => ({
   tier_code: _.get(_model, 'tierCode'),
   outlet_code: _.get(_model, 'qrCode'),
   benefit_id: _.get(_model, 'benefitId'),
+  otp: _.get(_model, 'otp'),
 });
 
 export const carWashMessageModel = (_model = {}) => ({
