@@ -9,4 +9,6 @@ export default {
   voucherCount: () => `${apiUrl}/car_washes/voucher_count`,
   canClaimVoucher: () => `${apiUrl}/car_washes/can_claim_voucher`,
   sendCanClaimOtp: () => `${apiUrl}/car_washes/send_can_claim_otp`,
+  getCarDetailsForm: () => `${apiUrl}/car_washes/get_car_form`,
+  submitCarWashDetails: () => `${apiUrl}/car_washes/submit_car_form`,
 };

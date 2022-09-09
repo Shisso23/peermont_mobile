@@ -16,3 +16,4 @@ export { default as RegisterEmailForm } from './register-email/register-email.fo
 export { default as JackpotListForm } from './jackpot-list/jackpot-list.form';
 export { default as PredictionsForm } from './hot-slots-predictions/predictions.form';
 export { default as QrInputForm } from './qr-input/qr-input.form';
+export { default as CarDetailsForm } from './car-details/car-details.form';

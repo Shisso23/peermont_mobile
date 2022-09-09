@@ -32,3 +32,16 @@ export const carWashMessageModel = (_model = {}) => ({
 export const qrModel = (_model = {}) => ({
   qrCode: _.get(_model, 'qrCode'),
 });
+
+export const carDetailsFormModel = (_model = {}) => ({
+  fields: _.get(_model, 'outletTypeFormFieldLinks', []),
+});
+
+export const carDetailsFormApiModel = (_model = {}) => ({
+  fieldId: _.get(_model, 'fieldId', ''),
+  answers: _.get(_model, 'answers', ''),
+});
+
+export const formDetailApiModel = (_model = {}) => ({
+  form_detail: _.cloneDeep(_model?.fieldDetails),
+});

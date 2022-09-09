@@ -546,6 +546,15 @@ export const custom = {
   qrSubmitTitle: {
     color: 'grey',
   },
+  checkboxMargin: {
+    marginBottom: 20,
+  },
+  checkboxLabel: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    paddingLeft: 1,
+    marginBottom: 20,
+  },
 };
 export const globalScreenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

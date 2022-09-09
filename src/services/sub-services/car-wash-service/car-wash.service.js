@@ -44,6 +44,19 @@ export const sendCanClaimOtp = () => {
   return authNetworkService.get(carWashUrl);
 };
 
+export const getCarDetailsForm = (qrCode) => {
+  const apiModel = apiVoucherModel({ qrCode });
+  const carWashUrl = carWashUrls.getCarDetailsForm();
+  const returnCarDetailsForm = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.post(carWashUrl, apiModel).then(returnCarDetailsForm);
+};
+
+export const submitCarWashDetails = (carDetails) => {
+  const carWashUrl = carWashUrls.submitCarWashDetails();
+  const returnCarSuccess = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.post(carWashUrl, carDetails).then(returnCarSuccess);
+};
+
 export default {
   getAvailableCarWashes,
   getClaimHistory,
@@ -51,4 +64,6 @@ export default {
   getVoucherCount,
   canClaimVoucher,
   sendCanClaimOtp,
+  getCarDetailsForm,
+  submitCarWashDetails,
 };
