@@ -1,5 +1,7 @@
 import { carWashService } from '../../services';
 import {
+  setCarDetailsAction,
+  setCarSuccessAction,
   setCarWashesAction,
   setIsLoadingAction,
   setMessagesAction,
@@ -69,5 +71,25 @@ export const canClaimVoucherAction = (membershipCard, benefitId, otp) => {
 export const sendCanClaimOtpAction = () => {
   return () => {
     return carWashService.sendCanClaimOtp();
+  };
+};
+
+export const getCarDetailsFormAction = (outletCode) => {
+  return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+    return carWashService
+      .getCarDetailsForm(outletCode)
+      .then((carDetails) => {
+        dispatch(setCarDetailsAction(carDetails));
+      })
+      .finally(() => dispatch(setIsLoadingAction(false)));
+  };
+};
+
+export const submitCarDetailsAction = (carData) => {
+  return (dispatch) => {
+    return carWashService.submitCarWashDetails(carData).then((carSuccess) => {
+      dispatch(setCarSuccessAction(carSuccess));
+    });
   };
 };

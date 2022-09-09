@@ -18,6 +18,12 @@ export const setCarWashesAction = setCarWashes.action;
 const setVoucherCount = CreateAction(reducerName, 'SET_VOUCHER_COUNT');
 export const setVoucherCountAction = setVoucherCount.action;
 
+const setCarDetails = CreateAction(reducerName, 'SET_CAR_DETAILS');
+export const setCarDetailsAction = setCarDetails.action;
+
+const setCarSuccess = CreateAction(reducerName, 'SET_CAR_SUCCESS');
+export const setCarSuccessAction = setCarSuccess.action;
+
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
@@ -28,6 +34,8 @@ const initialState = {
   voucher: voucherModel,
   messages: {},
   voucherCount: {},
+  carDetails: {},
+  carSuccess: {},
 };
 
 export const carWashSelector = (reducers) => reducers.carWashReducer;
@@ -58,6 +66,16 @@ export default function carWashReducer(state = initialState, action) {
       return {
         ...state,
         voucherCount: action.payload,
+      };
+    case setCarDetails.actionType:
+      return {
+        ...state,
+        carDetails: action.payload,
+      };
+    case setCarSuccess.actionType:
+      return {
+        ...state,
+        carSuccess: action.payload,
       };
     case setIsLoading.actionType:
       return {
