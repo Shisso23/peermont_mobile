@@ -12,4 +12,5 @@ export default {
   hasQueuedPayoutsUrl: () => `${apiUrl}/payments/has_queued_payouts`,
   paymentSuccess: () => `${apiUrl}/payments/payment_success`,
   paymentFailed: () => `${apiUrl}/payments/payment_cancel`,
+  earnTransactions: () => `${apiUrl}/earn_and_burns`,
 };

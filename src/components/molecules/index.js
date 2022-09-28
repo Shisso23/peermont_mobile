@@ -26,3 +26,4 @@ export { default as CarWashVoucher } from './car-wash-voucher';
 export { default as RedeemedClaim } from './redeemed-car-wash';
 export { default as FailureComponent } from './failure';
 export { default as SuccessComponent } from './success';
+export { default as EarnTransaction } from './earnTransaction';

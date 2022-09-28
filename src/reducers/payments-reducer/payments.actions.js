@@ -6,6 +6,7 @@ import {
   setTransactionsAction,
   setIsLoadingAction,
   setHasQueuedPayoutsAction,
+  setEarnTransactionsAction,
 } from './payments.reducer';
 
 export const initiateTopUpAction = (topUpFormData) => {
@@ -196,5 +197,15 @@ export const hasQueuedPayouts = (membershipCardId) => {
       .then((hasQueued) =>
         dispatch(setHasQueuedPayoutsAction(_.get(hasQueued, 'has_queued_payouts'))),
       );
+  };
+};
+
+export const getEarnTransactions = () => {
+  return (dispatch) => {
+    dispatch(setIsLoadingAction(true));
+    return paymentService
+      .getEarnTransactions()
+      .then((earnTransactions) => dispatch(setEarnTransactionsAction(earnTransactions)))
+      .finally(() => dispatch(setIsLoadingAction(false)));
   };
 };
