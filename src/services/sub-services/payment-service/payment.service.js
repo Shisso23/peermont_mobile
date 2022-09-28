@@ -76,6 +76,12 @@ export const getHasQueuedPayouts = (membershipCardId) => {
   return authNetworkService.post(HasQueuedPayoutsUrl, membershipCardId).then(returnHasQueued);
 };
 
+export const getEarnTransactions = () => {
+  const transactionsUrl = paymentUrls.earnTransactions();
+  const returnTransactions = (apiResponse) => _.get(apiResponse, 'data');
+  return authNetworkService.get(transactionsUrl).then(returnTransactions);
+};
+
 export default {
   createPayment,
   sendPaymentOtp,
@@ -85,4 +91,5 @@ export default {
   createEft,
   getTransactions,
   getHasQueuedPayouts,
+  getEarnTransactions,
 };

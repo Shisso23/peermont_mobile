@@ -58,3 +58,11 @@ export const paymentTransactionModel = (_model = {}) => ({
   paymentType: formatPaymentType(_.get(_model, 'payment_type')),
   bank: _.get(_model, 'bank'),
 });
+
+export const earnTransactionModel = (_model = {}) => ({
+  reference: _.get(_model, 'ReferenceNumber'),
+  vendorName: _.get(_model, 'VendorName'),
+  cardNumber: _.get(_model, 'CardNumber'),
+  date: Moment(_.get(_model, 'DateStamp')).format('YYYY/MM/DD, HH:mm'),
+  value: (_.get(_model, 'Value') / 100).toFixed(2),
+});
