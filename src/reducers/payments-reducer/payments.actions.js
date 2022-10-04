@@ -7,6 +7,7 @@ import {
   setIsLoadingAction,
   setHasQueuedPayoutsAction,
   setEarnTransactionsAction,
+  setIsLoadingOutletAction,
 } from './payments.reducer';
 
 export const initiateTopUpAction = (topUpFormData) => {
@@ -202,10 +203,10 @@ export const hasQueuedPayouts = (membershipCardId) => {
 
 export const getEarnTransactions = () => {
   return (dispatch) => {
-    dispatch(setIsLoadingAction(true));
+    dispatch(setIsLoadingOutletAction(true));
     return paymentService
       .getEarnTransactions()
       .then((earnTransactions) => dispatch(setEarnTransactionsAction(earnTransactions)))
-      .finally(() => dispatch(setIsLoadingAction(false)));
+      .finally(() => dispatch(setIsLoadingOutletAction(false)));
   };
 };

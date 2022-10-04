@@ -20,6 +20,9 @@ export const setHasQueuedPayoutsAction = setHasQueuedPayouts.action;
 const setIsLoading = CreateAction(reducerName, 'SET_IS_LOADING');
 export const setIsLoadingAction = setIsLoading.action;
 
+const setIsLoadingOutlet = CreateAction(reducerName, 'SET_IS_LOADING_OUTLET');
+export const setIsLoadingOutletAction = setIsLoadingOutlet.action;
+
 const initialState = {
   pendingPaymentId: null,
   paymentUri: null,
@@ -27,6 +30,7 @@ const initialState = {
   hasQueuedPayouts: false,
   earnTransactions: [],
   isLoading: false,
+  isLoadingOutlet: false,
 };
 
 export const paymentSelector = (reducer) => reducer.paymentReducer;
@@ -62,6 +66,11 @@ export default function paymentReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case setIsLoadingOutlet.actionType:
+      return {
+        ...state,
+        isLoadingOutlet: action.payload,
       };
     default:
       return state;
