@@ -9,12 +9,14 @@ import _ from 'lodash';
 import { custom } from '../../../../theme/theme.styles';
 import { getVoucherCountAction } from '../../../reducers/car-wash-reducer/car-wash.actions';
 import { carWashSelector } from '../../../reducers/car-wash-reducer/car-wash.reducer';
+import { userSelector } from '../../../reducers/user-reducer/user.reducer';
 
 const CarWash = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const { isLoading, voucherCount } = useSelector(carWashSelector);
+  const { user } = useSelector(userSelector);
 
   const onCarWashPress = () => {
     navigation.navigate('CarWashHome');
@@ -35,7 +37,7 @@ const CarWash = () => {
   };
 
   useEffect(() => {
-    dispatch(getVoucherCountAction('10000000013', 'PLATINUM'));
+    dispatch(getVoucherCountAction(user.cmpAccountNumber, user.tierName));
   }, []);
 
   return (

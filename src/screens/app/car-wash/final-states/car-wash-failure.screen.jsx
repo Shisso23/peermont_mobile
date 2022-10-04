@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Divider, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';
 import { FailureComponent } from '../../../../components';
+import { resetCarSuccess } from '../../../../reducers/car-wash-reducer/car-wash.actions';
 
 const CarWashFailureScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetCarSuccess());
+  }, []);
 
   return (
     <KeyboardScrollContainer>

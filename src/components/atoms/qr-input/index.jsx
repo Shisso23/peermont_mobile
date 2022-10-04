@@ -14,6 +14,7 @@ import { qrModel } from '../../../models';
 import { QrInputForm } from '../../forms';
 import { carWashSelector } from '../../../reducers/car-wash-reducer/car-wash.reducer';
 import { claimCarWashVoucherAction } from '../../../reducers/car-wash-reducer/car-wash.actions';
+import { userSelector } from '../../../reducers/user-reducer/user.reducer';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -22,13 +23,21 @@ const QrInputModal = ({ visible, closeModal }) => {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
   const { voucher, messages } = useSelector(carWashSelector);
+  const { user } = useSelector(userSelector);
   const _closeModal = () => {
     closeModal(false);
   };
 
   const _submitForm = (formData) => {
     if (!_.isEmpty(formData)) {
-      dispatch(claimCarWashVoucherAction('10000000013', 'PLATINUM', formData.qrCode, voucher.id));
+      dispatch(
+        claimCarWashVoucherAction(
+          user.cmpAccountNumber,
+          user.tierName,
+          formData.qrCode,
+          voucher.id,
+        ),
+      );
       setActive(true);
     }
   };

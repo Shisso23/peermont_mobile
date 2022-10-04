@@ -9,18 +9,20 @@ import { PaddedContainer } from '../../../../components/containers';
 import { CarWashVoucher, LoadingComponent } from '../../../../components';
 import { carWashSelector } from '../../../../reducers/car-wash-reducer/car-wash.reducer';
 import { getAvailableCarWashesAction } from '../../../../reducers/car-wash-reducer/car-wash.actions';
+import { userSelector } from '../../../../reducers/user-reducer/user.reducer';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const AvailableCarWashesScreen = () => {
   const dispatch = useDispatch();
   const { vouchers, isLoading } = useSelector(carWashSelector);
+  const { user } = useSelector(userSelector);
 
   const renderCarWashVouchers = ({ item }) => <CarWashVoucher voucherData={item} />;
 
   useEffect(() => {
-    dispatch(getAvailableCarWashesAction('10000000013', 'PLATINUM'));
-  }, []);
+    dispatch(getAvailableCarWashesAction(user.cmpAccountNumber, user.tierName));
+  }, [user]);
 
   return isLoading ? (
     <View style={custom.loaderMargin}>

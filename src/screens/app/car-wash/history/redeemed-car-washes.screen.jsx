@@ -8,17 +8,19 @@ import { PaddedContainer } from '../../../../components/containers';
 import { LoadingComponent, RedeemedClaim } from '../../../../components';
 import { carWashSelector } from '../../../../reducers/car-wash-reducer/car-wash.reducer';
 import { getClaimHistoryAction } from '../../../../reducers/car-wash-reducer/car-wash.actions';
+import { userSelector } from '../../../../reducers/user-reducer/user.reducer';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const RedeemedCarWashesScreen = () => {
   const dispatch = useDispatch();
   const { carWashes, isLoading } = useSelector(carWashSelector);
+  const { user } = useSelector(userSelector);
 
   const renderCarWashVouchers = ({ item }) => <RedeemedClaim claimHistoryData={item} />;
 
   useEffect(() => {
-    dispatch(getClaimHistoryAction('1000000003'));
+    dispatch(getClaimHistoryAction(user.cmpAccountNumber));
   }, []);
 
   return isLoading ? (

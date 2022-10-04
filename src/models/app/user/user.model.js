@@ -26,4 +26,5 @@ export const userModel = (_userModel = {}) => ({
   unconfirmedDailyTopUpLimit: _.get(_userModel, 'unconfirmed_daily_top_up_limit', 0),
   emailConfirmed: _.get(_userModel, 'email_confirmed', false),
   pendingEmail: _.get(_userModel, 'unconfirmed_email', ''),
+  cmpAccountNumber: _.get(_userModel, 'cmp_account_number', ''),
 });
