@@ -18,18 +18,15 @@ import { custom } from '../../../../theme/theme.styles';
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const TransactionsScreen = () => {
-  const { earnTransactions, transactions, isLoading } = useSelector(
+  const { earnTransactions, transactions, isLoading, isLoadingOutlet } = useSelector(
     (reducers) => reducers.paymentReducer,
   );
   const dispatch = useDispatch();
   const [carouselRef, setCarouselRef] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const lists = [{ name: 'Payments' }, { name: 'Earn and Burn' }];
-  const predictions = [
-    { transaction: transactions },
-    { transaction: earnTransactions.earn_and_burn_transactions },
-  ];
+  const lists = [{ name: 'Payment Transactions' }, { name: 'Outlet Transactions' }];
+  const predictions = [{ transaction: transactions }, { transaction: earnTransactions }];
 
   const _setActiveSlideIndex = (index) => {
     setActiveIndex(index);
@@ -49,7 +46,7 @@ const TransactionsScreen = () => {
     }, []),
   );
 
-  return !isLoading ? (
+  return !isLoading && !isLoadingOutlet ? (
     <ScrollContainer>
       <PaddedContainer>
         <Text style={custom.centerTitle}>Mobile App Transactions</Text>
