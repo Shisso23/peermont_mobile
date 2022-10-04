@@ -93,3 +93,9 @@ export const submitCarDetailsAction = (carData) => {
     });
   };
 };
+
+export const resetCarSuccess = () => {
+  return (dispatch) => {
+    return dispatch(setCarSuccessAction({}));
+  };
+};

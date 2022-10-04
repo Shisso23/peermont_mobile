@@ -9,6 +9,7 @@ import _ from 'lodash';
 import { barCodeFrame } from '../../../../assets';
 import { carWashSelector } from '../../../../reducers/car-wash-reducer/car-wash.reducer';
 import { claimCarWashVoucherAction } from '../../../../reducers/car-wash-reducer/car-wash.actions';
+import { userSelector } from '../../../../reducers/user-reducer/user.reducer';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -21,6 +22,7 @@ const ScannerScreen = () => {
   const device = devices.back;
   const dispatch = useDispatch();
   const { voucher, messages } = useSelector(carWashSelector);
+  const { user } = useSelector(userSelector);
 
   const [frameProcessor, barcodeResults] = useScanBarcodes([BarcodeFormat.QR_CODE], {
     checkInverted: true,
@@ -31,8 +33,8 @@ const ScannerScreen = () => {
       setActive(false);
       dispatch(
         claimCarWashVoucherAction(
-          '10000000013',
-          'PLATINUM',
+          user.cmpAccountNumber,
+          user.tierName,
           barcodeResults[0].content.data,
           voucher.id,
         ),

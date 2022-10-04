@@ -204,3 +204,12 @@ export const queryPatronEnquiryAction = (formData) => {
       .finally(() => dispatch(setMembershipCardIsLoading(false)));
   };
 };
+
+export const updateCmpAccountNumberAction = () => {
+  return (dispatch) => {
+    dispatch(setLoadingAction(true));
+    return membershipCardService
+      .updateCmpAccountNumber()
+      .finally(() => dispatch(setLoadingAction(false)));
+  };
+};

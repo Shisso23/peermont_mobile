@@ -40,6 +40,7 @@ import {
   canClaimVoucherAction,
   sendCanClaimOtpAction,
 } from '../../../reducers/car-wash-reducer/car-wash.actions';
+import { userSelector } from '../../../reducers/user-reducer/user.reducer';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -54,7 +55,7 @@ const OtpNumericInput = ({
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { user, otpAutoFill } = useSelector((reducers) => reducers.userReducer);
+  const { user, otpAutoFill } = useSelector(userSelector);
   const [showOtpMethodModal, setShowOtpMethodModal] = useState(false);
   const [otpMethod, setOtpMethod] = useState('SMS');
   const [unconfirmedMobileNumber, setUnconfirmedMobileNumber] = useState('');
@@ -81,7 +82,9 @@ const OtpNumericInput = ({
       case 'BANK_ACCOUNT':
         return dispatch(verifyBankAccountOtpAction(formData));
       case 'CAR_WASH':
-        return dispatch(canClaimVoucherAction('10000000013', voucherData.id, formData.numeric));
+        return dispatch(
+          canClaimVoucherAction(user.cmpAccountNumber, voucherData.id, formData.numeric),
+        );
       default:
         return null;
     }

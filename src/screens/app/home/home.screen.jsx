@@ -20,6 +20,8 @@ import { membershipCardSelector } from '../../../reducers/membership-card-reduce
 import { custom } from '../../../../theme/theme.styles';
 import { getSplashAdvertAction } from '../../../reducers/advert-reducer/advert.actions';
 import { JackpotListSelect } from '../../../components/atoms';
+import { updateCmpAccountNumberAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
+import { userSelector } from '../../../reducers/user-reducer/user.reducer';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -29,7 +31,7 @@ const HomeScreen = () => {
   const route = useRoute();
   const [visible, setVisible] = useState(false);
 
-  const { user } = useSelector((reducers) => reducers.userReducer);
+  const { user } = useSelector(userSelector);
   const { membershipCards } = useSelector(membershipCardSelector);
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -54,6 +56,10 @@ const HomeScreen = () => {
     biometricRegister().then();
     dispatch(getSplashAdvertAction());
   }, []);
+
+  useEffect(() => {
+    if (_.isNull(user.cmpAccountNumber)) dispatch(updateCmpAccountNumberAction());
+  }, [user]);
 
   useEffect(() => {
     if (_.isEqual(_.get(route.params, 'visible'), true)) {
