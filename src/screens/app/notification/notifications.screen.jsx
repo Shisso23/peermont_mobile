@@ -22,7 +22,7 @@ const NotificationsScreen = () => {
   return !isLoading ? (
     <ScrollContainer>
       <PaddedContainer>
-        <Text style={custom.centerTitle}>Notifications</Text>
+        <Text style={custom.centerTitle}>Inbox</Text>
         <Text style={custom.centerSubtitle}>Click to mark as read</Text>
       </PaddedContainer>
       {notification.map((message) => {
