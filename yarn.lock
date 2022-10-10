@@ -1112,15 +1112,15 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hmscore/react-native-hms-account@6.1.0-302":
-  version "6.1.0-302"
-  resolved "https://registry.yarnpkg.com/@hmscore/react-native-hms-account/-/react-native-hms-account-6.1.0-302.tgz#dfb8dec1089dc3a6f5e933f9f21e24ac498d3a1f"
-  integrity sha512-eD3ojVnEuVugGIMK0g6NY4S39lH0VngxDf18HSzaB/ENNjf5RbFjo56yakm9BmqdWUKdiPm8/lNMjo13W7rfkg==
+"@hmscore/react-native-hms-account@^6.4.0-302":
+  version "6.4.0-302"
+  resolved "https://registry.yarnpkg.com/@hmscore/react-native-hms-account/-/react-native-hms-account-6.4.0-302.tgz#1bab6e093a3d7c984fda137b587e9ec6e93ce617"
+  integrity sha512-2EfV578edm9w4Tuvpab4/9KzLgZmgGNYfgSsHS/xswn1D71PCV1/Hy9EjwiMBQcMjcc/a8ucQ8AFBnnY+lOuSA==
 
-"@hmscore/react-native-hms-push@^6.3.0-304":
-  version "6.3.0-304"
-  resolved "https://registry.yarnpkg.com/@hmscore/react-native-hms-push/-/react-native-hms-push-6.3.0-304.tgz#543efb504818007ecff5161339addeb865e7afcb"
-  integrity sha512-bxtyUemP+KInrrvJv5yl5M06Dt552iquXPzTFqySf1Q62C8F6LAz7FYqyqg+SmGbMy8iU0RMbg2sN2sRIVE/4g==
+"@hmscore/react-native-hms-push@^6.5.0-300":
+  version "6.5.0-300"
+  resolved "https://registry.yarnpkg.com/@hmscore/react-native-hms-push/-/react-native-hms-push-6.5.0-300.tgz#add42454d5fe57da024f3abf9ae2ff832321874b"
+  integrity sha512-ZowiGi7zdi+aABRS0Yb1eUjyvQSNoCgLnaCzVwii303BId4qYBgYe14mdhVPpBYmp38x0TM8qsElrM9ragpSkw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
