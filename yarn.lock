@@ -1112,12 +1112,12 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hmscore/react-native-hms-account@^6.4.0-302":
+"@hmscore/react-native-hms-account@6.4.0-302":
   version "6.4.0-302"
   resolved "https://registry.yarnpkg.com/@hmscore/react-native-hms-account/-/react-native-hms-account-6.4.0-302.tgz#1bab6e093a3d7c984fda137b587e9ec6e93ce617"
   integrity sha512-2EfV578edm9w4Tuvpab4/9KzLgZmgGNYfgSsHS/xswn1D71PCV1/Hy9EjwiMBQcMjcc/a8ucQ8AFBnnY+lOuSA==
 
-"@hmscore/react-native-hms-push@^6.5.0-300":
+"@hmscore/react-native-hms-push@6.5.0-300":
   version "6.5.0-300"
   resolved "https://registry.yarnpkg.com/@hmscore/react-native-hms-push/-/react-native-hms-push-6.5.0-300.tgz#add42454d5fe57da024f3abf9ae2ff832321874b"
   integrity sha512-ZowiGi7zdi+aABRS0Yb1eUjyvQSNoCgLnaCzVwii303BId4qYBgYe14mdhVPpBYmp38x0TM8qsElrM9ragpSkw==
