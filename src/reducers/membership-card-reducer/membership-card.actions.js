@@ -213,3 +213,15 @@ export const updateCmpAccountNumberAction = () => {
       .finally(() => dispatch(setLoadingAction(false)));
   };
 };
+
+export const updateMembershipCardsAction = () => {
+  return (dispatch) => {
+    dispatch(setLoadingAction(true));
+    return membershipCardService
+      .updateMembershipCards()
+      .then((_membershipCards) => {
+        dispatch(setMembershipCardsAction(_membershipCards));
+      })
+      .finally(() => dispatch(setLoadingAction(false)));
+  };
+};

@@ -11,4 +11,5 @@ export default {
     `${apiUrl}/membership_cards/update_mobile_number_patron_enquiry`,
   membershipNumberCheck: (id) => `${apiUrl}/membership_cards/${id}/number_changed`,
   cmpPatronEnquiryUrl: () => `${apiUrl}/membership_cards/set_cmp_account_number`,
+  updateMembershipCardsUrl: () => `${apiUrl}/membership_cards/set_membership_cards`,
 };
