@@ -10,6 +10,7 @@ import { getFormError } from '../form-utils';
 import { membershipCardSchema, pinSchema } from '../form-validaton-schemas';
 import { infoPopUpService } from '../../../services';
 import { RegisterCardModal } from '../../atoms';
+import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
   const pinRef = useRef(null);
@@ -87,6 +88,7 @@ const MembershipCardForm = ({ submitForm, onSuccess, initialValues }) => {
                 onBlur={handleBlur('pin')}
                 secureTextEntry
                 errorMessage={error('pin')}
+                errorStyle={[custom.errorStyle, custom.extendedErrorStyle]}
                 onSubmitEditing={handleSubmit}
                 leftIcon={() => <Icon name="lock" size={15} />}
                 rightIcon={() => (

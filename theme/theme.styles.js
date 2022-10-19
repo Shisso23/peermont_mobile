@@ -92,6 +92,9 @@ export const custom = {
     marginTop: 0,
     marginBottom: 0,
   },
+  extendedErrorStyle: {
+    height: 33,
+  },
   creditCardErrorStyle: {
     alignSelf: 'center',
     fontFamily: variables.fontFamily,
