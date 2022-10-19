@@ -106,6 +106,16 @@ const updateCmpAccountNumber = () => {
     });
 };
 
+const updateMembershipCards = () => {
+  const url = membershipCardUrls.updateMembershipCardsUrl();
+  return authNetworkService
+    .get(url)
+    .then(_createAndReturnUserMembershipCardModel)
+    .catch((error) => {
+      return Promise.reject(error);
+    });
+};
+
 export default {
   getMembershipCards,
   createMembershipCard,
@@ -115,4 +125,5 @@ export default {
   queryPatronEnquiry,
   checkForNumberChange,
   updateCmpAccountNumber,
+  updateMembershipCards,
 };

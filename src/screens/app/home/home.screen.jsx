@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Platform } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -20,7 +20,10 @@ import { membershipCardSelector } from '../../../reducers/membership-card-reduce
 import { custom } from '../../../../theme/theme.styles';
 import { getSplashAdvertAction } from '../../../reducers/advert-reducer/advert.actions';
 import { JackpotListSelect } from '../../../components/atoms';
-import { updateCmpAccountNumberAction } from '../../../reducers/membership-card-reducer/membership-card.actions';
+import {
+  updateCmpAccountNumberAction,
+  updateMembershipCardsAction,
+} from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { userSelector } from '../../../reducers/user-reducer/user.reducer';
 
 const HomeScreen = () => {
@@ -60,6 +63,10 @@ const HomeScreen = () => {
   useEffect(() => {
     if (_.isNull(user.cmpAccountNumber)) dispatch(updateCmpAccountNumberAction());
   }, [user]);
+
+  useEffect(() => {
+    dispatch(updateMembershipCardsAction());
+  }, [membershipCards]);
 
   useEffect(() => {
     if (_.isEqual(_.get(route.params, 'visible'), true)) {
@@ -117,9 +124,6 @@ const HomeScreen = () => {
           />
         </View>
       )}
-      <PaddedContainer>
-        <Button title="Add Card" onPress={() => navigation.navigate('AddMembershipCard')} />
-      </PaddedContainer>
       {visible ? <JackpotListSelect visible={visible} closeModal={_closeModal} /> : null}
     </ScrollContainer>
   );
