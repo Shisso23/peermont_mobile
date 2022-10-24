@@ -103,6 +103,7 @@
     <array>
       <string>zapper</string>
       <string>apple</string>
+      <string>palacebet</string>
     </array>
     <key>DTXApplicationID</key>
     <string>[ReactNativeConfig envFor:@"DYNATRACE_APP_ID"]</string>

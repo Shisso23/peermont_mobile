@@ -9,11 +9,13 @@ import { custom } from '../../../../theme/theme.styles';
 
 const PalaceBetInstall = () => {
   const onPalaceBetInstallPress = () => {
-    if (Platform.OS === 'ios') {
-      Linking.openURL(appConfig.palaceBetIosAppLink);
-    } else {
-      Linking.openURL(appConfig.palaceBetAndroidAppLink);
-    }
+    Linking.openURL('palacebet://palacetbet/Home').catch(() => {
+      if (Platform.OS === 'ios') {
+        Linking.openURL(appConfig.palaceBetIosAppLink);
+      } else {
+        Linking.openURL(appConfig.palaceBetAndroidAppLink);
+      }
+    });
   };
 
   const PalaceBetInstallViewContainer = ({ children }) => {
