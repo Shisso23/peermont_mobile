@@ -110,7 +110,11 @@ const DrawerComponent = (props) => {
           icon={() => (
             <Image source={palaceBetIcon} style={styles.palaceBetSize} width={22} height={21} />
           )}
-          onPress={() => Linking.openURL(appConfig.palaceBetLink)}
+          onPress={() => {
+            Linking.openURL('palacebet://palacetbet/Home').catch(() => {
+              Linking.openURL(appConfig.palaceBetLink);
+            });
+          }}
           labelStyle={styles.labelStyle}
         />
         {_.isEmpty(storeUrl) ? null : (
