@@ -5,7 +5,6 @@ import { Text } from 'react-native-elements';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
-import DeviceInfo from 'react-native-device-info';
 
 import { notificationSettingUpdateAction } from '../../../reducers/notification-reducer/notification.actions';
 import { PaddedContainer } from '../../containers';
@@ -21,13 +20,13 @@ const PushNotificationSettings = () => {
     loadPushNotificationSetting();
   }, []);
 
-  function toggleSwitch(value) {
+  const toggleSwitch = (value) => {
     if (value) {
       onEnablePushNotifications();
     } else {
       onDisablePushNotifications();
     }
-  }
+  };
 
   const loadPushNotificationSetting = async () => {
     if (user.optInNotifications) {
@@ -51,27 +50,14 @@ const PushNotificationSettings = () => {
 
   const onEnablePushNotifications = async () => {
     setPushNotificationAction(true);
-    DeviceInfo.hasHms().then(async (hasHms) => {
-      if (hasHms) {
-        await AsyncStorage.setItem(config.pushKitEnabled, 'true');
-      } else {
-        await messaging().requestPermission();
-        await AsyncStorage.setItem(config.fcmEnabled, 'true');
-      }
-    });
+    await messaging().requestPermission();
+    await AsyncStorage.setItem(config.fcmEnabled, 'true');
   };
 
   const onDisablePushNotifications = async () => {
     setPushNotificationAction(false);
-    DeviceInfo.hasHms().then(async (hasHms) => {
-      if (hasHms) {
-        await AsyncStorage.setItem(config.pushKitEnabled, 'false');
-        await AsyncStorage.removeItem(config.pushKitTokenKey);
-      } else {
-        await AsyncStorage.setItem(config.fcmEnabled, 'false');
-        await AsyncStorage.removeItem(config.fcmTokenKey);
-      }
-    });
+    await AsyncStorage.setItem(config.fcmEnabled, 'false');
+    await AsyncStorage.removeItem(config.fcmTokenKey);
   };
 
   return (

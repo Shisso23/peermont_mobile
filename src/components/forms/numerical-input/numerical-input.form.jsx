@@ -6,8 +6,6 @@ import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import OtpAutocomplete from 'react-native-otp-autocomplete';
-import DeviceInfo from 'react-native-device-info';
-import { HMSReadSMSManager } from '@hmscore/react-native-hms-account';
 
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
@@ -77,33 +75,11 @@ const NumericalInputForm = React.forwardRef(
       }
     };
 
-    const startListeningForOtpHuawei = () => {
-      HMSReadSMSManager.smsVerificationCode()
-        .then((message) => {
-          if (!_.isNull(message) && autoFillTry) {
-            try {
-              setOtp(/(\d{4})/.exec(_.get(message, 'Message'))[1]);
-              setFormOtpData({ numeric: /(\d{4})/.exec(_.get(message, 'Message'))[1] });
-              OtpAutocomplete.removeListener();
-            } catch {
-              startListeningForOtpAndroid();
-            }
-          }
-        })
-        .catch(() => {
-          turnOffOtpAutoFill();
-        });
-    };
-
     useEffect(() => {
       if (otpOption) {
-        DeviceInfo.hasHms().then((hasHms) => {
-          if (hasHms) {
-            startListeningForOtpHuawei();
-          } else if (Platform.OS === 'android') {
-            startListeningForOtpAndroid();
-          }
-        });
+        if (Platform.OS === 'android') {
+          startListeningForOtpAndroid();
+        }
       }
     }, []);
 

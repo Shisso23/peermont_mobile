@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { setUserAction, setLoadingAction, setOtpAutoFillAction } from './user.reducer';
-import { firebaseService, userService, pushKitService, appService } from '../../services';
+import { firebaseService, userService, appService } from '../../services';
 import { setMembershipCardsAction } from '../membership-card-reducer/membership-card.reducer';
 import { setCreditCardsAction } from '../credit-card-reducer/credit-card.reducer';
 import { setBankAccountsAction } from '../bank-account-reducer/bank-account.reducer';
@@ -53,7 +53,6 @@ export const updateAppDetails = () => {
 
     return userService.updateUserProfile({
       firebaseToken,
-      pushKitToken: null,
       appVersion: currentAppVersion,
       codePushAppVersion: currentCodePushAppVersion,
       manufacturer: deviceInfo.manufacturer,
@@ -66,14 +65,12 @@ export const updateAppDetails = () => {
 
 export const updateAppDetailsHuawei = () => {
   return async () => {
-    const pushKitToken = await pushKitService.getAndSetToken();
     const currentAppVersion = await appService.getAppVersion();
     const currentCodePushAppVersion = await appService.getCodePushAppVersion();
     const deviceInfo = await appService.getDeviceInfo();
 
     return userService.updateUserProfile({
       firebaseToken: null,
-      pushKitToken,
       appVersion: currentAppVersion,
       codePushAppVersion: currentCodePushAppVersion,
       manufacturer: deviceInfo.manufacturer,
