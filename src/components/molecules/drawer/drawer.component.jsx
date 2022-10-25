@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Linking, Platform } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import DeviceInfo, { getBuildNumber, getVersion } from 'react-native-device-info';
+import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import codePush from 'react-native-code-push';
@@ -39,15 +39,11 @@ const DrawerComponent = (props) => {
   };
 
   const setStoreUrls = () => {
-    DeviceInfo.hasHms().then((hasHms) => {
-      if (hasHms) {
-        setStoreUrl('');
-      } else if (Platform.OS === 'ios') {
-        setStoreUrl(appConfig.peermontHotelIosStoreUrl);
-      } else {
-        setStoreUrl(appConfig.peermontHotelAndroidStoreUrl);
-      }
-    });
+    if (Platform.OS === 'ios') {
+      setStoreUrl(appConfig.peermontHotelIosStoreUrl);
+    } else {
+      setStoreUrl(appConfig.peermontHotelAndroidStoreUrl);
+    }
   };
 
   const _openPeermontHotels = () => {

@@ -56,17 +56,13 @@ const getAppVersion = async () => {
 const getDeviceInfo = async () => {
   const deviceInfo = {};
 
-  await DeviceInfo.hasHms()
-    .then((hasHms) => {
-      deviceInfo.device_os = hasHms ? 'Harmony' : DeviceInfo.getSystemName();
-    })
-    .then(
-      DeviceInfo.getManufacturer().then((manufacturer) => {
-        deviceInfo.manufacturer = manufacturer;
-        deviceInfo.os_version = DeviceInfo.getSystemVersion();
-        deviceInfo.device_model = DeviceInfo.getModel();
-      }),
-    );
+  deviceInfo.device_os = DeviceInfo.getSystemName();
+
+  DeviceInfo.getManufacturer().then((manufacturer) => {
+    deviceInfo.manufacturer = manufacturer;
+    deviceInfo.os_version = DeviceInfo.getSystemVersion();
+    deviceInfo.device_model = DeviceInfo.getModel();
+  });
 
   return deviceInfo;
 };

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import DeviceInfo from 'react-native-device-info';
 
 import { userAuthService, encryptionService, storageService, appService } from '../../services';
 import {
@@ -10,23 +9,17 @@ import {
   setIsLoadingAction,
   setUnconfirmedEmailAction,
 } from './user-auth.reducer';
-import {
-  updateAppDetails,
-  updateAppDetailsHuawei,
-  updateAppVersion,
-} from '../user-reducer/user.actions';
+import { updateAppDetails, updateAppVersion } from '../user-reducer/user.actions';
 import { forgetCardPin } from '../membership-card-reducer/membership-card.actions';
 import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
 export const signInAction = (formData) => {
   return (dispatch) => {
-    return DeviceInfo.hasHms().then((hasHms) => {
-      return userAuthService
-        .signIn(formData)
-        .then(() => storageService.storeSignInForm(formData))
-        .then(() => dispatch(setSignInFormDataAction(formData)))
-        .then(() => (hasHms ? dispatch(updateAppDetailsHuawei()) : dispatch(updateAppDetails())));
-    });
+    return userAuthService
+      .signIn(formData)
+      .then(() => storageService.storeSignInForm(formData))
+      .then(() => dispatch(setSignInFormDataAction(formData)))
+      .then(() => dispatch(updateAppDetails()));
   };
 };
 
