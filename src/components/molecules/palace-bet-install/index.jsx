@@ -13,7 +13,7 @@ const PalaceBetInstall = () => {
       if (Platform.OS === 'ios') {
         Linking.openURL(appConfig.palaceBetIosAppLink);
       } else {
-        Linking.openURL(appConfig.palaceBetAndroidAppLink);
+        Linking.openURL(appConfig.palaceBetLink);
       }
     });
   };

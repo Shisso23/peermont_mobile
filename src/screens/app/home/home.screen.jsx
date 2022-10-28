@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -85,7 +85,7 @@ const HomeScreen = () => {
       <PaddedContainer>
         <View style={custom.headerContainer}>
           <CarWash />
-          {!_.isEqual(Platform.OS, 'huawei') ? <PalaceBetInstall /> : null}
+          <PalaceBetInstall />
         </View>
       </PaddedContainer>
       <View style={custom.nameContainer}>
