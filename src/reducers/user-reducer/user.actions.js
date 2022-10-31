@@ -63,24 +63,6 @@ export const updateAppDetails = () => {
   };
 };
 
-export const updateAppDetailsHuawei = () => {
-  return async () => {
-    const currentAppVersion = await appService.getAppVersion();
-    const currentCodePushAppVersion = await appService.getCodePushAppVersion();
-    const deviceInfo = await appService.getDeviceInfo();
-
-    return userService.updateUserProfile({
-      firebaseToken: null,
-      appVersion: currentAppVersion,
-      codePushAppVersion: currentCodePushAppVersion,
-      manufacturer: deviceInfo.manufacturer,
-      device_os: deviceInfo.device_os,
-      os_version: deviceInfo.os_version,
-      device_model: deviceInfo.device_model,
-    });
-  };
-};
-
 export const updateAppVersion = () => {
   return async () => {
     const currentAppVersion = await appService.getAppVersion();
