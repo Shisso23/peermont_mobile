@@ -6,6 +6,7 @@ import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import OtpAutocomplete from 'react-native-otp-autocomplete';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 import { NumericInput } from '../../atoms';
 import { numericSchema } from '../form-validaton-schemas';
@@ -64,13 +65,17 @@ const NumericalInputForm = React.forwardRef(
     };
 
     const otpHandler = (message) => {
-      if (!_.isNull(message) && autoFillTry) {
-        try {
-          setOtp(/(\d{4})/.exec(message)[1]);
-          setFormOtpData({ numeric: /(\d{4})/.exec(message)[1] });
-          OtpAutocomplete.removeListener();
-        } catch {
-          startListeningForOtpAndroid();
+      if (!_.isNull(message)) {
+        Clipboard.setString(/(\d{4})/.exec(message)[1]);
+
+        if (autoFillTry) {
+          try {
+            setOtp(/(\d{4})/.exec(message)[1]);
+            setFormOtpData({ numeric: /(\d{4})/.exec(message)[1] });
+            OtpAutocomplete.removeListener();
+          } catch {
+            startListeningForOtpAndroid();
+          }
         }
       }
     };
