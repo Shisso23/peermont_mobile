@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem } from 'react-native-elements';
+import { ListItem } from '@rneui/themed';
 import PropTypes from 'prop-types';
 
 const UploadDocumentSelectionItem = ({ title, onPress }) => {

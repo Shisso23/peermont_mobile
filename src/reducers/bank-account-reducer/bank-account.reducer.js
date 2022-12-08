@@ -24,7 +24,7 @@ const initialState = {
   token: null,
 };
 
-export default function bankAccountReducer(state = initialState, action) {
+export const bankAccountReducer = (state = initialState, action) => {
   switch (action.type) {
     case setBankAccounts.actionType:
       return {
@@ -54,4 +54,8 @@ export default function bankAccountReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default{
+  bankAccountReducer,
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Divider, Text } from 'react-native-elements';
+import { Divider, Text } from '@rneui/themed';
 import { useFocusEffect } from '@react-navigation/native';
 import _ from 'lodash';
 import Carousel, { Pagination } from 'react-native-snap-carousel';

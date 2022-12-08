@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 
 import { RegisterEmailForm } from '../../../../components/forms';
 import { registrationEmailModel } from '../../../../models';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Divider } from 'react-native-elements';
+import { Text, Divider } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';

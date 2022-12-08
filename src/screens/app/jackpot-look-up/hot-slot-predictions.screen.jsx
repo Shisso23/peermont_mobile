@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions, FlatList, SafeAreaView, View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 
 import colors from '../../../../theme/theme.colors';

@@ -20,7 +20,7 @@ const initialState = {
 
 export const userSelector = (reducer) => reducer.userReducer;
 
-export default function userReducer(state = initialState, action) {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case setLoading.actionType:
       return {
@@ -40,4 +40,8 @@ export default function userReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default{
+  userReducer,
 }

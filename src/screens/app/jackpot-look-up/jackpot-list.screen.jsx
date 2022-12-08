@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Dimensions, View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 

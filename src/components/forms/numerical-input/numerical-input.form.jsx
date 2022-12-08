@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
-import { Divider, Text } from 'react-native-elements';
+import { Divider, Text } from '@rneui/themed';
 import _ from 'lodash';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';

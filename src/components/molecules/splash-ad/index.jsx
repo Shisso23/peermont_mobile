@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Dimensions, ActivityIndicator, View, Linking } from 'react-native';
-import { Image } from 'react-native-elements';
+import { Image } from '@rneui/themed';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 

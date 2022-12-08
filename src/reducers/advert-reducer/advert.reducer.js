@@ -16,7 +16,7 @@ const initialState = {
 
 export const advertSelector = (reducer) => reducer.advertReducer;
 
-export default function advertReducer(state = initialState, action) {
+export const advertReducer = (state = initialState, action) => {
   switch (action.type) {
     case setIsLoading.actionType:
       return {
@@ -31,4 +31,8 @@ export default function advertReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default{
+  advertReducer,
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, View, Linking, Platform } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getBuildNumber, getVersion } from 'react-native-device-info';
 import { useNavigation } from '@react-navigation/native';

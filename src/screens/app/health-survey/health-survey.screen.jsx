@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, Divider } from 'react-native-elements';
+import { Text, Divider } from '@rneui/themed';
 
 import {
   initiateHealthSurveyAction,

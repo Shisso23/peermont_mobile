@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input } from 'react-native-elements';
+import { Button, Input } from '@rneui/themed';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';

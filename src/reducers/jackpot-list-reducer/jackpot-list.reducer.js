@@ -15,7 +15,7 @@ const initialState = {
 
 export const jackpotListSelector = (reducers) => reducers.jackpotListReducer;
 
-export default function jackpotListReducer(state = initialState, action) {
+export const jackpotListReducer = (state = initialState, action) => {
   switch (action.type) {
     case setJackpots.actionType:
       return {
@@ -30,4 +30,8 @@ export default function jackpotListReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  jackpotListReducer,
 }

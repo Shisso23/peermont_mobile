@@ -1,12 +1,11 @@
 // import React from 'react';
 // import _ from 'lodash';
-// import { ViewPropTypes, Text } from 'react-native';
 // import PropTypes from 'prop-types';
 // import { Formik } from 'formik';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import * as Yup from 'yup';
 
-// import { Button, Input } from 'react-native-elements';
+// import { Button, Input } from '@rneui/themed';
 // import {
 //   emailSchema,
 //   registerPasswordSchema,
@@ -124,7 +123,6 @@
 //   submitForm: PropTypes.func.isRequired,
 //   initialValues: PropTypes.object.isRequired,
 //   onSuccess: PropTypes.func,
-//   containerStyle: ViewPropTypes.style,
 //   edit: PropTypes.bool,
 // };
 

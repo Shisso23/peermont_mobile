@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewPropTypes } from 'react-native';
-import { Text } from 'react-native-elements';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+import { Text } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 
 const ForgotPasswordLink = ({ containerStyle }) => {

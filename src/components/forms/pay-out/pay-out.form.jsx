@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
-import { Button, Input, ListItem, Text } from 'react-native-elements';
+import { Button, Input, ListItem, Text } from '@rneui/themed';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';

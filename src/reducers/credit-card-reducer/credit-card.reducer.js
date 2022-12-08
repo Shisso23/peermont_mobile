@@ -20,7 +20,7 @@ const initialState = {
   privateKey: null,
 };
 
-export default function creditCardReducer(state = initialState, action) {
+export const creditCardReducer = (state = initialState, action) => {
   switch (action.type) {
     case setCreditCards.actionType:
       return {
@@ -45,4 +45,8 @@ export default function creditCardReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default{
+  creditCardReducer,
 }

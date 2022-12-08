@@ -1,18 +1,27 @@
-module.exports = {
-  resolver: {
-    sourceExts: ['jsx', 'js', 'ts', 'tsx'],
-  },
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false,
-      },
-    }),
-    babelTransformerPath: require.resolve(
-      '@dynatrace/react-native-plugin/lib/dynatrace-transformer',
-    ),
-  },
-  // eslint-disable-next-line global-require
-  reporter: require('@dynatrace/react-native-plugin/lib/dynatrace-reporter'),
-};
+/**
+ * Metro configuration for React Native
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+ const { getDefaultConfig } = require('metro-config');
+
+ module.exports = (async () => {
+   const {
+     resolver: { sourceExts },
+   } = await getDefaultConfig();
+   return {
+     transformer: {
+       getTransformOptions: async () => ({
+         transform: {
+           experimentalImportSupport: false,
+           inlineRequires: true,
+         },
+       }),
+     },
+     resolver: {
+      sourceExts: [...sourceExts, 'jsx', 'js', 'ts', 'tsx'],
+    },
+   };
+ })();
+ 

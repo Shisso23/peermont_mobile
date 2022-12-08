@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Button, Input, Divider } from 'react-native-elements';
+import { Button, Input, Divider } from '@rneui/themed';
 import { getFormError } from '../form-utils';
 import { passwordSchema, confirmPasswordSchema } from '../form-validaton-schemas';
 

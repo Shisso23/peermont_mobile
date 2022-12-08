@@ -40,7 +40,7 @@ const initialState = {
 
 export const carWashSelector = (reducers) => reducers.carWashReducer;
 
-export default function carWashReducer(state = initialState, action) {
+export const carWashReducer = (state = initialState, action) => {
   switch (action.type) {
     case setVouchers.actionType:
       return {
@@ -85,4 +85,8 @@ export default function carWashReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default{
+  carWashReducer,
 }

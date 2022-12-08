@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button } from '@rneui/themed';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';
 import { custom } from '../../../../../theme/theme.styles';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { ScrollContainer } from '../../../components/containers';

@@ -37,6 +37,13 @@
             {
               "client_id": "506320111286-l0flnr7gnsim48beaqqmmgigeki8ivu0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "506320111286-40mn800ts9r9dafsbh7l0gqcv9n9mru1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.codehesion.peermontmobile"
+              }
             }
           ]
         }

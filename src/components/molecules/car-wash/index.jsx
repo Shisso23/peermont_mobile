@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { Icon, Text } from 'react-native-elements';
+import { Icon, Text } from '@rneui/themed';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';

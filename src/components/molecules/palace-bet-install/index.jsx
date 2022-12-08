@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, Linking, Platform } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import PropTypes from 'prop-types';
 
 import appConfig from '../../../config';

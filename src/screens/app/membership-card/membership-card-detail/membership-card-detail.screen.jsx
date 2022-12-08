@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View, Alert, StyleSheet, ActivityIndicator } from 'react-native';
-import { Button, Divider, ListItem, Text, Avatar, Icon } from 'react-native-elements';
+import { Button, Divider, ListItem, Text, Avatar, Icon } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';

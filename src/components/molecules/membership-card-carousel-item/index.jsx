@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import {
   setCurrentMembershipCardAction,
 } from '../../../reducers/membership-card-reducer/membership-card.reducer';
 import { MembershipCardInput } from '../../atoms';
-import getCardType from '../../../helpers/getCardType';
+import { getCardType } from '../../../helpers/getCardType';
 import { custom } from '../../../../theme/theme.styles';
 
 const MembershipCardCarouselItem = ({

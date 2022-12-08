@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, TouchableOpacity, View, ViewPropTypes } from 'react-native';
-import { Text } from 'react-native-elements';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+import { Text } from '@rneui/themed';
 
 const TextLink = ({ title, containerStyle, onPress }) => {
   return (

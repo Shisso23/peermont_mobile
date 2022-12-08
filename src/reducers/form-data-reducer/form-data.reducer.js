@@ -10,7 +10,7 @@ const initialState = {
   banks: constructBankModels([]),
 };
 
-export default function formDataReducer(state = initialState, action) {
+export const formDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case setBanks.actionType:
       return {
@@ -21,4 +21,8 @@ export default function formDataReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  formDataReducer,
 }

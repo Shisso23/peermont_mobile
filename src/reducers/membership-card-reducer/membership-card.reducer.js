@@ -49,7 +49,7 @@ const initialState = {
 
 export const membershipCardSelector = (reducers) => reducers.membershipCardReducer;
 
-export default function membershipCardReducer(state = initialState, action) {
+export const membershipCardReducer = (state = initialState, action) => {
   switch (action.type) {
     case setIsLoading.actionType:
       return {
@@ -109,4 +109,8 @@ export default function membershipCardReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  membershipCardReducer,
 }

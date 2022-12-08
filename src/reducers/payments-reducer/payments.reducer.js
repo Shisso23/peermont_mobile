@@ -35,7 +35,7 @@ const initialState = {
 
 export const paymentSelector = (reducer) => reducer.paymentReducer;
 
-export default function paymentReducer(state = initialState, action) {
+export const paymentReducer = (state = initialState, action) => {
   switch (action.type) {
     case setPendingPaymentId.actionType:
       return {
@@ -75,4 +75,8 @@ export default function paymentReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  paymentReducer,
 }
