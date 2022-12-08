@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, Input } from 'react-native-elements';
+import { Text, Button, Input } from '@rneui/themed';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRoute } from '@react-navigation/native';

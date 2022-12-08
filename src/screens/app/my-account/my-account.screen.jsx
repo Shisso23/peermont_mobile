@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { Text, ListItem, Icon } from 'react-native-elements';
+import { Text, ListItem, Icon } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 

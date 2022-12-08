@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
-import { Button, Input, Divider } from 'react-native-elements';
+import { Button, Input, Divider } from '@rneui/themed';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import Icon from 'react-native-vector-icons/FontAwesome5';

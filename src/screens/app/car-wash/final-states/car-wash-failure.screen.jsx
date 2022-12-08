@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Divider, Text } from 'react-native-elements';
+import { Button, Divider, Text } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';

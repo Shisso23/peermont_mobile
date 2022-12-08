@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
 import { Dimensions, StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Divider, Text, Button } from 'react-native-elements';
+import { Divider, Text, Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 
 import colors from '../../../../theme/theme.colors';

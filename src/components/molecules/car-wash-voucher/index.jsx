@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { View, Text, Image, ImageBackground } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Button } from 'react-native-elements';
+import { Button } from '@rneui/themed';
 import { useDispatch } from 'react-redux';
 
 import { custom } from '../../../../theme/theme.styles';

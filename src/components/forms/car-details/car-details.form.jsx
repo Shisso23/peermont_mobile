@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { Button, CheckBox, Input } from 'react-native-elements';
+import { Button, CheckBox, Input } from '@rneui/themed';
 import { FieldArray, Formik } from 'formik';
 import PropTypes from 'prop-types';
 import _ from 'lodash';

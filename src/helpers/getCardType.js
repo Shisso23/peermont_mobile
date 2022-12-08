@@ -6,7 +6,7 @@ const sapphireCard = require('../assets/images/membership-cards/sapphire-card.pn
 const blackCard = require('../assets/images/membership-cards/black-card.png');
 const creditCard = require('../assets/images/credit-card.png');
 
-export default function getCardType(type) {
+export const getCardType = (type) => {
   switch (_.lowerCase(type)) {
     case 'silver':
       return silverCard;
@@ -22,3 +22,7 @@ export default function getCardType(type) {
       return null;
   }
 }
+
+export default {
+  getCardType,
+};

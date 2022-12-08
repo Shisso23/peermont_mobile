@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon } from '@rneui/themed';
 
 import colors from '../../../../theme/theme.colors';
 import { JackpotListFilter } from '../..';

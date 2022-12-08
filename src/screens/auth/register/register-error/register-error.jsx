@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Divider } from 'react-native-elements';
+import { Text, Divider } from '@rneui/themed';
 import { useRoute } from '@react-navigation/native';
 import _ from 'lodash';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem } from 'react-native-elements';
+import { ListItem } from '@rneui/themed';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 

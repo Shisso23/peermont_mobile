@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Picker } from '@react-native-picker/picker';
-import { Button, Input, Text } from 'react-native-elements';
+import { Button, Input, Text } from '@rneui/themed';
 
 import { useSelector } from 'react-redux';
 import { getFormError } from '../form-utils';

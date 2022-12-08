@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { Switch, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { notificationSettingUpdateAction } from '../../../reducers/notification-reducer/notification.actions';

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ViewPropTypes } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 import PropTypes from 'prop-types';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar } from '@rneui/themed';
 
 import { custom } from '../../../../theme/theme.styles';
 import colors from '../../../../theme/theme.colors';

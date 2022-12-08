@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ViewPropTypes } from 'react-native';
-import { ListItem, Avatar, CheckBox } from 'react-native-elements';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+import { ListItem, Avatar, CheckBox } from '@rneui/themed';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 

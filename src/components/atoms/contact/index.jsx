@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { ListItem } from '@rneui/themed';
 import { openUserPhoneApp, openEmailApp } from '../../../helpers';
 import config from '../../../config';
 

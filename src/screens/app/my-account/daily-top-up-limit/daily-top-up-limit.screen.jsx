@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Text } from 'react-native-elements';
+import { Divider, Text } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 

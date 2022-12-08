@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { Divider, ListItem, Text } from 'react-native-elements';
+import { Divider, ListItem, Text } from '@rneui/themed';
 
 import { MembershipCardForm } from '../../../components/forms';
 import { registrationMembershipCardModel } from '../../../models';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Dimensions, View, Platform } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button } from '@rneui/themed';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';

@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 
-import userAuthReducer from './user-auth-reducer/user-auth.reducer';
-import userReducer from './user-reducer/user.reducer';
-import membershipCardReducer from './membership-card-reducer/membership-card.reducer';
-import creditCardReducer from './credit-card-reducer/credit-card.reducer';
-import bankAccountReducer from './bank-account-reducer/bank-account.reducer';
-import formDataReducer from './form-data-reducer/form-data.reducer';
-import healthSurveyReducer from './health-survey-reducer/health-survey.reducer';
-import paymentReducer from './payments-reducer/payments.reducer';
-import notificationReducer from './notification-reducer/notification.reducer';
-import advertReducer from './advert-reducer/advert.reducer';
-import hotSlotPredictionsReducer from './hot-slot-predictions-reducer/hot-slot-predictions.reducer';
-import jackpotListReducer from './jackpot-list-reducer/jackpot-list.reducer';
-import carWashReducer from './car-wash-reducer/car-wash.reducer';
+import { userAuthReducer } from './user-auth-reducer/user-auth.reducer';
+import { userReducer } from './user-reducer/user.reducer';
+import { membershipCardReducer } from './membership-card-reducer/membership-card.reducer';
+import { creditCardReducer } from './credit-card-reducer/credit-card.reducer';
+import { bankAccountReducer } from './bank-account-reducer/bank-account.reducer';
+import { formDataReducer } from './form-data-reducer/form-data.reducer';
+import { healthSurveyReducer } from './health-survey-reducer/health-survey.reducer';
+import { paymentReducer } from './payments-reducer/payments.reducer';
+import { notificationReducer } from './notification-reducer/notification.reducer';
+import { advertReducer } from './advert-reducer/advert.reducer';
+import { hotSlotPredictionsReducer } from './hot-slot-predictions-reducer/hot-slot-predictions.reducer';
+import { jackpotListReducer } from './jackpot-list-reducer/jackpot-list.reducer';
+import { carWashReducer } from './car-wash-reducer/car-wash.reducer';
 
 export default combineReducers({
   userAuthReducer,

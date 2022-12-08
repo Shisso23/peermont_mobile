@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
-import { Button, Divider, Text } from 'react-native-elements';
+import { Button, Divider, Text } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import { useDispatch, useSelector } from 'react-redux';

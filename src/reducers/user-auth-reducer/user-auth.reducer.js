@@ -30,7 +30,7 @@ const initialState = {
   unconfirmedEmail: '',
 };
 
-export default function userAuthReducer(state = initialState, action) {
+export const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case setIsLoading.actionType:
       return {
@@ -65,4 +65,8 @@ export default function userAuthReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  userAuthReducer,
 }

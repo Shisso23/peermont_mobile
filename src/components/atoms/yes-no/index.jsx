@@ -1,6 +1,6 @@
 import React, { useState, useImperativeHandle } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox } from '@rneui/themed';
 import PropTypes from 'prop-types';
 
 const YesNo = React.forwardRef(({ setFormValue }, ref) => {

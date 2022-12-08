@@ -1,4 +1,4 @@
-import buildActionType from './action-type-creator';
+import { buildActionType } from './action-type-creator';
 
 function CreateAction(reducerName, actionName) {
   if (!reducerName || !actionName) {

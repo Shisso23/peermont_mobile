@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ReactNativeBiometrics from 'react-native-biometrics';

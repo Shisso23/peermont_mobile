@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import _ from 'lodash';

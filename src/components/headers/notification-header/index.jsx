@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import { Icon, Badge } from 'react-native-elements';
+import { Icon, Badge } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 

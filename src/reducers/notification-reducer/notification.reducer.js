@@ -17,7 +17,7 @@ const initialState = {
   hasUnseen: false,
 };
 
-export default function notificationReducer(state = initialState, action) {
+export const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
     case setNotification.actionType:
       return {
@@ -37,4 +37,8 @@ export default function notificationReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  notificationReducer,
 }

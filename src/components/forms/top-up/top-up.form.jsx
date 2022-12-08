@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Image, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Input, Text, ListItem, CheckBox } from 'react-native-elements';
+import { Button, Input, Text, ListItem, CheckBox } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';

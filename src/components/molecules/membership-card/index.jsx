@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar } from '@rneui/themed';
 import { useDispatch } from 'react-redux';
 
 import { promptConfirmDelete } from '../../../helpers/prompt.helper';

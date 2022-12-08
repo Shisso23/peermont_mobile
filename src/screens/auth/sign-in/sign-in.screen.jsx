@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, Platform, View } from 'react-native';
-import { Divider, Button, ListItem, Text } from 'react-native-elements';
+import { Divider, Button, ListItem, Text } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ReactNativeBiometrics from 'react-native-biometrics';

@@ -17,7 +17,7 @@ const initialState = {
   lastHealthSurvey: {},
 };
 
-export default function healthSurveyReducer(state = initialState, action) {
+export const healthSurveyReducer = (state = initialState, action) => {
   switch (action.type) {
     case setIsLoading.actionType:
       return {
@@ -37,4 +37,8 @@ export default function healthSurveyReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export default {
+  healthSurveyReducer,
 }

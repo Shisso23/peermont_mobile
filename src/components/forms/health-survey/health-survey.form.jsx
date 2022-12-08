@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, ListItem, Text, Divider } from 'react-native-elements';
+import { Button, ListItem, Text, Divider } from '@rneui/themed';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';

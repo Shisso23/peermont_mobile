@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -64,9 +64,9 @@ const HomeScreen = () => {
     if (_.isNull(user.cmpAccountNumber)) dispatch(updateCmpAccountNumberAction());
   }, [user]);
 
-  useEffect(() => {
-    dispatch(updateMembershipCardsAction());
-  }, [membershipCards]);
+  // useEffect(() => {
+  //   dispatch(updateMembershipCardsAction());
+  // }, [membershipCards]);
 
   useEffect(() => {
     if (_.isEqual(_.get(route.params, 'visible'), true)) {

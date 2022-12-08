@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Switch, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch } from 'react-redux';
 

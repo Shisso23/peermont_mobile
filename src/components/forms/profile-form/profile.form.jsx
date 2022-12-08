@@ -1,6 +1,6 @@
 import React from 'react';
 import { Keyboard, TouchableOpacity } from 'react-native';
-import { Input, Text } from 'react-native-elements';
+import { Input, Text } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';

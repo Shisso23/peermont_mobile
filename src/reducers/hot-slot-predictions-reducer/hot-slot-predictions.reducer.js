@@ -19,7 +19,7 @@ const initialState = {
 
 export const hotSlotPredictionsSelector = (reducers) => reducers.hotSlotPredictionsReducer;
 
-export default function hotSlotPredictionsReducer(state = initialState, action) {
+export const hotSlotPredictionsReducer = (state = initialState, action) => {
   switch (action.type) {
     case setRedHotSlots.actionType:
       return {
@@ -39,4 +39,8 @@ export default function hotSlotPredictionsReducer(state = initialState, action) 
     default:
       return state;
   }
+}
+
+export default{
+  hotSlotPredictionsReducer,
 }

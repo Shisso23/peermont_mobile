@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import { useSelector } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';

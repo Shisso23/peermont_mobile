@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 
 import { OtpNumericInput } from '../../../components/molecules';
 import { MobileNumberForm } from '../../../components/forms';

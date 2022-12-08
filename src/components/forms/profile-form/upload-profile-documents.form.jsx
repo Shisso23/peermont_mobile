@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button } from 'react-native-elements';
+import { Button } from '@rneui/themed';
 
 import { proofOfIdDocumentSchema, proofOfAddressDocumentSchema } from '../form-validaton-schemas';
 import { UploadDocumentButton } from '../../molecules';

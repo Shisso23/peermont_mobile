@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { CheckBox, Text } from 'react-native-elements';
+import { CheckBox, Text } from '@rneui/themed';
 import colors from '../../../../theme/theme.colors';
 
 const TermsAndConditions = ({ checked, onPress }) => {

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ActionSheet from 'react-native-actions-sheet';
 import _ from 'lodash';

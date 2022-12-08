@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Divider, Icon, Text } from 'react-native-elements';
+import { Divider, Icon, Text } from '@rneui/themed';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';

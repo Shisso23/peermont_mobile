@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Badge, Icon, ListItem, Text } from 'react-native-elements';
+import { Badge, Icon, ListItem, Text } from '@rneui/themed';
 import Collapsible from 'react-native-collapsible';
 import { useDispatch } from 'react-redux';
 import Moment from 'moment';

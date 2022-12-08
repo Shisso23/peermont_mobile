@@ -1,4 +1,4 @@
-import { ListItem, Text } from 'react-native-elements';
+import { ListItem, Text } from '@rneui/themed';
 import React from 'react';
 import PropTypes from 'prop-types';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem, Divider } from 'react-native-elements';
+import { ListItem, Divider } from '@rneui/themed';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 

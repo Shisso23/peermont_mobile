@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Divider } from 'react-native-elements';
+import { Button, Divider } from '@rneui/themed';
 import { CreditCardInput } from 'react-native-credit-card-input';
 
 import { getFormError } from '../form-utils';

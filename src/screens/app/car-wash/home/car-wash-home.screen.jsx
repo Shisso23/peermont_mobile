@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import { Button, Divider, Text } from 'react-native-elements';
+import { Button, Divider, Text } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 
 import { KeyboardScrollContainer, PaddedContainer } from '../../../../components/containers';

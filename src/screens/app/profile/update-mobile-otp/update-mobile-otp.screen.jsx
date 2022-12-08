@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Text, Divider } from 'react-native-elements';
+import { Text, Divider } from '@rneui/themed';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
