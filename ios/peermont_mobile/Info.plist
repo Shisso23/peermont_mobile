@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>$(BITRISE_BUILD_NUMBER)</string>
 	<key>CodePushDeploymentKey</key>
 	<string>KQN5kPBgJrPioSWrh-w4YYxfyIOJnTRCPtyDM</string>
 	<key>LSRequiresIPhoneOS</key>
