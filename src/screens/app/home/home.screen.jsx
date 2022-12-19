@@ -64,9 +64,9 @@ const HomeScreen = () => {
     if (_.isNull(user.cmpAccountNumber)) dispatch(updateCmpAccountNumberAction());
   }, [user]);
 
-  // useEffect(() => {
-  //   dispatch(updateMembershipCardsAction());
-  // }, [membershipCards]);
+  useEffect(() => {
+    dispatch(updateMembershipCardsAction());
+  }, [membershipCards]);
 
   useEffect(() => {
     if (_.isEqual(_.get(route.params, 'visible'), true)) {
