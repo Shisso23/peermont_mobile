@@ -10,11 +10,7 @@ import { custom } from '../../../../theme/theme.styles';
 const PalaceBetInstall = () => {
   const onPalaceBetInstallPress = () => {
     Linking.openURL('palacebet://palacetbet/Home').catch(() => {
-      if (Platform.OS === 'ios') {
-        Linking.openURL(appConfig.palaceBetIosAppLink);
-      } else {
-        Linking.openURL(appConfig.palaceBetLink);
-      }
+      Linking.openURL(Platform.OS === 'ios' ? appConfig.palaceBetIosAppLink : appConfig.palaceBetLink);
     });
   };
 
