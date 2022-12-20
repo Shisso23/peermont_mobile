@@ -25,6 +25,7 @@ import {
   updateMembershipCardsAction,
 } from '../../../reducers/membership-card-reducer/membership-card.actions';
 import { userSelector } from '../../../reducers/user-reducer/user.reducer';
+import { updateAppDetails, updateAppVersion } from '../../../reducers/user-reducer/user.actions';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -58,6 +59,8 @@ const HomeScreen = () => {
     notificationOpenedBackGround();
     biometricRegister().then();
     dispatch(getSplashAdvertAction());
+    dispatch(updateAppDetails());
+    dispatch(updateAppVersion());
   }, []);
 
   useEffect(() => {

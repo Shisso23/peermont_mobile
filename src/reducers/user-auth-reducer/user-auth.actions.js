@@ -9,7 +9,6 @@ import {
   setIsLoadingAction,
   setUnconfirmedEmailAction,
 } from './user-auth.reducer';
-import { updateAppDetails, updateAppVersion } from '../user-reducer/user.actions';
 import { forgetCardPin } from '../membership-card-reducer/membership-card.actions';
 import { parseMobile } from '../../models/auth/auth-utils/auth.utils';
 
@@ -19,7 +18,6 @@ export const signInAction = (formData) => {
       .signIn(formData)
       .then(() => storageService.storeSignInForm(formData))
       .then(() => dispatch(setSignInFormDataAction(formData)))
-      .then(() => dispatch(updateAppDetails()));
   };
 };
 
@@ -48,7 +46,6 @@ export const loadSignInFormFromStorage = () => {
     return storageService.getSignInForm().then((signInForm) => {
       if (signInForm) {
         dispatch(setSignInFormDataAction(signInForm));
-        dispatch(updateAppVersion());
       }
     });
   };
@@ -68,7 +65,6 @@ export const signInWithBiometricsAction = (signature) => {
       .signIn(formData)
       .then(() => storageService.storeSignInForm(formData))
       .then(() => dispatch(setSignInFormDataAction(formData)))
-      .then(() => dispatch(updateAppVersion()));
   };
 };
 
